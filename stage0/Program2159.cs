@@ -10,7 +10,7 @@ namespace stage0
             Console.ReadKey();
         }
 
-        private static void welcome6722()
+        private static void Welcome6722()
         {
             throw new NotImplementedException();
         }

@@ -6,7 +6,7 @@ namespace DO;
 /// <summary>
 /// Task Entity represents a Task with all its props
 /// </summary>
-/// <param name="Id">Unique ID number</param>
+/// <param name="TaskId">Unique ID number of the task</param>
 /// <param name="NickName"></param>
 /// <param name="Description">A text detailing the task</param>
 /// <param name="MileStone"></param>
@@ -20,7 +20,7 @@ namespace DO;
 /// <param name="Remarks"></param>
 public record Task
 (
-    int Id,                             
+    int TaskId,                             
     string? NickName = null,            
     string? Description = null,         
     bool MileStone = false,              
@@ -31,11 +31,11 @@ public record Task
     DateTime? DeadLine = null,          
     DateTime? FinishtDate = null,       
     string? Product=null,               
-    string? Remarks = null
-
+    string? Remarks = null,
+    int EngineerId=0,
+    EngineerLevel? RequiredLevel = null
 
 )
 {
     public Task() : this(0) { }
-    public Task()
 }

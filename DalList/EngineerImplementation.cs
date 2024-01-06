@@ -7,26 +7,47 @@ public class EngineerImplementation : IEngineer
 {
     public int Create(Engineer item)
     {
-        throw new NotImplementedException();
+
+        if (DataSource.Engineers.Exists(x => x.Id == item.Id))
+        {
+            throw new NotImplementedException(); //הערה שהאייטם כבר קיים בבסיס נתונים
+        }
+
+        DataSource.Engineers.Add(item);
+        return item.Id;
     }
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        if (DataSource.Engineers.Exists(x => x.Id == id))
+        {
+            DataSource.Engineers.Remove(DataSource.Engineers.Find(x => x.Id == id));
+        }
+        else
+            throw new NotImplementedException();
     }
 
     public Engineer? Read(int id)
     {
-        throw new NotImplementedException();
+        if (DataSource.Engineers.Exists(x => x.Id == id))
+            return DataSource.Engineers.Find(x => x.Id == id);
+        return null;
     }
 
     public List<Engineer?> ReadAll()
     {
-        throw new NotImplementedException();
+        return new List<Engineer?>(DataSource.Engineers);
     }
 
     public void Update(Engineer item)
     {
-        throw new NotImplementedException();
+        if (DataSource.Engineers.Exists(x => x.Id == item.Id))
+        {
+            DataSource.Engineers.Remove(DataSource.Engineers.Find(x => x.Id == item.Id));
+            DataSource.Engineers.Add(item);
+        }
+        else
+            throw new NotImplementedException();
+
     }
 }

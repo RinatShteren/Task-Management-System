@@ -10,7 +10,7 @@ public class EngineerImplementation : IEngineer
 
         if (DataSource.Engineers.Exists(x => x.Id == item.Id))
         {
-            throw new NotImplementedException(); //הערה שהאייטם כבר קיים בבסיס נתונים
+            throw new Exception($"Engineer with ID={item.Id} is alredy exist"); //הערה שהאייטם כבר קיים בבסיס נתונים
         }
 
         DataSource.Engineers.Add(item);
@@ -24,7 +24,7 @@ public class EngineerImplementation : IEngineer
             DataSource.Engineers.Remove(DataSource.Engineers.Find(x => x.Id == id));
         }
         else
-            throw new NotImplementedException();
+            throw new Exception($"Engineer with ID={id} not exist");
     }
 
     public Engineer? Read(int id)
@@ -47,7 +47,7 @@ public class EngineerImplementation : IEngineer
             DataSource.Engineers.Add(item);
         }
         else
-            throw new NotImplementedException();
+            throw new Exception($"Engineer with ID={item.Id} not exist");
 
     }
 }

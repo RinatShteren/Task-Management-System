@@ -11,14 +11,25 @@ public static class Initialization
     private static IDependence? s_dalDependence; //stage 1
     private static ITask? s_dalTask; //stage 1
 
+
     private static readonly Random s_rand = new();
 
+    public static void Do(IEngineer? dalEngineer, IDependence? dalDependence,ITask? dalTask)
+    {
+  
+        s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
+        s_dalDependence = dalDependence ?? throw new NullReferenceException("DAL can not be null!");
+        s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
 
+        createEngineers();
+        createTasks();
+        createDependences();
+    }
     private static void createEngineers()
     {
         long[] engineerId = //רשימה של תעודות זהות לאיתחול בהמשך, ביקשו שהתז יהיה אינט אבל זה לא עבד 
-       {
-        4312345678, 212345678, 312345678,112345678, 112345678
+        {
+        4312345678, 212345678, 312345678,112345678, 112345679
         };
 
         string[] engineerNames =   //רשימה של שמות מהנדסים לאיתחול בהמשך
@@ -74,11 +85,11 @@ public static class Initialization
         };
         long[] engineerId = //רשימה של תעודות זהות של מהנדסים  
        {
-        4312345678, 212345678, 312345678,112345678, 112345678
+        4312345678, 212345678, 312345678,112345678, 112345679
         };
         for (int i = 0; i < 20; i++)
         {
-            int num = s_rand.Next(0, 20);
+            int num = s_rand.Next(0, 19);
             string _TaskNickName = TaskNickName[num];//כל פעם תוגרל רנדומלית משימה ותיאור
             string _Description = TaskDescription[num];
             bool _MileStone = false;
@@ -91,7 +102,7 @@ public static class Initialization
             DateTime? _FinishtDate = DateTime.Now.AddDays(num + 2 + i); //תמיד לפני הדד ליין
             int? _NumOfDays = i + 1; //ההפרש בין התאריך המשוער לדד ליין
             string? _Product = Products[num]; //כל פעם יוגרל רנדומלית תוצר 
-            string? _Remarks = Remarks[num]; //כל פעם יוגרל רנדומלית הערה מהרשימה 
+            string? _Remarks = Remarks[num%2]; //כל פעם יוגרל רנדומלית הערה מהרשימה 
             long _EngineerId = engineerId[i % 5]; //יגריל תז של מהנדס מהרשימה
             EngineerLevel _RequiredLevel = (EngineerLevel)new Random().Next(Enum.GetValues(typeof(EngineerLevel)).Length); //נגדיר מס רנדומלי שייתן רמת מהנדס רנדומלית מתוך האינם
 
@@ -105,10 +116,10 @@ public static class Initialization
     {
         for (int i = 0; i < 40; i++)
         {
-            int _PendingTaskId = s_rand.Next(1000, 1020); //משימה רנדומלית מ20 המשימות הקיימות
-            int temp = s_rand.Next(1000, 1020); 
+            int _PendingTaskId = s_rand.Next(1000, 1019); //משימה רנדומלית מ20 המשימות הקיימות
+            int temp = s_rand.Next(1000, 1019); 
             while (temp < _PendingTaskId) // נרצה שהמשימה הקודמת תיהיה עם דד ליין מוקדם יותר מהמשימה התלויה בה
-                temp = s_rand.Next(1000, 1020);
+                temp = s_rand.Next(1000, 1019);
             int _PreviousTaskId = temp;
             Dependence newDpns = new Dependence(0, _PendingTaskId, _PreviousTaskId); //נגדיר תלות זמנית
             s_dalDependence!.Create(newDpns); //נכניס אותה לבסיס נתונים

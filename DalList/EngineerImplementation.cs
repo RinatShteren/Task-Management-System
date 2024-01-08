@@ -5,7 +5,7 @@ using DO;
 using System.Collections.Generic;
 public class EngineerImplementation : IEngineer
 {
-    public int Create(Engineer item)
+    public long Create(Engineer item)
     {
 
         if (DataSource.Engineers.Exists(x => x.Id == item.Id))
@@ -17,7 +17,7 @@ public class EngineerImplementation : IEngineer
         return item.Id;
     }
 
-    public void Delete(int id)
+    public void Delete(long id)
     {
         if (DataSource.Engineers.Exists(x => x.Id == id))
         {
@@ -27,7 +27,7 @@ public class EngineerImplementation : IEngineer
             throw new Exception($"Engineer with ID={id} not exist");
     }
 
-    public Engineer? Read(int id)
+    public Engineer? Read(long id)
     {
         if (DataSource.Engineers.Exists(x => x.Id == id))
             return DataSource.Engineers.Find(x => x.Id == id);

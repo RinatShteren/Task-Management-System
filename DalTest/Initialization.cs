@@ -4,49 +4,52 @@ using DalApi;
 using DO;
 using System.Data.Common;
 using System.Reflection.Emit;
+ 
 
+//s_dalStudent!.Create(newStu); //stage 1
+//s_dal!.Student.Create(newStu); //stage 2
 public static class Initialization
 {
-    private static IEngineer? s_dalEngineer; //stage 1
-    private static IDependence? s_dalDependence; //stage 1
-    private static ITask? s_dalTask; //stage 1
-
+    //private static IEngineer? s_dalEngineer; //stage 1
+    //private static IDependence? s_dalDependence; //stage 1
+    //private static ITask? s_dalTask; //stage 1
+    private static IDal? s_dal; //stage 2
 
     private static readonly Random s_rand = new();
-
-    public static void Do(IEngineer? dalEngineer, IDependence? dalDependence,ITask? dalTask)
+    private const int MIN_ID = 200000000;
+    private const int MAX_ID = 400000000;
+    //public static void Do(IEngineer? dalEngineer, IDependence? dalDependence,ITask? dalTask)
+    public static void Do(IDal dal) //stage 2
     {
-  
-        s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalDependence = dalDependence ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
 
+        //s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
+        //s_dalDependence = dalDependence ?? throw new NullReferenceException("DAL can not be null!");
+        //s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
+        s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
         createEngineers();
         createTasks();
         createDependences();
     }
     private static void createEngineers()
     {
-        long[] engineerId = //רשימה של תעודות זהות לאיתחול בהמשך, ביקשו שהתז יהיה אינט אבל זה לא עבד 
-        {
-        4312345678, 212345678, 312345678,112345678, 112345679
-        };
+
 
         string[] engineerNames =   //רשימה של שמות מהנדסים לאיתחול בהמשך
         {
         "Dani Levi", "Eli Amar", "Neria Cohen","Ariela Levin", "Dina Klein"
         };
-
-        for (int i = 0; i < 5; i++) 
+        Random random = new Random();
+        for (int i = 0; i < 5; i++)
         {
-            long _id = engineerId[i];
+            int _id = random.Next(200000000, 400000000); //מגריל תז רנדומלי בין 2000000 ל4000000
             string? _name = engineerNames[i];
             string? _email = _name[0] + _name[1] + "@gmail.com"; //אימייל שמורכב מהשם של המהנדס
             //EngineerLevel? _engineerLevel = EngineerLevel.Beginner;
             EngineerLevel _engineerLevel = (EngineerLevel)new Random().Next(Enum.GetValues(typeof(EngineerLevel)).Length); //נגדיר מס רנדומלי שייתן רמת מהנדס רנדומלית מתוך האינם
             double _cost = s_rand.Next(200, 1000); //נגריל מס רנדומלי לעלות המהנדס
             Engineer newEng = new(_id, _name, _email, _engineerLevel, _cost); //נגדיר מהנדס חדש זמני עם הערכים שאיתחלנו
-            s_dalEngineer!.Create(newEng); //נכניס אותו לבסיס הנתונים
+            //s_dalEngineer!.Create(newEng); //נכניס אותו לבסיס הנתונים
+            s_dal!.Engineer.Create(newEng);
         }
     }
     private static void createTasks()
@@ -83,10 +86,7 @@ public static class Initialization
             "Enabled feature toggles for control.", "Performed regular security audits.", "Collaborated for seamless API integration.",
             "Optimized queries for scalability.","Boosted system performance with caching.", "Conducted post-implementation review."
         };
-        long[] engineerId = //רשימה של תעודות זהות של מהנדסים  
-       {
-        4312345678, 212345678, 312345678,112345678, 112345679
-        };
+
         for (int i = 0; i < 20; i++)
         {
             int num = s_rand.Next(0, 19);
@@ -102,27 +102,28 @@ public static class Initialization
             DateTime? _FinishtDate = DateTime.Now.AddDays(num + 2 + i); //תמיד לפני הדד ליין
             int? _NumOfDays = i + 1; //ההפרש בין התאריך המשוער לדד ליין
             string? _Product = Products[num]; //כל פעם יוגרל רנדומלית תוצר 
-            string? _Remarks = Remarks[num%2]; //כל פעם יוגרל רנדומלית הערה מהרשימה 
-            long _EngineerId = engineerId[i % 5]; //יגריל תז של מהנדס מהרשימה
+            string? _Remarks = Remarks[num % 2]; //כל פעם יוגרל רנדומלית הערה מהרשימה 
             EngineerLevel _RequiredLevel = (EngineerLevel)new Random().Next(Enum.GetValues(typeof(EngineerLevel)).Length); //נגדיר מס רנדומלי שייתן רמת מהנדס רנדומלית מתוך האינם
 
             Task newTsk = new Task(0, _TaskNickName, _Description, _MileStone, _CreationDate, _EstimatedDate, _StartDate,
-                _NumOfDays, _DeadLine, _FinishtDate, _Product, _Remarks, _EngineerId, _RequiredLevel); //נגדיר משימה זמנית
-            s_dalTask!.Create(newTsk); //נכניס אותה לבסיס נתונים
+                _NumOfDays, _DeadLine, _FinishtDate, _Product, _Remarks, 0, _RequiredLevel); //נגדיר משימה זמנית
+            //s_dalTask!.Create(newTsk); //נכניס אותה לבסיס נתונים
+            s_dal!.Task.Create(newTsk);
         }
-        
+
     }
     private static void createDependences()
     {
         for (int i = 0; i < 40; i++)
         {
             int _PendingTaskId = s_rand.Next(1000, 1019); //משימה רנדומלית מ20 המשימות הקיימות
-            int temp = s_rand.Next(1000, 1019); 
+            int temp = s_rand.Next(1000, 1019);
             while (temp < _PendingTaskId) // נרצה שהמשימה הקודמת תיהיה עם דד ליין מוקדם יותר מהמשימה התלויה בה
                 temp = s_rand.Next(1000, 1019);
             int _PreviousTaskId = temp;
             Dependence newDpns = new Dependence(0, _PendingTaskId, _PreviousTaskId); //נגדיר תלות זמנית
-            s_dalDependence!.Create(newDpns); //נכניס אותה לבסיס נתונים
+            //s_dalDependence!.Create(newDpns);//נכניס אותה לבסיס נתונים
+            s_dal!.Dependence.Create(newDpns);
         }
 
     }

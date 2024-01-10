@@ -10,7 +10,7 @@ namespace DO;
 /// <param name="Cost">cost per hour</param>
 public record Engineer
 (
-    long Id,
+    int Id,
     string? Name = null,
     string? Email = null,
     EngineerLevel? Level = null,

@@ -10,17 +10,18 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 internal class Program
 {
-    private static IEngineer? s_dalEngineer = new EngineerImplementation(); //stage 1
-    private static IDependence? s_dalDependence = new DependenceImplementation(); //stage 1
-    private static ITask? s_dalTask = new TaskImplementation(); //stage 1
-
+    //private static IEngineer? s_dalEngineer = new EngineerImplementation(); //stage 1
+    //private static IDependence? s_dalDependence = new DependenceImplementation(); //stage 1
+    //private static ITask? s_dalTask = new TaskImplementation(); //stage 1
+    static readonly IDal s_dal = new DalList(); //stage 2
     private static void Main(string[] args)
     {
         int num = 1;
            
         try
         {
-            Initialization.Do(s_dalEngineer, s_dalDependence, s_dalTask);
+            Initialization.Do(s_dal); //stage 2
+            //Initialization.Do(s_dalEngineer, s_dalDependence, s_dalTask);
             while (num != 0)
             {
                 Console.WriteLine(@"Hello!
@@ -39,13 +40,13 @@ internal class Program
                 switch (num)
                 {
                     case 1:
-                        testEngineer(s_dalEngineer);
+                        testEngineer(s_dal.Engineer);  //לפני : (s_dalEngineer); 
                         break;
                     case 2:
-                        testDependence(s_dalDependence);
+                        testDependence(s_dal.Dependence);
                         break;
                     case 3:
-                        testTask(s_dalTask);
+                        testTask(s_dal.Task);
                         break;
                     default:
                         break;
@@ -77,9 +78,9 @@ internal class Program
                 case "a":
                         
                         Console.WriteLine("enter the new Engineer ID");
-                        long id;
+                        int id;
                         double cost;
-                        long.TryParse(Console.ReadLine(), out id);
+                        int.TryParse(Console.ReadLine(), out id);
                         Console.WriteLine("enter the Engineer name");
                         string? name = Console.ReadLine();
                         Console.WriteLine("enter the Engineer email");
@@ -94,8 +95,8 @@ internal class Program
                         break;
                     case "b":
                         Console.WriteLine("enter the Engineer ID");
-                        long.TryParse(Console.ReadLine(), out id);
-                        long myId = id;
+                        int.TryParse(Console.ReadLine(), out id);
+                        int myId = id;
                         Console.WriteLine(engineer.Read(myId));
                         break;
                     case "c":
@@ -108,8 +109,8 @@ internal class Program
                     case "d":
                         Engineer tempEngineer2 = new Engineer();
                         Console.WriteLine("enter the engineer ID");
-                        long.TryParse(Console.ReadLine(), out id);
-                        long.TryParse(Console.ReadLine(), out id);
+                        int.TryParse(Console.ReadLine(), out id);
+                        int.TryParse(Console.ReadLine(), out id);
                         Console.WriteLine("enter the Engineer name");
                         string? name2 = Console.ReadLine();
                         Console.WriteLine("enter the Engineer email");
@@ -123,7 +124,7 @@ internal class Program
                         break;
                     case "e":
                         Console.WriteLine("enter the Engineer ID");
-                        long.TryParse(Console.ReadLine(), out id);
+                        int.TryParse(Console.ReadLine(), out id);
                         myId = id;
                         engineer.Delete(myId);
                         break;
@@ -207,7 +208,7 @@ internal class Program
     static void testTask(ITask? task)
     {
         int id, numOfDays;
-        long engineerId;
+        int engineerId;
         bool mileStone;
         try
         {
@@ -252,7 +253,7 @@ internal class Program
                     Console.WriteLine("enter the remarks ");
                     string? remarks = Console.ReadLine();
                     Console.WriteLine("enter the engineer Id");
-                    long.TryParse(Console.ReadLine(), out engineerId);
+                    int.TryParse(Console.ReadLine(), out engineerId);
                     Console.WriteLine("enter the Required Level");
                     EngineerLevel? RequiredLevel = EngineerLevel.Beginner;
 

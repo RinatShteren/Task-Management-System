@@ -32,7 +32,7 @@ public record Task
     DateTime? FinishtDate = null,       
     string? Product=null,               
     string? Remarks = null,
-    long EngineerId=0,
+    int EngineerId=0,
     EngineerLevel? RequiredLevel = null
 
 )

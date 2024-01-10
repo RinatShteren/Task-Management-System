@@ -3,9 +3,9 @@ namespace Dal;
 using DalApi;
 using DO;
 using System.Collections.Generic;
-public class EngineerImplementation : IEngineer
+internal class EngineerImplementation : IEngineer
 {
-    public long Create(Engineer item)
+    public int Create(Engineer item)
     {
 
         if (DataSource.Engineers.Exists(x => x.Id == item.Id))
@@ -17,7 +17,7 @@ public class EngineerImplementation : IEngineer
         return item.Id;
     }
 
-    public void Delete(long id)
+    public void Delete(int id)
     {
         if (DataSource.Engineers.Exists(x => x.Id == id))
         {
@@ -27,7 +27,7 @@ public class EngineerImplementation : IEngineer
             throw new Exception($"Engineer with ID={id} not exist");
     }
 
-    public Engineer? Read(long id)
+    public Engineer? Read(int id)
     {
         if (DataSource.Engineers.Exists(x => x.Id == id))
             return DataSource.Engineers.Find(x => x.Id == id);

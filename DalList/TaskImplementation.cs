@@ -25,17 +25,17 @@ internal class TaskImplementation : ITask
             throw new Exception($"Task with ID={id} not exist");
     }
 
-    public Task? Read(int id)
+  
+    public Task? Read(int id) => Read(x => x.TaskId == id);
+    public Task? Read(Func<Task, bool>? predicate)
     {
-        if (DataSource.Tasks.Exists(x => x.TaskId == id))
-            return DataSource.Tasks.Find(x => x.TaskId == id);
-        return null;
+        return DataSource.Tasks.Where(predicate).FirstOrDefault();
     }
 
-    public List<Task?> ReadAll()
-    {
-        return new List<Task?>(DataSource.Tasks);
-    }
+
+    public IEnumerable<Task?> ReadAll(Func<Task, bool>? predicate = null) =>
+       predicate is null ? DataSource.Tasks.Select(a => a) : DataSource.Tasks.Where(predicate);
+
 
     public void Update(Task item)
     {

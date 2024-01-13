@@ -100,7 +100,7 @@ internal class Program
                         Console.WriteLine(engineer.Read(myId));
                         break;
                     case "c":
-                        foreach (Engineer item in engineer.ReadAll())
+                        foreach (Engineer item in engineer.ReadAll(engineer => engineer.Id > 0))
                         {
                             Console.WriteLine(item);
                         }
@@ -174,7 +174,7 @@ internal class Program
                     Console.WriteLine(dependence.Read(myId));
                     break;
                 case "c":
-                    foreach (Dependence oItem in dependence.ReadAll())
+                    foreach (Dependence oItem in dependence.ReadAll(dependence=> dependence.DependenceId>0))
                     {
                         Console.WriteLine(oItem);
                     }
@@ -266,7 +266,7 @@ internal class Program
                     Console.WriteLine(task.Read(myId));
                     break;
                 case "c":
-                    foreach (DO.Task item in task.ReadAll())
+                    foreach (DO.Task item in task.ReadAll(task => task.TaskId>0))
                     {
                         Console.WriteLine(item);
                     }

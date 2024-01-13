@@ -2,7 +2,10 @@
 namespace Dal;
 using DalApi;
 using DO;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+
 internal class EngineerImplementation : IEngineer
 {
     public int Create(Engineer item)
@@ -27,18 +30,17 @@ internal class EngineerImplementation : IEngineer
             throw new Exception($"Engineer with ID={id} not exist");
     }
 
-    public Engineer? Read(int id)
+    public Engineer? Read(int id) => Read(x => x.Id == id);
+    public Engineer? Read(Func<Engineer, bool>? predicate)
     {
-        if (DataSource.Engineers.Exists(x => x.Id == id))
-            return DataSource.Engineers.Find(x => x.Id == id);
-        return null;
+        return DataSource.Engineers.Where(predicate).FirstOrDefault();
     }
 
-    public List<Engineer?> ReadAll()
-    {
-        return new List<Engineer?>(DataSource.Engineers);
-    }
 
+    public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? predicate = null) =>
+       predicate is null ? DataSource.Engineers.Select(a => a) : DataSource.Engineers.Where(predicate);
+
+    
     public void Update(Engineer item)
     {
         if (DataSource.Engineers.Exists(x => x.Id == item.Id))

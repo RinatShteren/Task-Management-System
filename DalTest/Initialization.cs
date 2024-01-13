@@ -6,25 +6,19 @@ using System.Data.Common;
 using System.Reflection.Emit;
  
 
-//s_dalStudent!.Create(newStu); //stage 1
-//s_dal!.Student.Create(newStu); //stage 2
+
 public static class Initialization
 {
-    //private static IEngineer? s_dalEngineer; //stage 1
-    //private static IDependence? s_dalDependence; //stage 1
-    //private static ITask? s_dalTask; //stage 1
+   
     private static IDal? s_dal; //stage 2
 
     private static readonly Random s_rand = new();
     private const int MIN_ID = 200000000;
     private const int MAX_ID = 400000000;
-    //public static void Do(IEngineer? dalEngineer, IDependence? dalDependence,ITask? dalTask)
     public static void Do(IDal dal) //stage 2
     {
 
-        //s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
-        //s_dalDependence = dalDependence ?? throw new NullReferenceException("DAL can not be null!");
-        //s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
+        
         s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
         createEngineers();
         createTasks();
@@ -107,8 +101,8 @@ public static class Initialization
 
             Task newTsk = new Task(0, _TaskNickName, _Description, _MileStone, _CreationDate, _EstimatedDate, _StartDate,
                 _NumOfDays, _DeadLine, _FinishtDate, _Product, _Remarks, 0, _RequiredLevel); //נגדיר משימה זמנית
-            //s_dalTask!.Create(newTsk); //נכניס אותה לבסיס נתונים
-            s_dal!.Task.Create(newTsk);
+            s_dal!.Task.Create(newTsk);             //נכניס אותה לבסיס נתונים
+
         }
 
     }
@@ -122,7 +116,7 @@ public static class Initialization
                 temp = s_rand.Next(1000, 1019);
             int _PreviousTaskId = temp;
             Dependence newDpns = new Dependence(0, _PendingTaskId, _PreviousTaskId); //נגדיר תלות זמנית
-            //s_dalDependence!.Create(newDpns);//נכניס אותה לבסיס נתונים
+ ;//נכניס אותה לבסיס נתונים
             s_dal!.Dependence.Create(newDpns);
         }
 

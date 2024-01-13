@@ -40,7 +40,7 @@ internal class Program
                 switch (num)
                 {
                     case 1:
-                        testEngineer(s_dal.Engineer);  //לפני : (s_dalEngineer); 
+                        testEngineer(s_dal.Engineer);   
                         break;
                     case 2:
                         testDependence(s_dal.Dependence);

@@ -29,11 +29,7 @@ internal class DependenceImplementation : IDependence
     public Dependence? Read(int id) => Read(x => x.DependenceId == id);
     public Dependence? Read(Func<Dependence, bool>? predicate)
     {
-        //linq question
         return DataSource.Dependences.Where(predicate).FirstOrDefault();
-      /*  if (DataSource.Dependences.Exists(x => x.DependenceId == id))
-          return DataSource.Dependences.Find(x => x.DependenceId == id);*/
-        //return null;
     }
 
     public IEnumerable<Dependence?> ReadAll(Func<Dependence, bool>? predicate = null) =>

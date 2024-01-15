@@ -42,7 +42,7 @@ public static class Initialization
             EngineerLevel _engineerLevel = (EngineerLevel)new Random().Next(Enum.GetValues(typeof(EngineerLevel)).Length); //נגדיר מס רנדומלי שייתן רמת מהנדס רנדומלית מתוך האינם
             double _cost = s_rand.Next(200, 1000); //נגריל מס רנדומלי לעלות המהנדס
             Engineer newEng = new(_id, _name, _email, _engineerLevel, _cost); //נגדיר מהנדס חדש זמני עם הערכים שאיתחלנו
-            //s_dalEngineer!.Create(newEng); //נכניס אותו לבסיס הנתונים
+            
             s_dal!.Engineer.Create(newEng);
         }
     }

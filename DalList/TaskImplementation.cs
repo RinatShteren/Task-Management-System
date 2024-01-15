@@ -22,7 +22,7 @@ internal class TaskImplementation : ITask
             DataSource.Tasks.Remove(DataSource.Tasks.Find(x => x.TaskId == id));
         }
         else
-            throw new Exception($"Task with ID={id} not exist");
+            throw new DalDoesNotExistException($"Task with ID={id} not exist");
     }
 
   
@@ -45,6 +45,6 @@ internal class TaskImplementation : ITask
             DataSource.Tasks.Add(item);
         }
         else
-            throw new Exception($"Task with ID={item.TaskId} not exist");
+            throw new DalDoesNotExistException($"Task with ID={item.TaskId} not exist");
     }
 }

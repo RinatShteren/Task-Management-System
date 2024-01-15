@@ -10,6 +10,9 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 internal class Program
 {
+    //private static IEngineer? s_dalEngineer = new EngineerImplementation(); //stage 1
+    //private static IDependence? s_dalDependence = new DependenceImplementation(); //stage 1
+    //private static ITask? s_dalTask = new TaskImplementation(); //stage 1
     static readonly IDal s_dal = new DalList(); //stage 2
     private static void Main(string[] args)
     {
@@ -18,6 +21,7 @@ internal class Program
         try
         {
             Initialization.Do(s_dal); //stage 2
+            //Initialization.Do(s_dalEngineer, s_dalDependence, s_dalTask);
             while (num != 0)
             {
                 Console.WriteLine(@"Hello!

@@ -13,7 +13,7 @@ internal class EngineerImplementation : IEngineer
 
         if (DataSource.Engineers.Exists(x => x.Id == item.Id))
         {
-            throw new Exception($"Engineer with ID={item.Id} is alredy exist"); //הערה שהאייטם כבר קיים בבסיס נתונים
+            throw new DalDoesNotExistException($"Engineer with ID={item.Id} is alredy exist"); //הערה שהאייטם כבר קיים בבסיס נתונים
         }
 
         DataSource.Engineers.Add(item);
@@ -27,7 +27,7 @@ internal class EngineerImplementation : IEngineer
             DataSource.Engineers.Remove(DataSource.Engineers.Find(x => x.Id == id));
         }
         else
-            throw new Exception($"Engineer with ID={id} not exist");
+            throw new DalDoesNotExistException($"Engineer with ID={id} not exist");
     }
 
     public Engineer? Read(int id) => Read(x => x.Id == id);
@@ -49,7 +49,7 @@ internal class EngineerImplementation : IEngineer
             DataSource.Engineers.Add(item);
         }
         else
-            throw new Exception($"Engineer with ID={item.Id} not exist");
+            throw new DalDoesNotExistException($"Engineer with ID={item.Id} not exist");
 
     }
 }

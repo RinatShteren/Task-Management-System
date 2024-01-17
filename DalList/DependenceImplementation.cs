@@ -25,19 +25,39 @@ internal class DependenceImplementation : IDependence
         else
             throw new DalDoesNotExistException($"Dependence with ID={id} does Not exist");
     }
-
+    /// <summary>
+    ///  A method that take int 
+    /// </summary>
+    /// If a dependency with the given identifier is found, the function returns the dependency object.
+    /// If no dependency with the given identifier is found, the function returns a null value.
+    /// <param name="id"></param>
+    /// <returns></returns>
     public Dependence? Read(int id) => Read(x => x.DependenceId == id);
+    /// <summary>
+    /// A method that takes a Boolean function delegate of type Func, 
+    /// operating on elements of type T in a list. 
+    /// It returns the first object in the list for which the function returns True.    /// </summary>
+    /// <param name="predicate"></param>
+    /// <returns></returns>
     public Dependence? Read(Func<Dependence, bool>? predicate)
     {
         return DataSource.Dependences.Where(predicate).FirstOrDefault();
     }
-
+    /// <summary>
+    /// The method will receive a delegate of type Func, representing a Boolean function,
+    /// operating on elements of type T in a list. It will return a list of all objects in the 
+    /// list for which the function returns True. If no delegate is provided, the entire list will be returned.
+    /// </summary>
+    /// <param name="predicate"></param>
+    /// <returns></returns>
     public IEnumerable<Dependence?> ReadAll(Func<Dependence, bool>? predicate = null) =>
         predicate is null ? DataSource.Dependences.Select(a => a) : DataSource.Dependences.Where(predicate);
 
-        //return new List<Dependence?>(DataSource.Dependences);
-
-
+    /// <summary>
+    /// Updating Data of an Existing Object
+    /// </summary>
+    /// <param name="item"></param>
+    /// <exception cref="DalDoesNotExistException"></exception>
     public void Update(Dependence item)
     {
         if (DataSource.Dependences.Exists(x => x.DependenceId == item.DependenceId))

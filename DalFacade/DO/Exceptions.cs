@@ -1,6 +1,11 @@
 ﻿
 namespace DO;
 
+public class DalXMLFileLoadCreateException: Exception//Exception for fail to loude XML file
+{
+    public DalXMLFileLoadCreateException(string? message) : base(message) { }
+}
+
 public class DalDoesNotExistException : Exception //חריגה עבור ישות עם מספר מזהה שלא קיים ברשימה
 {
     public DalDoesNotExistException(string? message) : base(message) { }

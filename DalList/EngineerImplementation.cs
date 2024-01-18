@@ -13,7 +13,7 @@ internal class EngineerImplementation : IEngineer
 
         if (DataSource.Engineers.Exists(x => x.Id == item.Id))
         {
-            throw new DalDoesNotExistException($"Engineer with ID={item.Id} is alredy exist"); //הערה שהאייטם כבר קיים בבסיס נתונים
+            throw new DalAlreadyExistsException($"Engineer with ID={item.Id} is alredy exist"); //הערה שהאייטם כבר קיים בבסיס נתונים
         }
 
         DataSource.Engineers.Add(item);

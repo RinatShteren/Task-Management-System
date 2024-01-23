@@ -10,7 +10,6 @@ internal class TaskImplementation : ITask
     {
         int newTaskId = DataSource.Config.NextTaskId;//set newTaskId acording to the run number
         Task newTask = new Task(newTaskId);//init a new Task
-
         DataSource.Tasks.Add(newTask);
         return newTaskId;
     }

@@ -2,6 +2,9 @@
 using DalApi;
 using DO;
 using System.Data.Common;
+using System.Linq;
+using System.Reflection.Emit;
+using System.Reflection.Metadata.Ecma335;
 using System.Xml.Linq;
 
 namespace Dal;
@@ -34,29 +37,32 @@ internal class EngineerImplementation : IEngineer
     public void Delete(int id)
     {
         XElement engineerRoot = XMLTools.LoadListFromXMLElement(x_XML_engineers);
-        XElement delItem;
-
-        delItem = (from i in engineerRoot.Elements()
-                   where Convert.ToInt32(i.Element("Id").Value) == id
-                   select i).FirstOrDefault();
+        
+        XElement delItem= XMLTools.LoadListFromXMLElement(x_XML_engineers).Elements().FirstOrDefault(item => (int?)item.Element("Id") == id);
         if (delItem.IsEmpty)
         {
             throw new DalDoesNotExistException($"Engineer with ID={id} not exist");
-
         }
         delItem.Remove();
+        //delItem = (from i in engineerRoot.Elements()
+        //where Convert.ToInt32(i.Element("Id").Value) == id
+        //select i).FirstOrDefault();
         XMLTools.SaveListToXMLElement(engineerRoot, x_XML_engineers);
 
     }
 
-    public Engineer? Read(int id)
+    public Engineer? Read(int id) //חריגה
     {
-        throw new NotImplementedException();
+        XElement? engineer = XMLTools.LoadListFromXMLElement(x_XML_engineers).Elements().FirstOrDefault(item => (int?)item.Element("Id") == id);
+        if (engineer != null)
+            return xlmToEng(engineer);
+        return null;
     }
 
     public Engineer? Read(Func<Engineer, bool> filter)
-    {
-        throw new NotImplementedException();
+    { 
+           
+        return XMLTools.LoadListFromXMLElement(x_XML_engineers).Elements().Select(eng=> xlmToEng(eng)).FirstOrDefault(filter);
     }
 
     public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? p)
@@ -68,4 +74,19 @@ internal class EngineerImplementation : IEngineer
     {
         throw new NotImplementedException();
     }
+    
+    public Engineer xlmToEng (XElement eng)  //גם// צד שני//להעביר לטולס
+      {
+        Engineer tempEngineer = new Engineer();
+
+
+        tempEngineer.Id = (int)eng.Element("Id");
+            Name = (string?)engineer.Element("Name"),
+            Email = (string?)engineer.Element("Email"),
+            newItem.Add(new XElement("Level", item.Level));
+            newItem.Add(new XElement("Cost", item.Cost));
+    };
+    }
+
+
 }

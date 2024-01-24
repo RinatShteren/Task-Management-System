@@ -61,9 +61,10 @@ internal class TaskImplementation : ITask
         {
             return from item in tskList where p(item) select item;
         }
-        return from item in tskList select item; 
-    
+        return from item in tskList select item;
+
         //updating item in the orign
+    }
     public void Update(DO.Task item)
     {
         var tskList = XMLTools.LoadListFromXMLSerializer<DO.Task>(x_XML_tasks);

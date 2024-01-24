@@ -1,6 +1,7 @@
 ﻿
 using DalApi;
 using DO;
+using System.Data.Common;
 
 namespace Dal;
 
@@ -10,7 +11,12 @@ internal class DependenceImplementation:IDependence
 
     public int Create(Dependence item)
     {
-        throw new NotImplementedException();
+        int newDependenceId = Config.NextDependenceId; //set newTaskId acording to the run number
+        Dependence newDependence = item with { DependenceId = newDependenceId };
+        var DepList = XMLTools.LoadListFromXMLSerializer<Dependence>(x_XML);
+        DepList.Add(newDependence);
+        XMLTools.SaveListToXMLSerializer(DepList, x_XML);
+        return newDependenceId;
     }
 
     public void Delete(int id)

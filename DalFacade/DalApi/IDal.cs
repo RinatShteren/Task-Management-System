@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace DalApi;
+using DO;
 
-namespace DalApi
+
+public interface IDal
 {
-    public interface IDal
-    {
-        IEngineer Engineer { get; }
-        IDependence Dependence { get; }
-        ITask Task { get; }
-    }
+    IEngineer Engineer { get; }
+    IDependence Dependence { get; }
+    ITask Task { get; }
 }

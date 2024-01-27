@@ -1,6 +1,8 @@
-﻿using Dal;
+﻿namespace DalTest;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+using Dal;
 using DalApi;
-using DalTest;
 using DO;
 using System;
 using System.Reflection.Emit;
@@ -17,7 +19,7 @@ internal class Program
     private static void Main(string[] args)
     {
         int num = 1;
-           
+          
         try
         {
             Initialization.Do(s_dal); //stage 2

@@ -1,6 +1,6 @@
-﻿using Dal;
+﻿namespace DalTest;
+using Dal;
 using DalApi;
-using DalTest;
 using DO;
 using System;
 using System.Reflection.Emit;
@@ -10,7 +10,9 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 internal class Program
 {
-    static readonly IDal s_dal = new DalList(); //stage 2
+    //static readonly IDal s_dal = new DalList(); //stage 2
+    static readonly IDal s_dal = new DalXml(); //stage 3
+
     private static void Main(string[] args)
     {
         int num = 1;
@@ -18,7 +20,7 @@ internal class Program
         try
         {
             // Stage 2: Perform initialization
-            Initialization.Do(s_dal);
+            //Initialization.Do(s_dal);
 
             // Main loop for user interaction
             while (num != 0)
@@ -28,7 +30,8 @@ internal class Program
                 0 - exit
                 1 - test Engineer
                 2 - test Dependence
-                3 - test Task");
+                3 - test Task
+                4 - Generation initial data "); 
 
                 // Read user input
                 string? option = Console.ReadLine();
@@ -57,6 +60,14 @@ internal class Program
                     case 3:
                         // Test Task functionality
                         testTask(s_dal.Task);
+                        break;
+                    case 4:
+                        // Stage 2: Perform initialization
+                        Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
+                        string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
+                        if (ans == "Y") //stage 3
+                            Initialization.Do(s_dal); //stage 2
+
                         break;
                     default:
                         // Handle unrecognized input

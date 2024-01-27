@@ -1,4 +1,5 @@
-﻿
+﻿namespace Dal;
+
 using DalApi;
 using DO;
 using System.Data.Common;
@@ -7,7 +8,6 @@ using System.Reflection.Emit;
 using System.Reflection.Metadata.Ecma335;
 using System.Xml.Linq;
 
-namespace Dal;
 
 internal class EngineerImplementation : IEngineer
 {

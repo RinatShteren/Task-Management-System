@@ -1,9 +1,9 @@
-﻿
+﻿namespace Dal;
+
 using DalApi;
 using DO;
 using System.Data.Common;
 
-namespace Dal;
 
 internal class DependenceImplementation:IDependence
 {

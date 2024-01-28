@@ -1,8 +1,4 @@
-﻿
-//using System;
-//using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace DO;
+﻿namespace DO;
 /// <summary>
 /// Task Entity represents a Task with all its props
 /// </summary>

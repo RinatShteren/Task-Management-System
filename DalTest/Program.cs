@@ -31,7 +31,7 @@ internal class Program
                 1 - test Engineer
                 2 - test Dependence
                 3 - test Task
-                4 - Generation initial data "); 
+                4 - Generation initial data ");
 
                 // Read user input
                 string? option = Console.ReadLine();
@@ -87,7 +87,7 @@ internal class Program
     {
         try
         {
-                Console.WriteLine(@"test order:
+            Console.WriteLine(@"test order:
                 Enter your choice:
                 0 - EXIT MANU
                 a - ADD ENGINEER
@@ -95,65 +95,65 @@ internal class Program
                 c - GET ENGINEERS LIST
                 d - UPDATE ENGINEER
                 e - DELETE ENGINEER");
-                string? option = Console.ReadLine();
-                switch (option)
-                {
+            string? option = Console.ReadLine();
+            switch (option)
+            {
                 case "0":
                     break;
                 case "a":
-                        
-                        Console.WriteLine("enter the new Engineer ID");
-                        int id;
-                        double cost;
-                        int.TryParse(Console.ReadLine(), out id);
-                        Console.WriteLine("enter the Engineer name");
-                        string? name = Console.ReadLine();
-                        Console.WriteLine("enter the Engineer email");
-                        string? email = Console.ReadLine();
-                        Console.WriteLine("enter the Engineer level");
-                        EngineerLevel? level = EngineerLevel.Beginner;
-                        Console.WriteLine("enter the Engineer cost");
-                        double.TryParse(Console.ReadLine(), out cost);
+
+                    Console.WriteLine("enter the new Engineer ID");
+                    int id;
+                    double cost;
+                    int.TryParse(Console.ReadLine(), out id);
+                    Console.WriteLine("enter the Engineer name");
+                    string? name = Console.ReadLine();
+                    Console.WriteLine("enter the Engineer email");
+                    string? email = Console.ReadLine();
+                    Console.WriteLine("enter the Engineer level");
+                    EngineerLevel? level = EngineerLevel.Beginner;
+                    Console.WriteLine("enter the Engineer cost");
+                    double.TryParse(Console.ReadLine(), out cost);
 
                     Engineer tempEngineer = new Engineer(id, name, email, level, cost);
                     engineer.Create(tempEngineer);
-                        break;
-                    case "b":
-                        Console.WriteLine("enter the Engineer ID");
-                        int.TryParse(Console.ReadLine(), out id);
-                        int myId = id;
-                        Console.WriteLine(engineer.Read(myId));
-                        break;
-                    case "c":
-                        foreach (Engineer item in engineer.ReadAll(engineer => engineer.Id > 0))///print all content
+                    break;
+                case "b":
+                    Console.WriteLine("enter the Engineer ID");
+                    int.TryParse(Console.ReadLine(), out id);
+                    int myId = id;
+                    Console.WriteLine(engineer.Read(myId));
+                    break;
+                case "c":
+                    foreach (Engineer item in engineer.ReadAll(engineer => engineer.Id > 0))///print all content
                     {
                         Console.WriteLine(item);
-                        }
-                        break;
-                    case "d":
-                       
-                        Console.WriteLine("enter the engineer ID");
-                        int.TryParse(Console.ReadLine(), out id);
-                        Console.WriteLine("enter the Engineer name");
-                        string? name2 = Console.ReadLine();
-                        Console.WriteLine("enter the Engineer email");
-                        string? email2 = Console.ReadLine();
-                        Console.WriteLine("enter the Engineer level");
-                        EngineerLevel? level2 = EngineerLevel.Beginner;/*TODO*/
-                        Console.WriteLine("enter the Engineer cost");
-                        double.TryParse(Console.ReadLine(), out cost);
-                        Engineer tempEngineer2 = new Engineer(id, name2, email2, level2, cost);
-                        engineer.Update(tempEngineer2);
-                        break;
-                    case "e":
-                        Console.WriteLine("enter the Engineer ID");
-                        int.TryParse(Console.ReadLine(), out id);
-                        myId = id;
-                        engineer.Delete(myId);
-                        break;
-                }   
-        } 
-       catch (Exception ex)
+                    }
+                    break;
+                case "d":
+
+                    Console.WriteLine("enter the engineer ID");
+                    int.TryParse(Console.ReadLine(), out id);
+                    Console.WriteLine("enter the Engineer name");
+                    string? name2 = Console.ReadLine();
+                    Console.WriteLine("enter the Engineer email");
+                    string? email2 = Console.ReadLine();
+                    Console.WriteLine("enter the Engineer level");
+                    EngineerLevel? level2 = EngineerLevel.Beginner;/*TODO*/
+                    Console.WriteLine("enter the Engineer cost");
+                    double.TryParse(Console.ReadLine(), out cost);
+                    Engineer tempEngineer2 = new Engineer(id, name2, email2, level2, cost);
+                    engineer.Update(tempEngineer2);
+                    break;
+                case "e":
+                    Console.WriteLine("enter the Engineer ID");
+                    int.TryParse(Console.ReadLine(), out id);
+                    myId = id;
+                    engineer.Delete(myId);
+                    break;
+            }
+        }
+        catch (Exception ex)
         {
             Console.WriteLine(ex);
         }
@@ -180,7 +180,7 @@ internal class Program
                 case "0":
                     break;
                 case "a":
-                    
+
                     Console.WriteLine("enter the new Dependence Id");
                     int.TryParse(Console.ReadLine(), out DependenceId);
                     Console.WriteLine("enter the new Pending Task Id");
@@ -197,7 +197,7 @@ internal class Program
                     Console.WriteLine(dependence.Read(myId));
                     break;
                 case "c":
-                    foreach (Dependence oItem in dependence.ReadAll(dependence=> dependence.DependenceId>0))///print all content
+                    foreach (Dependence oItem in dependence.ReadAll(dependence => dependence.DependenceId > 0))///print all content
                     {
                         Console.WriteLine(oItem);
                     }
@@ -258,18 +258,18 @@ internal class Program
                     Console.WriteLine("enter the mile Stone");
                     bool.TryParse(Console.ReadLine(), out mileStone);
                     Console.WriteLine("enter the creation Date");
-                  //  while (!DateTime.TryParse(Console.ReadLine(), out  date)) ;
-                    DateTime? creationDate= null;
+                    //  while (!DateTime.TryParse(Console.ReadLine(), out  date)) ;
+                    DateTime? creationDate = null;
                     Console.WriteLine("enter the estimated Date");
                     DateTime? estimatedDate = null;
                     Console.WriteLine("enter the start Date");
-                    DateTime? startDate = null;       
+                    DateTime? startDate = null;
                     Console.WriteLine("enter the num Of Days");
                     int.TryParse(Console.ReadLine(), out numOfDays);
                     Console.WriteLine("enter the dead Line");
                     DateTime? deadLine = null;
                     Console.WriteLine("enter the finisht Date");
-                    DateTime? finishtDate = null;  
+                    DateTime? finishtDate = null;
                     Console.WriteLine("enter the product name");
                     string? product = Console.ReadLine();
                     Console.WriteLine("enter the remarks ");
@@ -286,11 +286,11 @@ internal class Program
                 case "b":
                     Console.WriteLine("enter the task ID");
                     int myId;
-                    int.TryParse(Console.ReadLine(), out myId);                 
+                    int.TryParse(Console.ReadLine(), out myId);
                     Console.WriteLine(task.Read(myId));
                     break;
                 case "c":
-                    foreach (DO.Task item in task.ReadAll(task => task.TaskId>0))///print all content
+                    foreach (DO.Task item in task.ReadAll(task => task.TaskId > 0))///print all content
                     {
                         Console.WriteLine(item);
                     }
@@ -343,6 +343,6 @@ internal class Program
             Console.WriteLine(ex);
         }
     }
-    
+
 }
 

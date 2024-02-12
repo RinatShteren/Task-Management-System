@@ -1,7 +1,6 @@
 ﻿
 namespace BlImplementation;
-using BlApi;
-using BO;
+using System;
 using System.Collections.Generic;
 
 internal class TaskImplementation : ITask

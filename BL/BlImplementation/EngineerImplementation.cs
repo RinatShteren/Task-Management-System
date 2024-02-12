@@ -3,7 +3,6 @@ namespace BlImplementation;
 using BlApi;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 
 internal class EngineerImplementation : IEngineer
 {

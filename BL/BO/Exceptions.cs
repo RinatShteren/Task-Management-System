@@ -38,13 +38,15 @@ public class BlDeletionImpossible : Exception
     public BlDeletionImpossible(string message, Exception innerException) : base(message, innerException) { }
     //protected BlDeletionImpossible(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
 }
-
+/// <summary>
+/// The exception will be thrown when attempting to do an operation prohibited by the schedule.
+/// </summary>
 [Serializable]
-public class BlException : Exception
+public class BlNotFitSchedule : Exception
 {
-    public BlException() : base() { }
-    public BlException(string message) : base(message) { }
-    public BlException(string message, Exception innerException) : base(message, innerException) { }
+    public BlNotFitSchedule() : base() { }
+    public BlNotFitSchedule(string message) : base(message) { }
+    public BlNotFitSchedule(string message, Exception innerException) : base(message, innerException) { }
    // protected BlException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
 }
 

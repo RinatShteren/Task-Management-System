@@ -1,39 +1,21 @@
 ﻿namespace BlImplementation;
 using BlApi;
-<<<<<<< HEAD
 using BO;
-using DO;
 
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-=======
-using DalApi;
->>>>>>> 78110a78f0482602c938071e054c094874b45d80
-
-//using BO;
-
+//AFTER APDATE
 internal class TaskImplementation : ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
     public int Create(BO.Task boTask)
     {
-<<<<<<< HEAD
-        // ודא שהפרויקט לא בשלב התכנון
-        if (Factory.Get().Schedule.GetStage() != BO.Stage.planning)
-            throw new BO.BlNotFitSchedule("Can not add tasks after Project planning phase");
 
-        DO.Task doTask = new DO.Task(boTask.TaskId, boTask.Description, boTask.NickName); //?
-
-=======
-        
         if (Factory.Get().Schedule.GetStage() != BO.Stage.planning)  // Make sure the project is in the planning stage
             throw new BO.BlNotFitSchedule("Can not add tasks after Project planning phase");
 
-        DO.Task doTask = new DO.Task(boTask.TaskId, boTask.NickName, boTask.Description, DateTime.Now) with { RequiredLevel = (DO.EngineerLevel)boTask.RequiredLevel, NumOfDays=boTask.NumOfDays }; //?
->>>>>>> 78110a78f0482602c938071e054c094874b45d80
+        DO.Task doTask = new DO.Task(boTask.TaskId, boTask.NickName, boTask.Description, DateTime.Now) with { RequiredLevel = (DO.EngineerLevel)boTask.RequiredLevel, NumOfDays = boTask.NumOfDays }; //?
         try
         {
-            if (boTask.TaskId < 0) 
+            if (boTask.TaskId < 0)
                 throw new BO.BlNotVaildException("id is not valid");
 
             if (boTask.NickName == "")
@@ -49,6 +31,7 @@ internal class TaskImplementation : ITask
                     _dal.Dependence.Create(dependence);
                 }
             }
+
             return idTsk;   // Return the new task ID
         }
         catch (DO.DalAlreadyExistsException ex) //will catch an exception that will be thrown from the DAL layer if a task with the same ID already exists
@@ -60,17 +43,12 @@ internal class TaskImplementation : ITask
 
     public void Delete(int id)
     {
-<<<<<<< HEAD
-        //בדיקה אם יש משימה שתלויה במשימה שעומדים למחוק
-        DO.Dependence tempDp = _dal.Dependence.Read(item => item.PreviousTaskId == id);
-=======
 
         if (Factory.Get().Schedule.GetStage() != BO.Stage.planning)  // Make sure the project is in the planning stage
             throw new BO.BlNotFitSchedule("Can not delete tasks after Project planning phase");
 
-        
-        DO.Dependence tempDp= _dal.Dependence.Read(item => item.PreviousTaskId == id); //checking if there is another task that depended in this task
->>>>>>> 78110a78f0482602c938071e054c094874b45d80
+
+        DO.Dependence tempDp = _dal.Dependence.Read(item => item.PreviousTaskId == id); //checking if there is another task that depended in this task
         if (tempDp != null)
             throw new BO.BlDeletionImpossible("The task cannot be deleted because there is a task that depends on it");
 
@@ -78,21 +56,16 @@ internal class TaskImplementation : ITask
         {
             DO.Task tempTsk = _dal.Task.Read(id);
             if (tempTsk == null) throw new BO.BlDoesNotExistException($"Task with ID=[{id}] does Not exist");
-            //if (tempTsk.EstimatedDate != null) throw new NotImplementedException(); //אסור למחוק אחרי שנוצר לוח זמנים לפרוייקט
+        
             _dal.Task.Delete(id);
         }
         catch (DO.DalDoesNotExistException ex)
         {
-            throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist", ex); 
+            throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist", ex);
         }
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> 78110a78f0482602c938071e054c094874b45d80
-
-
-    public IEnumerable<TaskInList> ReadAll(Func<D.Task, bool>? predicate = null)
+    public IEnumerable<TaskInList> ReadAll(Func<BO.Task, bool>? predicate = null)
     {
         if(predicate == null)
         {
@@ -155,16 +128,22 @@ internal class TaskImplementation : ITask
         }
 
         task.DeadLine = getPlanToFinish(doTask);
-        task.Dependencies = Dependencies(task);
+        //task.Dependencies = Dependencies(task);
 
         return task;
     }
 
-    private DateTime? getPlanToFinish(DO.Task tesk)
+    private DateTime? getPlanToFinish(DO.Task task)
     {
-        if (tesk.EstimatedDate == null) return null;
-        if (task.DeadLine == null) return null;
-        return(Task.)
+        if (task.EstimatedDate == null)
+        {
+            return null;
+        }
+        if (task.NumOfDays == null)
+        {
+            return null;
+        }
+        return (task.EstimatedDate + task.NumOfDays);
     }
     public void UpdateDate(int id, DateTime date)
     {

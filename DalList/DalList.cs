@@ -11,4 +11,5 @@ sealed internal class DalList : IDal
 
     public ITask Task =>  new TaskImplementation();
 
+    public ISchedule Schedule =>  new ScheduleImplementation();
 }

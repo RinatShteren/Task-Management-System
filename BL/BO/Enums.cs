@@ -8,3 +8,10 @@ public enum EngineerLevel
     Advanced,
     Expert
 }
+
+public enum Stage
+{
+    planning,
+    middle,
+    action
+}

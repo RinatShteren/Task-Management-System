@@ -24,7 +24,7 @@ namespace BlTest
                 0 - exit
                 1 - test Task
                 2 - test Engineer 
-                3 - automaticSchedule ");
+                3 - test Schedule ");
 
                 // Read user input
                 string? option = Console.ReadLine();
@@ -43,14 +43,14 @@ namespace BlTest
                     switch (num)
                     {
                         case 0: break;
-                        case 1: taskMenu(); break;
-                        case 2: engineerMenu(); break;
-                        case 3:
-                            DateTime startOfProject = DateTime.Parse(getString("Please enter start-date of the project"));
-                            if (DalApi.Factory.Get.saveStartandFinishDatestoFile("data-config", "startDate", startOfProject))
-                                s_bl.automaticSchedule();
-                            else throw new BO.BlAlreadyExistsException($"The date is already exsist");
-                            break;
+                        case 1: Test_task(); break;
+                        case 2: Test_engineer(); break;
+                        case 3:Test_schedule(); break;
+                        /* DateTime startOfProject = DateTime.Parse(getString("Please enter start-date of the project"));
+                         if (DalApi.Factory.Get.saveStartandFinishDatestoFile("data-config", "startDate", startOfProject))
+                             s_bl.automaticSchedule();
+                         else throw new BO.BlAlreadyExistsException($"The date is already exsist");
+                         break;*/
                         default:
                             // Handle unrecognized input
                         Console.WriteLine("ERROR: Unrecognized option. Please choose a valid option.");
@@ -70,8 +70,11 @@ namespace BlTest
 
 
         }
+        private static void Test_schedule()
+        {
 
-        private static void taskMenu()
+        }
+        private static void Test_task()
         {
 
             string? choice;
@@ -217,7 +220,7 @@ namespace BlTest
 
             }
             }
-        private static void engineerMenu()
+        private static void Test_engineer()
         {
            
             Console.WriteLine(@"test order:
@@ -255,13 +258,13 @@ namespace BlTest
                     foreach (var item in s_bl.Engineer.ReadAll(null))
                         Console.WriteLine(item);
                     break;
-                case "update":
+                case "e":
                     BO.Engineer eng = new BO.Engineer()
                     {
                         Id = int.Parse(getString("enter id\n")),
                         Name = getString("enter name"),
                         Email = getString("enter email"),
-                        Level = (Level)int.Parse(getString("enter level")),
+                        Level = (EngineerLevel)int.Parse(getString("enter level")),
                         Cost = double.Parse(getString("enter cost"))
                     };
 
@@ -269,7 +272,7 @@ namespace BlTest
                     {
                         id = Convert.ToInt16(getString("enter id of task"));
                         string name = getString("enter name of the task");
-                        BO.TaskInEngineer temp = new BO.TaskInEngineer() { Id = id, Name = name };
+                        BO.TaskInEngineer temp = new BO.TaskInEngineer() { Id = id, NickName = name };
                         eng.Task = temp;
                     }
 
@@ -279,7 +282,7 @@ namespace BlTest
                 default:
                     {
                         Console.WriteLine("doesnt valid input, please enter again");
-                        choice = Console.ReadLine();
+                        option = Console.ReadLine();
                         return;
                     }
             }
@@ -294,6 +297,25 @@ namespace BlTest
             return Console.ReadLine();
         }
 
+        public void UpdateAllDates()
+        {
+            try
+            {
+                Console.WriteLine("Enter date to start the project");
+                if (DateTime.TryParse(Console.ReadLine(), out DateTime startPRO))
+                    throw new BlNotVaildException("wrong input");
 
+                while (s_bl!.Task.ReadAll(task => task.StartDate is null).Any())//update the tasks
+                {
+
+                }
+
+                s_bl.Schedule.SetStartPro(startPRO);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+    }
     }
 }

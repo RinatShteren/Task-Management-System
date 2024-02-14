@@ -11,4 +11,8 @@ public interface ITask
     public IEnumerable<TaskInList> ReadAll(Func<BO.Task, bool>? p);
     public void Delete(int id);
     public void UpdateDate(int id, DateTime date);
+    public List<BO.TaskInList> getLinks(BO.Task task);
+   public DateTime? getPlanToFinish(DO.Task task);
+
+
 }

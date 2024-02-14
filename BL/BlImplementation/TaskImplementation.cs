@@ -67,7 +67,7 @@ internal class TaskImplementation : ITask
 
 
 
-    public IEnumerable<TaskInList> ReadAll(Func<BO.Task, bool>? predicate = null)
+    public IEnumerable<TaskInList> ReadAll(Func<D.Task, bool>? predicate = null)
     {
         if(predicate == null)
         {

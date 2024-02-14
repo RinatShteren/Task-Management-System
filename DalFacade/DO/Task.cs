@@ -19,7 +19,7 @@ public record Task
     int TaskId,                             
     string? NickName = null,            
     string? Description = null,         
-    bool MileStone = false,              
+    //bool MileStone = false,              
     DateTime? CreationDate= null,         
     DateTime? EstimatedDate = null,        
     DateTime? StartDate = null,         

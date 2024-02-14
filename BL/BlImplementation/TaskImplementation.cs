@@ -1,10 +1,14 @@
 ﻿namespace BlImplementation;
 using BlApi;
+<<<<<<< HEAD
 using BO;
 using DO;
 
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+=======
+using DalApi;
+>>>>>>> 78110a78f0482602c938071e054c094874b45d80
 
 //using BO;
 
@@ -13,23 +17,31 @@ internal class TaskImplementation : ITask
     private DalApi.IDal _dal = DalApi.Factory.Get;
     public int Create(BO.Task boTask)
     {
+<<<<<<< HEAD
         // ודא שהפרויקט לא בשלב התכנון
         if (Factory.Get().Schedule.GetStage() != BO.Stage.planning)
             throw new BO.BlNotFitSchedule("Can not add tasks after Project planning phase");
 
         DO.Task doTask = new DO.Task(boTask.TaskId, boTask.Description, boTask.NickName); //?
 
+=======
+        
+        if (Factory.Get().Schedule.GetStage() != BO.Stage.planning)  // Make sure the project is in the planning stage
+            throw new BO.BlNotFitSchedule("Can not add tasks after Project planning phase");
+
+        DO.Task doTask = new DO.Task(boTask.TaskId, boTask.NickName, boTask.Description, DateTime.Now) with { RequiredLevel = (DO.EngineerLevel)boTask.RequiredLevel, NumOfDays=boTask.NumOfDays }; //?
+>>>>>>> 78110a78f0482602c938071e054c094874b45d80
         try
         {
-            if (boTask.TaskId < 0) //??
+            if (boTask.TaskId < 0) 
                 throw new BO.BlNotVaildException("id is not valid");
 
             if (boTask.NickName == "")
                 throw new BO.BlNotVaildException("NickName is not valid");
 
-            int idTsk = _dal.Task.Create(doTask); // צור את המשימה בשכבת הנתונים
+            int idTsk = _dal.Task.Create(doTask); //Create in the data layer
 
-            if (boTask.Dependencies != null) //if the task depend in ather task ??
+            if (boTask.Dependencies != null)  //if the task depends in ather task 
             {
                 foreach (BO.TaskInList item in boTask.Dependencies)
                 {
@@ -48,23 +60,36 @@ internal class TaskImplementation : ITask
 
     public void Delete(int id)
     {
+<<<<<<< HEAD
         //בדיקה אם יש משימה שתלויה במשימה שעומדים למחוק
         DO.Dependence tempDp = _dal.Dependence.Read(item => item.PreviousTaskId == id);
+=======
+
+        if (Factory.Get().Schedule.GetStage() != BO.Stage.planning)  // Make sure the project is in the planning stage
+            throw new BO.BlNotFitSchedule("Can not delete tasks after Project planning phase");
+
+        
+        DO.Dependence tempDp= _dal.Dependence.Read(item => item.PreviousTaskId == id); //checking if there is another task that depended in this task
+>>>>>>> 78110a78f0482602c938071e054c094874b45d80
         if (tempDp != null)
-            throw new NotImplementedException();
+            throw new BO.BlDeletionImpossible("The task cannot be deleted because there is a task that depends on it");
+
         try
         {
             DO.Task tempTsk = _dal.Task.Read(id);
-            if (tempTsk == null) throw new NotImplementedException();
-            if (tempTsk.EstimatedDate != null) throw new NotImplementedException(); //אסור למחוק אחרי שנוצר לוח זמנים לפרוייקט
-            else _dal.Task.Delete(id);
+            if (tempTsk == null) throw new BO.BlDoesNotExistException($"Task with ID=[{id}] does Not exist");
+            //if (tempTsk.EstimatedDate != null) throw new NotImplementedException(); //אסור למחוק אחרי שנוצר לוח זמנים לפרוייקט
+            _dal.Task.Delete(id);
         }
-        catch (DO.DalAlreadyExistsException ex)
+        catch (DO.DalDoesNotExistException ex)
         {
-            throw new NotImplementedException();
+            throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist", ex); 
         }
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 78110a78f0482602c938071e054c094874b45d80
 
 
     public IEnumerable<TaskInList> ReadAll(Func<D.Task, bool>? predicate = null)

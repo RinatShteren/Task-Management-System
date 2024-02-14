@@ -1,47 +1,45 @@
 ﻿namespace BlImplementation;
 using BlApi;
+//using BO;
 
 internal class TaskImplementation : ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
     public int Create(BO.Task boTask)
     {
+        // ודא שהפרויקט לא בשלב התכנון
+        if (Factory.Get.Stage != BO.Stage.Planning) 
+            throw new BO.BlNotFitSchedule("Can not add tasks after Project planning phase");
 
-        //DO.Task doTask = new DO.Task
-           // (boTask.TaskId, boTask.Description, boTask.NickName, boTask.MileStone,
-            //.CreationDate, boTask.EstimatedDate, boTask.StartDate, boTask.NumOfDays, boTask.DeadLine,
-           // boTask.FinishtDate, boTask.Product, boTask.Remarks, boTask.EngineerId,(DO.EngineerLevel)boTask.RequiredLevel);
-        
+        DO.Task doTask = new DO.Task(boTask.TaskId, boTask.Description, boTask.NickName); //?
+  
         try
         {
-            if (boTask.TaskId < 0)
-                throw new NotImplementedException();
+            if (boTask.TaskId < 0) //??
+                throw new BO.BlNotVaildException("id is not valid");
+
             if (boTask.NickName == "")
-                throw new NotImplementedException();
-            if (boTask.Dependencies != null) //אם יש תלות
+                throw new BO.BlNotVaildException("NickName is not valid");
+
+            int idTsk = _dal.Task.Create(doTask); // צור את המשימה בשכבת הנתונים
+
+            if (boTask.Dependencies != null) //if the task depend in ather task ??
             {
                 foreach (BO.TaskInList item in boTask.Dependencies)
                 {
-                    DO.Dependence dependence = new DO.Dependence(0, item.TaskId, boTask.TaskId);
+                    DO.Dependence dependence = new DO.Dependence(idTsk, boTask.TaskId, item.TaskId);
                     _dal.Dependence.Create(dependence);
                 }
             }
 
-            //DO.Task doTask = new DO.Task
-            // (boTask.TaskId, boTask.Description, boTask.NickName, boTask.MileStone,
-            //.CreationDate, boTask.EstimatedDate, boTask.StartDate, boTask.NumOfDays, boTask.DeadLine,
-            // boTask.FinishtDate, boTask.Product, boTask.Remarks, boTask.EngineerId,(DO.EngineerLevel)boTask.RequiredLevel);
-
-            int idTsk = _dal.Task.Create(boTask);
-
-            return idTsk;
+            return idTsk;   // Return the new task ID
         }
-        catch (DO.DalAlreadyExistsException ex)
+        catch (DO.DalAlreadyExistsException ex) //will catch an exception that will be thrown from the DAL layer if a task with the same ID already exists
         {
-            throw new NotImplementedException();
+            throw new BO.BlAlreadyExistsException($"Task with ID={boTask.TaskId} already exists", ex);
         }
-    }
 
+    }
 
     public void Delete(int id)
     {
@@ -62,6 +60,8 @@ internal class TaskImplementation : ITask
         }
     }
   
+
+
     public IEnumerable<Task?> ReadAll()
     {
         throw new NotImplementedException();

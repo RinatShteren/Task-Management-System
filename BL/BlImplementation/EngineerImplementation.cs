@@ -1,12 +1,6 @@
 ﻿
 namespace BlImplementation;
 using BlApi;
-using System.ComponentModel.Design;
-using System.ComponentModel.Design;
-using System.ComponentModel.Design;
-using System.ComponentModel.Design;
-using System.ComponentModel.Design;
-using System.ComponentModel.Design;
 
 
 internal class EngineerImplementation : IEngineer

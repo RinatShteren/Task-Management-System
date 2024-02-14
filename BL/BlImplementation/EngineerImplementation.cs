@@ -1,13 +1,14 @@
 ﻿
 namespace BlImplementation;
 using BlApi;
+using BO;
 using System.ComponentModel.Design;
 using System.ComponentModel.Design;
 using System.ComponentModel.Design;
 using System.ComponentModel.Design;
 using System.ComponentModel.Design;
 using System.ComponentModel.Design;
-
+using System.Net.Security;
 
 internal class EngineerImplementation : IEngineer
 {
@@ -135,4 +136,43 @@ internal class EngineerImplementation : IEngineer
             return temp;
         }
     }
+
+    public void Update(BO.Engineer boEngineer)
+    {
+        DO.Engineer doEngineer =new DO.Engineer
+            (boEngineer.Id, boEngineer.Name, boEngineer.Email, (DO.EngineerLevel)boEngineer.Level, boEngineer.Cost);
+        try
+        {
+            if (doEngineer.Id < 0)
+                throw new BO.BlNotVaildException("Id is not vaild");
+            if (doEngineer.Name == "")
+                throw new BO.BlNotVaildException("Name is empty");
+            if (doEngineer.Cost < 0)
+                throw new BO.BlNotVaildException("Cost under zero");
+            if (!doEngineer.Email.Contains("@"))
+                throw new BO.BlNotVaildException("Email not vaild");
+            if ((int)doEngineer.Level <= 0 || (int)doEngineer.Level > 4)
+                throw new BO.BlNotVaildException("Level not vaild");
+            //UPDATE the engineer if content is vaild
+            _dal.Engineer.Update(doEngineer);
+            if(boEngineer.Task!= null)//if he has tasts
+            {
+                if(Factory.Get().Schedule.GetStage()== (BO.Stage.planning))//are we in the plenning stage
+                    throw new BlNotFitSchedule("you are in the plenning stage- you cant assign a task to engineer ");
+                var task = _dal.Task.Read(task => task.TaskId == boEngineer.Task!.Id)
+                    ?? throw new BlDoesNotExistException($"task with id dous not fit to enginer level");
+                // if((int)task.Difficulty>(int)boEngineer.Level)
+                //  throw BO.BlNotFitSchedule($"task with ID={task.TaskId} dousnt fit engineer level");
+                if (task.EngineerId != 0)
+                    throw new BO.BlNotFitSchedule($"task with ID={task.TaskId} is alredy bolong to engineer");
+                _dal.Task.Update(task with { TaskId = boEngineer.Id });
+            }
+
+        }
+        catch (DO.DalAlreadyExistsException ex)
+        {
+            throw new BO.BlDoesNotExistException($"Engineer with ID={boEngineer.Id} dous not exist", ex);
+        }
+    }
+    
 }

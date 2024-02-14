@@ -7,7 +7,5 @@ internal class Bl : IBl
 
     public ITask Task => new TaskImplementation();
 
-    public IEngineer Student => throw new NotImplementedException();
-
-    public ITask Course => throw new NotImplementedException();
+    public ISchedule Schedule => new ScheduleImplementation();
 }

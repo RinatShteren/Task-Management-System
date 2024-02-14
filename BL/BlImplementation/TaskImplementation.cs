@@ -1,5 +1,7 @@
 ﻿namespace BlImplementation;
 using BlApi;
+using DalApi;
+using DO;
 
 internal class TaskImplementation : ITask
 {
@@ -41,7 +43,6 @@ internal class TaskImplementation : ITask
             throw new NotImplementedException();
         }
     }
-
 
     public void Delete(int id)
     {

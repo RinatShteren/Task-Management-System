@@ -8,11 +8,11 @@ public class Task
     public string? NickName { get; set; }//Alies
     public EngineerLevel? RequiredLevel { get; set; }
     public DateTime? CreationDate { get; set; }//CreatedatDate
-    public DateTime? EstimatedDate { get; set; }
-    public DateTime? StartDate { get; set; }
-    public int? NumOfDays { get; set; }
-    public DateTime? DeadLine { get; set; }
-    public DateTime? FinishtDate { get; set; }
+    public DateTime? EstimatedDate { get; set; }//מתוכנן
+    public DateTime? StartDate { get; set; }//בפועל
+    public int? NumOfDays { get; set; }//כמה ימים המשימה תיקח
+    public DateTime? DeadLine { get; set; }//מתוכנן
+    public DateTime? FinishtDate { get; set; }//בפועל
     public string? Product { get; set; }
     public string? Remarks { get; set; }//
     public int EngineerId { get; set; }//
@@ -23,6 +23,6 @@ public class Task
     /// </summary>
     public BO.EngineerInTask Engineer { get; set; }
 
-    public List<BO.TaskInList>? Dependencies { get; set; } //
+    public List<BO.TaskInList> Dependencies { get; set; } //
 
 }

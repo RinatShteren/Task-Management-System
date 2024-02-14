@@ -1,5 +1,11 @@
 ﻿namespace BlImplementation;
 using BlApi;
+using BO;
+using DO;
+
+using System.Collections.Generic;
+using System.ComponentModel.Design;
+
 //using BO;
 
 internal class TaskImplementation : ITask
@@ -8,11 +14,11 @@ internal class TaskImplementation : ITask
     public int Create(BO.Task boTask)
     {
         // ודא שהפרויקט לא בשלב התכנון
-        if (Factory.Get.Stage != BO.Stage.Planning) 
+        if (Factory.Get().Schedule.GetStage() != BO.Stage.planning)
             throw new BO.BlNotFitSchedule("Can not add tasks after Project planning phase");
 
         DO.Task doTask = new DO.Task(boTask.TaskId, boTask.Description, boTask.NickName); //?
-  
+
         try
         {
             if (boTask.TaskId < 0) //??
@@ -31,7 +37,6 @@ internal class TaskImplementation : ITask
                     _dal.Dependence.Create(dependence);
                 }
             }
-
             return idTsk;   // Return the new task ID
         }
         catch (DO.DalAlreadyExistsException ex) //will catch an exception that will be thrown from the DAL layer if a task with the same ID already exists
@@ -43,8 +48,8 @@ internal class TaskImplementation : ITask
 
     public void Delete(int id)
     {
-       //בדיקה אם יש משימה שתלויה במשימה שעומדים למחוק
-        DO.Dependence tempDp= _dal.Dependence.Read(item => item.PreviousTaskId == id);
+        //בדיקה אם יש משימה שתלויה במשימה שעומדים למחוק
+        DO.Dependence tempDp = _dal.Dependence.Read(item => item.PreviousTaskId == id);
         if (tempDp != null)
             throw new NotImplementedException();
         try
@@ -59,12 +64,38 @@ internal class TaskImplementation : ITask
             throw new NotImplementedException();
         }
     }
-  
 
 
-    public IEnumerable<Task?> ReadAll()
+
+    public IEnumerable<TaskInList> ReadAll(Func<BO.Task, bool>? predicate = null)
     {
-        throw new NotImplementedException();
+        if(predicate == null)
+        {
+            IEnumerable<BO.TaskInList> tasks = (from DO.Task item in _dal.Task.ReadAll(null)
+                                                select new BO.TaskInList()
+                                                {
+                                                    TaskId = item.TaskId,
+                                                    NickName = item.NickName,
+                                                    Description = item.Description
+                                                }) ;
+            return tasks;
+        }
+        else
+        {
+          IEnumerable<BO.TaskInList> tasks1 = (from DO.Task item in _dal.Task.ReadAll(null)
+                                                        where predicate()
+                                                        select new BO.TaskInList()
+                                                        {
+                                                            TaskId = item.TaskId,
+                                                            NickName = item.NickName,
+                                                            Description = item.Description
+                                                        });
+            return tasks1;
+        }
+          
+
+
+       
     }
     public BO.Task? Read(int id)
     {
@@ -75,7 +106,6 @@ internal class TaskImplementation : ITask
             TaskId = id,
             Description = doTask.Description,
             NickName = doTask.NickName,
-            MileStone = doTask.MileStone,
             CreationDate = doTask.CreationDate,
             EstimatedDate = doTask.EstimatedDate,
             StartDate = doTask.StartDate,
@@ -93,16 +123,57 @@ internal class TaskImplementation : ITask
             task.Engineer = new BO.EngineerInTask()
             {
                 Id = (int)doTask.EngineerId,
-                Name = (_dal.Engineer.Read(id) ?? throw new BO.BlDoesNotExistException($"Engineer with ID={id} does not exist")).Id = (int)doTask.Name,
+                Name = (_dal.Engineer.Read(id) ??
+                throw new BO.BlDoesNotExistException($"Engineer with ID={id} does not exist")).Name
 
             };
         }
 
-        task.Status = getStatus(doTask);
-        task.PlanToFinish = getPlanToFinish(doTask);
-        task.Links = getLinks(task);
+        task.DeadLine = getPlanToFinish(doTask);
+        task.Dependencies = Dependencies(task);
 
         return task;
+    }
+
+    private DateTime? getPlanToFinish(DO.Task tesk)
+    {
+        if (tesk.EstimatedDate == null) return null;
+        if (task.DeadLine == null) return null;
+        return(Task.)
+    }
+    public void UpdateDate(int id, DateTime date)
+    {
+        DO.Task doTask = _dal.Task.Read(id) ??
+            throw new BO.BlDoesNotExistException($"task with ID={id} dous not exist");
+        BO.Task task = Read(id)!;
+        List<BO.TaskInList>? Dependencies1 = task.Dependencies;
+
+        if (Dependencies1 != null)
+        {
+            foreach (BO.TaskInList a in Dependencies1)//if there is  dependencies
+            {
+                DO.Task allTasks = _dal.Task.Read(a.TaskId) ??
+                    throw BO.BlDoesNotExistException($"task with ID={id} dous not exist");
+                if (a.StartDate == null)//if the date is null
+                    throw BO.BlNotFitSchedule($"The date is null while id is:{a}");
+                if (date < _dal.Schedule.GetEndPro())
+                    throw BO.BlNotFitSchedule($"task with ID={a.TaskId} will not finish in time");
+            }
+        }
+        _dal.Task.Update(doTask with { StartDate = date });
+    }
+
+    public DateTime? startDateToSet(int id)
+    {
+        if (Factory.Get().Schedule.GetStage() == BO.Stage.planning)
+            throw
+        DO.Task tesk = _dal.Task.Read(id) ??
+            throw
+        IEnumerable< DO.Dependence > links = _dal.Dependence.ReadAll(link => Dependence.PendingTaskId == id)
+            ?? throw
+        if (dates.any(date => date == null)) return null;
+        DateTime? date = dates.max();
+        return date;
     }
 
 }

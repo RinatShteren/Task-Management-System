@@ -129,22 +129,42 @@ internal class TaskImplementation : ITask
         }
 
         task.DeadLine = getPlanToFinish(doTask);
-        //task.Dependencies = Dependencies(task);
+        task.Dependencies = getLinks(task);
 
         return task;
     }
 
+    private List<BO.TaskInList> getLinks(BO.Task task)
+    {
+        List<DO.Dependence> dep = new List<DO.Dependence>(_dal.Dependence.ReadAll(link => link.PendingTaskId == task.TaskId));
+        if (dep.Count == 0)
+            return new List<BO.TaskInList>();
+        List<BO.TaskInList> tasks = new List<BO.TaskInList>();
+
+        foreach (DO.Dependence d in dep)
+        {
+            DO.Task doTask = _dal.Task.Read(d!.PreviousTaskId) ?? throw new BO.BlDoesNotExistException("");
+            BO.TaskInList newTask = new BO.TaskInList
+            {
+                TaskId = doTask.TaskId,
+                NickName = doTask.NickName,
+                Description = doTask.Description
+            };
+            tasks.Add(newTask);
+        }
+        return tasks;
+    }
     private DateTime? getPlanToFinish(DO.Task task)
     {
-        if (task.EstimatedDate == null)
+        if (task.EstimatedDate == null || task.NumOfDays == null)
         {
             return null;
         }
-        if (task.NumOfDays == null)
-        {
-            return null;
-        }
-        return (task.EstimatedDate + task.NumOfDays);
+
+        // המרת המספר לתאריך והוספתו לתאריך המשוער
+        DateTime estimatedDateWithDays = task.EstimatedDate.Value.AddDays(task.NumOfDays.Value);
+
+        return estimatedDateWithDays;
     }
 
 
@@ -160,11 +180,11 @@ internal class TaskImplementation : ITask
             foreach (BO.TaskInList a in Dependencies1)//if there is  dependencies
             {
                 DO.Task allTasks = _dal.Task.Read(a.TaskId) ??
-                    throw BO.BlDoesNotExistException($"task with ID={id} dous not exist");
+                    throw new BO.BlDoesNotExistException($"task with ID={id} dous not exist");
                 if (a.StartDate == null)//if the date is null
-                    throw BO.BlNotFitSchedule($"The date is null while id is:{a}");
+                    throw new BO.BlNotFitSchedule($"The date is null while id is:{a}");
                 if (date < _dal.Schedule.GetEndPro())
-                    throw BO.BlNotFitSchedule($"task with ID={a.TaskId} will not finish in time");
+                    throw new BO.BlNotFitSchedule($"task with ID={a.TaskId} will not finish in time");
             }
         }
         _dal.Task.Update(doTask with { StartDate = date });
@@ -173,13 +193,18 @@ internal class TaskImplementation : ITask
     public DateTime? startDateToSet(int id)
     {
         if (Factory.Get().Schedule.GetStage() == BO.Stage.planning)
-            throw
+            throw new BO.BlDoesNotExistException("");
         DO.Task tesk = _dal.Task.Read(id) ??
-            throw
-        IEnumerable< DO.Dependence > links = _dal.Dependence.ReadAll(link => Dependence.PendingTaskId == id)
-            ?? throw
-        if (dates.any(date => date == null)) return null;
-        DateTime? date = dates.max();
+        throw new BO.BlDoesNotExistException("");
+        IEnumerable<DO.Dependence> links = _dal.Dependence.ReadAll(Dependence => Dependence.PendingTaskId == id);
+        if (links.Count() == 0)
+            return _dal.Schedule.GetStartPro();
+        IEnumerable<DateTime?> dates = links.Select
+            (link => getPlanToFinish(_dal.Task.Read(link.PreviousTaskId)
+            ?? throw new BO.BlDoesNotExistException("")));
+       
+        if (dates.Any(date => date == null)) return null;
+        DateTime? date = dates.Max();
         return date;
     }
 

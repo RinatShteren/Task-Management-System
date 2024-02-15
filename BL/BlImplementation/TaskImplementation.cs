@@ -1,6 +1,7 @@
 ﻿namespace BlImplementation;
 using BlApi;
-using BO;
+//using BO;
+using DalApi;
 
 //AFTER APDATE
 internal class TaskImplementation : ITask
@@ -18,7 +19,7 @@ internal class TaskImplementation : ITask
             if (boTask.TaskId < 0)
                 throw new BO.BlNotVaildException("id is not valid");
 
-            if (boTask.NickName == "")
+            if (string.IsNullOrEmpty(boTask.NickName))
                 throw new BO.BlNotVaildException("NickName is not valid");
 
             int idTsk = _dal.Task.Create(doTask); //Create in the data layer
@@ -54,8 +55,8 @@ internal class TaskImplementation : ITask
 
         try
         {
-            DO.Task tempTsk = _dal.Task.Read(id);
-            if (tempTsk == null) throw new BO.BlDoesNotExistException($"Task with ID=[{id}] does Not exist");
+            DO.Task doTask = _dal.Task.Read(id);
+            if (doTask == null) throw new BO.BlDoesNotExistException($"Task with ID=[{id}] does Not exist");
         
             _dal.Task.Delete(id);
         }
@@ -145,6 +146,8 @@ internal class TaskImplementation : ITask
         }
         return (task.EstimatedDate + task.NumOfDays);
     }
+
+
     public void UpdateDate(int id, DateTime date)
     {
         DO.Task doTask = _dal.Task.Read(id) ??
@@ -178,6 +181,61 @@ internal class TaskImplementation : ITask
         if (dates.any(date => date == null)) return null;
         DateTime? date = dates.max();
         return date;
+    }
+
+
+    public void Update(BO.Task boTask)
+    {
+        
+        if (boTask.TaskId <= 0) 
+            throw new BO.BlNotVaildException("id is not valid");
+
+        if (string.IsNullOrEmpty(boTask.NickName))
+            throw new BO.BlNotVaildException("NickName is not valid");
+
+        DO.Task? tempTask = _dal.Task.Read(boTask.TaskId);
+
+        if (tempTask == null) throw new BO.BlAlreadyExistsException($"Task with ID= {boTask.TaskId} already exists");
+
+
+        if (Factory.Get().Schedule.GetStage() == BO.Stage.planning)  // אם אנחנו בשלב התכנון, 
+
+
+
+
+
+
+
+
+
+
+
+            //If the schedule has already been set, check that only the fields allowed for update have been updated
+            if (Factory.Get.GetStage() == BO.Stage.Execution)
+        {
+            List<DO.Link> tempTaskLinks = dal.Link.ReadAll(link => link.NextTask == task.Id).ToList; //a list of all the tasks that task depends on
+            List<DO.Link> taskLinks = new List<DO.Link>(); //the list of tasks that the user wants task to depend on
+
+            if (task.Links != null)
+            {
+                foreach (var taskIn in task.Links)
+                {
+                    DO.Link? link = dal.Link.Read(link => link.PrevTask == taskIn.Id);
+                    if (link != null) taskLinks.Add(link);
+                }
+            }
+
+            if (task.Id != tempTask.TaskId || (int)task.Difficulty != (int)tempTask.Difficulty || task.Milestone != tempTask.Milestone ||
+                task.Creation != tempTask.Creation || task.PlanToStart != tempTask.PlanToStart || task.StartWork != tempTask.StartWork ||
+                task.Deadline != tempTask.Deadline || task.FinishDate != tempTask.FinishDate ||
+                (task.Links != null && !taskLinks.SequenceEqual(tempTaskLinks))) //checking if the links are the same
+            {
+                throw new BO.BlForbiddenInThisStage("Updating these parameters is prohibited after the project schedule is created");
+            }
+        }
+
+        //If we are here, it means that all the tests passed successfully:)
+        dal.Task.Update(task);
     }
 
 }

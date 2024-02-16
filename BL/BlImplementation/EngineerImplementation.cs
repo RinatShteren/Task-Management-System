@@ -2,13 +2,6 @@
 namespace BlImplementation;
 using BlApi;
 using BO;
-using System.ComponentModel.Design;
-using System.ComponentModel.Design;
-using System.ComponentModel.Design;
-using System.ComponentModel.Design;
-using System.ComponentModel.Design;
-using System.ComponentModel.Design;
-using System.Net.Security;
 
 internal class EngineerImplementation : IEngineer
 {
@@ -113,7 +106,7 @@ internal class EngineerImplementation : IEngineer
         else
         {
             IEnumerable<BO.Engineer> temp = from DO.Engineer doEngineer in _dal.Engineer.ReadAll(null)
-                                            where filter()
+                                            where filter()//(doToBo(doEngineer))
                                             select new BO.Engineer()
                                             {
                                                 Id = doEngineer.Id,
@@ -157,7 +150,7 @@ internal class EngineerImplementation : IEngineer
             _dal.Engineer.Update(doEngineer);
             if(boEngineer.Task!= null)//if he has tasts
             {
-                if(Factory.Get().Schedule.GetStage()== (BO.Stage.planning))//are we in the plenning stage
+                if(Factory.Get().Schedule.GetStage()== (BO.Stage.Planning))//are we in the plenning stage
                     throw new BlNotFitSchedule("you are in the plenning stage- you cant assign a task to engineer ");
                 var task = _dal.Task.Read(task => task.TaskId == boEngineer.Task!.Id)
                     ?? throw new BlDoesNotExistException($"task with id dous not fit to enginer level");
@@ -174,5 +167,27 @@ internal class EngineerImplementation : IEngineer
             throw new BO.BlDoesNotExistException($"Engineer with ID={boEngineer.Id} dous not exist", ex);
         }
     }
-    
+
+/*
+    private BO.Engineer doToBo(DO.Engineer doEng)
+    {
+        BO.Engineer boEng = new BO.Engineer()
+        {
+            Id = boEng.Id,
+            Name = boEng.Name,
+            Email = boEng.Email,
+            Level = (BO.EngineerLevel)boEng.Level,
+            Cost = boEng.Cost,
+        };
+        //check if there is a task on track of the engineer
+        var task = _dal.Task.Read(item => item.EngineerID == doEng.EngineerID);
+
+        if (task != null) //if found 
+        {
+            BO.TaskInEngineer temp = new BO.TaskInEngineer() { Id = task.TaskID, Name = task.Name };
+            boEng.Task = temp;
+        }
+        return boEng;
+    }
+*/
 }

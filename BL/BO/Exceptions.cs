@@ -1,4 +1,6 @@
 ﻿
+using System.Runtime.Serialization;
+
 namespace BO;
 
 
@@ -42,20 +44,31 @@ public class BlDeletionImpossible : Exception
 /// The exception will be thrown when attempting to do an operation prohibited by the schedule.
 /// </summary>
 [Serializable]
-public class BlNotFitSchedule : Exception
-{
-    public BlNotFitSchedule() : base() { }
-    public BlNotFitSchedule(string message) : base(message) { }
-    public BlNotFitSchedule(string message, Exception innerException) : base(message, innerException) { }
-   // protected BlException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
-}
 
-[Serializable]
-public class BlXMLFileLoadCreateException : Exception
+
+internal class DependenceTasksStartDateIsStillNull : Exception
 {
-    public BlXMLFileLoadCreateException() : base() { }
-    public BlXMLFileLoadCreateException(string message) : base(message) { }
-    public BlXMLFileLoadCreateException(string message, Exception innerException) : base(message, innerException) { }
-    //protected BlXMLFileLoadCreateException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
+    public DependenceTasksStartDateIsStillNull() { }
+    public DependenceTasksStartDateIsStillNull(string? message) : base(message) { }
+    public DependenceTasksStartDateIsStillNull(string? message, Exception? innerException) : base(message, innerException)
+    { }
+    protected DependenceTasksStartDateIsStillNull(SerializationInfo info, StreamingContext context) : base(info, context)
+    { }
+    public class BlNotFitSchedule : Exception
+    {
+        public BlNotFitSchedule() : base() { }
+        public BlNotFitSchedule(string message) : base(message) { }
+        public BlNotFitSchedule(string message, Exception innerException) : base(message, innerException) { }
+        // protected BlException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
+    }
+
+    [Serializable]
+    public class BlXMLFileLoadCreateException : Exception
+    {
+        public BlXMLFileLoadCreateException() : base() { }
+        public BlXMLFileLoadCreateException(string message) : base(message) { }
+        public BlXMLFileLoadCreateException(string message, Exception innerException) : base(message, innerException) { }
+        //protected BlXMLFileLoadCreateException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
+    }
 }
 

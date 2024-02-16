@@ -6,7 +6,7 @@ public class Task
     public int TaskId { get; init; }
     public string? Description { get; set; }
     public string? NickName { get; set; }//Alies
-    public EngineerLevel? RequiredLevel { get; set; }
+    public EngineerLevel? RequiredLevel { get; set; }//נצרך?
     public DateTime? CreationDate { get; set; }//CreatedatDate
     public DateTime? EstimatedDate { get; set; }//מתוכנן
     public DateTime? StartDate { get; set; }//בפועל

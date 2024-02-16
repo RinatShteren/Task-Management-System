@@ -45,12 +45,7 @@ namespace BlTest
                         case 0: break;
                         case 1: Test_task(); break;
                         case 2: Test_engineer(); break;
-                        case 3:Test_schedule(); break;
-                        /* DateTime startOfProject = DateTime.Parse(getString("Please enter start-date of the project"));
-                         if (DalApi.Factory.Get.saveStartandFinishDatestoFile("data-config", "startDate", startOfProject))
-                             s_bl.automaticSchedule();
-                         else throw new BO.BlAlreadyExistsException($"The date is already exsist");
-                         break;*/
+                        case 3: UpdateAllDates();break;
                         default:
                             // Handle unrecognized input
                         Console.WriteLine("ERROR: Unrecognized option. Please choose a valid option.");
@@ -67,20 +62,11 @@ namespace BlTest
                 }
 
             }
-
-
-        }
-        private static void Test_schedule()
-        {
-
         }
         private static void Test_task()
         {
 
             string? choice;
-
-            try
-            {
                 Console.WriteLine(@"test order:
                 Enter your choice:
                 0 - EXIT 
@@ -99,7 +85,7 @@ namespace BlTest
                     case "a":
                         string? name = (getString("enter Name")), descreption = getString("enter description"),
                         product = getString("enter product"), notes = getString("enter notes");
-                        TimeSpan? duration = TimeSpan.Parse(getString("enter duration"));
+                        int duration = int.Parse(getString("enter duration"));
                         EngineerLevel difficulty = (EngineerLevel)int.Parse(getString("enter level"));
 
                         List<BO.TaskInList> prevTasks = new List<BO.TaskInList>();
@@ -115,11 +101,9 @@ namespace BlTest
 
                             BO.TaskInList temp = new BO.TaskInList()
                             {
-                                Id = tempID,
+                                TaskId = tempID,
                                 Description = fullTask.Description,
-                                Name = fullTask.Name,
-                                Status = (BO.Status?)fullTask.Status
-
+                                NickName = fullTask.NickName                           
                             };
                             prevTasks.Add(temp);
                             tempID = Convert.ToInt16(getString("enter id of previous task or 0 to finish"));
@@ -127,43 +111,39 @@ namespace BlTest
 
                         BO.Task task = new BO.Task()
                         {
-                            Name = name,
+                           
+                            NickName = name,
                             Description = descreption,
-                            Creation = DateTime.Now,
-                            Status = BO.Status.Unscheduled,
-                            Links = prevTasks,
-
-                            Duration = duration,
+                            CreationDate = DateTime.Now,
+                            Dependencies = prevTasks,
+                            NumOfDays = duration,
                             Product = product,
-                            Notes = notes,
-                            Difficulty = difficulty
+                            Remarks = notes,
                         };
 
 
-                        int newID = s_bl.Task.Add(task);
+                        int newID = s_bl.Task.Create(task);
                         Console.WriteLine(newID);
                         break;
-                    case "delete":
+                    case "b":
                         int idToDelete = int.Parse(getString("enter the id of the task to delete"));
                         s_bl.Task.Delete(idToDelete);
-                        //s_bl.Task.Read(idToDelete); //התוצאה צריכה להיות שגיאה שנתפסת
                         break;
-                    case "read":
+                    case "c":
                         int idToRead = int.Parse(getString("enter the id of the task to read"));
                         Console.WriteLine(s_bl.Task.Read(idToRead));
                         break;
-                    case "read all":
+                    case "d":
                         foreach (var item in s_bl.Task.ReadAll())
                             Console.WriteLine(item);
 
                         break;
-                    case "update":
+                    case "e":
                         int id = int.Parse(getString("enter id"));
                         name = (getString("enter Name")); descreption = getString("enter description");
                         product = getString("enter product"); notes = getString("enter notes");
-                        duration = TimeSpan.Parse(getString("enter duration"));
-                        difficulty = (Level)int.Parse(getString("enter level"));
-
+                        duration = int.Parse(getString("enter duration"));
+                        difficulty = (EngineerLevel)int.Parse(getString("enter level"));
                         prevTasks = new List<BO.TaskInList>();
 
                         tempID = int.Parse(getString("enter id of previous task or 0 to finish"));
@@ -172,10 +152,9 @@ namespace BlTest
                             BO.Task tempTask = s_bl.Task.Read(tempID) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
                             BO.TaskInList temp = new BO.TaskInList()
                             {
-                                Id = tempID,
+                                TaskId = tempID,
                                 Description = tempTask.Description,
-                                Name = tempTask.Name,
-                                Status = (BO.Status?)tempTask.Status
+                                NickName = tempTask.NickName
                             };
                             prevTasks.Add(temp);
                             tempID = int.Parse(getString("enter id of previous task or 0 to finish"));
@@ -183,31 +162,26 @@ namespace BlTest
 
                         BO.Task taskToUpdate = new BO.Task()
                         {
-                            Id = id,
-                            Name = name,
+                            TaskId = id,
+                            NickName = name,
                             Description = descreption,
-                            Creation = DateTime.Now,
-                            Status = BO.Status.Unscheduled,
-                            Links = prevTasks,
-
-                            Duration = duration,
+                            CreationDate = DateTime.Now,
+                            Dependencies = prevTasks,
+                            NumOfDays = duration,
                             Product = product,
-                            Notes = notes,
-                            Difficulty = difficulty
+                            Remarks = notes,
+                           
                         };
 
                         s_bl.Task.Update(taskToUpdate);
-                        //check:
-                        Console.WriteLine(s_bl.Task.Read(taskToUpdate.Id));
+                        Console.WriteLine(s_bl.Task.Read(taskToUpdate.TaskId));
                         break;
-                    case "update date":
+                    case "f":
                         id = int.Parse(getString("enter id of task to update date"));
                         DateTime date = DateTime.Parse(getString("enter the new date"));
                         s_bl.Task.UpdateDate(id, date);
-                        //check:
                         Console.WriteLine(s_bl.Task.Read(id));
                         break;
-
                     default:
                         {
                             Console.WriteLine("invalid input, please enter again");
@@ -215,11 +189,9 @@ namespace BlTest
                             break;
                         }
                 }
-
                 return;
+        }
 
-            }
-            }
         private static void Test_engineer()
         {
            
@@ -290,25 +262,19 @@ namespace BlTest
             return;
         }
 
-
-        private static string getString(string s)
-        {
-            Console.WriteLine(s);
-            return Console.ReadLine();
-        }
-
-        public void UpdateAllDates()
+        public static void UpdateAllDates()
         {
             try
             {
+               
                 Console.WriteLine("Enter date to start the project");
                 if (DateTime.TryParse(Console.ReadLine(), out DateTime startPRO))
                     throw new BlNotVaildException("wrong input");
 
-                while (s_bl!.Task.ReadAll(task => task.StartDate is null).Any())//update the tasks
-                {
+                s_bl.Task.CalculateCloserStartDateForAllTasks();
 
-                }
+ 
+              //  Console.WriteLine(s_bl.Task.Read(item.TaskId));
 
                 s_bl.Schedule.SetStartPro(startPRO);
             }
@@ -316,6 +282,12 @@ namespace BlTest
             {
                 Console.WriteLine(e.Message);
             }
-    }
+        }
+
+        private static string getString(string s)
+        {
+            Console.WriteLine(s);
+            return Console.ReadLine();
+        }
     }
 }

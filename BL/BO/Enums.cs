@@ -11,7 +11,7 @@ public enum EngineerLevel
 
 public enum Stage
 {
-    planning,
-    middle,
-    action
+    Planning,
+    Middle,
+    Action
 }

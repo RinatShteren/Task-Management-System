@@ -9,6 +9,6 @@
         public DateTime? SetEndPro(DateTime endPro);
         public DateTime? GetEndPro();
 
-      
+     
     }
 }

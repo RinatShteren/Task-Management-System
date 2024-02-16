@@ -10,4 +10,5 @@ public interface ISchedule
     public DateTime? GetEndPro();
 
     public BO.Stage GetStage();
+
 }

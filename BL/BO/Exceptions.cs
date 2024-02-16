@@ -1,4 +1,6 @@
 ﻿
+using System.Runtime.Serialization;
+
 namespace BO;
 
 
@@ -42,6 +44,16 @@ public class BlDeletionImpossible : Exception
 /// The exception will be thrown when attempting to do an operation prohibited by the schedule.
 /// </summary>
 [Serializable]
+
+
+internal class DependenceTasksStartDateIsStillNull : Exception
+{
+    public DependenceTasksStartDateIsStillNull()  { }
+    public DependenceTasksStartDateIsStillNull(string? message) : base(message)   {    }
+    public DependenceTasksStartDateIsStillNull(string? message, Exception? innerException) : base(message, innerException)
+    { }
+    protected DependenceTasksStartDateIsStillNull(SerializationInfo info, StreamingContext context) : base(info, context)
+    {  }
 public class BlNotFitSchedule : Exception
 {
     public BlNotFitSchedule() : base() { }

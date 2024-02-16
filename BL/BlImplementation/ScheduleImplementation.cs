@@ -4,7 +4,7 @@ using DalApi;
 
 namespace BlImplementation;
 
-internal class ScheduleImplementation : ISchedule
+internal class ScheduleImplementation : BlApi.ISchedule
 {
     private readonly DalApi.IDal _dal = DalApi.Factory.Get;
     public DateTime? GetEndPro() => _dal.Schedule.GetEndPro();
@@ -17,15 +17,10 @@ internal class ScheduleImplementation : ISchedule
 
     public BO.Stage GetStage()
     {
-        if(this.GetStartPro().Value == null)
-            return BO.Stage.planning;
-        else if(this.GetStartPro().Value != null/*וגם כל המשימות בדאל הם עם תאריך התחלה נל*/)
-            return BO.Stage.middle;
-        else
-            return BO.Stage.action;
+        if(GetStartPro() is null)
+            return BO.Stage.Planning;
+        if(!_dal.Task.ReadAll(t => t.StartDate is not null).Any())
+            return BO.Stage.Middle;
+        return BO.Stage.Action;
     }
-
-   
-   
-
 }

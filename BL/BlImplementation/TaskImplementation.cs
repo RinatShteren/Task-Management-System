@@ -2,6 +2,7 @@
 using BlApi;
 //using BO;
 using DalApi;
+using DO;
 
 //AFTER APDATE
 internal class TaskImplementation : ITask
@@ -209,58 +210,71 @@ internal class TaskImplementation : ITask
     }
 
 
-    public void Update(BO.Task boTask)
+    public void Update(BO.Task upTask)
     {
-        
-        if (boTask.TaskId <= 0) 
+
+        if (upTask.TaskId <= 0)
             throw new BO.BlNotVaildException("id is not valid");
 
-        if (string.IsNullOrEmpty(boTask.NickName))
+        if (string.IsNullOrEmpty(upTask.NickName))
             throw new BO.BlNotVaildException("NickName is not valid");
 
-        DO.Task? tempTask = _dal.Task.Read(boTask.TaskId);
+        DO.Task existingTask = _dal.Task.Read(upTask.TaskId);// Read the existing task from the data layer
 
-        if (tempTask == null) throw new BO.BlAlreadyExistsException($"Task with ID= {boTask.TaskId} already exists");
+        if (existingTask == null)
+            throw new BO.BlDoesNotExistException($"Task with ID={upTask.TaskId} does not exist");
 
-
-        if (Factory.Get().Schedule.GetStage() == BO.Stage.planning)  // אם אנחנו בשלב התכנון, 
-
-
-
-
-
-
-
-
-
-
-
-            //If the schedule has already been set, check that only the fields allowed for update have been updated
-            if (Factory.Get.GetStage() == BO.Stage.Execution)
+        //אם אנחנו בתכנון אפשר לקרוא לפונקציה אפדייט של הדאל ,רק צריך לעדכן את השדה של התלויות כי הוא לא מופיע בדאל  
+        if (Factory.Get().Schedule.GetStage() == BO.Stage.action)
         {
-            List<DO.Link> tempTaskLinks = dal.Link.ReadAll(link => link.NextTask == task.Id).ToList; //a list of all the tasks that task depends on
-            List<DO.Link> taskLinks = new List<DO.Link>(); //the list of tasks that the user wants task to depend on
+            // list of the tasks that the task we want to update depends on 
+            List<DO.Dependence> dalDependences = _dal.Dependence.ReadAll(Dependence => Dependence.PendingTaskId == upTask.TaskId).ToList();
 
-            if (task.Links != null)
+            //list of the tasks that the updated task depends on 
+            List<DO.Dependence> upDependences = upTask.Dependencies?.Select(taskIn => new DO.Dependence(0, taskIn.TaskId, upTask.TaskId)).ToList() ?? new List<DO.Dependence>();
+            // Check if task links are provided and are different from existing task links
+            if (upTask.Dependencies?.Any() == true && !upDependences.SequenceEqual(dalDependences))  //אם הן שונות- חריגה 
             {
-                foreach (var taskIn in task.Links)
-                {
-                    DO.Link? link = dal.Link.Read(link => link.PrevTask == taskIn.Id);
-                    if (link != null) taskLinks.Add(link);
-                }
+                throw new BO.BlNotFitSchedule("Dependencies cannot be initialized after creating the project schedule");
             }
-
-            if (task.Id != tempTask.TaskId || (int)task.Difficulty != (int)tempTask.Difficulty || task.Milestone != tempTask.Milestone ||
-                task.Creation != tempTask.Creation || task.PlanToStart != tempTask.PlanToStart || task.StartWork != tempTask.StartWork ||
-                task.Deadline != tempTask.Deadline || task.FinishDate != tempTask.FinishDate ||
-                (task.Links != null && !taskLinks.SequenceEqual(tempTaskLinks))) //checking if the links are the same
+            // Check if any date properties have been modified
+            if (new[] { upTask.CreationDate, upTask.EstimatedDate, upTask.StartDate, upTask.DeadLine, upTask.FinishtDate }
+                .Any(date => date != existingTask.CreationDate && date != existingTask.EstimatedDate &&
+                             date != existingTask.StartDate && date != existingTask.DeadLine &&
+                             date != existingTask.FinishtDate))
             {
-                throw new BO.BlForbiddenInThisStage("Updating these parameters is prohibited after the project schedule is created");
+                throw new BO.BlNotFitSchedule("Unable to initialize dates after creating the project schedule");
             }
         }
+        //עד כאן בדקנו שלא מנסים לעשות משהו שאסור בשלב של הלוז ואם לא קפצנו אז כנראה הכל טוב ואפשר להתחיל
+        try
+        {
+            //updete the Dependences
+            foreach (var item in (_dal.Dependence.ReadAll(Dependence => Dependence.PendingTaskId == upTask.TaskId)))
+            {
+                _dal.Dependence.Delete(item.DependenceId);
+            }
+            if (upTask.Dependencies != null)
+                foreach (var item in upTask.Dependencies)
+                {
+                    DO.Dependence temp = new DO.Dependence() { PreviousTaskId = item.TaskId, PendingTaskId = upTask.TaskId };
+                    _dal.Dependence.Create(temp);
+                }
+            int tempID;
+            if (upTask.Engineer == null)
+                tempID = 0;
+            else
+                tempID = upTask.EngineerId;
 
-        //If we are here, it means that all the tests passed successfully:)
-        dal.Task.Update(task);
+
+            DO.Task doTask = new DO.Task(upTask.TaskId, upTask.Description, upTask.NickName, upTask.CreationDate, upTask.EstimatedDate, upTask.StartDate, 0, upTask.DeadLine, upTask.FinishtDate,
+            upTask.Product, upTask.Remarks, tempID, (DO.EngineerLevel)upTask.RequiredLevel);
+
+            _dal.Task.Update(doTask);
+        }
+        catch (DO.DalDoesNotExistException ex)
+        {
+            throw new BO.BlDoesNotExistException($"Task with ID={upTask.TaskId} does Not exist", ex);
+        }
+        
     }
-
-}

@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using ISchedule = BlApi.ISchedule;
 
-internal class TaskImplementation :ITask
+internal class TaskImplementation : BlApi.ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
     private readonly ISchedule _schedule;
@@ -113,7 +113,7 @@ internal class TaskImplementation :ITask
         return task;
     }
 
-    public IEnumerable<TaskInList> ReadAll(Func<BO.Task, bool>? predicate = null)
+    public IEnumerable<TaskInList> ReadAll(Func< bool>? predicate = null)
     {
         if (predicate == null)
         {
@@ -163,7 +163,7 @@ internal class TaskImplementation :ITask
         return boEng;
     }*/
 
-    private List<BO.TaskInList> getLinks(BO.Task task)//return list of all dependence of spesific task
+    public List<BO.TaskInList> getLinks(BO.Task task)//return list of all dependence of spesific task
     {
         //כל התלויות שהתלות הבאה שלהם זה המשימה הנוכחית 
         List<DO.Dependence> dep = new List<DO.Dependence>(_dal.Dependence.ReadAll(link => link.PendingTaskId == task.TaskId));
@@ -283,63 +283,12 @@ internal class TaskImplementation :ITask
       
     }
 
-    private DateTime? getEndTaskDate_DO(DO.Task task) => task?.StartDate!.Value.AddDays(task.NumOfDays.Value);
+    public DateTime? getEndTaskDate_DO(DO.Task task) => task?.StartDate!.Value.AddDays(task.NumOfDays.Value);
 
-    private DateTime? getEndTaskDate_BO(BO.Task task) => task?.StartDate!.Value.AddDays(task.NumOfDays.Value);
-
-
-}
+    public DateTime? getEndTaskDate_BO(BO.Task task) => task?.StartDate!.Value.AddDays(task.NumOfDays.Value);
 
 
-
-
-//private DateTime? getPlanToFinish(int id)//קביעת תאריך משוער למשימה 
-//{
-//    DO.Task newTask = _dal.Task.Read(id);
-//    if (newTask.EstimatedDate == null || newTask.NumOfDays == null)
-//    {
-//        return null;
-//    }
-
-//    // המרת המספר לתאריך והוספתו לתאריך המשוער
-//    DateTime estimatedDateWithDays = newTask.EstimatedDate.Value.AddDays(newTask.NumOfDays.Value);
-
-//    return estimatedDateWithDays;
-//}
-
-//}
-//public DateTime? startDateToSet(int id)
-//{
-//    if (_schedule.GetStage() == BO.Stage.Planning)//מותר לעדכן תאריך רק אחרי שלב התכנון
-//        throw new BO.BlDoesNotExistException("");
-//    DO.Task tesk = _dal.Task.Read(id) ??
-//    throw new BO.BlDoesNotExistException("");
-//    //שים את כל המשימות שהמשימה שלי זו המשימה שלהם
-//    IEnumerable<DO.Dependence> links = _dal.Dependence.ReadAll(Dependence => Dependence.PendingTaskId == id);
-
-//    IEnumerable<DateTime?> dates = links.Select
-//        (dep => getPlanToFinish(_dal.Task.Read(dep.PreviousTaskId)
-//        ?? throw new BO.BlDoesNotExistException("")));
-
-//    if (dates.Any(date => date == null)) return null;
-//    DateTime? date = dates.Max();
-//    return date;
-//}
-/*
- * public void UpdateEstimatedDate(int id, DateTime? date)
-    {
-        DO.Task doTask = _dal.Task.Read(id) ??
-            throw new BO.BlDoesNotExistException($"task with ID={id} dous not exist");
-        _dal.Task.Update(doTask with { EstimatedDate = date });//תעדכן את המשימה שקיבלת עם התאריך
-    }
-    public void UpdateDeadLineDate(int id, DateTime? date)
-    {
-        DO.Task doTask = _dal.Task.Read(id) ??
-            throw new BO.BlDoesNotExistException($"task with ID={id} dous not exist");
-        _dal.Task.Update(doTask with { DeadLine = date });//תעדכן את המשימה שקיבלת עם התאריך
-
-
-  public void UpdateDate(int id, DateTime date)//עדכון תאריך של משימה אחת
+    public void UpdateDate(int id, DateTime date)//עדכון תאריך של משימה אחת
     {
         DO.Task doTask = _dal.Task.Read(id) ??
             throw new BO.BlDoesNotExistException($"task with ID={id} dous not exist");
@@ -354,10 +303,12 @@ internal class TaskImplementation :ITask
                     throw new BO.BlDoesNotExistException($"task with ID={id} dous not exist");
                 if (a.StartDate == null)//if the date is null
                     throw new BO.BlNotFitSchedule($"The date is null while id is:{a}");
-                if (date < getPlanToFinish(a))// אם התאריך שקיבלתי קטן מהתאריך של סיום המשימה  אני לא אסיים בזמן
-                    throw new BO.BlNotFitSchedule($"task with ID={a.TaskId} will not finish in time");
+              /*  if (date < getPlanToFinish(a))// אם התאריך שקיבלתי קטן מהתאריך של סיום המשימה  אני לא אסיים בזמן
+                    throw new BO.BlNotFitSchedule($"task with ID={a.TaskId} will not finish in time");*/
             }
         }
         _dal.Task.Update(doTask with { StartDate = date });//תעדכן את המשימה שקיבלת עם התאריך
     }
-    }*/
+}
+
+

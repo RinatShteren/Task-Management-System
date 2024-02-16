@@ -99,7 +99,7 @@ public static class Initialization
             string? _Remarks = Remarks[num % 2]; //כל פעם יוגרל רנדומלית הערה מהרשימה 
             EngineerLevel _RequiredLevel = (EngineerLevel)new Random().Next(Enum.GetValues(typeof(EngineerLevel)).Length); //נגדיר מס רנדומלי שייתן רמת מהנדס רנדומלית מתוך האינם
 
-            Task newTsk = new Task(0, _TaskNickName, _Description, _MileStone, _CreationDate, _EstimatedDate, _StartDate,
+            Task newTsk = new Task(0, _TaskNickName, _Description, _CreationDate, _EstimatedDate, _StartDate,
                 _NumOfDays, _DeadLine, _FinishtDate, _Product, _Remarks, 0, _RequiredLevel); //נגדיר משימה זמנית
             s_dal!.Task.Create(newTsk);             //נכניס אותה לבסיס נתונים
 

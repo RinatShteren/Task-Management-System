@@ -275,7 +275,7 @@ internal class TaskImplementation :ITask
                 {
                     var l when l.Count() is 0 => _schedule.GetStartPro(),
                     var l when l.Any(d => d.StartDate is null) => throw new DependenceTasksStartDateIsStillNull(),
-                    _ => getEndTaskDate(dependenceTasks.MaxBy(t => getEndTaskDate(t!))!) 
+                    _ => getEndTaskDate_DO(dependenceTasks.MaxBy(t => getEndTaskDate_DO(t!))!) 
                 };
                 _dal.Task.Update(task with { StartDate = startDate });
             }

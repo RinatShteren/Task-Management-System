@@ -28,7 +28,7 @@ internal class TaskImplementation :ITask
             if (boTask.TaskId < 0)
                 throw new BO.BlNotVaildException("id is not valid");
 
-            if (boTask.NickName == "")
+            if (string.IsNullOrEmpty(boTask.NickName))
                 throw new BO.BlNotVaildException("NickName is not valid");
 
             int idTsk = _dal.Task.Create(doTask); //Create in the data layer

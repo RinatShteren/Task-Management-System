@@ -6,6 +6,9 @@ using BO;
 internal class EngineerImplementation : IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
+
+  
+
     public int AddEngineer(BO.Engineer boEngineer)
     {
         DO.Engineer doEngineer = new DO.Engineer
@@ -30,24 +33,6 @@ internal class EngineerImplementation : IEngineer
         catch (DO.DalAlreadyExistsException ex)
         {
             throw new BO.BlDoesNotExistException($"Engineer with ID={boEngineer.Id} is alredy exist",ex);
-        }
-    }
-
-    public void Delete(int id)
-    {
-        /*all task that fit to the current id  and to to the start date*/
-        var task = _dal.Task.Read(item => item.EngineerId == id
-        && item.StartDate < DateTime.Now);
-        try
-        {
-            if(task == null)
-                throw new BO.BlDeletionImpossible("You can't deleate this engineer because his task in progress");
-           
-            _dal.Engineer.Delete(id);
-        }
-        catch (DO.DalAlreadyExistsException ex)
-        {
-            throw new BO.BlDoesNotExistException($"Engineer with ID={id} is alredy exist", ex);
         }
     }
 
@@ -77,9 +62,9 @@ internal class EngineerImplementation : IEngineer
         return engeneerToRead;
     }
 
-    public IEnumerable<BO.Engineer> ReadAll(Func<bool>? filter = null)
+    public IEnumerable<BO.Engineer> ReadAll(Func<bool>? p = null)
     {
-        if (filter == null)
+        if (p == null)
         {
             IEnumerable<BO.Engineer> temp = from DO.Engineer doEngineer in _dal.Engineer.ReadAll(null)
                                             select new BO.Engineer()
@@ -106,7 +91,7 @@ internal class EngineerImplementation : IEngineer
         else
         {
             IEnumerable<BO.Engineer> temp = from DO.Engineer doEngineer in _dal.Engineer.ReadAll(null)
-                                            where filter()//(doToBo(doEngineer))
+                                            where p()//(doToBo(doEngineer))
                                             select new BO.Engineer()
                                             {
                                                 Id = doEngineer.Id,
@@ -127,6 +112,24 @@ internal class EngineerImplementation : IEngineer
             }
 
             return temp;
+        }
+    }
+
+    public void Delete(int id)
+    {
+        /*all task that fit to the current id  and to to the start date*/
+        var task = _dal.Task.Read(item => item.EngineerId == id
+        && item.StartDate < DateTime.Now);
+        try
+        {
+            if (task == null)
+                throw new BO.BlDeletionImpossible("You can't deleate this engineer because his task in progress");
+
+            _dal.Engineer.Delete(id);
+        }
+        catch (DO.DalAlreadyExistsException ex)
+        {
+            throw new BO.BlDoesNotExistException($"Engineer with ID={id} is alredy exist", ex);
         }
     }
 

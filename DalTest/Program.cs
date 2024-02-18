@@ -280,7 +280,7 @@ internal class Program
                     Console.WriteLine("enter the Required Level");
                     EngineerLevel? RequiredLevel = EngineerLevel.Beginner;
 
-                    DO.Task tempTask = new DO.Task(id, nickName, description, mileStone, creationDate, estimatedDate, startDate, numOfDays, deadLine, finishtDate, product, remarks, engineerId, RequiredLevel);
+                    DO.Task tempTask = new DO.Task(id, nickName, description, creationDate, estimatedDate, startDate, numOfDays, deadLine, finishtDate, product, remarks, engineerId, RequiredLevel);
                     task.Create(tempTask);
 
                     break;
@@ -328,7 +328,7 @@ internal class Program
                     Console.WriteLine("enter the Required Level");
                     EngineerLevel? RequiredLevel2 = EngineerLevel.Beginner;
 
-                    DO.Task tempTask2 = new DO.Task(id, nickName2, description2, mileStone, creationDate2, estimatedDate2, startDate2, numOfDays, deadLine2, finishtDate2, product2, remarks2, engineerId, RequiredLevel2);
+                    DO.Task tempTask2 = new DO.Task(id, nickName2, description2, creationDate2, estimatedDate2, startDate2, numOfDays, deadLine2, finishtDate2, product2, remarks2, engineerId, RequiredLevel2);
                     task.Update(tempTask2);
                     break;
                 case "e":

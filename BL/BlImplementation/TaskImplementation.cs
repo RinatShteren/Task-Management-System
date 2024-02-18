@@ -162,34 +162,6 @@ internal class TaskImplementation : BlApi.ITask
         }
         return boEng;
     }*/
-
-    public List<BO.TaskInList> getLinks(BO.Task task)//return list of all dependence of spesific task
-    {
-        //כל התלויות שהתלות הבאה שלהם זה המשימה הנוכחית 
-        List<DO.Dependence> dep = new List<DO.Dependence>(_dal.Dependence.ReadAll(link => link.PendingTaskId == task.TaskId));
-        if (dep.Count == 0)//if the task not have dependence
-            return new List<BO.TaskInList>();
-        //else
-        List<BO.TaskInList> tasks = new List<BO.TaskInList>();
-
-        foreach (DO.Dependence d in dep)//לכל תלות 
-        {
-
-            DO.Task doTask = _dal.Task.Read(d!.PreviousTaskId) ?? throw new BO.BlDoesNotExistException("");
-            //in doTask there is the task with PreviousTaskId of the current dep
-            //יבדו טסק יש את המשימה שהמשימה הקודמת שלה היא 
-            BO.TaskInList newTask = new BO.TaskInList//create new object of tesk in list
-            //תיצור אובייקט שיכיל את השם של המשימה והתיאור והתעודת זהות
-            {
-                TaskId = doTask.TaskId,
-                NickName = doTask.NickName,
-                Description = doTask.Description
-            };
-            tasks.Add(newTask);//insert tasks to the taskInList 
-        }
-        return tasks;
-    }
-
   
     public void Update(BO.Task upTask)
     {
@@ -260,6 +232,34 @@ internal class TaskImplementation : BlApi.ITask
 
     }
 
+    public List<BO.TaskInList> getLinks(BO.Task task)//return list of all dependence of spesific task
+    {
+        //כל התלויות שהתלות הבאה שלהם זה המשימה הנוכחית 
+        List<DO.Dependence> dep = new List<DO.Dependence>(_dal.Dependence.ReadAll(link => link.PendingTaskId == task.TaskId));
+        if (dep.Count == 0)//if the task not have dependence
+            return new List<BO.TaskInList>();
+        //else
+        List<BO.TaskInList> tasks = new List<BO.TaskInList>();
+
+        foreach (DO.Dependence d in dep)//לכל תלות 
+        {
+
+            DO.Task doTask = _dal.Task.Read(d!.PreviousTaskId) ?? throw new BO.BlDoesNotExistException("");
+            //in doTask there is the task with PreviousTaskId of the current dep
+            //יבדו טסק יש את המשימה שהמשימה הקודמת שלה היא 
+            BO.TaskInList newTask = new BO.TaskInList//create new object of tesk in list
+            //תיצור אובייקט שיכיל את השם של המשימה והתיאור והתעודת זהות
+            {
+                TaskId = doTask.TaskId,
+                NickName = doTask.NickName,
+                Description = doTask.Description
+            };
+            tasks.Add(newTask);//insert tasks to the taskInList 
+        }
+        return tasks;
+    }
+
+
     public void CalculateCloserStartDateForAllTasks()
     {
         if (_schedule.GetStage() is Stage.Middle)
@@ -274,7 +274,7 @@ internal class TaskImplementation : BlApi.ITask
                 var startDate = dependenceTasks switch
                 {
                     var l when l.Count() is 0 => _schedule.GetStartPro(),
-                    var l when l.Any(d => d.StartDate is null) => throw new DependenceTasksStartDateIsStillNull(),
+                    var l when l.Any(d => d.StartDate is null) => throw new DependenceTasksStartDateIsStillNull("DependenceTasksStartDateIsStillNull"),
                     _ => getEndTaskDate_DO(dependenceTasks.MaxBy(t => getEndTaskDate_DO(t!))!) 
                 };
                 _dal.Task.Update(task with { StartDate = startDate });
@@ -286,7 +286,6 @@ internal class TaskImplementation : BlApi.ITask
     public DateTime? getEndTaskDate_DO(DO.Task task) => task?.StartDate!.Value.AddDays(task.NumOfDays.Value);
 
     public DateTime? getEndTaskDate_BO(BO.Task task) => task?.StartDate!.Value.AddDays(task.NumOfDays.Value);
-
 
     public void UpdateDate(int id, DateTime date)//עדכון תאריך של משימה אחת
     {

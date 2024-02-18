@@ -16,7 +16,13 @@ public interface ITask
 
     public List<BO.TaskInList> getLinks(BO.Task task);
    
-    void CalculateCloserStartDateForAllTasks();
+    public void CalculateCloserStartDateForAllTasks();
 
-  
+    public DateTime? getEndTaskDate_DO(DO.Task task) ;
+
+    public DateTime? getEndTaskDate_BO(BO.Task task);
+
+    
+
+
 }

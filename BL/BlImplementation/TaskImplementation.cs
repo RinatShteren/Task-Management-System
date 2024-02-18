@@ -1,6 +1,5 @@
 ﻿namespace BlImplementation;
 using BlApi;
-using BO;
 using DalApi;
 using DO;
 using System.Collections.Generic;
@@ -14,12 +13,12 @@ internal class TaskImplementation :ITask
     private readonly ISchedule _schedule;
 
     public TaskImplementation(ISchedule schedule) => _schedule = schedule;
- 
+
     public int Create(BO.Task boTask)
     {
-
-        if (_schedule.GetStage() != BO.Stage.Planning)  // Make sure the project is in the planning stage
-            throw new BO.BlNotFitSchedule("Can not add tasks after Project Planning phase");
+    
+        //if (_schedule.GetStage() != BO.Stage.Planning)  // Make sure the project is in the planning stage
+            //throw new BO.BlNotFitSchedule("Can not add tasks after Project Planning phase");
 
         DO.Task doTask = new DO.Task(boTask.TaskId, boTask.NickName, boTask.Description, DateTime.Now) with
         { RequiredLevel = (DO.EngineerLevel)boTask.RequiredLevel, NumOfDays = boTask.NumOfDays }; //?
@@ -55,8 +54,11 @@ internal class TaskImplementation :ITask
     {
 
         if (_schedule.GetStage() != BO.Stage.Planning)  // Make sure the project is in the planning stage
-            throw new BO.BlNotFitSchedule("Can not delete tasks after Project Planning phase");
 
+        throw new BO.BlNotFitSchedule("Can not delete tasks after Project Planning phase");
+
+        
+ 
 
         DO.Dependence tempDp = _dal.Dependence?.Read(item => item.PreviousTaskId == id); //checking if there is another task that depended in this task
         if (tempDp != null)
@@ -112,58 +114,63 @@ internal class TaskImplementation :ITask
 
         return task;
     }
+   
 
-    public IEnumerable<TaskInList> ReadAll(Func<BO.Task, bool>? predicate = null)
+  
+
+        public IEnumerable<TaskInList> ReadAll(Func<BO.Task, bool>? predicate = null) //compilition error under <TaskInList>
+
     {
-        if (predicate == null)
-        {
-            IEnumerable<BO.TaskInList> tasks = (from DO.Task item in _dal.Task.ReadAll(null)
-                                                select new BO.TaskInList()
-                                                {
-                                                    TaskId = item.TaskId,
-                                                    NickName = item.NickName,
-                                                    Description = item.Description
-                                                });
-            return tasks;
+            if (predicate == null)
+            {
+                IEnumerable<BO.TaskInList> tasks = (from DO.Task item in _dal.Task.ReadAll(null)
+                                                    select new BO.TaskInList()
+                                                    {
+                                                        TaskId = item.TaskId,
+                                                        NickName = item.NickName,
+                                                        Description = item.Description
+                                                    });
+                return tasks;
+            }
+            else
+            {
+                IEnumerable<BO.TaskInList> tasks1 = (from DO.Task item in _dal.Task.ReadAll(null)
+                                                     where predicate()  //compilition error
+                                                     select new BO.TaskInList()
+                                                     {
+                                                         TaskId = item.TaskId,
+                                                         NickName = item.NickName,
+                                                         Description = item.Description
+                                                     });
+                return tasks1;
+            }
+
+
+
+
         }
-        else
+
+        /*
+        private BO.Task doToBo(DO.Task doEng)
         {
-            IEnumerable<BO.TaskInList> tasks1 = (from DO.Task item in _dal.Task.ReadAll(null)
-                                                 where predicate()
-                                                 select new BO.TaskInList()
-                                                 {
-                                                     TaskId = item.TaskId,
-                                                     NickName = item.NickName,
-                                                     Description = item.Description
-                                                 });
-            return tasks1;
-        }
+            BO.Task boDep = new BO.Task()
+            {
+                TaskId = boDep.TaskId,
+                NickName = boDep.NickName,
+                Description = boDep.Description
+            };
+            //check if there is a task on track of the engineer
+            var task = _dal.Task.Read(item => item.EngineerID == doEng.EngineerID);
 
+            if (task != null) //if found 
+            {
+                BO.TaskInEngineer temp = new BO.TaskInEngineer() { Id = task.TaskID, Name = task.Name };
+                boEng.Task = temp;
+            }
+            return boEng;
+        }*/
 
-
-
-    }
-    /*
-    private BO.Task doToBo(DO.Task doEng)
-    {
-        BO.Task boDep = new BO.Task()
-        {
-            TaskId = boDep.TaskId,
-            NickName = boDep.NickName,
-            Description = boDep.Description
-        };
-        //check if there is a task on track of the engineer
-        var task = _dal.Task.Read(item => item.EngineerID == doEng.EngineerID);
-
-        if (task != null) //if found 
-        {
-            BO.TaskInEngineer temp = new BO.TaskInEngineer() { Id = task.TaskID, Name = task.Name };
-            boEng.Task = temp;
-        }
-        return boEng;
-    }*/
-
-    private List<BO.TaskInList> getLinks(BO.Task task)//return list of all dependence of spesific task
+        private List<BO.TaskInList> getLinks(BO.Task task)//return list of all dependence of spesific task
     {
         //כל התלויות שהתלות הבאה שלהם זה המשימה הנוכחית 
         List<DO.Dependence> dep = new List<DO.Dependence>(_dal.Dependence.ReadAll(link => link.PendingTaskId == task.TaskId));
@@ -259,10 +266,11 @@ internal class TaskImplementation :ITask
         }
 
     }
-
+    
+        
     public void CalculateCloserStartDateForAllTasks()
     {
-        if (_schedule.GetStage() is Stage.Middle)
+        if (_schedule.GetStage() is BO.Stage.Middle)
         {
             var tasks = _dal.Task.ReadAll(task => task.StartDate is null).ToDictionary(t => t.TaskId, t => t);
 
@@ -274,7 +282,7 @@ internal class TaskImplementation :ITask
                 var startDate = dependenceTasks switch
                 {
                     var l when l.Count() is 0 => _schedule.GetStartPro(),
-                    var l when l.Any(d => d.StartDate is null) => throw new DependenceTasksStartDateIsStillNull(),
+                    var l when l.Any(d => d.StartDate is null) => throw new BO.DependenceTasksStartDateIsStillNull(),
                     _ => getEndTaskDate_DO(dependenceTasks.MaxBy(t => getEndTaskDate_DO(t!))!) 
                 };
                 _dal.Task.Update(task with { StartDate = startDate });

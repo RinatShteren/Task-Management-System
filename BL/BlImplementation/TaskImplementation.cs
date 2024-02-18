@@ -50,31 +50,6 @@ internal class TaskImplementation : BlApi.ITask
         }
 
     }
-
-    public void Delete(int id)
-    {
-
-        if (_schedule.GetStage() != BO.Stage.Planning)  // Make sure the project is in the planning stage
-            throw new BO.BlNotFitSchedule("Can not delete tasks after Project Planning phase");
-
-
-        DO.Dependence tempDp = _dal.Dependence?.Read(item => item.PreviousTaskId == id); //checking if there is another task that depended in this task
-        if (tempDp != null)
-            throw new BO.BlDeletionImpossible("The task cannot be deleted because there is a task that depends on it");
-
-        try
-        {
-            DO.Task tempTsk = _dal.Task.Read(id);
-            if (tempTsk == null) throw new BO.BlDoesNotExistException($"Task with ID=[{id}] does Not exist");
-
-            _dal.Task.Delete(id);
-        }
-        catch (DO.DalDoesNotExistException ex)
-        {
-            throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist", ex);
-        }
-    }
-
     public BO.Task? Read(int id)
     {
         DO.Task? doTask = _dal.Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does not exist");
@@ -113,9 +88,9 @@ internal class TaskImplementation : BlApi.ITask
         return task;
     }
 
-    public IEnumerable<TaskInList> ReadAll(Func< bool>? predicate = null)
+    public IEnumerable<TaskInList> ReadAll(Func<bool>? p = null)
     {
-        if (predicate == null)
+        if (p == null)
         {
             IEnumerable<BO.TaskInList> tasks = (from DO.Task item in _dal.Task.ReadAll(null)
                                                 select new BO.TaskInList()
@@ -129,7 +104,7 @@ internal class TaskImplementation : BlApi.ITask
         else
         {
             IEnumerable<BO.TaskInList> tasks1 = (from DO.Task item in _dal.Task.ReadAll(null)
-                                                 where predicate()
+                                                 where p()
                                                  select new BO.TaskInList()
                                                  {
                                                      TaskId = item.TaskId,
@@ -162,7 +137,30 @@ internal class TaskImplementation : BlApi.ITask
         }
         return boEng;
     }*/
-  
+    public void Delete(int id)
+    {
+
+        if (_schedule.GetStage() != BO.Stage.Planning)  // Make sure the project is in the planning stage
+            throw new BO.BlNotFitSchedule("Can not delete tasks after Project Planning phase");
+
+
+        DO.Dependence tempDp = _dal.Dependence?.Read(item => item.PreviousTaskId == id); //checking if there is another task that depended in this task
+        if (tempDp != null)
+            throw new BO.BlDeletionImpossible("The task cannot be deleted because there is a task that depends on it");
+
+        try
+        {
+            DO.Task tempTsk = _dal.Task.Read(id);
+            if (tempTsk == null) throw new BO.BlDoesNotExistException($"Task with ID=[{id}] does Not exist");
+
+            _dal.Task.Delete(id);
+        }
+        catch (DO.DalDoesNotExistException ex)
+        {
+            throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist", ex);
+        }
+    }
+
     public void Update(BO.Task upTask)
     {
 
@@ -258,7 +256,6 @@ internal class TaskImplementation : BlApi.ITask
         }
         return tasks;
     }
-
 
     public void CalculateCloserStartDateForAllTasks()
     {

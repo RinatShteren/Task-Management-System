@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 
 namespace BO;
-internal class BlNotFitSchedule : Exception
+public class BlNotFitSchedule : Exception
 {
     public BlNotFitSchedule()
     {
@@ -61,9 +61,7 @@ public class BlDeletionImpossible : Exception
 /// The exception will be thrown when attempting to do an operation prohibited by the schedule.
 /// </summary>
 [Serializable]
-
-
-internal class DependenceTasksStartDateIsStillNull : Exception
+public class DependenceTasksStartDateIsStillNull : Exception
 {
     public DependenceTasksStartDateIsStillNull() { }
     public DependenceTasksStartDateIsStillNull(string? message) : base(message) { }

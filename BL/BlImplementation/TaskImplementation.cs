@@ -82,8 +82,8 @@ internal class TaskImplementation : BlApi.ITask
             };
         }
 
-        task.DeadLine = getEndTaskDate_BO(task);
-        task.Dependencies = getLinks(task);
+        task.DeadLine = GetEndTaskDate_BO(task);
+        task.Dependencies = GetLinks(task);
 
         return task;
     }
@@ -97,7 +97,8 @@ internal class TaskImplementation : BlApi.ITask
                                                 {
                                                     TaskId = item.TaskId,
                                                     NickName = item.NickName,
-                                                    Description = item.Description
+                                                    Description = item.Description,
+                                                    StartDate = item.StartDate
                                                 });
             return tasks;
         }
@@ -109,7 +110,8 @@ internal class TaskImplementation : BlApi.ITask
                                                  {
                                                      TaskId = item.TaskId,
                                                      NickName = item.NickName,
-                                                     Description = item.Description
+                                                     Description = item.Description,
+                                                     StartDate = item.StartDate
                                                  });
             return tasks1;
         }
@@ -230,7 +232,7 @@ internal class TaskImplementation : BlApi.ITask
 
     }
 
-    public List<BO.TaskInList> getLinks(BO.Task task)//return list of all dependence of spesific task
+    public List<BO.TaskInList> GetLinks(BO.Task task)//return list of all dependence of spesific task
     {
         //כל התלויות שהתלות הבאה שלהם זה המשימה הנוכחית 
         List<DO.Dependence> dep = new List<DO.Dependence>(_dal.Dependence.ReadAll(link => link.PendingTaskId == task.TaskId));
@@ -270,9 +272,9 @@ internal class TaskImplementation : BlApi.ITask
 
                 var startDate = dependenceTasks switch
                 {
-                    var l when l.Count() is 0 => _schedule.GetStartPro(),
+                    var l when l.Count() is 0 => _schedule.StartProject,
                     var l when l.Any(d => d.StartDate is null) => throw new DependenceTasksStartDateIsStillNull("DependenceTasksStartDateIsStillNull"),
-                    _ => getEndTaskDate_DO(dependenceTasks.MaxBy(t => getEndTaskDate_DO(t!))!) 
+                    _ => GetEndTaskDate_DO(dependenceTasks.MaxBy(t =>GetEndTaskDate_DO(t!))!) 
                 };
                 _dal.Task.Update(task with { StartDate = startDate });
             }
@@ -280,9 +282,9 @@ internal class TaskImplementation : BlApi.ITask
       
     }
 
-    public DateTime? getEndTaskDate_DO(DO.Task task) => task?.StartDate!.Value.AddDays(task.NumOfDays.Value);
+    public DateTime? GetEndTaskDate_DO(DO.Task task) => task?.StartDate!.Value.AddDays(task.NumOfDays.Value);
 
-    public DateTime? getEndTaskDate_BO(BO.Task task) => task?.StartDate!.Value.AddDays(task.NumOfDays.Value);
+    public DateTime? GetEndTaskDate_BO(BO.Task task) => task?.StartDate!.Value.AddDays(task.NumOfDays.Value);
 
     public void UpdateDate(int id, DateTime date)//עדכון תאריך של משימה אחת
     {

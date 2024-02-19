@@ -7,8 +7,6 @@ internal class EngineerImplementation : IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
-  
-
     public int AddEngineer(BO.Engineer boEngineer)
     {
         DO.Engineer doEngineer = new DO.Engineer
@@ -62,7 +60,7 @@ internal class EngineerImplementation : IEngineer
         return engeneerToRead;
     }
 
-    public IEnumerable<BO.Engineer> ReadAll(Func<bool>? p = null)
+    public IEnumerable<BO.Engineer> ReadAll(Func<bool>? p )
     {
         if (p == null)
         {

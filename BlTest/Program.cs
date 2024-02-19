@@ -268,15 +268,17 @@ namespace BlTest
             {
                
                 Console.WriteLine("Enter date to start the project");
-                if (!DateTime.TryParse(Console.ReadLine(), out DateTime startPRO))
+                if (!DateTime.TryParse(Console.ReadLine(), out DateTime startProject))
                     throw new BlNotVaildException("wrong input");
+               
+                s_bl.Schedule.StartProject = startProject;
 
                 s_bl.Task.CalculateCloserStartDateForAllTasks();
 
  
               //  Console.WriteLine(s_bl.Task.Read(item.TaskId));
 
-                s_bl.Schedule.SetStartPro(startPRO);
+
             }
             catch (Exception e)
             {

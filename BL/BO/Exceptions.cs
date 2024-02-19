@@ -65,17 +65,16 @@ public class DependenceTasksStartDateIsStillNull : Exception
 {
     public DependenceTasksStartDateIsStillNull() { }
     public DependenceTasksStartDateIsStillNull(string? message) : base(message) { }
-    public DependenceTasksStartDateIsStillNull(string? message, Exception? innerException) : base(message, innerException)
-    { }
-    protected DependenceTasksStartDateIsStillNull(SerializationInfo info, StreamingContext context) : base(info, context)
-    { }
-    public class BlNotFitSchedule : Exception
+    public DependenceTasksStartDateIsStillNull(string? message, Exception? innerException) : base(message, innerException) { }
+    protected DependenceTasksStartDateIsStillNull(SerializationInfo info, StreamingContext context) : base(info, context) { }
+}
+   /* public class BlNotFitSchedule : Exception
     {
         public BlNotFitSchedule() : base() { }
         public BlNotFitSchedule(string message) : base(message) { }
         public BlNotFitSchedule(string message, Exception innerException) : base(message, innerException) { }
         // protected BlException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
-    }
+    }*/
 
     [Serializable]
     public class BlXMLFileLoadCreateException : Exception
@@ -85,5 +84,5 @@ public class DependenceTasksStartDateIsStillNull : Exception
         public BlXMLFileLoadCreateException(string message, Exception innerException) : base(message, innerException) { }
         //protected BlXMLFileLoadCreateException(SerializationInfo info, StreamingContext contex) : base(info, contex) { }
     }
-}
+
 

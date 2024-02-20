@@ -28,11 +28,4 @@
     <Level>Intermediate</Level>
     <Cost>598</Cost>
   </Engineer>
-  <Engineer>
-    <Id>376974943</Id>
-    <Name>Dina Klein</Name>
-    <Email>173@gmail.com</Email>
-    <Level>Intermediate</Level>
-    <Cost>295</Cost>
-  </Engineer>
 </Engineer>

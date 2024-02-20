@@ -105,7 +105,8 @@ internal class EngineerImplementation : IEngineer
         if (p == null)//return all elements
             return XMLTools.LoadListFromXMLElement(x_XML_engineers).Elements().Select(eng => xlmToEng(eng));
         else//return all elements with condision
-            return XMLTools.LoadListFromXMLElement(x_XML_engineers).Elements().Select(eng => xlmToEng(eng)).Where(p);
+            return XMLTools.LoadListFromXMLElement(x_XML_engineers).Elements().Select(xlmToEng).Where(p);
+            //return XMLTools.LoadListFromXMLElement(x_XML_engineers).Elements().Select(eng => xlmToEng(eng)).Where(p);
 
     }
     /// <summary>
@@ -131,11 +132,11 @@ internal class EngineerImplementation : IEngineer
       {
         return new Engineer()
         {
-            Id = Convert.ToInt32(eng.Element("Id")),
+            Id = eng.ToIntNullable("Id")?? throw new Exception("aaaa"),
             Name = eng.Element("Name").Value,
             Email = eng.Element("Email").Value,
             Level = Enum.Parse<EngineerLevel>(eng.Element("Level").Value),
-            Cost = Convert.ToDouble(eng.Element("Cost"))
+            Cost = (double)eng.Element("Cost")
 
         };
 

@@ -3,26 +3,32 @@ using DalApi;
 using DO;
 using System.Data.Common;
 using System.Reflection.Emit;
- 
+
 
 
 public static class Initialization
 {
-   
+
     private static IDal? s_dal; //stage 2
 
     private static readonly Random s_rand = new();
     private const int MIN_ID = 200000000;
     private const int MAX_ID = 400000000;
-    //public static void Do(IDal dal) //stage 2
+
     public static void Do() //stage 4
     {
-
-        //s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
         s_dal = DalApi.Factory.Get; //stage 4
         createEngineers();
         createTasks();
         createDependences();
+    }
+
+    public static void Reset()//stage 5
+    {
+        s_dal = DalApi.Factory.Get;
+        deleteEngineers();
+        deleteTasks();
+        deleteDependences();
     }
     private static void createEngineers()
     {
@@ -42,8 +48,9 @@ public static class Initialization
             EngineerLevel _engineerLevel = (EngineerLevel)new Random().Next(Enum.GetValues(typeof(EngineerLevel)).Length); //נגדיר מס רנדומלי שייתן רמת מהנדס רנדומלית מתוך האינם
             double _cost = s_rand.Next(200, 1000); //נגריל מס רנדומלי לעלות המהנדס
             Engineer newEng = new(_id, _name, _email, _engineerLevel, _cost); //נגדיר מהנדס חדש זמני עם הערכים שאיתחלנו
-            
+
             s_dal!.Engineer.Create(newEng);
+
         }
     }
     private static void createTasks()
@@ -116,10 +123,24 @@ public static class Initialization
                 temp = s_rand.Next(1000, 1019);
             int _PreviousTaskId = temp;
             Dependence newDpns = new Dependence(0, _PendingTaskId, _PreviousTaskId); //נגדיר תלות זמנית
- ;//נכניס אותה לבסיס נתונים
+            ;//נכניס אותה לבסיס נתונים
             s_dal!.Dependence.Create(newDpns);
         }
 
     }
 
+    private static void deleteEngineers()
+    {
+        s_dal!.Engineer.DeleteAll();
+    }
+    private static void deleteTasks()
+    {
+        s_dal!.Task.DeleteAll();
+    }
+
+
+    private static void deleteDependences()
+    {
+        s_dal!.Dependence.DeleteAll();
+    }
 }

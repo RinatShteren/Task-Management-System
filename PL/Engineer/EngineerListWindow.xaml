@@ -14,24 +14,28 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <!--Internal, Upper Grid-->
-        <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+        <Grid Height="43" Grid.Row="0" VerticalAlignment="Bottom" Width="auto" Margin="0,0,0,531" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
-            <Label Content="Label" HorizontalAlignment="Left" Margin="37,10,0,0" VerticalAlignment="Top" Grid.Column="0"/>  <!--Category to filter-->
-         
-            <ComboBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1"/> <!--Filter options-->
+
+            <Label Content="Label" HorizontalAlignment="Left" Margin="37,10,0,0" VerticalAlignment="Top" Grid.Column="0"/>
+            <!--Category to filter-->
+
+            <ComboBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1"/>
+            <!--Filter options-->
         </Grid>
-        <ListView Grid.Row="1"> <!--List of engineers--> 
+        <ListView Grid.Row="1">
+            <!--List of engineers-->
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"/> <!--for add to the list--> 
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"/>
+        <!--for add to the list-->
     </Grid>
 
 </Window>

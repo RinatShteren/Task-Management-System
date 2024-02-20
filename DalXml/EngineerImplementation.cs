@@ -49,7 +49,7 @@ internal class EngineerImplementation : IEngineer
     {
         XElement engineerRoot = XMLTools.LoadListFromXMLElement(x_XML_engineers);
         
-        XElement delItem= XMLTools.LoadListFromXMLElement(x_XML_engineers).Elements().FirstOrDefault(item => (int?)item.Element("Id") == id);
+        XElement delItem= engineerRoot.Elements().FirstOrDefault(item => (int?)item.Element("Id") == id);
         if (delItem.IsEmpty)
         {
             throw new DalDoesNotExistException($"Engineer with ID={id} not exist");
@@ -65,6 +65,14 @@ internal class EngineerImplementation : IEngineer
     /// If no dependency with the given identifier is found, the function returns a null value.
     /// <param name="id"></param>
     /// <returns></returns>
+    /// 
+    public void DeleteAll()
+    {
+        XElement delItem= XMLTools.LoadListFromXMLElement(x_XML_engineers);
+        delItem.RemoveAll();
+        XMLTools.SaveListToXMLElement(delItem, x_XML_engineers);
+
+    }
     public Engineer? Read(int id)
     {
         XElement? engineer = XMLTools.LoadListFromXMLElement(x_XML_engineers).Elements().FirstOrDefault(item => (int?)item.Element("Id") == id);
@@ -91,8 +99,9 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     /// <param name="predicate"></param>
     /// <returns></returns>
-    public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? p)
+    public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? p)
     {
+
         if (p == null)//return all elements
             return XMLTools.LoadListFromXMLElement(x_XML_engineers).Elements().Select(eng => xlmToEng(eng));
         else//return all elements with condision
@@ -118,7 +127,7 @@ internal class EngineerImplementation : IEngineer
         XMLTools.SaveListToXMLElement(engineerRoot, x_XML_engineers);
     }
 
-    public Engineer? xlmToEng (XElement eng)  //גם// צד שני//להעביר לטולס
+    public Engineer xlmToEng (XElement eng)  //גם// צד שני//להעביר לטולס
       {
         return new Engineer()
         {

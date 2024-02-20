@@ -7,4 +7,9 @@ public interface IBl
     public ITask Task { get; }
     public ISchedule Schedule { get; }
 
+    public void InitalizingBD();
+
+    public void ResetDB();
+
+
 }

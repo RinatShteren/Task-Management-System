@@ -16,6 +16,10 @@ internal class DependenceImplementation : IDependence
         return newDependenceId;
     }
 
+    public void DeleteAll()
+    {
+        DataSource.Dependences.Clear();
+    }
     public void Delete(int id)
     {
         if (DataSource.Dependences.Exists(x => x.DependenceId == id))
@@ -50,7 +54,7 @@ internal class DependenceImplementation : IDependence
     /// </summary>
     /// <param name="predicate"></param>
     /// <returns></returns>
-    public IEnumerable<Dependence?> ReadAll(Func<Dependence, bool>? predicate = null) =>
+    public IEnumerable<Dependence> ReadAll(Func<Dependence, bool>? predicate = null) =>
         predicate is null ? DataSource.Dependences.Select(a => a) : DataSource.Dependences.Where(predicate);
 
     /// <summary>

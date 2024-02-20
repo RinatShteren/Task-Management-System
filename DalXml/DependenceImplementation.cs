@@ -3,6 +3,11 @@
 using DalApi;
 using DO;
 using System.Data.Common;
+using System.Linq;
+using System.Reflection.Emit;
+using System.Reflection.Metadata.Ecma335;
+using System.Xml.Linq;
+
 
 
 internal class DependenceImplementation:IDependence
@@ -31,7 +36,12 @@ internal class DependenceImplementation:IDependence
         else
             throw new DalDoesNotExistException($"Dependence with ID={id} not exist");
     }
-
+    public void DeleteAll()
+    {
+        XElement delItem = XMLTools.LoadListFromXMLElement(x_XML_dependences);
+        delItem.RemoveAll();
+        XMLTools.SaveListToXMLElement(delItem, x_XML_dependences);
+    }
     public Dependence? Read(int id)
     {
         var DepList = XMLTools.LoadListFromXMLSerializer<Dependence>(x_XML_dependences);
@@ -52,7 +62,7 @@ internal class DependenceImplementation:IDependence
         return null;
     }
 
-    public IEnumerable<Dependence?> ReadAll(Func<Dependence, bool>? p)
+    public IEnumerable<Dependence> ReadAll(Func<Dependence, bool>? p)
     {
         var DepList = XMLTools.LoadListFromXMLSerializer<Dependence>(x_XML_dependences);
         if (p != null)

@@ -23,14 +23,17 @@ internal class TaskImplementation : ITask
         else
             throw new DalDoesNotExistException($"Task with ID={id} not exist");
     }
-
+    public void DeleteAll()
+    {
+        DataSource.Engineers.Clear();
+    }
     /// <summary>
-    ///  A method that take int 
-    /// </summary>
-    /// If a dependency with the given identifier is found, the function returns the dependency object.
-    /// If no dependency with the given identifier is found, the function returns a null value.
-    /// <param name="id"></param>
-    /// <returns></returns>
+     ///  A method that take int 
+     /// </summary>
+     /// If a dependency with the given identifier is found, the function returns the dependency object.
+     /// If no dependency with the given identifier is found, the function returns a null value.
+     /// <param name="id"></param>
+     /// <returns></returns>
     public Task? Read(int id) => Read(x => x.TaskId == id);
     /// <summary>
     /// A method that takes a Boolean function delegate of type Func, 
@@ -50,7 +53,7 @@ internal class TaskImplementation : ITask
     /// <param name="predicate"></param>
     /// <returns></returns>
     /// 
-    public IEnumerable<Task?> ReadAll(Func<Task, bool>? predicate = null) =>
+    public IEnumerable<Task> ReadAll(Func<Task, bool>? predicate = null) =>
        predicate is null ? DataSource.Tasks.Select(a => a) : DataSource.Tasks.Where(predicate);
 
 

@@ -2,6 +2,11 @@
 using DalApi;
 using DO;
 using System.Data.Common;
+using System.Linq;
+using System.Reflection.Emit;
+using System.Reflection.Metadata.Ecma335;
+using System.Xml.Linq;
+
 
 
 internal class TaskImplementation : ITask
@@ -33,6 +38,13 @@ internal class TaskImplementation : ITask
  
     }
     //Returns the item that corresponds to the ID or NULL if it does not exist
+
+    public void DeleteAll()
+    {
+        XElement delItem = XMLTools.LoadListFromXMLElement(x_XML_tasks);
+        delItem.RemoveAll();
+        XMLTools.SaveListToXMLElement(delItem, x_XML_tasks);
+    }
     public DO.Task? Read(int id)
 
     {
@@ -54,7 +66,7 @@ internal class TaskImplementation : ITask
         return null;
     }
     //return the list by the filter and if no filter return yhe whole list
-    public IEnumerable<DO.Task?> ReadAll(Func<DO.Task, bool>? p)
+    public IEnumerable<DO.Task> ReadAll(Func<DO.Task, bool>? p)
     {
         var tskList = XMLTools.LoadListFromXMLSerializer<DO.Task>(x_XML_tasks);
         if (p != null)
@@ -65,6 +77,7 @@ internal class TaskImplementation : ITask
 
         //updating item in the orign
     }
+   
     public void Update(DO.Task item)
     {
         var tskList = XMLTools.LoadListFromXMLSerializer<DO.Task>(x_XML_tasks);

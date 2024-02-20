@@ -1,4 +1,5 @@
-﻿namespace BlImplementation;
+﻿
+namespace BlImplementation;
 using BlApi;
 
 internal class Bl : IBl
@@ -8,4 +9,9 @@ internal class Bl : IBl
     public ITask Task => new TaskImplementation(Schedule);
 
     public ISchedule Schedule => new ScheduleImplementation();
+
+    public void InitalizingBD() => DalTest.Initialization.Do();
+
+    public void ResetDB() => DalTest.Initialization.Reset();
+
 }

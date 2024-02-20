@@ -95,7 +95,8 @@ internal class Program
                 b - GET ENGINEER BY ID
                 c - GET ENGINEERS LIST
                 d - UPDATE ENGINEER
-                e - DELETE ENGINEER");
+                e - DELETE ENGINEER
+                f - DELETE ALL ENGINEERS");
             string? option = Console.ReadLine();
             switch (option)
             {
@@ -152,6 +153,10 @@ internal class Program
                     myId = id;
                     engineer.Delete(myId);
                     break;
+                case "f":
+                    engineer.DeleteAll();
+                    break;
+                
             }
         }
         catch (Exception ex)
@@ -174,7 +179,8 @@ internal class Program
                 b - GET Dependence
                 c - GET Dependence LIST
                 d - UPDATE Dependence
-                e - DELETE Dependence");
+                e - DELETE Dependence
+                f - DELETE ALL Dependense");
             string? option = Console.ReadLine();
             switch (option)
             {
@@ -219,6 +225,9 @@ internal class Program
                     int.TryParse(Console.ReadLine(), out myId);
                     dependence.Delete(myId);
                     break;
+                case "f":
+                    dependence.DeleteAll();
+                    break;
             }
 
         }
@@ -242,7 +251,8 @@ internal class Program
                 b - GET TASK BY ID
                 c - GET TASKS LIST
                 d - UPDATE TASK
-                e - DELETE TASK");
+                e - DELETE TASK
+                f - DELETE ALL TASKS");
             string? option = Console.ReadLine();
             switch (option)
             {
@@ -335,6 +345,9 @@ internal class Program
                     Console.WriteLine("enter the Task ID");
                     int.TryParse(Console.ReadLine(), out myId);
                     task.Delete(myId);
+                    break;
+                case "f":
+                    task.DeleteAll();
                     break;
             }
 

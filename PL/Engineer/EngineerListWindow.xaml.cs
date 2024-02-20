@@ -24,7 +24,7 @@ namespace PL.Engineer
         public EngineerListWindow()
         {
             InitializeComponent();
-            EngineerList = s_bl?.Engineer.ReadAll()!;
+            EngineerList = s_bl.Engineer.ReadAll(engineer => engineer.Id > 0);
         }
 
         public IEnumerable<BO.Engineer> EngineerList

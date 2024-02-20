@@ -11,7 +11,7 @@ internal class EngineerImplementation : IEngineer
     {
         DO.Engineer doEngineer = new DO.Engineer
             (boEngineer.Id, boEngineer.Name, boEngineer.Email, (DO.EngineerLevel)boEngineer.Level, boEngineer.Cost);
-        
+
         try
         {
             if (doEngineer.Id < 0)
@@ -22,15 +22,15 @@ internal class EngineerImplementation : IEngineer
                 throw new BO.BlNotVaildException("Cost under zero");
             if (!doEngineer.Email.Contains("@"))
                 throw new BO.BlNotVaildException("Email not vaild");
-            if ((int)doEngineer.Level<=0||(int)doEngineer.Level>4)
+            if ((int)doEngineer.Level <= 0 || (int)doEngineer.Level > 4)
                 throw new BO.BlNotVaildException("Level not vaild");
-            
+
             int idEng = _dal.Engineer.Create(doEngineer);
             return idEng;
         }
         catch (DO.DalAlreadyExistsException ex)
         {
-            throw new BO.BlDoesNotExistException($"Engineer with ID={boEngineer.Id} is alredy exist",ex);
+            throw new BO.BlDoesNotExistException($"Engineer with ID={boEngineer.Id} is alredy exist", ex);
         }
     }
 
@@ -41,13 +41,13 @@ internal class EngineerImplementation : IEngineer
             throw new BO.BlDoesNotExistException($"Engineer with ID={id} is alredy exist");
 
         BO.Engineer engeneerToRead = new BO.Engineer()
-            {
-                Id = id,
-                Name = doEngineer.Name,
-                Email = doEngineer.Email,
-                Level = (BO.EngineerLevel)doEngineer.Level,
-                Cost = doEngineer.Cost
-            };
+        {
+            Id = id,
+            Name = doEngineer.Name,
+            Email = doEngineer.Email,
+            Level = (BO.EngineerLevel)doEngineer.Level,
+            Cost = doEngineer.Cost
+        };
 
         var task = _dal.Task.Read(item => item.EngineerId == id);
         //if we found an engineer
@@ -60,8 +60,10 @@ internal class EngineerImplementation : IEngineer
         return engeneerToRead;
     }
 
-    public IEnumerable<BO.Engineer> ReadAll(Func<bool>? p )
+    public IEnumerable<BO.Engineer> ReadAll(Func<Engineer, bool>? p)
     {
+
+
         if (p == null)
         {
             IEnumerable<BO.Engineer> temp = from DO.Engineer doEngineer in _dal.Engineer.ReadAll(null)
@@ -80,7 +82,7 @@ internal class EngineerImplementation : IEngineer
 
                 if (task != null)
                 {
-                    engineer.Task = new BO.TaskInEngineer {Id= task.TaskId, NickName = task.NickName };
+                    engineer.Task = new BO.TaskInEngineer { Id = task.TaskId, NickName = task.NickName };
                 }
             }
 
@@ -89,7 +91,7 @@ internal class EngineerImplementation : IEngineer
         else
         {
             IEnumerable<BO.Engineer> temp = from DO.Engineer doEngineer in _dal.Engineer.ReadAll(null)
-                                            where p()//(doToBo(doEngineer))
+                                            where p(doToBo(doEngineer))
                                             select new BO.Engineer()
                                             {
                                                 Id = doEngineer.Id,
@@ -133,7 +135,7 @@ internal class EngineerImplementation : IEngineer
 
     public void Update(BO.Engineer boEngineer)
     {
-        DO.Engineer doEngineer =new DO.Engineer
+        DO.Engineer doEngineer = new DO.Engineer
             (boEngineer.Id, boEngineer.Name, boEngineer.Email, (DO.EngineerLevel)boEngineer.Level, boEngineer.Cost);
         try
         {
@@ -149,9 +151,9 @@ internal class EngineerImplementation : IEngineer
                 throw new BO.BlNotVaildException("Level not vaild");
             //UPDATE the engineer if content is vaild
             _dal.Engineer.Update(doEngineer);
-            if(boEngineer.Task!= null)//if he has tasts
+            if (boEngineer.Task != null)//if he has tasts
             {
-                if(Factory.Get().Schedule.GetStage()== (BO.Stage.Planning))//are we in the plenning stage
+                if (Factory.Get().Schedule.GetStage() == (BO.Stage.Planning))//are we in the plenning stage
                     throw new BlNotFitSchedule("you are in the plenning stage- you cant assign a task to engineer ");
                 var task = _dal.Task.Read(task => task.TaskId == boEngineer.Task!.Id)
                     ?? throw new BlDoesNotExistException($"task with id dous not fit to enginer level");
@@ -167,28 +169,27 @@ internal class EngineerImplementation : IEngineer
         {
             throw new BO.BlDoesNotExistException($"Engineer with ID={boEngineer.Id} dous not exist", ex);
         }
+
     }
 
-/*
-    private BO.Engineer doToBo(DO.Engineer doEng)
+    public BO.Engineer doToBo(DO.Engineer doEng)
     {
         BO.Engineer boEng = new BO.Engineer()
         {
-            Id = boEng.Id,
-            Name = boEng.Name,
-            Email = boEng.Email,
-            Level = (BO.EngineerLevel)boEng.Level,
-            Cost = boEng.Cost,
+            Id = doEng.Id,
+            Name = doEng.Name,
+            Email = doEng.Email,
+            Level = (BO.EngineerLevel)doEng.Level,
+            Cost = doEng.Cost
         };
         //check if there is a task on track of the engineer
-        var task = _dal.Task.Read(item => item.EngineerID == doEng.EngineerID);
+        var task = _dal.Task.Read(item => item.TaskId == doEng.Id);
 
         if (task != null) //if found 
         {
-            BO.TaskInEngineer temp = new BO.TaskInEngineer() { Id = task.TaskID, Name = task.Name };
+            BO.TaskInEngineer temp = new BO.TaskInEngineer() { Id = task.TaskId, NickName = task.NickName };
             boEng.Task = temp;
         }
         return boEng;
     }
-*/
 }

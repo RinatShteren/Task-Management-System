@@ -32,8 +32,70 @@ namespace PL.Engineer
             get { return (IEnumerable<BO.Engineer>)GetValue(EngineerListProperty); }
             set { SetValue(EngineerListProperty, value); }
         }
+       
+       // public BO.EngineerLevel level { get; set; } = BO.EngineerLevel.All;
 
         public static readonly DependencyProperty EngineerListProperty =
             DependencyProperty.Register("EngineerList", typeof(IEnumerable<BO.Engineer>), typeof(EngineerListWindow), new PropertyMetadata(null));
+
+       // private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) //the user can filter the engineers on the screens according to their level
+       // {
+         //   EngineerList = ((level == BO.Level.All) ?
+          //     s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(eng => eng.Level == level)!)
+          //     .OrderBy(e => e.Id); // sort by ID so it will be easier to find the engineer in the list as a human
+   //     }
+
     }
+
 }
+
+
+   /* public partial class EngineerListWindow : Window
+    {
+       
+
+        public EngineerListWindow()
+        {
+            InitializeComponent();
+            EngineerList = s_bl?.Engineer.ReadAll()!;
+        }
+
+        //the user can filter the engineers on the screens according to their level
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            EngineerList = ((level == BO.Level.All) ?
+               s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(eng => eng.Level == level)!)
+               .OrderBy(e => e.Id); // sort by ID so it will be easier to find the engineer in the list as a human
+        }
+
+        void UpdateEngineerList()
+        {
+
+            EngineerList = ((level == BO.Level.All) ?
+                s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(eng => eng.Level == level)!)
+                .OrderBy(e => e.Id); // sort by ID so it will be easier to find the engineer in the list as a human
+        }
+
+        private void listView_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
+
+            if (engineer == null) { / exeption / }
+
+            new EngineerWindow(engineer!.Id).ShowDialog();
+            UpdateEngineerList();
+
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            new EngineerWindow().ShowDialog();
+            UpdateEngineerList();
+        }
+    }
+}*/

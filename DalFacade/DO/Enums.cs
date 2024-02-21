@@ -6,5 +6,5 @@ public enum EngineerLevel
     AdvancedBeginner,
     Intermediate,
     Advanced,
-    Expert
+    Expert,
 }

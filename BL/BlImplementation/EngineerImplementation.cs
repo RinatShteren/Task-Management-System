@@ -60,7 +60,7 @@ internal class EngineerImplementation : IEngineer
         return engeneerToRead;
     }
 
-    public IEnumerable<BO.Engineer> ReadAll(Func<Engineer, bool>? p)
+    public IEnumerable<BO.Engineer> ReadAll(Func<Engineer, bool> p)
     {
 
 

@@ -35,6 +35,10 @@ namespace PL
             MessageBox.Show("Are you shoure you want to reset data?");
             s_bl.ResetDB();
         }
-        
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new EngineerView().Show();
+        }
     }
 }

@@ -12,7 +12,9 @@
         Click="btnEngineer_Click"/>
         <Button Content="initalization" HorizontalAlignment="Left" Margin="122,171,0,0" VerticalAlignment="Top" Height="82" Width="182"
         Click="btnInit_Click"/>
-        <Button Content="reset" HorizontalAlignment="Left" Margin="122,171,0,0" VerticalAlignment="Top" Height="82" Width="182"
+        <Button Content="reset" HorizontalAlignment="Left" Margin="122,281,0,0" VerticalAlignment="Top" Height="82" Width="182"
         Click="btnReset_Click"/>
+        <Button Content="Button" HorizontalAlignment="Left" Height="29" Margin="314,281,0,0" VerticalAlignment="Top" Width="101" 
+         Click="Button_Click"/>
     </Grid>
 </Window>

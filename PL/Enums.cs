@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 
 namespace PL;
 
-/*internal class EngineerLevelCollection : IEnumerable 
+
+internal class EngineerLevelCollection : IEnumerable 
 {
     static readonly IEnumerable<BO.EngineerLevel> s_enums =
 (Enum.GetValues(typeof(BO.EngineerLevel)) as IEnumerable<BO.EngineerLevel>)!;
 
     public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
 }
-
+/*
 public enum EngineerLevel
 {
     Beginner,
@@ -23,7 +24,7 @@ public enum EngineerLevel
     Advanced,
     Expert,
     All
-}*/
+
 internal class EngineerLevelCollection : IEnumerable
 {
     public static readonly Dictionary<string, BO.EngineerLevel?> _engineerLevelsMap =
@@ -38,4 +39,4 @@ internal class EngineerLevelCollection : IEnumerable
 
     public IEnumerator GetEnumerator() =>
         _engineerLevelsMap.Values.GetEnumerator();
-}
+}}*/

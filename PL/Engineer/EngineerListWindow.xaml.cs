@@ -35,7 +35,7 @@ namespace PL.Engineer
             set { SetValue(EngineerListProperty, value); }
         }
        
-       public BO.EngineerLevel level { get; set; } = BO.EngineerLevel.All; //??
+       public BO.EngineerLevel EngineerLevel { get; set; } = BO.EngineerLevel.All; //??
 
         public static readonly DependencyProperty EngineerListProperty =
             DependencyProperty.Register("EngineerList", typeof(IEnumerable<BO.Engineer>), typeof(EngineerListWindow), new PropertyMetadata(null));
@@ -45,53 +45,34 @@ namespace PL.Engineer
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             EngineerList = ((EngineerLevel == BO.EngineerLevel.All) ?   //?? 
-               s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(eng => eng.Level == level)!)  //??
+               s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(eng => eng.EngineerLevel == EngineerLevel)!)  //??
                .OrderBy(e => e.Id); // sort by ID 
         }
 
-    }
-
-}
-
-
-   /* public partial class EngineerListWindow : Window
-    {
-       
-
-        public EngineerListWindow()
+        private void AddButtonClick(object sender, RoutedEventArgs e)
         {
-            InitializeComponent();
-            EngineerList = s_bl?.Engineer.ReadAll()!;
+            new EngineerWindow().ShowDialog();
+            UpdateEngineerList();
+
+        }
+
+        private void ListViewDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
+            if (engineer == null)
+                   //  exeption 
+            new EngineerWindow(engineer!.Id).ShowDialog();
+            UpdateEngineerList();
         }
 
         void UpdateEngineerList()
         {
 
-            EngineerList = ((level == BO.Level.All) ?
-                s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(eng => eng.Level == level)!)
-                .OrderBy(e => e.Id); // sort by ID so it will be easier to find the engineer in the list as a human
+            EngineerList = ((EngineerLevel == BO.EngineerLevel.All) ? //??
+                s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(eng => eng.EngineerLevel == EngineerLevel)!)
+                .OrderBy(e => e.Id); // sort by ID 
         }
 
-        private void listView_DoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
-
-            if (engineer == null) { / exeption / }
-
-            new EngineerWindow(engineer!.Id).ShowDialog();
-            UpdateEngineerList();
-
-        }
-
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            new EngineerWindow().ShowDialog();
-            UpdateEngineerList();
-        }
     }
-}*/
+
+}

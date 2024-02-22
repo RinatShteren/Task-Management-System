@@ -35,7 +35,7 @@ namespace PL.Engineer
             set { SetValue(EngineerListProperty, value); }
         }
        
-       public BO.EngineerLevel EngineerLevel { get; set; } = BO.EngineerLevel.All; //??
+       public BO.EngineerLevel EngineerLevel { get; set; } = BO.EngineerLevel.Beginner; //??
 
         public static readonly DependencyProperty EngineerListProperty =
             DependencyProperty.Register("EngineerList", typeof(IEnumerable<BO.Engineer>), typeof(EngineerListWindow), new PropertyMetadata(null));
@@ -44,8 +44,8 @@ namespace PL.Engineer
         //option for the user to sort the list of engineers according to their level
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            EngineerList = ((EngineerLevel == BO.EngineerLevel.All) ?   //?? 
-               s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(eng => eng.EngineerLevel == EngineerLevel)!)  //??
+            EngineerList = ((EngineerLevel == BO.EngineerLevel.Beginner) ?   //?? 
+               s_bl?.Engineer.ReadAll(null)! : s_bl?.Engineer.ReadAll(eng => eng.Level == EngineerLevel)!)  //??
                .OrderBy(e => e.Id); // sort by ID 
         }
 

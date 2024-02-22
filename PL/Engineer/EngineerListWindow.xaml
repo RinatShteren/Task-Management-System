@@ -25,7 +25,8 @@
             <Label Content="Label" HorizontalAlignment="Left" Margin="37,10,0,0" VerticalAlignment="Top" Grid.Column="0"/>
             <!--Category to filter-->
 
-            <ComboBox SelectedValue="{Binding EngineerLevel, Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource EngineerLevelCollectionKey}}"
+            <ComboBox SelectedValue="{Binding EngineerLevel, Mode=TwoWay}"
+                      ItemsSource="{Binding Source={StaticResource EngineerLevelCollectionKey}}"
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Grid.Column="1" SelectionChanged="ComboBox_SelectionChanged"/>
             <!--Filter options-->
         </Grid>

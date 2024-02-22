@@ -1,6 +1,8 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,17 +35,19 @@ namespace PL.Engineer
             set { SetValue(EngineerListProperty, value); }
         }
        
-       // public BO.EngineerLevel level { get; set; } = BO.EngineerLevel.All;
+       public BO.EngineerLevel level { get; set; } = BO.EngineerLevel.All; //??
 
         public static readonly DependencyProperty EngineerListProperty =
             DependencyProperty.Register("EngineerList", typeof(IEnumerable<BO.Engineer>), typeof(EngineerListWindow), new PropertyMetadata(null));
 
-       // private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) //the user can filter the engineers on the screens according to their level
-       // {
-         //   EngineerList = ((level == BO.Level.All) ?
-          //     s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(eng => eng.Level == level)!)
-          //     .OrderBy(e => e.Id); // sort by ID so it will be easier to find the engineer in the list as a human
-   //     }
+
+        //option for the user to sort the list of engineers according to their level
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            EngineerList = ((EngineerLevel == BO.EngineerLevel.All) ?   //?? 
+               s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(eng => eng.Level == level)!)  //??
+               .OrderBy(e => e.Id); // sort by ID 
+        }
 
     }
 
@@ -58,14 +62,6 @@ namespace PL.Engineer
         {
             InitializeComponent();
             EngineerList = s_bl?.Engineer.ReadAll()!;
-        }
-
-        //the user can filter the engineers on the screens according to their level
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            EngineerList = ((level == BO.Level.All) ?
-               s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(eng => eng.Level == level)!)
-               .OrderBy(e => e.Id); // sort by ID so it will be easier to find the engineer in the list as a human
         }
 
         void UpdateEngineerList()

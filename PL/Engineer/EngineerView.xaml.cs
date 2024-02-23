@@ -20,24 +20,32 @@ namespace PL.Engineer
     public partial class EngineerView : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        public BO.Engineer CurrentEngineer { get; set; }
         int ID;/*if idd =0 :ADD else:UPDATE*/
+
+
+        public static readonly DependencyProperty EngineerProperty =
+           DependencyProperty.Register("CurrentEngineer", typeof(BO.Engineer), typeof(EngineerView), new PropertyMetadata(null));
+        public BO.Engineer CurrentEngineer
+        {
+            get { return (BO.Engineer)GetValue(EngineerProperty); }
+            set { SetValue(EngineerProperty, value); }
+        }
+
+
         public EngineerView(int idd=0)
         {
-
         InitializeComponent();
             ID = idd;
             if(ID == 0)
             {
-                CurrentEngineer = new BO.Engineer {
-                    Id = 0
-                };
+                SetValue(EngineerProperty, new BO.Engineer ());
             }
             else
             {
                 try
                 {
-                    CurrentEngineer = s_bl.Engineer.Read(idd);
+                    BO.Engineer eng = s_bl.Engineer.Read(idd);
+                    SetValue(EngineerProperty, eng);
                 }
                 catch(Exception ex)
                 {
@@ -46,19 +54,9 @@ namespace PL.Engineer
             }
         }
 
-
-            private void cbSemesterSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
         {
-           
-        }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-        }
-       
     }
 }

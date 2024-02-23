@@ -51,7 +51,7 @@ namespace PL.Engineer
 
         private void AddButtonClick(object sender, RoutedEventArgs e)
         {
-            new EngineerWindow().ShowDialog();
+            new EngineerView().ShowDialog();
             UpdateEngineerList();
 
         }
@@ -61,15 +61,15 @@ namespace PL.Engineer
             BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
             if (engineer == null)
                    //  exeption 
-            new EngineerWindow(engineer!.Id).ShowDialog();
+            new EngineerView(engineer!.Id).ShowDialog();
             UpdateEngineerList();
         }
 
         void UpdateEngineerList()
         {
 
-            EngineerList = ((EngineerLevel == BO.EngineerLevel.All) ? //??
-                s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(eng => eng.EngineerLevel == EngineerLevel)!)
+            EngineerList = ((EngineerLevel == BO.EngineerLevel.Beginner) ? //??
+                s_bl?.Engineer.ReadAll(null)! : s_bl?.Engineer.ReadAll(eng => eng.Level == EngineerLevel)!)
                 .OrderBy(e => e.Id); // sort by ID 
         }
 

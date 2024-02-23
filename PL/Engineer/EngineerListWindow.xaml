@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="EngineerListWindow" Height="640" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
-        
+
     <!--Extrnal Grid-->
     <Grid>
         <Grid.RowDefinitions>
@@ -18,19 +18,20 @@
         <!--Internal, Upper Grid-->
         <Grid Height="43" Grid.Row="0" VerticalAlignment="Bottom" Width="auto" Margin="0,0,0,531" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="400*"/>
+                <ColumnDefinition Width="52*"/>
+                <ColumnDefinition Width="41*"/>
+                <ColumnDefinition Width="307*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Content="Label" HorizontalAlignment="Left" Margin="37,10,0,0" VerticalAlignment="Top" Grid.Column="0"/>
+            <Label Content="Select Engineer" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="37,10,0,0" VerticalAlignment="Top" Grid.Column="0"/>
             <!--Category to filter-->
 
             <ComboBox SelectedValue="{Binding EngineerLevel, Mode=TwoWay}"
-                      ItemsSource="{Binding Source={StaticResource EngineerLevelCollectionKey}}"
-                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Grid.Column="1" SelectionChanged="ComboBox_SelectionChanged"/>
+                      ItemsSource="{Binding Source={StaticResource EngineerLevelCollectionKey}}"  Grid.Column="1" SelectionChanged="ComboBox_SelectionChanged" Grid.ColumnSpan="3" Margin="10,21,-10,-21"/>
             <!--Filter options-->
         </Grid>
-         <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding EngineerList}" MouseDoubleClick="ListViewDoubleClick">
+        <ListView Margin="5,32,0,5" Grid.Row="1" ItemsSource="{Binding EngineerList}" MouseDoubleClick="ListViewDoubleClick">
             <!--List of engineers-->
             <ListView.View>
                 <GridView>

@@ -115,20 +115,17 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     /// <param name="item"></param>
     /// <exception cref="DalDoesNotExistException"></exception>
+ 
     public void Update(Engineer item)
     {
-        if (Read(item.Id) == null)
-        {
-            throw new DalDoesNotExistException($"Engineer with ID={item.Id} not exist"); ; //item not exsist in dataBase
-        }
-        XElement engineerRoot = XMLTools.LoadListFromXMLElement(x_XML_engineers);
-        XElement delItem= engineerRoot.Elements().FirstOrDefault(itemEx => (int?)itemEx.Element("Id") == item.Id);
-        delItem.Remove();
-        engineerRoot.Add(item);
-        XMLTools.SaveListToXMLElement(engineerRoot, x_XML_engineers);
-    }
+        if (Read(item.Id) == null) //If this id doesnt exist
+            throw new DalDoesNotExistException($"Engineer with ID={item.Id} does Not exist");
 
-    public Engineer xlmToEng (XElement eng)  //גם// צד שני//להעביר לטולס
+        XElement engineerList = XMLTools.LoadListFromXMLElement(x_XML_engineers);
+        Delete(item.Id);
+        Create(item);
+    }
+    public Engineer xlmToEng (XElement eng) 
       {
         return new Engineer()
         {

@@ -1,303 +1,303 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Task>
-    <TaskId>1313</TaskId>
-    <NickName>Sales Pitch</NickName>
-    <Description>Delivering Sales Pitch</Description>
-    <CreationDate>2024-03-14T14:16:29.0144371+02:00</CreationDate>
-    <EstimatedDate>2024-03-16T14:16:29.0145015+02:00</EstimatedDate>
-    <StartDate>2024-03-17T14:16:29.0145023+02:00</StartDate>
-    <NumOfDays>1</NumOfDays>
-    <DeadLine>2024-03-17T14:16:29.0145031+02:00</DeadLine>
-    <FinishtDate>2024-03-16T14:16:29.0145034+02:00</FinishtDate>
-    <Product>IoTShield Device Security Suite</Product>
-    <Remarks>Enhanced UI based on testing.</Remarks>
-    <EngineerId>0</EngineerId>
-    <RequiredLevel>Intermediate</RequiredLevel>
-  </Task>
-  <Task>
-    <TaskId>1314</TaskId>
-    <NickName>Marketing Campaign</NickName>
-    <Description>Executing Marketing Campaign</Description>
-    <CreationDate>2024-03-01T14:16:29.187037+02:00</CreationDate>
-    <EstimatedDate>2024-03-03T14:16:29.1870479+02:00</EstimatedDate>
-    <StartDate>2024-03-04T14:16:29.1870497+02:00</StartDate>
-    <NumOfDays>2</NumOfDays>
-    <DeadLine>2024-03-05T14:16:29.18705+02:00</DeadLine>
-    <FinishtDate>2024-03-04T14:16:29.1870504+02:00</FinishtDate>
-    <Product>TechScan Code Review System</Product>
-    <Remarks>Met project deadlines on time.</Remarks>
-    <EngineerId>0</EngineerId>
-    <RequiredLevel>AdvancedBeginner</RequiredLevel>
-  </Task>
-  <Task>
-    <TaskId>1315</TaskId>
-    <NickName>Research Proposal</NickName>
-    <Description>Conducting Research Proposal</Description>
-    <CreationDate>2024-03-05T14:16:29.243227+02:00</CreationDate>
-    <EstimatedDate>2024-03-07T14:16:29.2432361+02:00</EstimatedDate>
-    <StartDate>2024-03-08T14:16:29.2432367+02:00</StartDate>
-    <NumOfDays>3</NumOfDays>
-    <DeadLine>2024-03-10T14:16:29.2432371+02:00</DeadLine>
-    <FinishtDate>2024-03-09T14:16:29.2432376+02:00</FinishtDate>
-    <Product>AIInsight Data Analysis Software</Product>
-    <Remarks>Met project deadlines on time.</Remarks>
-    <EngineerId>0</EngineerId>
-    <RequiredLevel>Expert</RequiredLevel>
-  </Task>
-  <Task>
-    <TaskId>1316</TaskId>
-    <NickName>Software Development</NickName>
-    <Description>Developing Software Features</Description>
-    <CreationDate>2024-03-08T14:16:29.5291691+02:00</CreationDate>
-    <EstimatedDate>2024-03-10T14:16:29.5291751+02:00</EstimatedDate>
-    <StartDate>2024-03-11T14:16:29.5291755+02:00</StartDate>
-    <NumOfDays>4</NumOfDays>
-    <DeadLine>2024-03-14T14:16:29.5291759+02:00</DeadLine>
-    <FinishtDate>2024-03-13T14:16:29.5291763+02:00</FinishtDate>
-    <Product>NetworkPulse Monitoring Solution</Product>
-    <Remarks>Enhanced UI based on testing.</Remarks>
-    <EngineerId>0</EngineerId>
-    <RequiredLevel>Beginner</RequiredLevel>
-  </Task>
-  <Task>
-    <TaskId>1317</TaskId>
-    <NickName>Software Development</NickName>
-    <Description>Developing Software Features</Description>
-    <CreationDate>2024-03-08T14:16:29.5541422+02:00</CreationDate>
-    <EstimatedDate>2024-03-10T14:16:29.5541475+02:00</EstimatedDate>
-    <StartDate>2024-03-11T14:16:29.554148+02:00</StartDate>
-    <NumOfDays>5</NumOfDays>
-    <DeadLine>2024-03-15T14:16:29.5541483+02:00</DeadLine>
-    <FinishtDate>2024-03-14T14:16:29.5541487+02:00</FinishtDate>
-    <Product>NetworkPulse Monitoring Solution</Product>
-    <Remarks>Enhanced UI based on testing.</Remarks>
-    <EngineerId>0</EngineerId>
-    <RequiredLevel>Beginner</RequiredLevel>
-  </Task>
-  <Task>
-    <TaskId>1318</TaskId>
-    <NickName>Client Presentation</NickName>
-    <Description>Designing Client Presentation</Description>
-    <CreationDate>2024-03-04T14:16:29.6618705+02:00</CreationDate>
-    <EstimatedDate>2024-03-06T14:16:29.661876+02:00</EstimatedDate>
-    <StartDate>2024-03-07T14:16:29.6618765+02:00</StartDate>
-    <NumOfDays>6</NumOfDays>
-    <DeadLine>2024-03-12T14:16:29.6618768+02:00</DeadLine>
-    <FinishtDate>2024-03-11T14:16:29.661883+02:00</FinishtDate>
-    <Product>DevOpsNavigator CI/CD Pipeline</Product>
-    <Remarks>Enhanced UI based on testing.</Remarks>
-    <EngineerId>0</EngineerId>
-    <RequiredLevel>Expert</RequiredLevel>
-  </Task>
-  <Task>
-    <TaskId>1319</TaskId>
-    <NickName>Website Redesign</NickName>
-    <Description>Redesigning Website Layout</Description>
-    <CreationDate>2024-02-29T14:16:29.9084164+02:00</CreationDate>
-    <EstimatedDate>2024-03-02T14:16:29.9084589+02:00</EstimatedDate>
-    <StartDate>2024-03-03T14:16:29.9084594+02:00</StartDate>
-    <NumOfDays>7</NumOfDays>
-    <DeadLine>2024-03-09T14:16:29.9084597+02:00</DeadLine>
-    <FinishtDate>2024-03-08T14:16:29.90846+02:00</FinishtDate>
-    <Product>AgileFlow Project Management Tool</Product>
-    <Remarks>Enhanced UI based on testing.</Remarks>
-    <EngineerId>0</EngineerId>
-    <RequiredLevel>Advanced</RequiredLevel>
-  </Task>
-  <Task>
-    <TaskId>1320</TaskId>
-    <NickName>Product Launch</NickName>
-    <Description>Planning Product Launch Event</Description>
-    <CreationDate>2024-03-02T14:16:30.0493499+02:00</CreationDate>
-    <EstimatedDate>2024-03-04T14:16:30.049354+02:00</EstimatedDate>
-    <StartDate>2024-03-05T14:16:30.0493544+02:00</StartDate>
-    <NumOfDays>8</NumOfDays>
-    <DeadLine>2024-03-12T14:16:30.0493547+02:00</DeadLine>
-    <FinishtDate>2024-03-11T14:16:30.0493549+02:00</FinishtDate>
-    <Product>CloudSync File Hosting Service</Product>
-    <Remarks>Enhanced UI based on testing.</Remarks>
-    <EngineerId>0</EngineerId>
-    <RequiredLevel>Advanced</RequiredLevel>
-  </Task>
-  <Task>
-    <TaskId>1321</TaskId>
-    <NickName>Research Proposal</NickName>
-    <Description>Conducting Research Proposal</Description>
-    <CreationDate>2024-03-05T14:16:30.0750604+02:00</CreationDate>
-    <EstimatedDate>2024-03-07T14:16:30.0750641+02:00</EstimatedDate>
-    <StartDate>2024-03-08T14:16:30.0750644+02:00</StartDate>
-    <NumOfDays>9</NumOfDays>
-    <DeadLine>2024-03-16T14:16:30.0750647+02:00</DeadLine>
-    <FinishtDate>2024-03-15T14:16:30.0750649+02:00</FinishtDate>
-    <Product>AIInsight Data Analysis Software</Product>
-    <Remarks>Met project deadlines on time.</Remarks>
-    <EngineerId>0</EngineerId>
-    <RequiredLevel>Beginner</RequiredLevel>
-  </Task>
-  <Task>
-    <TaskId>1322</TaskId>
-    <NickName>Website Redesign</NickName>
-    <Description>Redesigning Website Layout</Description>
-    <CreationDate>2024-02-29T14:16:30.095666+02:00</CreationDate>
-    <EstimatedDate>2024-03-02T14:16:30.0956699+02:00</EstimatedDate>
-    <StartDate>2024-03-03T14:16:30.0956706+02:00</StartDate>
-    <NumOfDays>10</NumOfDays>
-    <DeadLine>2024-03-12T14:16:30.0956712+02:00</DeadLine>
-    <FinishtDate>2024-03-11T14:16:30.0956718+02:00</FinishtDate>
-    <Product>AgileFlow Project Management Tool</Product>
-    <Remarks>Enhanced UI based on testing.</Remarks>
-    <EngineerId>0</EngineerId>
-    <RequiredLevel>Advanced</RequiredLevel>
-  </Task>
-  <Task>
-    <TaskId>1323</TaskId>
+    <TaskId>1333</TaskId>
     <NickName>Inventory Management</NickName>
     <Description>Managing Inventory Updates</Description>
-    <CreationDate>2024-03-10T14:16:30.1169561+02:00</CreationDate>
-    <EstimatedDate>2024-03-12T14:16:30.1169594+02:00</EstimatedDate>
-    <StartDate>2024-03-13T14:16:30.1169596+02:00</StartDate>
-    <NumOfDays>11</NumOfDays>
-    <DeadLine>2024-03-23T14:16:30.1169599+02:00</DeadLine>
-    <FinishtDate>2024-03-22T14:16:30.1169602+02:00</FinishtDate>
+    <CreationDate>2024-03-10T23:32:36.6873441+02:00</CreationDate>
+    <EstimatedDate>2024-03-12T23:32:36.6879359+02:00</EstimatedDate>
+    <StartDate>2024-03-13T23:32:36.687943+02:00</StartDate>
+    <NumOfDays>1</NumOfDays>
+    <DeadLine>2024-03-13T23:32:36.6879432+02:00</DeadLine>
+    <FinishtDate>2024-03-12T23:32:36.6879435+02:00</FinishtDate>
     <Product>ScriptMaster Automation Framework</Product>
     <Remarks>Enhanced UI based on testing.</Remarks>
     <EngineerId>0</EngineerId>
     <RequiredLevel>Intermediate</RequiredLevel>
   </Task>
   <Task>
-    <TaskId>1324</TaskId>
-    <NickName>Financial Reporting</NickName>
-    <Description>Compiling Financial Reports</Description>
-    <CreationDate>2024-03-13T14:16:30.1501193+02:00</CreationDate>
-    <EstimatedDate>2024-03-15T14:16:30.1501223+02:00</EstimatedDate>
-    <StartDate>2024-03-16T14:16:30.1501226+02:00</StartDate>
-    <NumOfDays>12</NumOfDays>
-    <DeadLine>2024-03-27T14:16:30.1501228+02:00</DeadLine>
-    <FinishtDate>2024-03-26T14:16:30.1501231+02:00</FinishtDate>
-    <Product>BotAssist Chatbot Development Kit</Product>
+    <TaskId>1334</TaskId>
+    <NickName>Research Proposal</NickName>
+    <Description>Conducting Research Proposal</Description>
+    <CreationDate>2024-03-05T23:32:36.9338079+02:00</CreationDate>
+    <EstimatedDate>2024-03-07T23:32:36.9338169+02:00</EstimatedDate>
+    <StartDate>2024-03-08T23:32:36.9338174+02:00</StartDate>
+    <NumOfDays>2</NumOfDays>
+    <DeadLine>2024-03-09T23:32:36.9338177+02:00</DeadLine>
+    <FinishtDate>2024-03-08T23:32:36.9338212+02:00</FinishtDate>
+    <Product>AIInsight Data Analysis Software</Product>
     <Remarks>Met project deadlines on time.</Remarks>
     <EngineerId>0</EngineerId>
-    <RequiredLevel>AdvancedBeginner</RequiredLevel>
+    <RequiredLevel>Expert</RequiredLevel>
   </Task>
   <Task>
-    <TaskId>1325</TaskId>
+    <TaskId>1335</TaskId>
     <NickName>Website Redesign</NickName>
     <Description>Redesigning Website Layout</Description>
-    <CreationDate>2024-02-29T14:16:30.1714052+02:00</CreationDate>
-    <EstimatedDate>2024-03-02T14:16:30.1714093+02:00</EstimatedDate>
-    <StartDate>2024-03-03T14:16:30.1714096+02:00</StartDate>
-    <NumOfDays>13</NumOfDays>
-    <DeadLine>2024-03-15T14:16:30.1714099+02:00</DeadLine>
-    <FinishtDate>2024-03-14T14:16:30.1714102+02:00</FinishtDate>
+    <CreationDate>2024-02-29T23:32:36.9567368+02:00</CreationDate>
+    <EstimatedDate>2024-03-02T23:32:36.9567422+02:00</EstimatedDate>
+    <StartDate>2024-03-03T23:32:36.9567427+02:00</StartDate>
+    <NumOfDays>3</NumOfDays>
+    <DeadLine>2024-03-05T23:32:36.956743+02:00</DeadLine>
+    <FinishtDate>2024-03-04T23:32:36.9567434+02:00</FinishtDate>
     <Product>AgileFlow Project Management Tool</Product>
     <Remarks>Enhanced UI based on testing.</Remarks>
     <EngineerId>0</EngineerId>
+    <RequiredLevel>Advanced</RequiredLevel>
+  </Task>
+  <Task>
+    <TaskId>1336</TaskId>
+    <NickName>Client Presentation</NickName>
+    <Description>Designing Client Presentation</Description>
+    <CreationDate>2024-03-04T23:32:36.9775926+02:00</CreationDate>
+    <EstimatedDate>2024-03-06T23:32:36.9775974+02:00</EstimatedDate>
+    <StartDate>2024-03-07T23:32:36.9775979+02:00</StartDate>
+    <NumOfDays>4</NumOfDays>
+    <DeadLine>2024-03-10T23:32:36.9775982+02:00</DeadLine>
+    <FinishtDate>2024-03-09T23:32:36.9775986+02:00</FinishtDate>
+    <Product>DevOpsNavigator CI/CD Pipeline</Product>
+    <Remarks>Enhanced UI based on testing.</Remarks>
+    <EngineerId>0</EngineerId>
     <RequiredLevel>AdvancedBeginner</RequiredLevel>
   </Task>
   <Task>
-    <TaskId>1326</TaskId>
-    <NickName>Project Alpha</NickName>
-    <Description>Drafting Project Proposal</Description>
-    <CreationDate>2024-02-26T14:16:30.1929753+02:00</CreationDate>
-    <EstimatedDate>2024-02-28T14:16:30.1929784+02:00</EstimatedDate>
-    <StartDate>2024-02-29T14:16:30.1929787+02:00</StartDate>
-    <NumOfDays>14</NumOfDays>
-    <DeadLine>2024-03-13T14:16:30.1929789+02:00</DeadLine>
-    <FinishtDate>2024-03-12T14:16:30.1929792+02:00</FinishtDate>
-    <Product>CodeCraft IDE</Product>
+    <TaskId>1337</TaskId>
+    <NickName>Budget Planning</NickName>
+    <Description>Creating Budget Report</Description>
+    <CreationDate>2024-02-28T23:32:37.0283498+02:00</CreationDate>
+    <EstimatedDate>2024-03-01T23:32:37.0283574+02:00</EstimatedDate>
+    <StartDate>2024-03-02T23:32:37.0283578+02:00</StartDate>
+    <NumOfDays>5</NumOfDays>
+    <DeadLine>2024-03-06T23:32:37.0283582+02:00</DeadLine>
+    <FinishtDate>2024-03-05T23:32:37.0283584+02:00</FinishtDate>
+    <Product>SecureGuard Cybersecurity Platform</Product>
     <Remarks>Met project deadlines on time.</Remarks>
     <EngineerId>0</EngineerId>
-    <RequiredLevel>Beginner</RequiredLevel>
+    <RequiredLevel>Expert</RequiredLevel>
   </Task>
   <Task>
-    <TaskId>1327</TaskId>
-    <NickName>Content Creation</NickName>
-    <Description>Producing Content for Blog</Description>
-    <CreationDate>2024-03-06T14:16:30.2441555+02:00</CreationDate>
-    <EstimatedDate>2024-03-08T14:16:30.2441596+02:00</EstimatedDate>
-    <StartDate>2024-03-09T14:16:30.2441599+02:00</StartDate>
-    <NumOfDays>15</NumOfDays>
-    <DeadLine>2024-03-23T14:16:30.2441602+02:00</DeadLine>
-    <FinishtDate>2024-03-22T14:16:30.2441605+02:00</FinishtDate>
-    <Product>AutomatePro Workflow Automation Tool</Product>
+    <TaskId>1338</TaskId>
+    <NickName>Social Media Strategy</NickName>
+    <Description>Crafting Social Media Strategy</Description>
+    <CreationDate>2024-03-11T23:32:37.0476941+02:00</CreationDate>
+    <EstimatedDate>2024-03-13T23:32:37.0476984+02:00</EstimatedDate>
+    <StartDate>2024-03-14T23:32:37.0476989+02:00</StartDate>
+    <NumOfDays>6</NumOfDays>
+    <DeadLine>2024-03-19T23:32:37.0477004+02:00</DeadLine>
+    <FinishtDate>2024-03-18T23:32:37.0477016+02:00</FinishtDate>
+    <Product>VirtualizeIT Virtualization Platform</Product>
+    <Remarks>Met project deadlines on time.</Remarks>
+    <EngineerId>0</EngineerId>
+    <RequiredLevel>Expert</RequiredLevel>
+  </Task>
+  <Task>
+    <TaskId>1339</TaskId>
+    <NickName>Product Launch</NickName>
+    <Description>Planning Product Launch Event</Description>
+    <CreationDate>2024-03-02T23:32:37.06216+02:00</CreationDate>
+    <EstimatedDate>2024-03-04T23:32:37.0621783+02:00</EstimatedDate>
+    <StartDate>2024-03-05T23:32:37.0621792+02:00</StartDate>
+    <NumOfDays>7</NumOfDays>
+    <DeadLine>2024-03-11T23:32:37.0621796+02:00</DeadLine>
+    <FinishtDate>2024-03-10T23:32:37.0621799+02:00</FinishtDate>
+    <Product>CloudSync File Hosting Service</Product>
     <Remarks>Enhanced UI based on testing.</Remarks>
     <EngineerId>0</EngineerId>
     <RequiredLevel>Beginner</RequiredLevel>
   </Task>
   <Task>
-    <TaskId>1328</TaskId>
+    <TaskId>1340</TaskId>
+    <NickName>Inventory Management</NickName>
+    <Description>Managing Inventory Updates</Description>
+    <CreationDate>2024-03-10T23:32:37.0744185+02:00</CreationDate>
+    <EstimatedDate>2024-03-12T23:32:37.0744235+02:00</EstimatedDate>
+    <StartDate>2024-03-13T23:32:37.0744239+02:00</StartDate>
+    <NumOfDays>8</NumOfDays>
+    <DeadLine>2024-03-20T23:32:37.0744242+02:00</DeadLine>
+    <FinishtDate>2024-03-19T23:32:37.0744245+02:00</FinishtDate>
+    <Product>ScriptMaster Automation Framework</Product>
+    <Remarks>Enhanced UI based on testing.</Remarks>
+    <EngineerId>0</EngineerId>
+    <RequiredLevel>Intermediate</RequiredLevel>
+  </Task>
+  <Task>
+    <TaskId>1341</TaskId>
     <NickName>Financial Reporting</NickName>
     <Description>Compiling Financial Reports</Description>
-    <CreationDate>2024-03-13T14:16:30.2720836+02:00</CreationDate>
-    <EstimatedDate>2024-03-15T14:16:30.272087+02:00</EstimatedDate>
-    <StartDate>2024-03-16T14:16:30.2720873+02:00</StartDate>
-    <NumOfDays>16</NumOfDays>
-    <DeadLine>2024-03-31T14:16:30.2720875+03:00</DeadLine>
-    <FinishtDate>2024-03-30T14:16:30.2720878+03:00</FinishtDate>
+    <CreationDate>2024-03-13T23:32:37.0887494+02:00</CreationDate>
+    <EstimatedDate>2024-03-15T23:32:37.0887547+02:00</EstimatedDate>
+    <StartDate>2024-03-16T23:32:37.0887557+02:00</StartDate>
+    <NumOfDays>9</NumOfDays>
+    <DeadLine>2024-03-24T23:32:37.0887571+02:00</DeadLine>
+    <FinishtDate>2024-03-23T23:32:37.0887581+02:00</FinishtDate>
+    <Product>BotAssist Chatbot Development Kit</Product>
+    <Remarks>Met project deadlines on time.</Remarks>
+    <EngineerId>0</EngineerId>
+    <RequiredLevel>Beginner</RequiredLevel>
+  </Task>
+  <Task>
+    <TaskId>1342</TaskId>
+    <NickName>Event Coordination</NickName>
+    <Description>Coordinating Event Logistics</Description>
+    <CreationDate>2024-03-07T23:32:37.1040818+02:00</CreationDate>
+    <EstimatedDate>2024-03-09T23:32:37.1040873+02:00</EstimatedDate>
+    <StartDate>2024-03-10T23:32:37.1040878+02:00</StartDate>
+    <NumOfDays>10</NumOfDays>
+    <DeadLine>2024-03-19T23:32:37.1040881+02:00</DeadLine>
+    <FinishtDate>2024-03-18T23:32:37.1040885+02:00</FinishtDate>
+    <Product>MobileGuard App Security Suite</Product>
+    <Remarks>Met project deadlines on time.</Remarks>
+    <EngineerId>0</EngineerId>
+    <RequiredLevel>Beginner</RequiredLevel>
+  </Task>
+  <Task>
+    <TaskId>1343</TaskId>
+    <NickName>Financial Reporting</NickName>
+    <Description>Compiling Financial Reports</Description>
+    <CreationDate>2024-03-13T23:32:37.1205854+02:00</CreationDate>
+    <EstimatedDate>2024-03-15T23:32:37.1205904+02:00</EstimatedDate>
+    <StartDate>2024-03-16T23:32:37.1205908+02:00</StartDate>
+    <NumOfDays>11</NumOfDays>
+    <DeadLine>2024-03-26T23:32:37.1205912+02:00</DeadLine>
+    <FinishtDate>2024-03-25T23:32:37.1205915+02:00</FinishtDate>
     <Product>BotAssist Chatbot Development Kit</Product>
     <Remarks>Met project deadlines on time.</Remarks>
     <EngineerId>0</EngineerId>
     <RequiredLevel>Intermediate</RequiredLevel>
   </Task>
   <Task>
-    <TaskId>1329</TaskId>
-    <NickName>Product Launch</NickName>
-    <Description>Planning Product Launch Event</Description>
-    <CreationDate>2024-03-02T14:16:30.2936398+02:00</CreationDate>
-    <EstimatedDate>2024-03-04T14:16:30.2936429+02:00</EstimatedDate>
-    <StartDate>2024-03-05T14:16:30.2936433+02:00</StartDate>
-    <NumOfDays>17</NumOfDays>
-    <DeadLine>2024-03-21T14:16:30.2936436+02:00</DeadLine>
-    <FinishtDate>2024-03-20T14:16:30.2936439+02:00</FinishtDate>
-    <Product>CloudSync File Hosting Service</Product>
-    <Remarks>Enhanced UI based on testing.</Remarks>
+    <TaskId>1344</TaskId>
+    <NickName>Research Proposal</NickName>
+    <Description>Conducting Research Proposal</Description>
+    <CreationDate>2024-03-05T23:32:37.138907+02:00</CreationDate>
+    <EstimatedDate>2024-03-07T23:32:37.1389107+02:00</EstimatedDate>
+    <StartDate>2024-03-08T23:32:37.138911+02:00</StartDate>
+    <NumOfDays>12</NumOfDays>
+    <DeadLine>2024-03-19T23:32:37.1389113+02:00</DeadLine>
+    <FinishtDate>2024-03-18T23:32:37.1389116+02:00</FinishtDate>
+    <Product>AIInsight Data Analysis Software</Product>
+    <Remarks>Met project deadlines on time.</Remarks>
     <EngineerId>0</EngineerId>
-    <RequiredLevel>Expert</RequiredLevel>
+    <RequiredLevel>Intermediate</RequiredLevel>
   </Task>
   <Task>
-    <TaskId>1330</TaskId>
-    <NickName>Sales Pitch</NickName>
-    <Description>Delivering Sales Pitch</Description>
-    <CreationDate>2024-03-14T14:16:30.3144165+02:00</CreationDate>
-    <EstimatedDate>2024-03-16T14:16:30.3144196+02:00</EstimatedDate>
-    <StartDate>2024-03-17T14:16:30.31442+02:00</StartDate>
-    <NumOfDays>18</NumOfDays>
-    <DeadLine>2024-04-03T14:16:30.3144203+03:00</DeadLine>
-    <FinishtDate>2024-04-02T14:16:30.3144205+03:00</FinishtDate>
-    <Product>IoTShield Device Security Suite</Product>
-    <Remarks>Enhanced UI based on testing.</Remarks>
-    <EngineerId>0</EngineerId>
-    <RequiredLevel>Beginner</RequiredLevel>
-  </Task>
-  <Task>
-    <TaskId>1331</TaskId>
-    <NickName>Content Creation</NickName>
-    <Description>Producing Content for Blog</Description>
-    <CreationDate>2024-03-06T14:16:30.3347288+02:00</CreationDate>
-    <EstimatedDate>2024-03-08T14:16:30.3347321+02:00</EstimatedDate>
-    <StartDate>2024-03-09T14:16:30.3347324+02:00</StartDate>
-    <NumOfDays>19</NumOfDays>
-    <DeadLine>2024-03-27T14:16:30.3347327+02:00</DeadLine>
-    <FinishtDate>2024-03-26T14:16:30.3347329+02:00</FinishtDate>
-    <Product>AutomatePro Workflow Automation Tool</Product>
-    <Remarks>Enhanced UI based on testing.</Remarks>
-    <EngineerId>0</EngineerId>
-    <RequiredLevel>Expert</RequiredLevel>
-  </Task>
-  <Task>
-    <TaskId>1332</TaskId>
-    <NickName>Social Media Strategy</NickName>
-    <Description>Crafting Social Media Strategy</Description>
-    <CreationDate>2024-03-11T14:16:30.3537959+02:00</CreationDate>
-    <EstimatedDate>2024-03-13T14:16:30.3537993+02:00</EstimatedDate>
-    <StartDate>2024-03-14T14:16:30.3537997+02:00</StartDate>
-    <NumOfDays>20</NumOfDays>
-    <DeadLine>2024-04-02T14:16:30.3537999+03:00</DeadLine>
-    <FinishtDate>2024-04-01T14:16:30.3538001+03:00</FinishtDate>
-    <Product>VirtualizeIT Virtualization Platform</Product>
+    <TaskId>1345</TaskId>
+    <NickName>Meeting Prep</NickName>
+    <Description>Preparing Meeting Agenda</Description>
+    <CreationDate>2024-03-03T23:32:37.1565145+02:00</CreationDate>
+    <EstimatedDate>2024-03-05T23:32:37.1565186+02:00</EstimatedDate>
+    <StartDate>2024-03-06T23:32:37.1565191+02:00</StartDate>
+    <NumOfDays>13</NumOfDays>
+    <DeadLine>2024-03-18T23:32:37.1565194+02:00</DeadLine>
+    <FinishtDate>2024-03-17T23:32:37.1565198+02:00</FinishtDate>
+    <Product>BugShield QA Testing Suite</Product>
     <Remarks>Met project deadlines on time.</Remarks>
     <EngineerId>0</EngineerId>
     <RequiredLevel>Expert</RequiredLevel>
+  </Task>
+  <Task>
+    <TaskId>1346</TaskId>
+    <NickName>Event Coordination</NickName>
+    <Description>Coordinating Event Logistics</Description>
+    <CreationDate>2024-03-07T23:32:37.1732102+02:00</CreationDate>
+    <EstimatedDate>2024-03-09T23:32:37.1732157+02:00</EstimatedDate>
+    <StartDate>2024-03-10T23:32:37.1732163+02:00</StartDate>
+    <NumOfDays>14</NumOfDays>
+    <DeadLine>2024-03-23T23:32:37.1732166+02:00</DeadLine>
+    <FinishtDate>2024-03-22T23:32:37.173217+02:00</FinishtDate>
+    <Product>MobileGuard App Security Suite</Product>
+    <Remarks>Met project deadlines on time.</Remarks>
+    <EngineerId>0</EngineerId>
+    <RequiredLevel>Intermediate</RequiredLevel>
+  </Task>
+  <Task>
+    <TaskId>1347</TaskId>
+    <NickName>Event Coordination</NickName>
+    <Description>Coordinating Event Logistics</Description>
+    <CreationDate>2024-03-07T23:32:37.1891989+02:00</CreationDate>
+    <EstimatedDate>2024-03-09T23:32:37.1892036+02:00</EstimatedDate>
+    <StartDate>2024-03-10T23:32:37.1892052+02:00</StartDate>
+    <NumOfDays>15</NumOfDays>
+    <DeadLine>2024-03-24T23:32:37.1892069+02:00</DeadLine>
+    <FinishtDate>2024-03-23T23:32:37.1892075+02:00</FinishtDate>
+    <Product>MobileGuard App Security Suite</Product>
+    <Remarks>Met project deadlines on time.</Remarks>
+    <EngineerId>0</EngineerId>
+    <RequiredLevel>Expert</RequiredLevel>
+  </Task>
+  <Task>
+    <TaskId>1348</TaskId>
+    <NickName>Project Alpha</NickName>
+    <Description>Drafting Project Proposal</Description>
+    <CreationDate>2024-02-26T23:32:37.2256323+02:00</CreationDate>
+    <EstimatedDate>2024-02-28T23:32:37.2256365+02:00</EstimatedDate>
+    <StartDate>2024-02-29T23:32:37.225637+02:00</StartDate>
+    <NumOfDays>16</NumOfDays>
+    <DeadLine>2024-03-15T23:32:37.2256374+02:00</DeadLine>
+    <FinishtDate>2024-03-14T23:32:37.2256377+02:00</FinishtDate>
+    <Product>CodeCraft IDE</Product>
+    <Remarks>Met project deadlines on time.</Remarks>
+    <EngineerId>0</EngineerId>
+    <RequiredLevel>AdvancedBeginner</RequiredLevel>
+  </Task>
+  <Task>
+    <TaskId>1349</TaskId>
+    <NickName>Product Launch</NickName>
+    <Description>Planning Product Launch Event</Description>
+    <CreationDate>2024-03-02T23:32:37.2473122+02:00</CreationDate>
+    <EstimatedDate>2024-03-04T23:32:37.2473163+02:00</EstimatedDate>
+    <StartDate>2024-03-05T23:32:37.2473167+02:00</StartDate>
+    <NumOfDays>17</NumOfDays>
+    <DeadLine>2024-03-21T23:32:37.247317+02:00</DeadLine>
+    <FinishtDate>2024-03-20T23:32:37.2473173+02:00</FinishtDate>
+    <Product>CloudSync File Hosting Service</Product>
+    <Remarks>Enhanced UI based on testing.</Remarks>
+    <EngineerId>0</EngineerId>
+    <RequiredLevel>Intermediate</RequiredLevel>
+  </Task>
+  <Task>
+    <TaskId>1350</TaskId>
+    <NickName>Data Analysis</NickName>
+    <Description>Analyzing Sales Data</Description>
+    <CreationDate>2024-02-27T23:32:37.2665529+02:00</CreationDate>
+    <EstimatedDate>2024-02-29T23:32:37.2665567+02:00</EstimatedDate>
+    <StartDate>2024-03-01T23:32:37.2665571+02:00</StartDate>
+    <NumOfDays>18</NumOfDays>
+    <DeadLine>2024-03-18T23:32:37.2665575+02:00</DeadLine>
+    <FinishtDate>2024-03-17T23:32:37.2665578+02:00</FinishtDate>
+    <Product>DataForge Analytics Suite</Product>
+    <Remarks>Enhanced UI based on testing.</Remarks>
+    <EngineerId>0</EngineerId>
+    <RequiredLevel>Expert</RequiredLevel>
+  </Task>
+  <Task>
+    <TaskId>1351</TaskId>
+    <NickName>Content Creation</NickName>
+    <Description>Producing Content for Blog</Description>
+    <CreationDate>2024-03-06T23:32:37.2796027+02:00</CreationDate>
+    <EstimatedDate>2024-03-08T23:32:37.2796061+02:00</EstimatedDate>
+    <StartDate>2024-03-09T23:32:37.2796065+02:00</StartDate>
+    <NumOfDays>19</NumOfDays>
+    <DeadLine>2024-03-27T23:32:37.2796075+02:00</DeadLine>
+    <FinishtDate>2024-03-26T23:32:37.2796085+02:00</FinishtDate>
+    <Product>AutomatePro Workflow Automation Tool</Product>
+    <Remarks>Enhanced UI based on testing.</Remarks>
+    <EngineerId>0</EngineerId>
+    <RequiredLevel>Intermediate</RequiredLevel>
+  </Task>
+  <Task>
+    <TaskId>1352</TaskId>
+    <NickName>Meeting Prep</NickName>
+    <Description>Preparing Meeting Agenda</Description>
+    <CreationDate>2024-03-03T23:32:37.2950539+02:00</CreationDate>
+    <EstimatedDate>2024-03-05T23:32:37.2950574+02:00</EstimatedDate>
+    <StartDate>2024-03-06T23:32:37.2950578+02:00</StartDate>
+    <NumOfDays>20</NumOfDays>
+    <DeadLine>2024-03-25T23:32:37.2950581+02:00</DeadLine>
+    <FinishtDate>2024-03-24T23:32:37.2950584+02:00</FinishtDate>
+    <Product>BugShield QA Testing Suite</Product>
+    <Remarks>Met project deadlines on time.</Remarks>
+    <EngineerId>0</EngineerId>
+    <RequiredLevel>AdvancedBeginner</RequiredLevel>
   </Task>
 </ArrayOfTask>

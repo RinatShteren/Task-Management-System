@@ -87,7 +87,7 @@ internal class EngineerImplementation : IEngineer
     /// <param name="predicate"></param>
     /// <returns></returns>
     /// 
-    public Engineer? Read(Func<Engineer, bool> filter)
+    public Engineer? Read(Func<Engineer, bool> filter= null)
     { 
            
         return XMLTools.LoadListFromXMLElement(x_XML_engineers).Elements().Select(eng=> xlmToEng(eng)).FirstOrDefault(filter);
@@ -99,7 +99,7 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     /// <param name="predicate"></param>
     /// <returns></returns>
-    public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? p)
+    public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? p = null)
     {
 
         if (p == null)//return all elements

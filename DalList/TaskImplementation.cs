@@ -42,7 +42,7 @@ internal class TaskImplementation : ITask
     /// <param name="predicate"></param>
     /// <returns></returns>
     /// 
-    public Task? Read(Func<Task, bool>? predicate)
+    public Task? Read(Func<Task, bool>? predicate=null)
     {
         return DataSource.Tasks.Where(predicate).FirstOrDefault();
     }

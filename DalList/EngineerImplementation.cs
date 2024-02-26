@@ -50,7 +50,7 @@ internal class EngineerImplementation : IEngineer
     /// <param name="predicate"></param>
     /// <returns></returns>
     /// 
-    public Engineer? Read(Func<Engineer, bool>? predicate)
+    public Engineer? Read(Func<Engineer, bool>? predicate = null)
     {
         return DataSource.Engineers.Where(predicate).FirstOrDefault();
     }

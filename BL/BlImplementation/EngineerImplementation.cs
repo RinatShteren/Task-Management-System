@@ -22,7 +22,7 @@ internal class EngineerImplementation : IEngineer
                 throw new BO.BlNotVaildException("Cost under zero");
             if (!doEngineer.Email.Contains("@"))
                 throw new BO.BlNotVaildException("Email not vaild");
-            if ((int)doEngineer.Level <= 0 || (int)doEngineer.Level > 4)
+            if ((int)doEngineer.Level < 0 || (int)doEngineer.Level > 4)
                 throw new BO.BlNotVaildException("Level not vaild");
 
             int idEng = _dal.Engineer.Create(doEngineer);
@@ -60,7 +60,7 @@ internal class EngineerImplementation : IEngineer
         return engeneerToRead;
     }
 
-    public IEnumerable<BO.Engineer> ReadAll(Func<Engineer, bool> p)
+    public IEnumerable<BO.Engineer> ReadAll(Func<Engineer, bool> p = null)
     {
 
 

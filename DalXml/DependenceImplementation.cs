@@ -52,7 +52,7 @@ internal class DependenceImplementation:IDependence
         return null;
     }
 
-    public Dependence? Read(Func<Dependence, bool> filter)
+    public Dependence? Read(Func<Dependence, bool> filter= null)
     {
         var DepList = XMLTools.LoadListFromXMLSerializer<Dependence>(x_XML_dependences);
         foreach (Dependence dep in DepList)
@@ -62,7 +62,7 @@ internal class DependenceImplementation:IDependence
         return null;
     }
 
-    public IEnumerable<Dependence> ReadAll(Func<Dependence, bool>? p)
+    public IEnumerable<Dependence> ReadAll(Func<Dependence, bool>? p= null)
     {
         var DepList = XMLTools.LoadListFromXMLSerializer<Dependence>(x_XML_dependences);
         if (p != null)

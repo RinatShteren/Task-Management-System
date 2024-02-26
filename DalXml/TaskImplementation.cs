@@ -56,7 +56,7 @@ internal class TaskImplementation : ITask
         return null;
     }
     //
-    public DO.Task? Read(Func<DO.Task, bool> filter)
+    public DO.Task? Read(Func<DO.Task, bool> filter=null)
     {
         var tskList = XMLTools.LoadListFromXMLSerializer<DO.Task>(x_XML_tasks);
         foreach (DO.Task tsk in tskList)
@@ -66,7 +66,7 @@ internal class TaskImplementation : ITask
         return null;
     }
     //return the list by the filter and if no filter return yhe whole list
-    public IEnumerable<DO.Task> ReadAll(Func<DO.Task, bool>? p)
+    public IEnumerable<DO.Task> ReadAll(Func<DO.Task, bool>? p = null)
     {
         var tskList = XMLTools.LoadListFromXMLSerializer<DO.Task>(x_XML_tasks);
         if (p != null)

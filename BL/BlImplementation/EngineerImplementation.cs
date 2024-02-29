@@ -11,7 +11,7 @@ internal class EngineerImplementation : IEngineer
     {
         DO.Engineer doEngineer = new DO.Engineer
             (boEngineer.Id, boEngineer.Name, boEngineer.Email, (DO.EngineerLevel)boEngineer.Level, boEngineer.Cost);
-
+        
         try
         {
             if (doEngineer.Id < 0)

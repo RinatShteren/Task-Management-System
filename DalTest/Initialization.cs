@@ -1,8 +1,7 @@
 ﻿namespace DalTest;
 using DalApi;
 using DO;
-using System.Data.Common;
-using System.Reflection.Emit;
+using System;
 
 
 
@@ -17,15 +16,16 @@ public static class Initialization
 
     public static void Do() //stage 4
     {
-        s_dal = DalApi.Factory.Get; //stage 4
+        s_dal = Factory.Get; //stage 4
         createEngineers();
         createTasks();
         createDependences();
+        createUsers();
     }
 
     public static void Reset()//stage 5
     {
-        s_dal = DalApi.Factory.Get;
+        s_dal = Factory.Get;
         deleteEngineers();
         deleteTasks();
         deleteDependences();
@@ -52,6 +52,15 @@ public static class Initialization
             s_dal!.Engineer.Create(newEng);
 
         }
+    }
+
+    private static void createUsers()
+    {
+        s_dal.User.UserExist(new User(1234));
+
+        var engineers = s_dal.Engineer.ReadAll().ToList();
+
+        foreach (var engineer in engineers) s_dal.User.Create(new User(new Random().Next(2000, 4000), engineer.Id));
     }
     private static void createTasks()
     {
@@ -137,8 +146,6 @@ public static class Initialization
     {
         s_dal!.Task.DeleteAll();
     }
-
-
     private static void deleteDependences()
     {
         s_dal!.Dependence.DeleteAll();

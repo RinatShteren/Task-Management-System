@@ -12,6 +12,7 @@ sealed internal class DalXml : IDal
     public ITask Task => new TaskImplementation();
 
     public ISchedule Schedule =>  new ScheduleImplementation();
+    public IUser User => new UserImplementation();
 
 
 }

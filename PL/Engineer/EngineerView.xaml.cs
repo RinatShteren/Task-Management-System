@@ -20,7 +20,7 @@ namespace PL.Engineer
     public partial class EngineerView : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-         int ID;/*if idd =0 :ADD else:UPDATE*/
+         int AddOrUpdate;/*if idd =0 :ADD else:UPDATE*/
 
 
         public static readonly DependencyProperty CurrentEngineerProperty =
@@ -32,22 +32,23 @@ namespace PL.Engineer
         }
 
 
-        public EngineerView(int idd=0)
+        public EngineerView(int GetId=0)
         {
         InitializeComponent();
            // ID = idd;
-            if( idd == 0)
+            if(GetId == 0)
             {
-                ID = 0;
+               
+                AddOrUpdate = 0;
                 CurrentEngineer = new BO.Engineer() { Id = 0 };
                // SetValue(CurrentEngineerProperty, new BO.Engineer ());
             }
             else
             {
-                ID = 1;
+                AddOrUpdate = 1;
                 try
                 {
-                   /* BO.Engineer*/ CurrentEngineer = s_bl.Engineer.Read(idd);
+                   /* BO.Engineer*/ CurrentEngineer = s_bl.Engineer.Read(GetId);
                     //SetValue(CurrentEngineerProperty, CurrentEngineer);
                 }
                 catch(Exception ex)
@@ -61,7 +62,7 @@ namespace PL.Engineer
         {
             try
             {
-                if (ID == 0)
+                if (AddOrUpdate == 0)
                 {
                     s_bl.Engineer.AddEngineer(CurrentEngineer);
                 }

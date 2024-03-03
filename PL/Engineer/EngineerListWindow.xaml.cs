@@ -55,21 +55,23 @@ namespace PL.Engineer
             UpdateEngineerList();
 
         }
-
+       
         private void ListViewDoubleClick(object sender, MouseButtonEventArgs e)
         {
             BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
-            if (engineer == null)
-                   //  exeption 
+           // if (engineer == null)
+               // throw new Excption("engineer is null");
             new EngineerView(engineer!.Id).ShowDialog();
             UpdateEngineerList();
         }
+
+        
 
         void UpdateEngineerList()
         {
 
             EngineerList = ((EngineerLevel == BO.EngineerLevel.Beginner) ? //??
-                s_bl?.Engineer.ReadAll(null)! : s_bl?.Engineer.ReadAll(eng => eng.Level == EngineerLevel)!)
+                s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(eng => eng.Level == EngineerLevel)!)
                 .OrderBy(e => e.Id); // sort by ID 
         }
 

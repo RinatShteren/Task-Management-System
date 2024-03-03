@@ -50,7 +50,7 @@ internal class EngineerImplementation : IEngineer
     /// <param name="predicate"></param>
     /// <returns></returns>
     /// 
-    public Engineer? Read(Func<Engineer, bool>? predicate)
+    public Engineer? Read(Func<Engineer, bool>? predicate = null)
     {
         return DataSource.Engineers.Where(predicate).FirstOrDefault();
     }
@@ -64,16 +64,12 @@ internal class EngineerImplementation : IEngineer
     public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? predicate = null) =>
        predicate is null ? DataSource.Engineers.Select(a => a) : DataSource.Engineers.Where(predicate);
 
-    
-    public void Update(Engineer item)
+    public void Update(Engineer item) //Updates entity object
     {
-        if (DataSource.Engineers.Exists(x => x.Id == item.Id))
-        {
-            DataSource.Engineers.Remove(DataSource.Engineers.Find(x => x.Id == item.Id));
-            DataSource.Engineers.Add(item);
-        }
-        else
-            throw new DalDoesNotExistException($"Engineer with ID={item.Id} not exist");
-
+        Engineer? temp = Read(item.Id);
+        if (temp == null) //If this id doesn't exist
+            throw new DalDoesNotExistException($"Engineer with ID={item.Id} does Not exist");
+        DataSource.Engineers.Remove(temp);  //deleting the existing object
+        DataSource.Engineers.Add(item); //adding the updated object
     }
 }

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        DataContext="{Binding User, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
 
 
     <Grid>
@@ -20,10 +21,31 @@
         Click="btnReset_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}"/>
 
 
+        <Grid Margin="496,51,104,183" Width="200" Height="200">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition Width="33*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="57*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="log in" HorizontalAlignment="Left" Margin="60,123,0,0" VerticalAlignment="Top" Width="120" Height="21"
+                 Click="btnOPEN_Click" FontFamily="Comic Sans MS" Grid.ColumnSpan="4" Grid.RowSpan="2"/>
+            <TextBox Text="{Binding UserId, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
+                   HorizontalAlignment="Left" Margin="60,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"
+                   MaxLength ="9" Grid.ColumnSpan="4" Grid.RowSpan="2"/>
 
-
+            <PasswordBox  Name="PasswordBox"
+               HorizontalAlignment="Left" Margin="60,172,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="4" Grid.RowSpan="2"/>
+            <TextBox HorizontalAlignment="Left" Height="18" Margin="-17,76,0,0" TextWrapping="Wrap" Text="ID:" VerticalAlignment="Top" Width="72" Grid.RowSpan="2" Grid.Column="1"/>
+            <TextBox HorizontalAlignment="Left" Height="16" Margin="-17,101,0,0" TextWrapping="Wrap" Text="PASSWORD:" 
+                      VerticalAlignment="Top" Width="72" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+            <TextBox  Text="{Binding Password, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
+                      Grid.Column="1" HorizontalAlignment="Left" Margin="60,99,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="3"/>
+        </Grid>
 
     </Grid>
-
-
 </Window>

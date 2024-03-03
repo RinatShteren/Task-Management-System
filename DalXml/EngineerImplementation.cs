@@ -87,7 +87,7 @@ internal class EngineerImplementation : IEngineer
     /// <param name="predicate"></param>
     /// <returns></returns>
     /// 
-    public Engineer? Read(Func<Engineer, bool> filter)
+    public Engineer? Read(Func<Engineer, bool> filter= null)
     { 
            
         return XMLTools.LoadListFromXMLElement(x_XML_engineers).Elements().Select(eng=> xlmToEng(eng)).FirstOrDefault(filter);
@@ -99,7 +99,7 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     /// <param name="predicate"></param>
     /// <returns></returns>
-    public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? p)
+    public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? p = null)
     {
 
         if (p == null)//return all elements
@@ -115,20 +115,17 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     /// <param name="item"></param>
     /// <exception cref="DalDoesNotExistException"></exception>
+ 
     public void Update(Engineer item)
     {
-        if (Read(item.Id) == null)
-        {
-            throw new DalDoesNotExistException($"Engineer with ID={item.Id} not exist"); ; //item not exsist in dataBase
-        }
-        XElement engineerRoot = XMLTools.LoadListFromXMLElement(x_XML_engineers);
-        XElement delItem= engineerRoot.Elements().FirstOrDefault(itemEx => (int?)itemEx.Element("Id") == item.Id);
-        delItem.Remove();
-        engineerRoot.Add(item);
-        XMLTools.SaveListToXMLElement(engineerRoot, x_XML_engineers);
-    }
+        if (Read(item.Id) == null) //If this id doesnt exist
+            throw new DalDoesNotExistException($"Engineer with ID={item.Id} does Not exist");
 
-    public Engineer xlmToEng (XElement eng)  //גם// צד שני//להעביר לטולס
+        XElement engineerList = XMLTools.LoadListFromXMLElement(x_XML_engineers);
+        Delete(item.Id);
+        Create(item);
+    }
+    public Engineer xlmToEng (XElement eng) 
       {
         return new Engineer()
         {

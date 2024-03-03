@@ -1,4 +1,5 @@
-﻿using PL.Engineer;
+﻿using BO;
+using PL.Engineer;
 
 using System.Text;
 using System.Windows;
@@ -18,13 +19,47 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        public MainWindow()
-        {
-            InitializeComponent();
 
-            
+        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
+
+        public User User
+        {
+            get { return (BO.User)GetValue(UserProperty); }
+            set { SetValue(UserProperty, value); }
         }
+
+        // Using a DependencyProperty as the backing store for User.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty UserProperty =
+            DependencyProperty.Register(nameof(User), typeof(User), typeof(MainWindow), new PropertyMetadata(new User()));
+
+
+        public MainWindow() => InitializeComponent();
+  
+        private void btnOPEN_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (s_bl.UserLogin.UserExist(User))
+            {
+               
+                if (User.Password == 1234)
+                {
+                    //meneger window
+                }
+                else
+                {
+                    new EngineerWindow(User.UserId).Show();
+
+                }
+
+            }
+
+
+
+        }
+    
+    
+     
         private void btnEngineer_Click(object sender, RoutedEventArgs e)
         { new EngineerListWindow().Show(); }
        

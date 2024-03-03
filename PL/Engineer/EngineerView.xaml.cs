@@ -20,32 +20,36 @@ namespace PL.Engineer
     public partial class EngineerView : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        int ID;/*if idd =0 :ADD else:UPDATE*/
+         int AddOrUpdate;/*if idd =0 :ADD else:UPDATE*/
 
 
-        public static readonly DependencyProperty EngineerProperty =
+        public static readonly DependencyProperty CurrentEngineerProperty =
            DependencyProperty.Register("CurrentEngineer", typeof(BO.Engineer), typeof(EngineerView), new PropertyMetadata(null));
         public BO.Engineer CurrentEngineer
         {
-            get { return (BO.Engineer)GetValue(EngineerProperty); }
-            set { SetValue(EngineerProperty, value); }
+            get { return (BO.Engineer)GetValue(CurrentEngineerProperty); }
+            set { SetValue(CurrentEngineerProperty, value); }
         }
 
 
-        public EngineerView(int idd=0)
+        public EngineerView(int GetId=0)
         {
         InitializeComponent();
-            ID = idd;
-            if(ID == 0)
+           // ID = idd;
+            if(GetId == 0)
             {
-                SetValue(EngineerProperty, new BO.Engineer ());
+               
+                AddOrUpdate = 0;
+                CurrentEngineer = new BO.Engineer() { Id = 0 };
+               // SetValue(CurrentEngineerProperty, new BO.Engineer ());
             }
             else
             {
+                AddOrUpdate = 1;
                 try
                 {
-                    BO.Engineer eng = s_bl.Engineer.Read(idd);
-                    SetValue(EngineerProperty, eng);
+                   /* BO.Engineer*/ CurrentEngineer = s_bl.Engineer.Read(GetId);
+                    //SetValue(CurrentEngineerProperty, CurrentEngineer);
                 }
                 catch(Exception ex)
                 {
@@ -56,7 +60,26 @@ namespace PL.Engineer
 
         private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                if (AddOrUpdate == 0)
+                {
+                    s_bl.Engineer.AddEngineer(CurrentEngineer);
+                }
+                else
+                {
+                    s_bl.Engineer.Update(CurrentEngineer);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
+            Close();
         }
+ 
+          
+       
     }
 }

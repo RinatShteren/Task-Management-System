@@ -43,7 +43,7 @@ internal class DependenceImplementation : IDependence
     /// It returns the first object in the list for which the function returns True.    /// </summary>
     /// <param name="predicate"></param>
     /// <returns></returns>
-    public Dependence? Read(Func<Dependence, bool>? predicate)
+    public Dependence? Read(Func<Dependence, bool>? predicate= null)
     {
         return DataSource.Dependences.Where(predicate).FirstOrDefault();
     }

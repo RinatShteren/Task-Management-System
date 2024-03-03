@@ -20,27 +20,26 @@
         <Label Content="Level" HorizontalAlignment="Left" Height="25" Margin="122,251,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
         <Label Content="Cost" HorizontalAlignment="Left" Height="25" Margin="122,298,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.961,0.615" Grid.ColumnSpan="2"/>
         <TextBox Grid.Column="1" 
-            Text="{Binding EngineerName, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
+            Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
             HorizontalAlignment="Left" Margin="267,113,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
         <TextBox Grid.Column="1" 
-            Text="{Binding EngineerId, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
+            Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
             HorizontalAlignment="Left" Margin="267,164,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="18"/>
         <TextBox Grid.Column="1" 
-            Text="{Binding EngineerEmail, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
+            Text="{Binding Email, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
             HorizontalAlignment="Left" Margin="267,212,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="18"/>
         <TextBox Grid.Column="1" 
-            Text="{Binding EngineerCost, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
+            Text="{Binding Cost, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
             HorizontalAlignment="Left" Margin="267,293,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
 
-
-        <ComboBox HorizontalAlignment="Left" Margin="267,248,0,0" VerticalAlignment="Top" Width="120"
+        <!--hendle engineer level-->
+        <ComboBox HorizontalAlignment="Left" Margin="267,248,0,0"  VerticalAlignment="Top" Width="120"
             ItemsSource="{Binding  Source={StaticResource EngineerLevelCollectionKey}}"
-            SelectedValue="{Binding EngineerLevel, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}" Grid.ColumnSpan="2" Height="22">
-
+            SelectedValue="{Binding Level, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}" Grid.ColumnSpan="2" Height="22">
         </ComboBox>
-
+        <!--hendle botton update/ add-->
         <Button 
-            Content="{Binding ID, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" 
+            Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" 
             HorizontalAlignment="Left" Margin="267,341,0,0"  VerticalAlignment="Top" Padding="5" 
             Click="btnAddUpdate_Click" FontFamily="Comic Sans MS" Width="120" Height="35" Grid.ColumnSpan="2"/>
 

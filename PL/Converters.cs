@@ -19,4 +19,8 @@ class ConvertIdToContent : IValueConverter
     {
         throw new NotImplementedException();
     }
+    public object ConvertMenegerOrWorker(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return (int)value == 0 ? "Meneger" : "Worker";
+    }
 }

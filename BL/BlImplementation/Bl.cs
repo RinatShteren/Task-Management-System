@@ -9,6 +9,7 @@ internal class Bl : IBl
     public ITask Task => new TaskImplementation(Schedule);
 
     public ISchedule Schedule => new ScheduleImplementation();
+    public IUserLogin UserLogin => new UserLoginImplementation();
 
     public void InitalizingBD() => DalTest.Initialization.Do();
 

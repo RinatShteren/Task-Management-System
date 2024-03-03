@@ -3,7 +3,7 @@ using BO;
 using DalApi;
 
 namespace BlApi;
-
+/**/
 public interface ITask
 {
     public int Create(BO.Task boTask);

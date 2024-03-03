@@ -39,20 +39,21 @@ namespace PL
         private void btnOPEN_Click(object sender, RoutedEventArgs e)
         {
 
-            if (s_bl.UserLogin.UserExist(User))
-            {
+            //if (s_bl.UserLogin.UserExist(User))
+            //{
                
-                if (User.Password == 1234)
+                if (User.Password == 1234 && User.UserId == 111111111)
                 {
-                    //meneger window
+                    new EngineerListWindow().Show();
                 }
                 else
                 {
-                    new EngineerWindow(User.UserId).Show();
-
-                }
+                string? userId = UserIdBox?.Text;
+                new EngineerWindow(int.Parse(userId)).ShowDialog();
 
             }
+
+            //}
 
 
 

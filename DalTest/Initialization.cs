@@ -56,11 +56,13 @@ public static class Initialization
 
     private static void createUsers()
     {
-        s_dal.User.UserExist(new User(1234));
+        s_dal.User.Create(new User(1234,11111111));
+        s_dal.User.Create(new User(0000, 222222222));
 
         var engineers = s_dal.Engineer.ReadAll().ToList();
 
-        foreach (var engineer in engineers) s_dal.User.Create(new User(new Random().Next(2000, 4000), engineer.Id));
+        foreach (var engineer in engineers)
+            s_dal.User.Create(new User(new Random().Next(2000, 4000), engineer.Id));
     }
     private static void createTasks()
     {
@@ -113,6 +115,10 @@ public static class Initialization
             int? _NumOfDays = i + 1; //ההפרש בין התאריך המשוער לדד ליין
             string? _Product = Products[num]; //כל פעם יוגרל רנדומלית תוצר 
             string? _Remarks = Remarks[num % 2]; //כל פעם יוגרל רנדומלית הערה מהרשימה 
+            var engineesr = s_dal!.Engineer.ReadAll(a => a.Id>0);
+
+            //int EnginnerId =
+            //EngineerLevel EngineerLevel = 
             EngineerLevel _RequiredLevel = (EngineerLevel)new Random().Next(Enum.GetValues(typeof(EngineerLevel)).Length); //נגדיר מס רנדומלי שייתן רמת מהנדס רנדומלית מתוך האינם
 
             Task newTsk = new Task(0, _TaskNickName, _Description, _CreationDate, _EstimatedDate, _StartDate,

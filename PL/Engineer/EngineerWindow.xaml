@@ -5,8 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
-        Title="EngineerWindow" Height="450" Width="800">
+        Title="EngineerWindow" Height="450" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+
     <Grid>
-        
+        <DataGrid d:ItemsSource="{d:SampleData ItemCount=10}" Margin="0,112,10,-5" RenderTransformOrigin="0.5,0.5" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Task Name" Binding="{Binding CurrentTask.NickName, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}" />
+                <DataGridTextColumn Header="StartDate" Binding="{Binding CurrentTask.StartDate}" />
+                <DataGridTextColumn Header="Num Of Days" Binding="{Binding CurrentTask.NumOfDays}" />
+                <DataGridTextColumn Header="Description" Binding="{Binding CurrentTask.Description}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid HorizontalAlignment="Center" Height="74" Margin="0,22,0,0" VerticalAlignment="Top" Width="736">
+            <Label Content="Engineer Name:" HorizontalAlignment="Left" Margin="54,0,0,0" VerticalAlignment="Center"/>
+            <Label Content="Engineer Id:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <TextBox Text="{Binding CurrentEngineer.Name, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}" 
+                     HorizontalAlignment="Left" Margin="153,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
+            <TextBox Text="{Binding CurrentEngineer.Id, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
+                 HorizontalAlignment="Left" Margin="432,0,0,0" TextWrapping="Wrap"  VerticalAlignment="Center" Width="120"/>
+        </Grid>
+
     </Grid>
 </Window>

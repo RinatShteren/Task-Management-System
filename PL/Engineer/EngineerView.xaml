@@ -24,7 +24,7 @@
             HorizontalAlignment="Left" Margin="267,113,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
         <TextBox Grid.Column="1" 
             Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
-            HorizontalAlignment="Left" Margin="267,164,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="18"/>
+           IsEnabled="False" HorizontalAlignment="Left" Margin="267,164,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="18"/>
         <TextBox Grid.Column="1" 
             Text="{Binding Email, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
             HorizontalAlignment="Left" Margin="267,212,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="18"/>

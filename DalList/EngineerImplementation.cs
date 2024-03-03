@@ -61,7 +61,7 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     /// <param name="predicate"></param>
     /// <returns></returns>
-    public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? predicate = null) =>
+    public IEnumerable<Engineer> ReadAll(Func<Engineer, bool> predicate = null) =>
        predicate is null ? DataSource.Engineers.Select(a => a) : DataSource.Engineers.Where(predicate);
 
     public void Update(Engineer item) //Updates entity object

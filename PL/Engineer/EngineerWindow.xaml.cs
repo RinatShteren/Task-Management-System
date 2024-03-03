@@ -41,7 +41,7 @@ namespace PL.Engineer
         {
             InitializeComponent();
             CurrentEngineer = s_bl.Engineer.Read(GetId);
-            CurrentTask = s_bl.Task.
+            //CurrentTask = s_bl.Task.
         }
     }
 }

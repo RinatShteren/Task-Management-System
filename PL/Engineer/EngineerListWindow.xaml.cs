@@ -53,7 +53,6 @@ namespace PL.Engineer
         {
             new EngineerView().ShowDialog();
             UpdateEngineerList();
-
         }
        
         private void ListViewDoubleClick(object sender, MouseButtonEventArgs e)
@@ -71,7 +70,7 @@ namespace PL.Engineer
         {
 
             EngineerList = ((EngineerLevel == BO.EngineerLevel.Beginner) ? //??
-                s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(eng => eng.Level == EngineerLevel)!)
+                s_bl?.Engineer.ReadAll(null)! : s_bl?.Engineer.ReadAll(eng => eng.Level == EngineerLevel)!)
                 .OrderBy(e => e.Id); // sort by ID 
         }
 

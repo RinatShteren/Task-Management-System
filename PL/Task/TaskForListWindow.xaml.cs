@@ -25,8 +25,9 @@ namespace PL.Task
         public TaskForListWindow()
         {
             InitializeComponent();
-            TaskList = s_bl.Task.ReadAll(task => task.TaskId > 0);
+            TaskList = s_bl.Task.ReadAll().Where(task => task.TaskId > 0);
         }
+        
         public IEnumerable<BO.TaskInList> TaskList
         {
             get { return (IEnumerable<BO.TaskInList>)GetValue(TaskListProperty); }

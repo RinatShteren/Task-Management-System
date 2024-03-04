@@ -21,8 +21,8 @@
         Click="btnReset_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}"/>
 
         <!-- Clock display -->
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,51,0,322" Width="136">
-            <Label Content="" HorizontalAlignment="Center" FontSize="15" Height="24" Width="126" Margin="0,20,0,0" Background="#FFF6ECEC"/>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,51,0,322" Width="136" >
+            <Label Content="" {Binding CurrentTime} HorizontalAlignment="Center" FontSize="15" Height="24" Width="126" Margin="0,20,0,0" Background="#FFF6ECEC"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0">
                 <Button Content="Add Day" Click="AddDay_Click" FontSize="9"/>
                 <Button Content="Add Month" Click="AddMonth_Click" FontSize="9"/>

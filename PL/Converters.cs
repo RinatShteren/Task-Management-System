@@ -23,4 +23,6 @@ class ConvertIdToContent : IValueConverter
     {
         return (int)value == 0 ? "Meneger" : "Worker";
     }
+
+
 }

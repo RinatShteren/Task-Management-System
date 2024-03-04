@@ -47,9 +47,9 @@ internal class Bl : IBl
     }
 
     // Method for advancing time by a specified number of hours
-    public void AdvanceTimeByHour(int hours)
+    public void AdvanceTimeByMonth(int month)
     {
-        s_Clock = s_Clock.AddHours(hours);
+        s_Clock = s_Clock.AddMonths(month);
     }
 
     // Method for initializing the time to the current system time

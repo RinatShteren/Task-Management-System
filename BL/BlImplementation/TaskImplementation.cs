@@ -88,7 +88,7 @@ internal class TaskImplementation : BlApi.ITask
         return task;
     }
 
-    public IEnumerable<TaskInList> ReadAll(Func<bool>? p = null)
+    public IEnumerable<TaskInList> ReadAll(Func<BO.Task, bool> p = null)
     {
         if (p == null)
         {
@@ -104,8 +104,8 @@ internal class TaskImplementation : BlApi.ITask
         }
         else
         {
-            IEnumerable<BO.TaskInList> tasks1 = (from DO.Task item in _dal.Task.ReadAll(null)
-                                                 where p()
+            IEnumerable<BO.TaskInList> tasks1 = (from DO.Task item in _dal.Task.ReadAll()
+                                                 where p(doToBo(item))
                                                  select new BO.TaskInList()
                                                  {
                                                      TaskId = item.TaskId,
@@ -120,25 +120,27 @@ internal class TaskImplementation : BlApi.ITask
 
 
     }
-    /*
-    private BO.Task doToBo(DO.Task doEng)
-    {
-        BO.Task boDep = new BO.Task()
-        {
-            TaskId = boDep.TaskId,
-            NickName = boDep.NickName,
-            Description = boDep.Description
-        };
-        //check if there is a task on track of the engineer
-        var task = _dal.Task.Read(item => item.EngineerID == doEng.EngineerID);
 
-        if (task != null) //if found 
+    public BO.Task doToBo(DO.Task doTask)
+    {
+        return new BO.Task()
         {
-            BO.TaskInEngineer temp = new BO.TaskInEngineer() { Id = task.TaskID, Name = task.Name };
-            boEng.Task = temp;
-        }
-        return boEng;
-    }*/
+            TaskId = doTask.TaskId,
+            NickName = doTask.NickName,
+            Description = doTask.Description,
+            RequiredLevel = (BO.EngineerLevel)doTask.RequiredLevel,
+            CreationDate = (DateTime)doTask.CreationDate!,
+            EstimatedDate = doTask.EstimatedDate,
+            StartDate = doTask.StartDate,
+            //PlanToFinish = getPlanToFinish(doTask),
+            DeadLine = doTask.DeadLine,
+            FinishtDate = doTask.FinishtDate,
+            NumOfDays = doTask.NumOfDays,
+            Product = doTask.Product,
+            Remarks = doTask.Remarks,
+        };
+    }
+   
     public void Delete(int id)
     {
 
@@ -280,6 +282,19 @@ internal class TaskImplementation : BlApi.ITask
             }
         }
       
+    }
+
+    public void EnginnerToTask()
+    {
+        var tasks = _dal.Task.ReadAll(task => task.EngineerId >0).ToDictionary(t => t.EngineerId, t => t);
+        var engineers = _dal.Engineer.ReadAll(eng => eng.Id > 0).ToList();
+        var CountOfEngineers = _dal.Engineer.ReadAll(eng => eng.Id > 0).Count().ToString();
+        foreach (var task in tasks.Values)
+        {
+            var engineerId = engineers[0];
+            _dal.Task.Update(task with { EngineerId = engineerId.Id});
+        }
+
     }
 
     public DateTime? GetEndTaskDate_DO(DO.Task task) => task?.StartDate!.Value.AddDays(task.NumOfDays.Value);

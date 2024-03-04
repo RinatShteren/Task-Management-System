@@ -134,7 +134,7 @@ namespace BlTest
                         Console.WriteLine(s_bl.Task.Read(idToRead));
                         break;
                     case "d":
-                        foreach (var item in s_bl.Task.ReadAll())
+                        foreach (var item in s_bl.Task.ReadAll(a=>a.TaskId>0))
                             Console.WriteLine(item);
 
                         break;
@@ -274,7 +274,7 @@ namespace BlTest
                 s_bl.Schedule.StartProject = startProject;
 
                 s_bl.Task.CalculateCloserStartDateForAllTasks();
-
+                s_bl.Task.EnginnerToTask();
  
               //  Console.WriteLine(s_bl.Task.Read(item.TaskId));
 

@@ -19,10 +19,16 @@ class ConvertIdToContent : IValueConverter
     {
         throw new NotImplementedException();
     }
-    public object ConvertMenegerOrWorker(object value, Type targetType, object parameter, CultureInfo culture)
+}
+class ConvertToString : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return (int)value == 0 ? "Meneger" : "Worker";
+        return (string)value.ToString();
     }
 
-
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
 }

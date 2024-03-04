@@ -5,14 +5,19 @@ using BlApi;
 internal class Bl : IBl
 {
 
-    public IEngineer Engineer => new EngineerImplementation();
+    public IEngineer Engineer => new EngineerImplementation(this);
 
     public ITask Task => new TaskImplementation(this);
 
-    public ISchedule Schedule => new ScheduleImplementation();
+    public ISchedule Schedule => new ScheduleImplementation(this);
     public IUserLogin UserLogin => new UserLoginImplementation();
 
-    public void InitalizingBD() => DalTest.Initialization.Do();
+    public void InitalizingBD()
+    {
+        DalTest.Initialization.Do();
+        InitializeTime(); // Initialize the time to the current system time
+
+    }
 
     public void ResetDB() => DalTest.Initialization.Reset();
 
@@ -26,12 +31,6 @@ internal class Bl : IBl
     {
         get { return s_Clock; }
         private set { s_Clock = value; }
-    }
-
-    // Constructor to initialize the clock
-    public Bl()
-    {
-        InitializeTime(); // Initialize the time to the current system time
     }
 
     // Method for advancing time by a specified number of years

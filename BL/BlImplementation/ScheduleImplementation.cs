@@ -1,4 +1,5 @@
 ﻿
+using BlApi;
 using BO;
 using DalApi;
 
@@ -6,8 +7,11 @@ namespace BlImplementation;
 
 internal class ScheduleImplementation : BlApi.ISchedule
 {
-    private readonly IDal _dal = Factory.Get;
+    private readonly IDal _dal = DalApi.Factory.Get;
     private DateTime? _startProject;
+
+    private readonly IBl _bl;
+    internal ScheduleImplementation(IBl bl) => _bl = bl;
     public DateTime? StartProject
     {
         get { return _dal.Schedule.StartProject; }

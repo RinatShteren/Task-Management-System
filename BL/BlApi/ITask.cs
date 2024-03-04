@@ -8,6 +8,7 @@ public interface ITask
 {
     public int Create(BO.Task boTask);
     public BO.Task? Read(int id);
+
     public IEnumerable<TaskInList> ReadAll(Func<BO.Task, bool> p = null);
     public void Delete(int id);
     public void Update(BO.Task upTask);

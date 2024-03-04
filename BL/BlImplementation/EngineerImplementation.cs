@@ -7,6 +7,10 @@ internal class EngineerImplementation : IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
+    private readonly IBl _bl;
+    internal EngineerImplementation(IBl bl) => _bl = bl;
+
+
     public int AddEngineer(BO.Engineer boEngineer)
     {
         DO.Engineer doEngineer = new DO.Engineer
@@ -119,7 +123,7 @@ internal class EngineerImplementation : IEngineer
     {
         /*all task that fit to the current id  and to to the start date*/
         var task = _dal.Task.Read(item => item.EngineerId == id
-        && item.StartDate < DateTime.Now);
+        && item.StartDate < _bl.Clock);
         try
         {
             if (task == null)

@@ -59,27 +59,7 @@ namespace PL
 
             }
 
-            //}
-
-
-
-        }
-
-
-
-        private void btnEngineer_Click(object sender, RoutedEventArgs e)
-        { new EngineerListWindow().Show(); }
-
-        private void btnInit_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Are you shoure you want to initional data?");
-            s_bl.InitalizingBD();
-        }
-        private void btnReset_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Are you shoure you want to reset data?");
-            s_bl.ResetDB();
-        }
+        } 
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -102,18 +82,23 @@ namespace PL
 
         private void AddDay_Click(object sender, RoutedEventArgs e)
         {
-            // Call BL method to increment hour
-           // BlApi.Factory.Get().AdvanceTimeByMonth(s_bl, CurrentTime);
+            // Call BL method to increment day
+            s_bl.AdvanceTimeByDay(1);
         }
 
         private void AddMonth_Click(object sender, RoutedEventArgs e)
         {
-
+            s_bl.AdvanceTimeByMonth(1);
         }
 
         private void AddYear_Click(object sender, RoutedEventArgs e)
         {
+            s_bl.AdvanceTimeByYear(1);
+        }
 
+        private void InitializationClock_Click(object sender, RoutedEventArgs e)
+        {
+            s_bl.InitializeTime();
         }
     }
 }

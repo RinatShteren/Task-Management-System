@@ -12,13 +12,11 @@
     <Grid>
 
         <!--Hendle Engineer -->
-        <Image Source="Images/a.png" HorizontalAlignment="Center" Height="414" Margin="0,20,0,0" VerticalAlignment="Top" Width="784" Stretch="Fill"/>
-        <Button Content="Hendle Engineer"  FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="10,71,0,0" VerticalAlignment="Top" Height="82" Width="182"
-        Click="btnEngineer_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}"/>
-        <Button Content="Initalization"  FontFamily="Comic Sans MS" HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="182"
-        Click="btnInit_Click" Margin="10,192,0,0" FontWeight="Bold" FontSize="20" BorderBrush="{x:Null}"/>
-        <Button Content="Reset" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="10,320,0,0" VerticalAlignment="Top" Height="82" Width="182"
-        Click="btnReset_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}"/>
+        <Image Source="Images/a.png" HorizontalAlignment="Left" Height="414" Margin="6,0,0,0" VerticalAlignment="Center" Width="784" Stretch="Fill"/>
+        <Button Content="Init Data"  FontFamily="Comic Sans MS" HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="182"
+Click="btnInit_Click" Margin="10,192,0,0" FontWeight="Bold" FontSize="20" BorderBrush="{x:Null}"/>
+        <Button Content="Reset Data" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="10,320,0,0" VerticalAlignment="Top" Height="82" Width="182"
+Click="btnReset_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}"/>
 
         <!-- Clock display -->
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,51,0,322" Width="136" >

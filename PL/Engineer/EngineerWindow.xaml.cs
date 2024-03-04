@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DalApi;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,14 +21,16 @@ namespace PL.Engineer
     /// </summary>
     public partial class EngineerWindow : Window
     {
+        List<BO.Task> listPerson;
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
-        public static readonly DependencyProperty CurrentTaskProperty =
-          DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(EngineerWindow), new PropertyMetadata(null));
-        public BO.Task CurrentTask
+        public static readonly DependencyProperty observeListTaskProperty =
+            DependencyProperty.Register("observeListPerson", typeof(ObservableCollection<BO.Task>), typeof(MainWindow), new PropertyMetadata(null));
+
+        public ObservableCollection<BO.Task> observeListPerson
         {
-            get { return (BO.Task)GetValue(CurrentTaskProperty); }
-            set { SetValue(CurrentTaskProperty, value); }
+            get { return (ObservableCollection<BO.Task>)GetValue(observeListTaskProperty); }
+            set { SetValue(observeListTaskProperty, value); }
         }
 
         public static readonly DependencyProperty CurrentEngineerProperty =
@@ -41,7 +45,8 @@ namespace PL.Engineer
         {
             InitializeComponent();
             CurrentEngineer = s_bl.Engineer.Read(GetId);
-            //CurrentTask = s_bl.Task.
+
+          //  observeListPerson = s_bl.Task.ReadAll(a => a.TaskId > 0);
         }
     }
 }

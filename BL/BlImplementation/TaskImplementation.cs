@@ -12,6 +12,8 @@ internal class TaskImplementation : BlApi.ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
     private readonly ISchedule _schedule;
+    private readonly IBl _bl;
+    internal TaskImplementation(IBl bl) => _bl = bl;
 
     public TaskImplementation(ISchedule schedule) => _schedule = schedule;
  
@@ -21,7 +23,7 @@ internal class TaskImplementation : BlApi.ITask
         if (_schedule.GetStage() != BO.Stage.Planning)  // Make sure the project is in the planning stage
             throw new BO.BlNotFitSchedule("Can not add tasks after Project Planning phase");
 
-        DO.Task doTask = new DO.Task(boTask.TaskId, boTask.NickName, boTask.Description, DateTime.Now) with
+        DO.Task doTask = new DO.Task(boTask.TaskId, boTask.NickName, boTask.Description, _bl.Clock) with
         { RequiredLevel = (DO.EngineerLevel)boTask.RequiredLevel, NumOfDays = boTask.NumOfDays }; //?
         try
         {

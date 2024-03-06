@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PL.Admin
+namespace PL
 {
     /// <summary>
     /// Interaction logic for Gantt.xaml
@@ -35,14 +35,13 @@ namespace PL.Admin
 
         public Gantt()
         {
-           // InitializeComponent();
+            InitializeComponent();
             ListOfTasks = new List<BO.Task>();
 
             List<BO.TaskInList> listT = s_bl.Task.ReadAll().ToList();
             ListOfTasks = (from item in listT
                            select s_bl.Task.Read(item.TaskId)).ToList();
         }
-
 
     }
 }

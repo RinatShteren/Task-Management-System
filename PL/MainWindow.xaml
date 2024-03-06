@@ -17,8 +17,10 @@
 Click="btnInit_Click" Margin="10,192,0,0" FontWeight="Bold" FontSize="20" BorderBrush="{x:Null}"/>
         <Button Content="Reset Data" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="10,320,0,0" VerticalAlignment="Top" Height="82" Width="182"
 Click="btnReset_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}"/>
+        <Button Content="Hendle Engineer"  FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="10,71,0,0" VerticalAlignment="Top" Height="82" Width="182"
+Click="btnEngineer_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}"/>
 
-        <!-- Clock display -->
+        <!-- Clock display --><!--
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,51,0,322" Width="136">
             <Label Content="" HorizontalAlignment="Center" FontSize="15" Height="24" Width="126" Margin="0,20,0,0" Background="#FFF6ECEC"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0">
@@ -26,7 +28,7 @@ Click="btnReset_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}"/>
                 <Button Content="Add Month" Click="AddMonth_Click" FontSize="9"/>
                 <Button Content="Add Year" Click="AddYear_Click" FontSize="9" />
             </StackPanel>
-        </StackPanel>
+        </StackPanel>-->
 
         <Grid Margin="446,51,54,83" Width="300" Height="300">
             <Grid.RowDefinitions>

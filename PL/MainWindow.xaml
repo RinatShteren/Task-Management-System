@@ -14,7 +14,7 @@
         <!-- Clock display -->
         <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="-15,10,0,322" Width="278" >
             <Label  Content="{Binding CurrentTime, Converter={StaticResource ConvertToStringKey}, Mode=OneTime}" FontSize="15" Height="24" Width="126" Background="#FFF6ECEC"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,1,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0">
                 <Button Content="Add Day" Click="AddDay_Click" FontSize="9"/>
                 <Button Content="Add Month" Click="AddMonth_Click" FontSize="9"/>
                 <Button Content="Add Year" Click="AddYear_Click" FontSize="9" />

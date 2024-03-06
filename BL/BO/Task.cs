@@ -26,5 +26,5 @@ public class Task
     public BO.EngineerInTask Engineer { get; set; }
 
     public List<BO.TaskInList> Dependencies { get; set; } //
-
+    public BO.Stage Stage { get; set; }
 }

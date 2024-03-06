@@ -42,10 +42,12 @@ namespace PL
             s_bl.ResetDB();
         }
 
-        private void btnTask_Click(object sender, RoutedEventArgs e)
+        private void btnList_Click(object sender, RoutedEventArgs e)
         {
             new TaskForListWindow().Show();
         }
+
+  
 
         ////private void AutoSchedule_Click(object sender, RoutedEventArgs e)
         ////{

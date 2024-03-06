@@ -24,7 +24,7 @@ internal class TaskImplementation : BlApi.ITask
             throw new BO.BlNotFitSchedule("Can not add tasks after Project Planning phase");
 
         DO.Task doTask = new DO.Task(boTask.TaskId, boTask.NickName, boTask.Description, _bl.Clock) with
-        { RequiredLevel = (DO.EngineerLevel)boTask.RequiredLevel, NumOfDays = boTask.NumOfDays }; //?
+        { RequiredLevel = (DO.EngineerLevel)boTask.RequiredLevel, NumOfDays = boTask.NumOfDays}; //?
         try
         {
             if (boTask.TaskId < 0)
@@ -86,7 +86,7 @@ internal class TaskImplementation : BlApi.ITask
 
         task.DeadLine = GetEndTaskDate_BO(task);
         task.Dependencies = GetLinks(task);
-
+        task.Stage = _schedule.GetStage();
         return task;
     }
 
@@ -167,7 +167,7 @@ internal class TaskImplementation : BlApi.ITask
         }
     }
 
-    public void Update(BO.Task upTask)
+    public void Update(BO.Task upTask) 
     {
 
         if (upTask.TaskId <= 0)

@@ -28,7 +28,7 @@
         </Grid>
         <!--List of tasks-->
 
-        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding TaskList}">
+        <ListView x:Name="TaskListView" Margin="5" Grid.Row="1" ItemsSource="{Binding TaskList}" MouseDoubleClick="ListView_MouseDoubleClick">
 
             <ListView.View>
                 <GridView>

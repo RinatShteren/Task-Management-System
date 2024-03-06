@@ -43,9 +43,23 @@ namespace PL.Task
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             TaskList = ((Stage == BO.Stage.Planning) ?   //?? 
-               s_bl?.Engineer.ReadAll(null)! : s_bl?.Engineer.ReadAll(tsk => tsk.Stage == Planning)!)  //??
-               .OrderBy(t => t.Id); // sort by ID 
+               s_bl?.Task.ReadAll(null)! : s_bl?.Task.ReadAll(tsk => tsk.Stage == BO.Stage.Planning)!)  //??
+               .OrderBy(t => t.TaskId); // sort by ID 
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            // Retrieve the selected item
+            var selectedTask = (BO.TaskInList)TaskListView.SelectedItem;
+
+            // Open TaskWindow and pass the selected task
+            TaskWindow taskWindow = new TaskWindow(selectedTask);
+            taskWindow.ShowDialog();
+        }
     }
 }

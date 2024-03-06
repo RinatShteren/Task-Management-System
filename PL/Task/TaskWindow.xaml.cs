@@ -17,11 +17,32 @@ namespace PL.Task
     /// <summary>
     /// Interaction logic for Task.xaml
     /// </summary>
-    public partial class Task : Window
+    public partial class TaskWindow : Window
     {
-        public Task()
+        private BO.TaskInList selectedTask;
+
+        public TaskWindow(BO.TaskInList task)
         {
             InitializeComponent();
+
+            this.selectedTask = task;
+
+            DataContext = this; // Set DataContext to this instance of TaskWindow
+
+        }
+
+        private void InitializeComponent()
+        {
+            throw new NotImplementedException();
         }
     }
+    //    public BO.Task Task
+    //    {
+    //        get { return (BO.Task)GetValue(CurrentTaskProperty); }
+    //        set { SetValue(CurrentTaskProperty, value); }
+    //    }
+
+    //    public static readonly DependencyProperty CurrentTaskProperty =
+    //        DependencyProperty.Register("Task", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
+    
 }

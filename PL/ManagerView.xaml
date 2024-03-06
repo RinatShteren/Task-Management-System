@@ -8,7 +8,6 @@
         Title="ManagerView" Height="450" Width="800">
     <Grid>
 
-        <!--Hendle Engineer -->
         <Image Source="Images/a.png" HorizontalAlignment="Left" Height="414" Margin="6,0,0,0" VerticalAlignment="Center" Width="784" Stretch="Fill"/>
         <Button Content="Init Data"  FontFamily="Comic Sans MS" HorizontalAlignment="Left" VerticalAlignment="Top" Height="82" Width="182"
 Click="btnInit_Click" Margin="10,192,0,0" FontWeight="Bold" FontSize="20" BorderBrush="{x:Null}"/>
@@ -18,6 +17,8 @@ Click="btnReset_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}"/>
 Click="btnList_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}"/>
         <Button Content="TaskList" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="309,81,0,0" VerticalAlignment="Top" Height="82" Width="182"
 Click="btnTask_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}"/>
+        <Button Content="Automatic schedule" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="309,192,0,0" VerticalAlignment="Top" Height="82" Width="182"
+Click="AutoSchedule_Click" FontSize="17" FontWeight="Bold" BorderBrush="{x:Null}"/>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="777*"/>
             <ColumnDefinition Width="23*"/>

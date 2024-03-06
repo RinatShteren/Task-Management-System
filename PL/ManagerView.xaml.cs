@@ -47,9 +47,9 @@ namespace PL
             new TaskForListWindow().Show();
         }
 
-        private void btnList_Click(object sender, RoutedEventArgs e)
-        {
+        ////private void AutoSchedule_Click(object sender, RoutedEventArgs e)
+        ////{
 
-        }
+        ////}
     }
 }

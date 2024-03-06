@@ -7,6 +7,6 @@
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
         <local:ConvertToString x:Key="ConvertToStringKey"/>
         <local:EngineerLevelCollection x:Key="EngineerLevelCollectionKey" />
-
+        <local:StageCollection x:Key="StageCollectionKey" />
     </Application.Resources>
 </Application>

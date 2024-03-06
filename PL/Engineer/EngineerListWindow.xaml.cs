@@ -34,12 +34,13 @@ namespace PL.Engineer
             get { return (IEnumerable<BO.Engineer>)GetValue(EngineerListProperty); }
             set { SetValue(EngineerListProperty, value); }
         }
-       
-       public BO.EngineerLevel EngineerLevel { get; set; } = BO.EngineerLevel.Beginner; //??
+
+
 
         public static readonly DependencyProperty EngineerListProperty =
             DependencyProperty.Register("EngineerList", typeof(IEnumerable<BO.Engineer>), typeof(EngineerListWindow), new PropertyMetadata(null));
 
+        public BO.EngineerLevel EngineerLevel { get; set; } = BO.EngineerLevel.Beginner;
 
         //option for the user to sort the list of engineers according to their level
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -54,17 +55,17 @@ namespace PL.Engineer
             new EngineerView().ShowDialog();
             UpdateEngineerList();
         }
-       
+
         private void ListViewDoubleClick(object sender, MouseButtonEventArgs e)
         {
             BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
-           // if (engineer == null)
-               // throw new Excption("engineer is null");
+            // if (engineer == null)
+            // throw new Excption("engineer is null");
             new EngineerView(engineer!.Id).ShowDialog();
             UpdateEngineerList();
         }
 
-        
+
 
         void UpdateEngineerList()
         {

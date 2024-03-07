@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PL
+namespace PL.Admin
 {
     /// <summary>
     /// Interaction logic for ManagerView.xaml
@@ -47,11 +47,16 @@ namespace PL
             new TaskForListWindow().Show();
         }
 
-  
+        private void btnTask_Click(object sender, RoutedEventArgs e)
+        {
+            new TaskForListWindow().Show();
+        }
 
-        ////private void AutoSchedule_Click(object sender, RoutedEventArgs e)
-        ////{
-
-        ////}
+        private void AutoSchedule_Click(object sender, RoutedEventArgs e)
+        {
+            s_bl.Task.CalculateCloserStartDateForAllTasks();
+            s_bl.Task.EnginnerToTask();
+        }
     }
 }
+

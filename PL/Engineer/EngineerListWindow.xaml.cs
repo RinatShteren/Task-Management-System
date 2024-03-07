@@ -65,8 +65,6 @@ namespace PL.Engineer
             UpdateEngineerList();
         }
 
-
-
         void UpdateEngineerList()
         {
 

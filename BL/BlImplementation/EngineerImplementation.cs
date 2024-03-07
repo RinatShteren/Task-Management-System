@@ -13,6 +13,10 @@ internal class EngineerImplementation : BlApi.IEngineer
 
     private readonly BlApi.ITask _task;
 
+    private readonly IBl _bl;
+    internal EngineerImplementation(IBl bl) => _bl = bl;
+
+
     public EngineerImplementation(BlApi.ITask task) => _task = task;
    
     public int AddEngineer(BO.Engineer boEngineer)

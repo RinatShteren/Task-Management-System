@@ -57,4 +57,8 @@ internal class Bl : IBl
         s_Clock = DateTime.Now;
     }
 
+    public void AdvanceTimeByHour(int hours)
+    {
+        throw new NotImplementedException();
+    }
 }

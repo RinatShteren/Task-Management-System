@@ -11,10 +11,16 @@
 	  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 	  <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 	  <UseCommonOutputDirectory>true</UseCommonOutputDirectory>
-  </PropertyGroup>
 
-  <ItemGroup>
-	  <ProjectReference Include="..\BL\BL.csproj" />
-  </ItemGroup>
+  </PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\BL\BL.csproj" />
+		<ProjectReference Include="..\DalTest\Daltest.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Engineer\" />
+	  <Folder Include="Images\" />
+	  <Folder Include="Task\" />
+	</ItemGroup>
 
 </Project>

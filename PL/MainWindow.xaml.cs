@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace PL
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
 
@@ -35,7 +32,7 @@ namespace PL
             DependencyProperty.Register(nameof(User), typeof(User), typeof(MainWindow), new PropertyMetadata(new User()));
 
 
-        //public MainWindow() => InitializeComponent();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -51,7 +48,7 @@ namespace PL
 
             if (User.Password == 1234 && User.UserId == 111111111)
             {
-                new EngineerListWindow().Show();
+                new ManagerView().Show();
             }
             else
             {
@@ -60,7 +57,7 @@ namespace PL
 
             }
 
-        } 
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

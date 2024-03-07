@@ -1,0 +1,95 @@
+﻿<Window x:Class="PL.Task.TaskView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.Task"
+        mc:Ignorable="d"
+        Title="TaskView" Height="450" Width="800"
+        DataContext="{Binding CurrentTask, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+    <Grid>
+        <Label Content="TaskId" HorizontalAlignment="Left" Margin="122,100,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
+        <Label Content="NickName" HorizontalAlignment="Left" Height="25" Margin="122,130,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
+        <Label Content="CreationDate" HorizontalAlignment="Left" Height="25" Margin="122,160,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
+        <Label Content="EstimatedDate" HorizontalAlignment="Left" Height="25" Margin="122,190,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
+        <Label Content="StartDate" HorizontalAlignment="Left" Height="25" Margin="122,220,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
+        <Label Content="NumOfDays" HorizontalAlignment="Left" Margin="122,250,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
+        <Label Content="DeadLine" HorizontalAlignment="Left" Margin="122,280,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
+        <Label Content="FinishtDate" HorizontalAlignment="Left" Margin="122,310,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
+        <Label Content="Product" HorizontalAlignment="Left" Margin="122,340,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
+        <Label Content="Remarks" HorizontalAlignment="Left" Margin="430,100,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
+        <Label Content="EngineerId" HorizontalAlignment="Left" Margin="430,130,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
+        <Label Content="RequiredLevel" HorizontalAlignment="Left" Margin="430,160,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
+
+
+
+
+        <TextBox Grid.Column="1" 
+   Text="{Binding TaskId, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
+   HorizontalAlignment="Left" Margin="260,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
+
+        <TextBox Grid.Column="1" 
+   Text="{Binding NickName, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
+  IsEnabled="False" HorizontalAlignment="Left" Margin="260,130,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="18" />
+
+        <DatePicker Grid.Column="1" 
+   Text="{Binding CreationDate, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
+   HorizontalAlignment="Left" Margin="260,160,0,0" VerticalAlignment="Top" Width="120" Height="18"/>
+
+        <DatePicker Grid.Column="1" 
+  Text="{Binding EstimatedDate, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
+  HorizontalAlignment="Left" Margin="260,190,0,0" VerticalAlignment="Top" Width="120" Height="18"/>
+
+        <DatePicker Grid.Column="1" 
+  Text="{Binding StartDate, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
+  HorizontalAlignment="Left" Margin="260,220,0,0" VerticalAlignment="Top" Width="120" Height="18"/>
+
+
+        <TextBox Grid.Column="1"
+   Text="{Binding NumOfDays, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
+   IsEnabled="False" HorizontalAlignment="Left" Margin="260,250,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="18" />
+
+
+        <DatePicker Grid.Column="1" 
+  Text="{Binding DeadLine, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
+   HorizontalAlignment="Left" Margin="260,280,0,0" VerticalAlignment="Top" Width="120" Height="18"/>
+
+        <DatePicker Grid.Column="1" 
+  Text="{Binding FinishtDate, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
+  HorizontalAlignment="Left" Margin="260,310,0,0" VerticalAlignment="Top" Width="120" Height="18"/>
+
+
+        <TextBox Grid.Column="1" 
+   Text="{Binding Product, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
+   HorizontalAlignment="Left" Margin="260,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
+
+        <TextBox Grid.Column="1" 
+   Text="{Binding Remarks, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
+   HorizontalAlignment="Left" Margin="550,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" />
+
+
+        <TextBox Grid.Column="1" 
+   Text="{Binding EngineerId, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
+   HorizontalAlignment="Left" Margin="550,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" />
+
+
+        <ComboBox HorizontalAlignment="Left" Margin="550,160,0,0"  VerticalAlignment="Top" Width="120"
+   ItemsSource="{Binding  Source={StaticResource EngineerLevelCollectionKey}}"
+   SelectedValue="{Binding Level, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}" Grid.ColumnSpan="2" Height="22">
+        </ComboBox>
+
+        <ListView Name="ListDependencies" ItemsSource="{Binding Dependencies}" Margin="441,217,21,15">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button 
+     Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" 
+     HorizontalAlignment="Left" Margin="260,384,0,0"  VerticalAlignment="Top" Padding="5" 
+     Click="btnAddUpdate_Click" FontFamily="Comic Sans MS" Width="120" Height="35"/>        
+
+
+    </Grid>
+</Window>

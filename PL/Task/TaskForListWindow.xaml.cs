@@ -36,5 +36,30 @@ namespace PL.Task
         public static readonly DependencyProperty TaskListProperty =
             DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.TaskInList>),
                 typeof(TaskForListWindow), new PropertyMetadata(null));
+
+        public BO.Stage Stage { get; set; } = BO.Stage.Planning;
+
+        //option for the user to sort the list of tasks according to their stage
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TaskList = ((Stage == BO.Stage.Planning) ?   //?? 
+               s_bl?.Task.ReadAll(null)! : s_bl?.Task.ReadAll(tsk => tsk.Stage == BO.Stage.Planning)!)  //??
+               .OrderBy(t => t.TaskId); // sort by ID 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            // Retrieve the selected item
+            var selectedTask = (BO.TaskInList)TaskListView.SelectedItem;
+
+            // Open TaskWindow and pass the selected task
+            TaskWindow taskWindow = new TaskWindow(selectedTask);
+            taskWindow.ShowDialog();
+        }
     }
 }

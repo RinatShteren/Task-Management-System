@@ -11,25 +11,28 @@ using System.Reflection.Metadata.Ecma335;
 public class GanttImplementation : BlApi.IGantt
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
+    private readonly IBl _bl;
+    internal GanttImplementation(IBl bl) => _bl = bl;
 
-   /* public BO.Gantt? Read(int id)
-    {
-        DO.Task? doTask = _dal.Task.Read(id);
-        DO.Task? doEng = _dal.Task.Read(id);
 
-        BO.Task task = new BO.Task()
-        {
-            TaskId=_dal.Task
-         TaskName;
-         EngineerId;
-         EngineerName;
-         Description;
-         StartDate;
-    };
+    /* public BO.Gantt? Read(int id)
+     {
+         DO.Task? doTask = _dal.Task.Read(id);
+         DO.Task? doEng = _dal.Task.Read(id);
 
-      
-        return task;
-    }*/
+         BO.Task task = new BO.Task()
+         {
+             TaskId=_dal.Task
+          TaskName;
+          EngineerId;
+          EngineerName;
+          Description;
+          StartDate;
+     };
+
+
+         return task;
+     }*/
 
     public IEnumerable<Gantt> ReadAll(Func<Gantt, bool> p = null)
     {

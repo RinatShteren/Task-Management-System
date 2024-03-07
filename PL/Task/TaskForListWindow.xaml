@@ -23,10 +23,12 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Label" HorizontalAlignment="Left" Margin="64,22,0,0" VerticalAlignment="Top" Grid.Column="0"/>
+            <ComboBox SelectedValue="{Binding Stage, Mode=TwoWay}"
+                      ItemsSource="{Binding Source={StaticResource StageCollectionKey}}"  Grid.Column="1" SelectionChanged="ComboBox_SelectionChanged" Grid.ColumnSpan="3" Margin="10,21,-10,-21"/>
         </Grid>
         <!--List of tasks-->
 
-        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding TaskList}">
+        <ListView x:Name="TaskListView" Margin="5" Grid.Row="1" ItemsSource="{Binding TaskList}" MouseDoubleClick="ListView_MouseDoubleClick">
 
             <ListView.View>
                 <GridView>
@@ -34,6 +36,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"/>
+        <Button Content="Add" Grid.Row="1" HorizontalAlignment="Center" Height="50" Width="100" Margin="0,356,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Click="Button_Click"/>
     </Grid>
 </Window>

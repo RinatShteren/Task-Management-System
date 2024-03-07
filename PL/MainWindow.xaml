@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
-        DataContext="{Binding User, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
 
     <Grid>
@@ -17,10 +17,8 @@
 Click="btnInit_Click" Margin="10,192,0,0" FontWeight="Bold" FontSize="20" BorderBrush="{x:Null}"/>
         <Button Content="Reset Data" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="10,320,0,0" VerticalAlignment="Top" Height="82" Width="182"
 Click="btnReset_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}"/>
-        <Button Content="Hendle Engineer"  FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="10,71,0,0" VerticalAlignment="Top" Height="82" Width="182"
-Click="btnEngineer_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}"/>
 
-        <!-- Clock display --><!--
+        <!-- Clock display -->
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,51,0,322" Width="136">
             <Label Content="" HorizontalAlignment="Center" FontSize="15" Height="24" Width="126" Margin="0,20,0,0" Background="#FFF6ECEC"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0">
@@ -28,7 +26,8 @@ Click="btnEngineer_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}"
                 <Button Content="Add Month" Click="AddMonth_Click" FontSize="9"/>
                 <Button Content="Add Year" Click="AddYear_Click" FontSize="9" />
             </StackPanel>
-        </StackPanel>-->
+            <Button Content="Initialization Clock" Click="InitializationClock_Click" FontSize="9" Width="126" />
+        </StackPanel>
 
         <Grid Margin="446,51,54,83" Width="300" Height="300">
             <Grid.RowDefinitions>
@@ -47,13 +46,13 @@ Click="btnEngineer_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}"
             </Grid.ColumnDefinitions>
             <Button Content="log in" HorizontalAlignment="Right" Margin="0,12,41,0" VerticalAlignment="Top" Width="120" Height="20"
                  Click="btnOPEN_Click" FontFamily="Comic Sans MS" Grid.Row="3" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
-            <TextBox Name="UserIdBox" Text="{Binding UserId, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
+            <TextBox Name="UserIdBox" Text="{Binding User.UserId, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
                    HorizontalAlignment="Left" Margin="10,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"
                    MaxLength ="9" Grid.ColumnSpan="2" Grid.Row="2" Grid.Column="3"/>
             <TextBox HorizontalAlignment="Left" Height="18" Margin="49,42,0,0" TextWrapping="Wrap" Text="ID:" VerticalAlignment="Top" Width="72" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"/>
             <TextBox HorizontalAlignment="Left" Height="16" Margin="49,66,0,0" TextWrapping="Wrap" Text="PASSWORD:" 
                       VerticalAlignment="Top" Width="72" Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="2"/>
-            <TextBox  Text="{Binding Password, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
+            <TextBox  Text="{Binding User.Password, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
                       Grid.Column="3" HorizontalAlignment="Left" Margin="10,64,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2" UndoLimit="150" Grid.RowSpan="2"/>
 
         </Grid>

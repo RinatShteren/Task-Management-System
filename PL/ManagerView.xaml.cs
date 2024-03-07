@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PL.Engineer;
+using PL.Task;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,15 +21,37 @@ namespace PL
     /// </summary>
     public partial class ManagerView : Window
     {
+        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public ManagerView()
         {
             InitializeComponent();
         }
 
-
+        private void btnInit_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Are you shoure you want to initional data?");
+            s_bl.InitalizingBD();
+        }
         private void EngineerListButton(object sender, RoutedEventArgs e)
         {
-
+            new EngineerListWindow().Show();
         }
+        private void btnReset_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Are you shoure you want to reset data?");
+            s_bl.ResetDB();
+        }
+
+        private void btnList_Click(object sender, RoutedEventArgs e)
+        {
+            new TaskForListWindow().Show();
+        }
+
+  
+
+        ////private void AutoSchedule_Click(object sender, RoutedEventArgs e)
+        ////{
+
+        ////}
     }
 }

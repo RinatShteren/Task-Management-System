@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -72,7 +73,12 @@ namespace PL.Engineer
                     s_bl.Engineer.Update(CurrentEngineer);
                 }
             }
-            catch(Exception ex)
+
+            catch (BO.BlNotVaildException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch(BO.BlDoesNotExistException ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }

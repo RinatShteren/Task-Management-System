@@ -129,7 +129,7 @@ internal class EngineerImplementation : BlApi.IEngineer
     {
         /*all task that fit to the current id  and to to the start date*/
         var task = _dal.Task.Read(item => item.EngineerId == id
-        && item.StartDate < DateTime.Now);
+        && item.StartDate < _bl.Clock);
         try
         {
             if (task == null)

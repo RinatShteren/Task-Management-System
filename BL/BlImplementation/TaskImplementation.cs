@@ -82,7 +82,7 @@ internal class TaskImplementation : BlApi.ITask
 
         task.DeadLine = GetEndTaskDate_BO(task);
         task.Dependencies = GetLinks(task);
-
+        task.Stage = _schedule.GetStage();
         return task;
     }
 
@@ -180,7 +180,7 @@ internal class TaskImplementation : BlApi.ITask
         }
     }
 
-    public void Update(BO.Task upTask)
+    public void Update(BO.Task upTask) 
     {
 
         if (upTask.TaskId <= 0)

@@ -15,6 +15,13 @@ internal class EngineerLevelCollection : IEnumerable
 
     public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
 }
+
+internal class StageCollection : IEnumerable
+{
+    static readonly IEnumerable<BO.Stage> s_enums =
+(Enum.GetValues(typeof(BO.Stage)) as IEnumerable<BO.Stage>)!;
+    public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
+}
 /*
 public enum EngineerLevel
 {

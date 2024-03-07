@@ -114,7 +114,7 @@ namespace BlTest
                            
                             NickName = name,
                             Description = descreption,
-                            CreationDate = DateTime.Now,
+                            CreationDate = s_bl.Clock,
                             Dependencies = prevTasks,
                             NumOfDays = duration,
                             Product = product,
@@ -165,7 +165,7 @@ namespace BlTest
                             TaskId = id,
                             NickName = name,
                             Description = descreption,
-                            CreationDate = DateTime.Now,
+                            CreationDate = s_bl.Clock,
                             Dependencies = prevTasks,
                             NumOfDays = duration,
                             Product = product,

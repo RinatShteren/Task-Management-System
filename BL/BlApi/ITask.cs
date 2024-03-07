@@ -8,9 +8,11 @@ public interface ITask
 {
     public int Create(BO.Task boTask);
     public BO.Task? Read(int id);
-    public IEnumerable<TaskInList> ReadAll(Func<BO.Task, bool> p = null);
+    public IEnumerable<TaskInList> ReadAll(Func<BO.TaskInList, bool> filter = null!);
     public void Delete(int id);
     public void Update(BO.Task upTask);
+    void AssginTaskToEngineer(BO.Engineer engineer);
+    IEnumerable<BO.TaskInList> ReadAllOptionalTasksForEngineer(BO.Engineer engineer);
 
     public List<BO.TaskInList> GetLinks(BO.Task task);
    
@@ -25,4 +27,5 @@ public interface ITask
     public BO.Task doToBo(DO.Task doTask);
 
     public void EnginnerToTask();
+ 
 }

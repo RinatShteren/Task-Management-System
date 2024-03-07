@@ -18,8 +18,10 @@ public class Task
     public string? Product { get; set; }
     public string? Remarks { get; set; }//
     public int EngineerId { get; set; }//
+
+    public int Difficulty { get; set; }
     //public EngineerLevel? RequiredLevel { get; set; }
- 
+
     /// <summary>
     /// 
     /// </summary>

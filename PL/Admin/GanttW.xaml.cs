@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,14 +12,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PL
+namespace PL.Admin
 {
     /// <summary>
-    /// Interaction logic for Gantt.xaml
+    /// Interaction logic for GanttW.xaml
     /// </summary>
-    public partial class Gantt : Window
+    public partial class GanttW : Window
     {
-
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public List<BO.Task> ListOfTasks
         {
@@ -30,10 +28,9 @@ namespace PL
 
         // Using a DependencyProperty as the backing store for ListOfTasks.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ListOfTasksProperty =
-            DependencyProperty.Register("ListOfTasks", typeof(List<BO.Task>), typeof(Gantt), new PropertyMetadata(null));
+            DependencyProperty.Register("ListOfTasks", typeof(List<BO.Task>), typeof(GanttW), new PropertyMetadata(null));
 
-
-        public Gantt()
+        public GanttW()
         {
             InitializeComponent();
             ListOfTasks = new List<BO.Task>();
@@ -42,6 +39,5 @@ namespace PL
             ListOfTasks = (from item in listT
                            select s_bl.Task.Read(item.TaskId)).ToList();
         }
-
     }
 }

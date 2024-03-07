@@ -11,7 +11,9 @@ using System.Xml.Linq;
 
 internal class EngineerImplementation : IEngineer
 {
-    readonly string x_XML_engineers = "engineers";
+    readonly string _xmlEngineer = "engineers";
+    readonly string _xmlUser = "users";
+
     /// <summary>
     /// The method  create a new element and save it into the XML
     /// if item alredy exsist , the function throw exeption
@@ -25,7 +27,7 @@ internal class EngineerImplementation : IEngineer
         {
             throw new DalAlreadyExistsException($"Engineer with ID={item.Id} is alredy exist"); //הערה שהאייטם כבר קיים בבסיס נתונים
         }
-        XElement engineerRoot = XMLTools.LoadListFromXMLElement(x_XML_engineers);
+        XElement engineerRoot = XMLTools.LoadListFromXMLElement(_xmlEngineer);
 
         XElement newItem = new XElement("Engineer");
         newItem.Add(new XElement("Id", item.Id));
@@ -35,7 +37,9 @@ internal class EngineerImplementation : IEngineer
         newItem.Add(new XElement("Cost", item.Cost));
         engineerRoot.Add(newItem);
 
-        XMLTools.SaveListToXMLElement(engineerRoot, x_XML_engineers);
+        XMLTools.SaveListToXMLElement(engineerRoot, _xmlEngineer);
+
+        
         return item.Id;
 
     }
@@ -47,7 +51,7 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="DalDoesNotExistException"></exception>
     public void Delete(int id)
     {
-        XElement engineerRoot = XMLTools.LoadListFromXMLElement(x_XML_engineers);
+        XElement engineerRoot = XMLTools.LoadListFromXMLElement(_xmlEngineer);
         
         XElement delItem= engineerRoot.Elements().FirstOrDefault(item => (int?)item.Element("Id") == id);
         if (delItem.IsEmpty)
@@ -55,7 +59,7 @@ internal class EngineerImplementation : IEngineer
             throw new DalDoesNotExistException($"Engineer with ID={id} not exist");
         }
         delItem.Remove();
-        XMLTools.SaveListToXMLElement(engineerRoot, x_XML_engineers);
+        XMLTools.SaveListToXMLElement(engineerRoot, _xmlEngineer);
 
     }
     /// <summary>
@@ -68,14 +72,14 @@ internal class EngineerImplementation : IEngineer
     /// 
     public void DeleteAll()
     {
-        XElement delItem= XMLTools.LoadListFromXMLElement(x_XML_engineers);
+        XElement delItem= XMLTools.LoadListFromXMLElement(_xmlEngineer);
         delItem.RemoveAll();
-        XMLTools.SaveListToXMLElement(delItem, x_XML_engineers);
+        XMLTools.SaveListToXMLElement(delItem, _xmlEngineer);
 
     }
     public Engineer? Read(int id)
     {
-        XElement? engineer = XMLTools.LoadListFromXMLElement(x_XML_engineers).Elements().FirstOrDefault(item => (int?)item.Element("Id") == id);
+        XElement? engineer = XMLTools.LoadListFromXMLElement(_xmlEngineer).Elements().FirstOrDefault(item => (int?)item.Element("Id") == id);
         if (engineer != null)
             return xlmToEng(engineer);
         return null;
@@ -90,7 +94,7 @@ internal class EngineerImplementation : IEngineer
     public Engineer? Read(Func<Engineer, bool> filter= null)
     { 
            
-        return XMLTools.LoadListFromXMLElement(x_XML_engineers).Elements().Select(eng=> xlmToEng(eng)).FirstOrDefault(filter);
+        return XMLTools.LoadListFromXMLElement(_xmlEngineer).Elements().Select(eng=> xlmToEng(eng)).FirstOrDefault(filter);
     }
     /// <summary>
     /// The method will receive a delegate of type Func, representing a Boolean function,
@@ -103,9 +107,9 @@ internal class EngineerImplementation : IEngineer
     {
 
         if (p == null)//return all elements
-            return XMLTools.LoadListFromXMLElement(x_XML_engineers).Elements().Select(eng => xlmToEng(eng));
+            return XMLTools.LoadListFromXMLElement(_xmlEngineer).Elements().Select(eng => xlmToEng(eng));
         else//return all elements with condision
-            return XMLTools.LoadListFromXMLElement(x_XML_engineers).Elements().Select(xlmToEng).Where(p);
+            return XMLTools.LoadListFromXMLElement(_xmlEngineer).Elements().Select(xlmToEng).Where(p);
             //return XMLTools.LoadListFromXMLElement(x_XML_engineers).Elements().Select(eng => xlmToEng(eng)).Where(p);
 
     }
@@ -121,7 +125,7 @@ internal class EngineerImplementation : IEngineer
         if (Read(item.Id) == null) //If this id doesnt exist
             throw new DalDoesNotExistException($"Engineer with ID={item.Id} does Not exist");
 
-        XElement engineerList = XMLTools.LoadListFromXMLElement(x_XML_engineers);
+        XElement engineerList = XMLTools.LoadListFromXMLElement(_xmlEngineer);
         Delete(item.Id);
         Create(item);
     }

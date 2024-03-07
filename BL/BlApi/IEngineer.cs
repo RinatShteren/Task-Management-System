@@ -10,7 +10,7 @@ public interface IEngineer
     public void Delete(int id);
 
     public void Update(BO.Engineer boEngineer);
-
-
+    IEnumerable<BO.TaskInList> ReadAllOptionalTasksForEngineer(BO.Engineer engineer);
+    void AssginTaskToEngineer(BO.Engineer engineer);
     public BO.Engineer doToBo(DO.Engineer doEng);
 }

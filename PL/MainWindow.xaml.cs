@@ -1,4 +1,5 @@
 ﻿using BO;
+using PL.Admin;
 using PL.Engineer;
 using PL.Task;
 using System.Text;
@@ -62,7 +63,9 @@ namespace PL
     
      
         private void btnEngineer_Click(object sender, RoutedEventArgs e)
-        { new TaskForListWindow().Show(); }
+        {
+            new GanttW().Show();
+        }
        
         private void  btnInit_Click(object sender, RoutedEventArgs e)
         { MessageBox.Show("Are you shoure you want to initional data?");

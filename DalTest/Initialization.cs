@@ -29,6 +29,7 @@ public static class Initialization
         deleteEngineers();
         deleteTasks();
         deleteDependences();
+        deleteUsers();
     }
     private static void createEngineers()
     {
@@ -57,7 +58,7 @@ public static class Initialization
     private static void createUsers()
     {
         s_dal.User.Create(new User(1234,11111111));
-        s_dal.User.Create(new User(0000, 222222222));
+        s_dal.User.Create(new User(1111, 222222222));
 
         var engineers = s_dal.Engineer.ReadAll().ToList();
 
@@ -155,5 +156,9 @@ public static class Initialization
     private static void deleteDependences()
     {
         s_dal!.Dependence.DeleteAll();
+    }
+    private static void deleteUsers()
+    {
+        s_dal!.User.DeleteAll();
     }
 }

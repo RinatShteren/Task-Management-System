@@ -42,6 +42,7 @@ namespace PL.Engineer
                 AddOrUpdate = 0;
                 CurrentEngineer = new BO.Engineer() { Id = 0 };
                // SetValue(CurrentEngineerProperty, new BO.Engineer ());
+               
             }
             else
             {

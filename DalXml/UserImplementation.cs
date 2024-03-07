@@ -32,4 +32,11 @@ internal class UserImplementation: IUser
     }
 
     public bool UserExist(User loginUser) =>XMLTools.LoadListFromXMLSerializer<User>(_xmlUser).Any(user => user == loginUser);
+
+    public void DeleteAll()
+    {
+        XElement delItem = XMLTools.LoadListFromXMLElement(_xmlUser);
+        delItem.RemoveAll();
+        XMLTools.SaveListToXMLElement(delItem, _xmlUser);
+    }
 }

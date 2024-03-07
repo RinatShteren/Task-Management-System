@@ -4,27 +4,23 @@ using BO;
 using DalApi;
 using DO;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Threading.Tasks;
 using ISchedule = BlApi.ISchedule;
 
 internal class TaskImplementation : BlApi.ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
     private readonly ISchedule _schedule;
-    private readonly IBl _bl;
-    internal TaskImplementation(IBl bl) => _bl = bl;
+    private readonly DateTime _clock;
+    internal TaskImplementation(IBl bl) => (_clock, _schedule) = (bl.Clock, bl.Schedule);
 
-    public TaskImplementation(ISchedule schedule) => _schedule = schedule;
- 
     public int Create(BO.Task boTask)
     {
 
         if (_schedule.GetStage() != BO.Stage.Planning)  // Make sure the project is in the planning stage
             throw new BO.BlNotFitSchedule("Can not add tasks after Project Planning phase");
 
-        DO.Task doTask = new DO.Task(boTask.TaskId, boTask.NickName, boTask.Description, _bl.Clock) with
-        { RequiredLevel = (DO.EngineerLevel)boTask.RequiredLevel, NumOfDays = boTask.NumOfDays }; //?
+        DO.Task doTask = new DO.Task(boTask.TaskId, boTask.NickName, boTask.Description, _clock) with
+        { RequiredLevel = (DO.EngineerLevel)boTask.RequiredLevel!, NumOfDays = boTask.NumOfDays }; //?
         try
         {
             if (boTask.TaskId < 0)
@@ -90,37 +86,54 @@ internal class TaskImplementation : BlApi.ITask
         return task;
     }
 
-    public IEnumerable<TaskInList> ReadAll(Func<BO.Task, bool> p = null)
+   
+    public IEnumerable<BO.TaskInList> ReadAllOptionalTasksForEngineer(BO.Engineer engineer) =>
+        from DO.Task task in _dal.Task.ReadAll(task => taskCanBeAssginToEngineer(task, engineer))
+        select doToBoTaskInList(task);
+
+    private bool taskCanBeAssginToEngineer(DO.Task task, BO.Engineer engineer)//הפונקציה בודקת האם המשימה יכולה להתאים למהנדס ומחזירה T\F בהתאמה
     {
-        if (p == null)
+      
+         //אין משימות קודמות שלא הסתיימו
+        if ((int)task.Difficulty > (int)engineer.Level)
+            throw new BO.BlNotFitSchedule($"task with ID={task.TaskId} do not fit engineer level");//אותה רמה או רמה נמוכה יותר
+        if (task.EngineerId is not 0)
+            throw new BO.BlNotFitSchedule($"task with ID={task.TaskId} is alredy bolong to engineer");//לא מבוצעות על ידי מהנדס אחר
+        
+
+        return task.TaskId == engineer.Task.Id;
+    }
+
+
+
+    public void AssginTaskToEngineer(BO.Engineer engineer)
+    {
+        if (BlApi.Factory.Get().Schedule.GetStage() == (BO.Stage.Planning))//are we in the plenning stage
+            throw new BlNotFitSchedule("you are in the plenning stage- you cant assign a task to engineer ");
+
+        var task = _dal.Task.Read(task => (task.TaskId == engineer.Task!.Id ))//&& task.EngineerId == engineer.Id
+           ?? throw new BlDoesNotExistException("task dous not fit");
+
+        if (!taskCanBeAssginToEngineer(task, engineer)) throw new taskCannotBeAssginToEngineerException("task Cannot Be Assgin To Engineer Exception");
+
+        _dal.Task.Update(task with { EngineerId = engineer.Id });
+    }
+
+    public IEnumerable<TaskInList> ReadAll(Func<BO.TaskInList, bool> filter = null!) =>
+          from DO.Task item in _dal.Task.ReadAll()
+          let task = doToBoTaskInList(item)
+          where filter is null ? true : filter(task)
+          select task;
+
+    private TaskInList doToBoTaskInList(DO.Task item)
+    {
+        return new BO.TaskInList()
         {
-            IEnumerable<BO.TaskInList> tasks = (from DO.Task item in _dal.Task.ReadAll(null)
-                                                select new BO.TaskInList()
-                                                {
-                                                    TaskId = item.TaskId,
-                                                    NickName = item.NickName,
-                                                    Description = item.Description,
-                                                    StartDate = item.StartDate
-                                                });
-            return tasks;
-        }
-        else
-        {
-            IEnumerable<BO.TaskInList> tasks1 = (from DO.Task item in _dal.Task.ReadAll()
-                                                 where p(doToBo(item))
-                                                 select new BO.TaskInList()
-                                                 {
-                                                     TaskId = item.TaskId,
-                                                     NickName = item.NickName,
-                                                     Description = item.Description,
-                                                     StartDate = item.StartDate
-                                                 });
-            return tasks1;
-        }
-
-
-
-
+            TaskId = item.TaskId,
+            NickName = item.NickName,
+            Description = item.Description,
+            StartDate = item.StartDate
+        };
     }
 
     public BO.Task doToBo(DO.Task doTask)
@@ -142,7 +155,7 @@ internal class TaskImplementation : BlApi.ITask
             Remarks = doTask.Remarks,
         };
     }
-   
+
     public void Delete(int id)
     {
 
@@ -278,23 +291,23 @@ internal class TaskImplementation : BlApi.ITask
                 {
                     var l when l.Count() is 0 => _schedule.StartProject,
                     var l when l.Any(d => d.StartDate is null) => throw new DependenceTasksStartDateIsStillNull("DependenceTasksStartDateIsStillNull"),
-                    _ => GetEndTaskDate_DO(dependenceTasks.MaxBy(t =>GetEndTaskDate_DO(t!))!) 
+                    _ => GetEndTaskDate_DO(dependenceTasks.MaxBy(t => GetEndTaskDate_DO(t!))!)
                 };
                 _dal.Task.Update(task with { StartDate = startDate });
             }
         }
-      
+
     }
 
     public void EnginnerToTask()
     {
-        var tasks = _dal.Task.ReadAll(task => task.EngineerId >0).ToDictionary(t => t.EngineerId, t => t);
+        var tasks = _dal.Task.ReadAll(task => task.EngineerId > 0).ToDictionary(t => t.EngineerId, t => t);
         var engineers = _dal.Engineer.ReadAll(eng => eng.Id > 0).ToList();
         var CountOfEngineers = _dal.Engineer.ReadAll(eng => eng.Id > 0).Count().ToString();
         foreach (var task in tasks.Values)
         {
             var engineerId = engineers[0];
-            _dal.Task.Update(task with { EngineerId = engineerId.Id});
+            _dal.Task.Update(task with { EngineerId = engineerId.Id });
         }
 
     }
@@ -318,12 +331,13 @@ internal class TaskImplementation : BlApi.ITask
                     throw new BO.BlDoesNotExistException($"task with ID={id} dous not exist");
                 if (a.StartDate == null)//if the date is null
                     throw new BO.BlNotFitSchedule($"The date is null while id is:{a}");
-              /*  if (date < getPlanToFinish(a))// אם התאריך שקיבלתי קטן מהתאריך של סיום המשימה  אני לא אסיים בזמן
-                    throw new BO.BlNotFitSchedule($"task with ID={a.TaskId} will not finish in time");*/
+                /*  if (date < getPlanToFinish(a))// אם התאריך שקיבלתי קטן מהתאריך של סיום המשימה  אני לא אסיים בזמן
+                      throw new BO.BlNotFitSchedule($"task with ID={a.TaskId} will not finish in time");*/
             }
         }
         _dal.Task.Update(doTask with { StartDate = date });//תעדכן את המשימה שקיבלת עם התאריך
     }
+
 }
 
 

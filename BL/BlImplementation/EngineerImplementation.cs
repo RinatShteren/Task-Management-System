@@ -2,11 +2,19 @@
 namespace BlImplementation;
 using BlApi;
 using BO;
+using DalApi;
+using DO;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-internal class EngineerImplementation : IEngineer
+internal class EngineerImplementation : BlApi.IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
+    private readonly BlApi.ITask _task;
+
+    public EngineerImplementation(BlApi.ITask task) => _task = task;
+   
     public int AddEngineer(BO.Engineer boEngineer)
     {
         DO.Engineer doEngineer = new DO.Engineer
@@ -14,18 +22,20 @@ internal class EngineerImplementation : IEngineer
         
         try
         {
-            if (doEngineer.Id < 0)
-                throw new BO.BlNotVaildException("Id is not vaild");
-            if (doEngineer.Name == "")
-                throw new BO.BlNotVaildException("Name is empty");
-            if (doEngineer.Cost < 0)
-                throw new BO.BlNotVaildException("Cost under zero");
-            if (!doEngineer.Email.Contains("@"))
-                throw new BO.BlNotVaildException("Email not vaild");
-            if ((int)doEngineer.Level < 0 || (int)doEngineer.Level > 4)
-                throw new BO.BlNotVaildException("Level not vaild");
+            if (double.IsNegative(doEngineer.Id)) throw new BO.BlNotVaildException("Id is not vaild");
+
+            if (string.IsNullOrWhiteSpace(doEngineer.Name)) throw new BO.BlNotVaildException("Name is empty");
+
+            if (double.IsNegative(doEngineer.Cost)) throw new BO.BlNotVaildException("Cost under zero");
+
+            if (!new EmailAddressAttribute().IsValid(doEngineer.Email)) throw new BO.BlNotVaildException("Email not vaild");
+
+            if ((int)doEngineer.Level! > Enum.GetValues(typeof(DO.EngineerLevel)).Length) throw new BO.BlNotVaildException("Level not vaild");
 
             int idEng = _dal.Engineer.Create(doEngineer);
+            //Create a User
+            _dal.User.Create(new DO.User(new Random().Next(2000, 4000), boEngineer.Id));
+
             return idEng;
         }
         catch (DO.DalAlreadyExistsException ex)
@@ -60,7 +70,7 @@ internal class EngineerImplementation : IEngineer
         return engeneerToRead;
     }
 
-    public IEnumerable<BO.Engineer> ReadAll(Func<Engineer,bool> p = null)
+    public IEnumerable<BO.Engineer> ReadAll(Func<BO.Engineer,bool> p = null)
     {
 
 
@@ -139,37 +149,35 @@ internal class EngineerImplementation : IEngineer
             (boEngineer.Id, boEngineer.Name, boEngineer.Email, (DO.EngineerLevel)boEngineer.Level, boEngineer.Cost);
         try
         {
-            if (doEngineer.Id < 0)
-                throw new BO.BlNotVaildException("Id is not vaild");
-            if (doEngineer.Name == "")
-                throw new BO.BlNotVaildException("Name is empty");
-            if (doEngineer.Cost < 0)
-                throw new BO.BlNotVaildException("Cost under zero");
-            if (!doEngineer.Email.Contains("@"))
-                throw new BO.BlNotVaildException("Email not vaild");
-            if ((int)doEngineer.Level <= 0 || (int)doEngineer.Level > 4)
-                throw new BO.BlNotVaildException("Level not vaild");
-            //UPDATE the engineer if content is vaild
-            _dal.Engineer.Update(doEngineer);
-            if (boEngineer.Task != null)//if he has tasts
-            {
-                if (Factory.Get().Schedule.GetStage() == (BO.Stage.Planning))//are we in the plenning stage
-                    throw new BlNotFitSchedule("you are in the plenning stage- you cant assign a task to engineer ");
-                var task = _dal.Task.Read(task => task.TaskId == boEngineer.Task!.Id)
-                    ?? throw new BlDoesNotExistException($"task with id dous not fit to enginer level");
-                // if((int)task.Difficulty>(int)boEngineer.Level)
-                //  throw BO.BlNotFitSchedule($"task with ID={task.TaskId} dousnt fit engineer level");
-                if (task.EngineerId != 0)
-                    throw new BO.BlNotFitSchedule($"task with ID={task.TaskId} is alredy bolong to engineer");
-                _dal.Task.Update(task with { TaskId = boEngineer.Id });
-            }
+            if (double.IsNegative(doEngineer.Id )) throw new BO.BlNotVaildException("Id is not vaild");
 
+            if (string.IsNullOrWhiteSpace(doEngineer.Name)) throw new BO.BlNotVaildException("Name is empty");
+
+            if (double.IsNegative( doEngineer.Cost)) throw new BO.BlNotVaildException("Cost under zero");
+
+            if (!new EmailAddressAttribute().IsValid(doEngineer.Email)) throw new BO.BlNotVaildException("Email not vaild");
+
+            if ((int)doEngineer.Level! > Enum.GetValues(typeof(DO.EngineerLevel)).Length) throw new BO.BlNotVaildException("Level not vaild");
+
+            //UPDATE the engineer if content is vaild
+
+            _dal.Engineer.Update(doEngineer);
+          
         }
         catch (DO.DalAlreadyExistsException ex)
         {
             throw new BO.BlDoesNotExistException($"Engineer with ID={boEngineer.Id} dous not exist", ex);
         }
 
+    }
+    public IEnumerable<BO.TaskInList> ReadAllOptionalTasksForEngineer(BO.Engineer engineer) =>
+        _task.ReadAllOptionalTasksForEngineer(engineer);
+
+    public void AssginTaskToEngineer(BO.Engineer engineer)
+    {
+        //if he has tasts 
+        //if (engineer.Task != null)
+        _task.AssginTaskToEngineer(engineer);
     }
 
     public BO.Engineer doToBo(DO.Engineer doEng)

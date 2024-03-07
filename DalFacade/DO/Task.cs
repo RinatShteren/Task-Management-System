@@ -29,8 +29,8 @@ public record Task
     string? Product=null,               
     string? Remarks = null,
     int EngineerId=0,
-    EngineerLevel? RequiredLevel = null
-
+    EngineerLevel? RequiredLevel = null,
+    int Difficulty =0
 )
 {
     public Task() : this(0) { }

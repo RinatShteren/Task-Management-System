@@ -11,5 +11,11 @@ internal class UserImplementation : IUser
     }
 
     public bool UserExist(User loginUser) => DataSource.Users.Any(user => loginUser == user);
-    
+
+    public void DeleteAll()
+    {
+        DataSource.Users.Clear();
+    }
+
+
 }

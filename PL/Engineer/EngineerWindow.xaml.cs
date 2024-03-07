@@ -1,4 +1,5 @@
 ﻿using DalApi;
+using PL.Task;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,29 +25,37 @@ namespace PL.Engineer
         List<BO.Task> listPerson;
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
-        public static readonly DependencyProperty observeListTaskProperty =
-            DependencyProperty.Register("observeListPerson", typeof(ObservableCollection<BO.Task>), typeof(MainWindow), new PropertyMetadata(null));
-
-        public ObservableCollection<BO.Task> observeListPerson
+        public IEnumerable<BO.TaskInList> CurrentTaskInList
         {
-            get { return (ObservableCollection<BO.Task>)GetValue(observeListTaskProperty); }
-            set { SetValue(observeListTaskProperty, value); }
+            get { return (IEnumerable<BO.TaskInList>)GetValue(TaskListProperty); }
+            set { SetValue(TaskListProperty, value); }
         }
-
-        public static readonly DependencyProperty CurrentEngineerProperty =
-           DependencyProperty.Register("CurrentEngineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
+        public static readonly DependencyProperty TaskListProperty =
+            DependencyProperty.Register("CurrentTaskInList", typeof(IEnumerable<BO.TaskInList>), typeof(EngineerWindow), new PropertyMetadata(null));
         public BO.Engineer CurrentEngineer
         {
             get { return (BO.Engineer)GetValue(CurrentEngineerProperty); }
             set { SetValue(CurrentEngineerProperty, value); }
         }
+    public static readonly DependencyProperty CurrentEngineerProperty =
+           DependencyProperty.Register("CurrentEngineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
 
+      
         public EngineerWindow(int GetId)
         {
             InitializeComponent();
+            // CurrentEngineer = (BO.Engineer)s_bl.Engineer.ReadAll(Eng => Eng.Id == GetId);
             CurrentEngineer = s_bl.Engineer.Read(GetId);
+            //CurrentTaskInList = (IEnumerable<BO.TaskInList>)s_bl.Task.Read(CurrentEngineer.Task.Id);
 
-          //  observeListPerson = s_bl.Task.ReadAll(a => a.TaskId > 0);
+            //  observeListPerson = s_bl.Task.ReadAll(a => a.TaskId > 0);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new RegisterTaskWindow(CurrentEngineer.Id).ShowDialog();
+
+         
         }
     }
 }

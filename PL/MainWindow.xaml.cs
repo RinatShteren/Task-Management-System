@@ -45,16 +45,22 @@ namespace PL
 
             //if (s_bl.UserLogin.UserExist(User))
             //{
-
-            if (User.Password == 1234 && User.UserId == 111111111)
+            try
             {
-                new ManagerView().Show();
+                if (User.Password == 1234 && User.UserId == 111111111)
+                {
+                    new ManagerView().Show();
+                }
+                else
+                {
+                    string? userId = UserIdBox?.Text;
+                    new EngineerWindow(int.Parse(userId)).ShowDialog();
+
+                }
             }
-            else
+            catch (Exception ex)
             {
-                string? userId = UserIdBox?.Text;
-                new EngineerWindow(int.Parse(userId)).ShowDialog();
-
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }

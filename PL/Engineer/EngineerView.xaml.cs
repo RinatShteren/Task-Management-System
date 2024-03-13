@@ -20,8 +20,9 @@ namespace PL.Engineer
     /// </summary>
     public partial class EngineerView : Window
     {
+        
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-         int AddOrUpdate;/*if idd =0 :ADD else:UPDATE*/
+        int AddOrUpdate;/*if idd =0 :ADD else:UPDATE*/
 
 
         public static readonly DependencyProperty CurrentEngineerProperty =
@@ -31,33 +32,43 @@ namespace PL.Engineer
             get { return (BO.Engineer)GetValue(CurrentEngineerProperty); }
             set { SetValue(CurrentEngineerProperty, value); }
         }
-
+    
 
         public EngineerView(int GetId=0)
         {
-        InitializeComponent();
-           // ID = idd;
-            if(GetId == 0)
+            try
             {
-               
-                AddOrUpdate = 0;
-                CurrentEngineer = new BO.Engineer() { Id = 0 };
-               // SetValue(CurrentEngineerProperty, new BO.Engineer ());
-               
-            }
-            else
-            {
-                AddOrUpdate = 1;
-                try
+                InitializeComponent();
+                // ID = idd;
+                if (GetId == 0)
                 {
-                   /* BO.Engineer*/ CurrentEngineer = s_bl.Engineer.Read(GetId);
-                    //SetValue(CurrentEngineerProperty, CurrentEngineer);
+
+                    AddOrUpdate = 0;
+                    CurrentEngineer = new BO.Engineer() { Id = 0 };
+                    // SetValue(CurrentEngineerProperty, new BO.Engineer ());
+
                 }
-                catch(Exception ex)
+                else
                 {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    AddOrUpdate = 1;
+
+                    CurrentEngineer = s_bl.Engineer.Read(GetId);
                 }
             }
+            catch (BO.BlNotVaildException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.BlDoesNotExistException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            
         }
 
         private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
@@ -78,7 +89,11 @@ namespace PL.Engineer
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch(BO.BlDoesNotExistException ex)
+            catch (BO.BlDoesNotExistException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }

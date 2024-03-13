@@ -52,7 +52,7 @@ internal class EngineerImplementation : BlApi.IEngineer
     {
         DO.Engineer doEngineer = _dal.Engineer.Read(id);
         if (doEngineer == null)
-            throw new BO.BlDoesNotExistException($"Engineer with ID={id} is alredy exist");
+            throw new BO.BlDoesNotExistException($"Engineer with ID={id} is not valid");
 
         BO.Engineer engeneerToRead = new BO.Engineer()
         {

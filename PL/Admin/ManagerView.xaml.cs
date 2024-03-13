@@ -38,8 +38,15 @@ namespace PL.Admin
         }
         private void btnReset_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Are you shoure you want to reset data?");
-            s_bl.ResetDB();
+            try
+            {
+                MessageBox.Show("Are you shoure you want to reset data?");
+                s_bl.ResetDB();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void btnList_Click(object sender, RoutedEventArgs e)

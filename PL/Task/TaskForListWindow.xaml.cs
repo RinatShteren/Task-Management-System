@@ -23,7 +23,7 @@ namespace PL.Task
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public BO.Stage Stage { get; set; } = BO.Stage.Planning;
-   
+
         public IEnumerable<BO.TaskInList> TaskList
         {
             get { return (IEnumerable<BO.TaskInList>)GetValue(TaskListProperty); }
@@ -35,20 +35,44 @@ namespace PL.Task
 
         public TaskForListWindow()
         {
-            InitializeComponent();
-            TaskList = s_bl.Task.ReadAll().Where(task => task.TaskId > 0);
+            try
+            {
+                InitializeComponent();
+                TaskList = s_bl.Task.ReadAll().Where(task => task.TaskId > 0);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
 
         void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TaskList = ((Stage == BO.Stage.Planning) ?   //?? 
+            try
+            {
+                TaskList = ((Stage == BO.Stage.Planning) ?   //?? 
                s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(tsk => Stage == BO.Stage.Planning)!)  //??
-               .OrderBy(t => t.TaskId); // sort by ID 
+               .OrderBy(t => t.TaskId); // sort by ID  
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            new TaskView().ShowDialog();
-            UpdateTaskList();
+            try
+            {
+                new TaskView().ShowDialog();
+                UpdateTaskList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
 
         private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -59,20 +83,34 @@ namespace PL.Task
             // Open TaskWindow and pass the selected task
             //  TaskWindow taskWindow = new TaskWindow(int GetId = 0);
             //taskWindow.ShowDialog();
+            try
+            {
+                //BO.Task? task = (sender as ListView)?.SelectedItem as BO.Task;
+                int id =((BO.TaskInList)((ListView)sender).SelectedItem).TaskId;
+                new TaskView(id).ShowDialog();
+                UpdateTaskList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
-            BO.Task? task = (sender as ListView)?.SelectedItem as BO.Task;
-            new TaskView(task!.TaskId).ShowDialog();
-            UpdateTaskList();
         }
 
         void UpdateTaskList()
         {
-
-            TaskList = ((Stage == BO.Stage.Planning) ?   //?? 
+            try
+            {
+                TaskList = ((Stage == BO.Stage.Planning) ?   //?? 
             s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(tsk => Stage == BO.Stage.Planning)!)  //??
-               .OrderBy(t => t.TaskId); // sort by ID 
-                                        //}
-                                        //option for the user to sort the list of tasks according to their stage
+               .OrderBy(t => t.TaskId);
+            } // sort by ID 
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
     }
 }

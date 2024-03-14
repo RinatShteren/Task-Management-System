@@ -32,17 +32,17 @@
    Text="{Binding NickName, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
   IsEnabled="False" HorizontalAlignment="Left" Margin="260,130,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="18" />
 
-        <DatePicker Grid.Column="1" 
+        <DatePicker 
    Text="{Binding CreationDate, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
-   HorizontalAlignment="Left" Margin="260,160,0,0" VerticalAlignment="Top" Width="120" Height="18"/>
+   HorizontalAlignment="Left" Margin="260,160,0,0" VerticalAlignment="Top" Width="120" Height="22"/>
 
-        <DatePicker Grid.Column="1" 
+        <DatePicker 
   Text="{Binding EstimatedDate, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
-  HorizontalAlignment="Left" Margin="260,190,0,0" VerticalAlignment="Top" Width="120" Height="18"/>
+  HorizontalAlignment="Left" Margin="260,190,0,0" VerticalAlignment="Top" Width="120" Height="25"/>
 
-        <DatePicker Grid.Column="1" 
+        <DatePicker 
   Text="{Binding StartDate, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
-  HorizontalAlignment="Left" Margin="260,220,0,0" VerticalAlignment="Top" Width="120" Height="18"/>
+  HorizontalAlignment="Left" Margin="260,220,0,0" VerticalAlignment="Top" Width="120" Height="25"/>
 
 
         <TextBox Grid.Column="1"
@@ -50,13 +50,13 @@
    IsEnabled="False" HorizontalAlignment="Left" Margin="260,250,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="18" />
 
 
-        <DatePicker Grid.Column="1" 
+        <DatePicker 
   Text="{Binding DeadLine, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
-   HorizontalAlignment="Left" Margin="260,280,0,0" VerticalAlignment="Top" Width="120" Height="18"/>
+   HorizontalAlignment="Left" Margin="260,280,0,0" VerticalAlignment="Top" Width="120" Height="25"/>
 
-        <DatePicker Grid.Column="1" 
+        <DatePicker 
   Text="{Binding FinishtDate, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
-  HorizontalAlignment="Left" Margin="260,310,0,0" VerticalAlignment="Top" Width="120" Height="18"/>
+  HorizontalAlignment="Left" Margin="260,310,0,0" VerticalAlignment="Top" Width="120" Height="25"/>
 
 
         <TextBox Grid.Column="1" 
@@ -78,17 +78,31 @@
    SelectedValue="{Binding Level, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}" Grid.ColumnSpan="2" Height="22">
         </ComboBox>
 
-        <ListView Name="ListDependencies" ItemsSource="{Binding Dependencies}" Margin="441,217,21,15">
+        <!-- list of dependent tasks -->
+        <ListBox BorderBrush="Black" BorderThickness="1"
+        ItemsSource="{Binding CurrentTask.Dependencies }" Height="207" VerticalAlignment="Top" Margin="481,217,21,0" Background="{x:Null}" SelectionChanged="ListBox_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="0,0,0,10">
+                        <TextBlock Text="{Binding Id}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Text="{Binding Description}"/>
+                        <TextBlock Text="{Binding Status}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <!--<ListView ItemsSource="{Binding CurrentTask.Dependencies, Mode=TwoWay, NotifyOnValidationError=True,ValidatesOnExceptions=True}" Margin="441,217,21,15">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
-        </ListView>
+        </ListView>-->
         <Button 
      Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" 
-     HorizontalAlignment="Left" Margin="260,384,0,0"  VerticalAlignment="Top" Padding="5" 
-     Click="btnAddUpdate_Click" FontFamily="Comic Sans MS" Width="120" Height="35"/>        
+     HorizontalAlignment="Left" Margin="283,384,0,0"  VerticalAlignment="Top" Padding="5" 
+     Click="btnAddUpdate_Click" FontFamily="Comic Sans MS" Width="87" Height="16"/>
 
 
     </Grid>

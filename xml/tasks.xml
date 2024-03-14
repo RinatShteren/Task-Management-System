@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Task>
-    <TaskId>1930</TaskId>
-    <NickName>Quality Assurance</NickName>
-    <Description>Ensuring Quality Assurance</Description>
-    <CreationDate>2024-03-25T03:57:41.5829397+02:00</CreationDate>
-    <EstimatedDate>2024-03-27T03:57:41.5834259+02:00</EstimatedDate>
-    <StartDate>2024-03-28T03:57:41.5834318+02:00</StartDate>
-    <NumOfDays>1</NumOfDays>
-    <DeadLine>2024-03-28T03:57:41.5834323+02:00</DeadLine>
-    <FinishtDate>2024-03-27T03:57:41.5834329+02:00</FinishtDate>
-    <Product>IntelliSync Integration Middleware</Product>
-    <Remarks>Met project deadlines on time.</Remarks>
-    <EngineerId>0</EngineerId>
-    <RequiredLevel>Beginner</RequiredLevel>
-    <Difficulty>0</Difficulty>
-  </Task>
-  <Task>
     <TaskId>1931</TaskId>
     <NickName>Event Coordination</NickName>
     <Description>Coordinating Event Logistics</Description>
@@ -30,22 +14,6 @@
     <Remarks>Met project deadlines on time.</Remarks>
     <EngineerId>0</EngineerId>
     <RequiredLevel>Beginner</RequiredLevel>
-    <Difficulty>0</Difficulty>
-  </Task>
-  <Task>
-    <TaskId>1932</TaskId>
-    <NickName>Inventory Management</NickName>
-    <Description>Managing Inventory Updates</Description>
-    <CreationDate>2024-03-20T03:57:41.8553627+02:00</CreationDate>
-    <EstimatedDate>2024-03-22T03:57:41.8553683+02:00</EstimatedDate>
-    <StartDate>2024-03-23T03:57:41.8553687+02:00</StartDate>
-    <NumOfDays>3</NumOfDays>
-    <DeadLine>2024-03-25T03:57:41.8553691+02:00</DeadLine>
-    <FinishtDate>2024-03-24T03:57:41.8553695+02:00</FinishtDate>
-    <Product>ScriptMaster Automation Framework</Product>
-    <Remarks>Enhanced UI based on testing.</Remarks>
-    <EngineerId>0</EngineerId>
-    <RequiredLevel>Intermediate</RequiredLevel>
     <Difficulty>0</Difficulty>
   </Task>
   <Task>
@@ -318,6 +286,38 @@
     <Remarks>Met project deadlines on time.</Remarks>
     <EngineerId>0</EngineerId>
     <RequiredLevel>Expert</RequiredLevel>
+    <Difficulty>0</Difficulty>
+  </Task>
+  <Task>
+    <TaskId>1930</TaskId>
+    <NickName>Ensuring Quality Assurance</NickName>
+    <Description>Quality Assurance</Description>
+    <CreationDate>2024-03-25T03:57:41.5829397+02:00</CreationDate>
+    <EstimatedDate>2024-03-27T03:57:41.5834259+02:00</EstimatedDate>
+    <StartDate>2024-03-28T03:57:41.5834318+02:00</StartDate>
+    <NumOfDays>0</NumOfDays>
+    <DeadLine>2024-03-29T03:57:41.5834318+03:00</DeadLine>
+    <FinishtDate>2024-03-27T03:57:41.5834329+02:00</FinishtDate>
+    <Product>IntelliSync Integration Middleware</Product>
+    <Remarks>Met project deadlines on time.</Remarks>
+    <EngineerId>0</EngineerId>
+    <RequiredLevel>Beginner</RequiredLevel>
+    <Difficulty>0</Difficulty>
+  </Task>
+  <Task>
+    <TaskId>1932</TaskId>
+    <NickName>Managing Inventory Updates</NickName>
+    <Description>Inventory Management</Description>
+    <CreationDate>2024-03-20T03:57:41.8553627+02:00</CreationDate>
+    <EstimatedDate>2024-03-22T03:57:41.8553683+02:00</EstimatedDate>
+    <StartDate>2024-03-23T03:57:41.8553687+02:00</StartDate>
+    <NumOfDays>0</NumOfDays>
+    <DeadLine>2024-03-26T03:57:41.8553687+02:00</DeadLine>
+    <FinishtDate>2024-03-24T03:57:41.8553695+02:00</FinishtDate>
+    <Product>ScriptMaster Automation Framework</Product>
+    <Remarks>Enhanced UI based on testing.</Remarks>
+    <EngineerId>0</EngineerId>
+    <RequiredLevel>Intermediate</RequiredLevel>
     <Difficulty>0</Difficulty>
   </Task>
 </ArrayOfTask>

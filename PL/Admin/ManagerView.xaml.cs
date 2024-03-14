@@ -51,7 +51,7 @@ namespace PL.Admin
 
         private void btnList_Click(object sender, RoutedEventArgs e)
         {
-            new TaskForListWindow().Show();
+            new EngineerListWindow().Show();
         }
 
         private void btnTask_Click(object sender, RoutedEventArgs e)

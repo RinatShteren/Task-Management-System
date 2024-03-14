@@ -55,14 +55,7 @@ namespace PL.Engineer
                     CurrentEngineer = s_bl.Engineer.Read(GetId);
                 }
             }
-            catch (BO.BlNotVaildException ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (BO.BlDoesNotExistException ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+          
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -83,15 +76,6 @@ namespace PL.Engineer
                 {
                     s_bl.Engineer.Update(CurrentEngineer);
                 }
-            }
-
-            catch (BO.BlNotVaildException ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (BO.BlDoesNotExistException ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (Exception ex)
             {

@@ -23,6 +23,7 @@ namespace PL
 
         public User User
         {
+
             get { return (BO.User)GetValue(UserProperty); }
             set { SetValue(UserProperty, value); }
         }
@@ -35,9 +36,18 @@ namespace PL
 
         public MainWindow()
         {
-            InitializeComponent();
-            //_ = s_bl.Clock;
-            DataContext = this; // Set DataContext to the MainWindow itself
+            try
+            {
+                InitializeComponent();
+                //_ = s_bl.Clock;
+                DataContext = this; // Set DataContext to the MainWindow itself
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+
         }
 
         private void btnOPEN_Click(object sender, RoutedEventArgs e)
@@ -67,7 +77,14 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new EngineerView().Show();
+            try
+            {
+                new EngineerView().Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
 
@@ -86,23 +103,52 @@ namespace PL
 
         private void AddDay_Click(object sender, RoutedEventArgs e)
         {
-            // Call BL method to increment day
-            s_bl.AdvanceTimeByDay(1);
+            try
+            {
+                // Call BL method to increment day
+                s_bl.AdvanceTimeByDay(1);
+                CurrentTime = s_bl.Clock;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
 
         private void AddMonth_Click(object sender, RoutedEventArgs e)
         {
-            s_bl.AdvanceTimeByMonth(1);
+            try {s_bl.AdvanceTimeByMonth(1);
+                CurrentTime = s_bl.Clock;
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void AddYear_Click(object sender, RoutedEventArgs e)
         {
-            s_bl.AdvanceTimeByYear(1);
+            try {s_bl.AdvanceTimeByYear(1);
+                CurrentTime = s_bl.Clock;
+            }
+            
+              catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void InitializationClock_Click(object sender, RoutedEventArgs e)
         {
-            s_bl.InitializeTime();
+            try { s_bl.InitializeTime();
+                CurrentTime = s_bl.Clock;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

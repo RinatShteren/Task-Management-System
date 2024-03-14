@@ -48,6 +48,20 @@ internal class TaskImplementation : BlApi.ITask
         }
 
     }
+    public BO.Status getStatus(BO.Task task)
+    {
+        TimeSpan t = TimeSpan.FromDays(2);
+        if (task.EstimatedDate == null)
+            return BO.Status.Unscheduled;
+        else
+            if (task.StartDate == null)
+            return BO.Status.Scheduled;
+        else
+            if (task.FinishtDate != null)
+            return BO.Status.Done;
+        else
+            return BO.Status.OnTrack;
+    }
     public BO.Task? Read(int id)
     {
         DO.Task? doTask = _dal.Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does not exist");
@@ -82,7 +96,7 @@ internal class TaskImplementation : BlApi.ITask
 
         task.DeadLine = GetEndTaskDate_BO(task);
         task.Dependencies = GetLinks(task);
-        task.Stage = _schedule.GetStage();
+        task.Status = getStatus(task);
         return task;
     }
 
@@ -108,7 +122,7 @@ internal class TaskImplementation : BlApi.ITask
 
     public void AssginTaskToEngineer(BO.Engineer engineer)
     {
-        if (BlApi.Factory.Get().Schedule.GetStage() == (BO.Stage.Planning))//are we in the plenning stage
+        if (BlApi.Factory.Get().Schedule.GetStage() == (BO.Stage.Planning))//are we in the planning stage
             throw new BlNotFitSchedule("you are in the plenning stage- you cant assign a task to engineer ");
 
         var task = _dal.Task.Read(task => (task.TaskId == engineer.Task!.Id ))//&& task.EngineerId == engineer.Id
@@ -235,10 +249,10 @@ internal class TaskImplementation : BlApi.ITask
                 tempID = 0;
             else
                 tempID = upTask.EngineerId;
-
-
+            
             DO.Task doTask = new DO.Task(upTask.TaskId, upTask.Description, upTask.NickName, upTask.CreationDate, upTask.EstimatedDate, upTask.StartDate, 0, upTask.DeadLine, upTask.FinishtDate,
             upTask.Product, upTask.Remarks, tempID, (DO.EngineerLevel)upTask.RequiredLevel);
+
 
             _dal.Task.Update(doTask);
         }

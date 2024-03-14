@@ -8,6 +8,13 @@ public enum EngineerLevel
     Advanced,
     Expert
 }
+public enum Status
+{
+    Unscheduled, 
+    Scheduled, 
+    OnTrack,
+    Done
+}
 
 public enum Stage
 {

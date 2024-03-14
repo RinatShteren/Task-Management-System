@@ -32,10 +32,7 @@ namespace PL.Admin
             MessageBox.Show("Are you shoure you want to initional data?");
             s_bl.InitalizingBD();
         }
-        private void EngineerListButton(object sender, RoutedEventArgs e)
-        {
-            new EngineerListWindow().Show();
-        }
+        
         private void btnReset_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -49,12 +46,12 @@ namespace PL.Admin
             }
         }
 
-        private void btnList_Click(object sender, RoutedEventArgs e)
+        private void btnEngineerList_Click(object sender, RoutedEventArgs e)
         {
-            new TaskForListWindow().Show();
+            new EngineerListWindow().Show();
         }
 
-        private void btnTask_Click(object sender, RoutedEventArgs e)
+        private void btnTaskList_Click(object sender, RoutedEventArgs e)
         {
             new TaskForListWindow().Show();
         }
@@ -63,6 +60,11 @@ namespace PL.Admin
         {
             s_bl.Task.CalculateCloserStartDateForAllTasks();
             s_bl.Task.EnginnerToTask();
+        }
+
+        private void ButtonGuntt_Click(object sender, RoutedEventArgs e)
+        {
+            new GanttW().Show();
         }
     }
 }

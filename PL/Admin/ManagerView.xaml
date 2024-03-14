@@ -13,11 +13,14 @@ Click="btnInit_Click" Margin="10,192,0,0" FontWeight="Bold" FontSize="20" Border
         <Button Content="Reset Data" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="10,320,0,0" VerticalAlignment="Top" Height="82" Width="182"
 Click="btnReset_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}"/>
         <Button Content="EngineerList" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" Height="82" Width="182"
-Click="btnList_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}"/>
+Click="btnEngineerList_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}"/>
         <Button Content="TaskList" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="309,81,0,0" VerticalAlignment="Top" Height="82" Width="182"
-Click="btnTask_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}"/>
+Click="btnTaskList_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}"/>
         <Button Content="Automatic schedule" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="309,192,0,0" VerticalAlignment="Top" Height="82" Width="182"
 Click="AutoSchedule_Click" FontSize="17" FontWeight="Bold" BorderBrush="{x:Null}"/>
+        <Button Content="Gantt" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Height="82" Margin="309,320,0,0" VerticalAlignment="Top"  Width="182"
+Click="ButtonGuntt_Click" FontSize="17" FontWeight="Bold" BorderBrush="{x:Null}"/>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="777*"/>
             <ColumnDefinition Width="23*"/>

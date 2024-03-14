@@ -102,20 +102,22 @@ public static class Initialization
 
         for (int i = 0; i < 20; i++)
         {
-            int num = s_rand.Next(0, 19);
+            int num = s_rand.Next(0, 20);
             string _TaskNickName = TaskNickName[num];//כל פעם תוגרל רנדומלית משימה ותיאור
             string _Description = TaskDescription[num];
             bool _MileStone = false;
             if (i % 2 == 0) //כדי לגוון שלפעמים יהיה טרו ולפעמים פאלס
                 _MileStone = true;
+            int? _NumOfDays = s_rand.Next(1, 4); //ההפרש בין התאריך המשוער לדד ליין
+            string? _Product = Products[num]; //כל פעם יוגרל רנדומלית תוצר 
+            string? _Remarks = Remarks[num % 2]; //כל פעם יוגרל רנדומלית הערה מהרשימה 
+            num = s_rand.Next(10, 40);
             DateTime? _CreationDate = DateTime.Now.AddDays(num); //בכל איטרציה יוגרל תאריך משימה
             DateTime? _EstimatedDate = DateTime.Now.AddDays(num + 2); //תאריך התחלה
             DateTime? _StartDate = DateTime.Now.AddDays(num + 3);  //יתחיל יום אחרי המשוער
             DateTime? _DeadLine = DateTime.Now.AddDays(num + 3 + i); //שיחקתי עם זה קצת שיהיה שונה אבל עקבי
             DateTime? _FinishtDate = DateTime.Now.AddDays(num + 2 + i); //תמיד לפני הדד ליין
-            int? _NumOfDays = i + 1; //ההפרש בין התאריך המשוער לדד ליין
-            string? _Product = Products[num]; //כל פעם יוגרל רנדומלית תוצר 
-            string? _Remarks = Remarks[num % 2]; //כל פעם יוגרל רנדומלית הערה מהרשימה 
+ 
             var engineesr = s_dal!.Engineer.ReadAll(a => a.Id>0);
 
             //int EnginnerId =
@@ -131,15 +133,15 @@ public static class Initialization
     }
     private static void createDependences()
     {
-        for (int i = 0; i < 40; i++)
+        for (int i = 0; i < 20; i++)//היה עד 40 ושיניתי.. מקווה שזה בסדר
         {
-            int _PendingTaskId = s_rand.Next(1000, 1019); //משימה רנדומלית מ20 המשימות הקיימות
-            int temp = s_rand.Next(1000, 1019);
+            int _PendingTaskId = s_rand.Next(1, 19); //משימה רנדומלית מ20 המשימות הקיימות
+            int temp = s_rand.Next(1, 19);
             while (temp < _PendingTaskId) // נרצה שהמשימה הקודמת תיהיה עם דד ליין מוקדם יותר מהמשימה התלויה בה
-                temp = s_rand.Next(1000, 1019);
+                temp = s_rand.Next(1, 19);
             int _PreviousTaskId = temp;
             Dependence newDpns = new Dependence(0, _PendingTaskId, _PreviousTaskId); //נגדיר תלות זמנית
-            ;//נכניס אותה לבסיס נתונים
+           //נכניס אותה לבסיס נתונים
             s_dal!.Dependence.Create(newDpns);
         }
 

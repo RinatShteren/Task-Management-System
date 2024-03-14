@@ -5,11 +5,11 @@ internal static class DataSource
 {
     internal static class Config
     {
-        internal const int startDependenceId = 1000;
+        internal const int startDependenceId = 1;
         private static int nextDependenceId = startDependenceId;
         internal static int NextDependenceId { get => nextDependenceId++; }
 
-        internal const int startTaskId = 1000;
+        internal const int startTaskId = 1;
         
         private static int nextTaskId = startTaskId;
         internal static int NextTaskId { get => nextTaskId++; }

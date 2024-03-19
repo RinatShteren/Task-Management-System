@@ -70,10 +70,10 @@ namespace PL.Task
             }
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // Your event handling code here
-            // This method will be called whenever the selection in the ListBox changes
-        }
+        //private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    // Your event handling code here
+        //    // This method will be called whenever the selection in the ListBox changes
+        //}
     }
 }

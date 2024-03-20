@@ -15,8 +15,9 @@ public static class Initialization
     private const int MAX_ID = 400000000;
 
     public static void Do() //stage 4
-    {
-        s_dal = Factory.Get; //stage 4
+    { 
+    
+    s_dal = Factory.Get; //stage 4
         createEngineers();
         createTasks();
         createDependences();
@@ -25,6 +26,9 @@ public static class Initialization
 
     public static void Reset()//stage 5
     {
+        const int startDependenceId = 1;
+        const int startTaskId = 1;
+
         s_dal = Factory.Get;
         deleteEngineers();
         deleteTasks();
@@ -103,6 +107,7 @@ public static class Initialization
         for (int i = 0; i < 20; i++)
         {
             int num = s_rand.Next(0, 20);
+     
             string _TaskNickName = TaskNickName[num];//כל פעם תוגרל רנדומלית משימה ותיאור
             string _Description = TaskDescription[num];
             bool _MileStone = false;

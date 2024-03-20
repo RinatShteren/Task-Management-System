@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
-        Title="EngineerListWindow" Height="640" Width="800"
+        Title="EngineerListWindow" Height="500" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+    <Window.Background>
+        <ImageBrush ImageSource="C:\Users\USER\source\repos\dotNet5784_2159_6722\PL\Images/back.jpg"/>
+    </Window.Background>
 
     <!--Extrnal Grid-->
     <Grid>
@@ -18,32 +21,36 @@
         <!--Internal, Upper Grid-->
         <Grid Height="43" VerticalAlignment="Top" Width="auto" Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="400*"/>
-                <ColumnDefinition Width="52*"/>
-                <ColumnDefinition Width="41*"/>
-                <ColumnDefinition Width="307*"/>
+                <ColumnDefinition Width="232*"/>
+                <ColumnDefinition Width="31*"/>
+                <ColumnDefinition Width="60*"/>
+                <ColumnDefinition Width="477*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Content="Select Engineer" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="37,10,0,0" VerticalAlignment="Top" Grid.Column="0"/>
+
+            <Label Content="Please select an engineer to add or update" HorizontalAlignment="Left" Height="61" Margin="10,-18,0,0" VerticalAlignment="Top" Width="432" FontFamily="Segoe UI Black" FontSize="18
+                   " Grid.ColumnSpan="4" RenderTransformOrigin="0.497,1.129"/>
             <!--Category to filter-->
 
-            <ComboBox SelectedValue="{Binding EngineerLevel, Mode=TwoWay}"
-                      ItemsSource="{Binding Source={StaticResource EngineerLevelCollectionKey}}"  Grid.Column="1" SelectionChanged="ComboBox_SelectionChanged" Grid.ColumnSpan="3" Margin="10,21,25,0"/>
+            <ComboBox SelectedValue="{Binding EngineerLevel, Mode=TwoWay}" FontFamily="Segoe UI Black"
+                      ItemsSource="{Binding Source={StaticResource EngineerLevelCollectionKey}}" SelectionChanged="ComboBox_SelectionChanged" Margin="77,-12,10,21" Grid.Column="3"/>
             <!--Filter options-->
         </Grid>
 
-        <ListView Margin="5,69,0,5" Grid.Row="1" ItemsSource="{Binding EngineerList}" MouseDoubleClick="ListViewDoubleClick"
-                  SelectedValue="{Binding EngineerLevel, Mode=TwoWay}">
+        <ListView Margin="10,48,10,91" Grid.Row="1" ItemsSource="{Binding EngineerList}" MouseDoubleClick="ListViewDoubleClick"
+                  SelectedValue="{Binding EngineerLevel, Mode=TwoWay}" FontFamily="Comic Sans MS">
             <!--List of engineers-->
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
+                    
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="AddButtonClick"/>
 
         <!--for add to the list-->
+        <Button Content="Add" Grid.Row="1" HorizontalAlignment="Left" Height="50" Width="100" Margin="323,376,0,0" VerticalAlignment="Top" Click="AddButtonClick" FontFamily="Segoe UI Black" RenderTransformOrigin="0.55,-0.05"/>
+
     </Grid>
 
 </Window>

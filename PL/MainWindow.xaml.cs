@@ -53,15 +53,14 @@ namespace PL
         private void btnOPEN_Click(object sender, RoutedEventArgs e)
         {
 
-            //if (s_bl.UserLogin.UserExist(User))
-            //{
+            
             try
             {
                 if (User.Password == 1234 && User.UserId == 111111111)
                 {
                     new ManagerView().Show();
                 }
-                else
+                else if(s_bl.UserLogin.UserExist(User))
                 {
                     string? userId = UserIdBox?.Text;
                     new EngineerWindow(int.Parse(userId)).ShowDialog();
@@ -149,6 +148,11 @@ namespace PL
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

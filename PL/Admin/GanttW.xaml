@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Admin"
         mc:Ignorable="d"
-        Title="GanttW" Height="450" Width="800"
+        Title="GanttW" Height="600" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
-    <!--<Grid>-->
-    <!--<DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="dataGrid_SelectionChanged"/>-->
+    <Window.Background>
+        <ImageBrush x:Name="back" ImageSource="C:\Users\USER\source\repos\dotNet5784_2159_6722\PL\Images/back.jpg"/>
+    </Window.Background>
+
     <Grid >
         <ItemsControl ItemsSource="{Binding ListOfTasks}" Margin="65,10,83,10">
             <ItemsControl.ItemTemplate>
@@ -16,11 +18,22 @@
                     <Border BorderThickness="2" BorderBrush="SaddleBrown">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                             <TextBlock HorizontalAlignment="Left" Text="{Binding TaskId}" FontWeight="Bold" Background="Aquamarine"/>
-                            <Rectangle HorizontalAlignment="Left" Height="20" Width="30"  Fill="White"/>
-
+                            <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding EstimatedDate ,Mode=TwoWay,Converter={StaticResource ConvertDateTimeToIntKey}}"  Fill="{Binding Background, ElementName=back}"/>
                             <!--Width="{Binding DaysFromStart}"
                             Width="{Binding DaysFromStart}"-->
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding NickName}" Width="{Binding StartDate}" FontWeight="Bold" Background="Aquamarine"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding NickName}" Width="{Binding NumOfDays*5}" FontWeight="Bold" Background="Aquamarine">
+
+       
+                                <TextBlock.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock FontWeight="Bold" Text="{Binding Dependencies}"/>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBlock.ToolTip>
+</TextBlock>
+
+
 
 
                         </StackPanel>

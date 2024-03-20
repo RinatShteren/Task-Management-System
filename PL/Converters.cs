@@ -32,3 +32,31 @@ class ConvertToString : IValueConverter
         throw new NotImplementedException();
     }
 }
+class ConvertDateTimeToInt : IValueConverter
+{
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return 10 * ((TimeSpan)((DateTime)value - s_bl.Clock)!).Days;
+
+    }
+
+    object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+class ConvertTimeSpanToInt : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return 40 * ((TimeSpan)value).Days;
+    }
+
+    object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}

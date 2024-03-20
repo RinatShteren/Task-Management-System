@@ -9,4 +9,6 @@ public interface IDal
     IUser User { get; }
     ITask Task { get; }
     ISchedule Schedule { get; }
+
+
 }

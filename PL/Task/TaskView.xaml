@@ -7,19 +7,23 @@
         mc:Ignorable="d"
         Title="TaskView" Height="450" Width="800"
         DataContext="{Binding CurrentTask, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+
+    <Window.Background>
+        <ImageBrush ImageSource="C:\Users\USER\source\repos\dotNet5784_2159_6722\PL\Images/back.jpg"/>
+    </Window.Background>
     <Grid>
-        <Label Content="TaskId" HorizontalAlignment="Left" Margin="122,100,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
-        <Label Content="NickName" HorizontalAlignment="Left" Height="25" Margin="122,130,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-        <Label Content="CreationDate" HorizontalAlignment="Left" Height="25" Margin="122,160,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-        <Label Content="EstimatedDate" HorizontalAlignment="Left" Height="25" Margin="122,190,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-        <Label Content="StartDate" HorizontalAlignment="Left" Height="25" Margin="122,220,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-        <Label Content="NumOfDays" HorizontalAlignment="Left" Margin="122,250,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
-        <Label Content="DeadLine" HorizontalAlignment="Left" Margin="122,280,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
-        <Label Content="FinishtDate" HorizontalAlignment="Left" Margin="122,310,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
-        <Label Content="Product" HorizontalAlignment="Left" Margin="122,340,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
-        <Label Content="Remarks" HorizontalAlignment="Left" Margin="430,100,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
-        <Label Content="EngineerId" HorizontalAlignment="Left" Margin="430,130,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
-        <Label Content="RequiredLevel" HorizontalAlignment="Left" Margin="430,160,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
+        <Label FontFamily="Segoe UI Black" Content="TaskId" HorizontalAlignment="Left" Margin="122,100,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
+        <Label FontFamily="Segoe UI Black" Content="NickName" HorizontalAlignment="Left" Height="25" Margin="122,130,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
+        <Label FontFamily="Segoe UI Black" Content="CreationDate" HorizontalAlignment="Left" Height="25" Margin="122,160,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
+        <Label FontFamily="Segoe UI Black" Content="EstimatedDate" HorizontalAlignment="Left" Height="25" Margin="122,190,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
+        <Label FontFamily="Segoe UI Black" Content="StartDate" HorizontalAlignment="Left" Height="25" Margin="122,220,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
+        <Label FontFamily="Segoe UI Black" Content="NumOfDays" HorizontalAlignment="Left" Margin="122,250,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
+        <Label FontFamily="Segoe UI Black" Content="DeadLine" HorizontalAlignment="Left" Margin="122,280,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
+        <Label FontFamily="Segoe UI Black" Content="FinishtDate" HorizontalAlignment="Left" Margin="122,310,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
+        <Label FontFamily="Segoe UI Black" Content="Product" HorizontalAlignment="Left" Margin="122,340,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
+        <Label FontFamily="Segoe UI Black" Content="Remarks" HorizontalAlignment="Left" Margin="430,100,0,0" VerticalAlignment="Top" Width="145" Height="25" RenderTransformOrigin="0.515,0.371"/>
+        <Label FontFamily="Segoe UI Black" Content="EngineerId" HorizontalAlignment="Left" Margin="430,130,0,0" VerticalAlignment="Top" Width="145" Height="26"/>
+        <Label FontFamily="Segoe UI Black" Content="RequiredLevel" HorizontalAlignment="Left" Margin="430,158,0,0" VerticalAlignment="Top" Width="145" Height="26"/>
 
 
 
@@ -59,16 +63,16 @@
   HorizontalAlignment="Left" Margin="260,310,0,0" VerticalAlignment="Top" Width="120" Height="25"/>
 
 
-        <TextBox Grid.Column="1" 
+        <TextBox 
    Text="{Binding Product, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
    HorizontalAlignment="Left" Margin="260,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
 
-        <TextBox Grid.Column="1" 
+        <TextBox 
    Text="{Binding Remarks, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
    HorizontalAlignment="Left" Margin="550,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" />
 
 
-        <TextBox Grid.Column="1" 
+        <TextBox 
    Text="{Binding EngineerId, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
    HorizontalAlignment="Left" Margin="550,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" />
 
@@ -77,21 +81,51 @@
    ItemsSource="{Binding  Source={StaticResource EngineerLevelCollectionKey}}"
    SelectedValue="{Binding Level, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}" Grid.ColumnSpan="2" Height="22">
         </ComboBox>
+        <!--try list-->
+        <!--<ListView Margin="10,48,10,91" Grid.Row="1" ItemsSource="{Binding CurrentDep }" 
+          FontFamily="Comic Sans MS">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+
+                </GridView>
+            </ListView.View>
+        </ListView>-->
+        <ListBox Height="100" Width="100" d:ItemsSource="{Binding CurrentTask.Dependencies }" Margin="502,230,198,104"/>
+        <ListBox Margin="430,209,130,76" SelectionChanged="ListBox_SelectionChanged_1"  FontFamily="Comic Sans MS">
+
+            <StackPanel>
+                <TextBlock Text="{Binding TaskId}" FontWeight="Bold"/>
+                <TextBlock Text="{Binding NickName}"/>
+                <TextBlock Text="{Binding Description}"/>
+                <TextBlock Text="{Binding Status}"/>
+            </StackPanel>
+
+
+        </ListBox>
+        <!--<ListView d:ItemsSource="{Binding CurrentTask.Dependencies }" Margin="61,77,72,37">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>-->
 
         <!-- list of dependent tasks -->
-        <ListBox BorderBrush="Black" BorderThickness="1"
-        ItemsSource="{Binding CurrentTask.Dependencies }" Height="207" VerticalAlignment="Top" Margin="481,217,21,0" Background="{x:Null}" SelectionChanged="ListBox_SelectionChanged">
+        <!--<ListBox BorderBrush="Black" BorderThickness="1"
+        ItemsSource="{Binding CurrentTask.Dependencies }" Height="156" VerticalAlignment="Top" Margin="673,202,72,0" Background="{x:Null}" SelectionChanged="ListBox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="0,0,0,10">
-                        <TextBlock Text="{Binding Id}" FontWeight="Bold"/>
-                        <TextBlock Text="{Binding Name}"/>
+                    <StackPanel>
+                        <TextBlock Text="hiosh" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding TaskId}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding NickName}"/>
                         <TextBlock Text="{Binding Description}"/>
                         <TextBlock Text="{Binding Status}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-        </ListBox>
+        </ListBox>-->
         <!--<ListView ItemsSource="{Binding CurrentTask.Dependencies, Mode=TwoWay, NotifyOnValidationError=True,ValidatesOnExceptions=True}" Margin="441,217,21,15">
             <ListView.View>
                 <GridView>
@@ -101,8 +135,10 @@
         </ListView>-->
         <Button 
      Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" 
-     HorizontalAlignment="Left" Margin="283,384,0,0"  VerticalAlignment="Top" Padding="5" 
-     Click="btnAddUpdate_Click" FontFamily="Comic Sans MS" Width="87" Height="16"/>
+     HorizontalAlignment="Left" Margin="320,370,0,0"  VerticalAlignment="Top" Padding="5" 
+     Click="btnAddUpdate_Click" FontFamily="Segoe UI Black" Width="117" Height="40"/>
+
+
 
 
     </Grid>

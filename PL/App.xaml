@@ -8,5 +8,7 @@
         <local:ConvertToString x:Key="ConvertToStringKey"/>
         <local:EngineerLevelCollection x:Key="EngineerLevelCollectionKey" />
         <local:StageCollection x:Key="StageCollectionKey" />
+        <local:ConvertDateTimeToInt x:Key="ConvertDateTimeToIntKey"/>
+       
     </Application.Resources>
 </Application>

@@ -9,6 +9,8 @@ public class TaskInList
     public string? Description { get; set; }
     public string? NickName { get; set; }//Alies
 
+    public BO.Status Status { get; set; }
+
     public DateTime? StartDate { get; set; }
 
     // public BO.Stutus Stutus { get; set; }

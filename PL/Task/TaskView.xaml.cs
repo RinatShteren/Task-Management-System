@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PL.Engineer;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -20,9 +21,21 @@ namespace PL.Task
             get { return (BO.Task)GetValue(CurrentTaskProperty); }
             set { SetValue(CurrentTaskProperty, value); }
         }
-
-
-
+        /////// <summary>
+        /////// /////////////////////////////
+        /////// </summary>
+        ////public static readonly DependencyProperty CurrentDepProperty =
+        //// DependencyProperty.Register("CurrentDep", typeof(List<BO.TaskInList>), typeof(TaskView), new PropertyMetadata(null));
+        ////public List<BO.TaskInList> CurrentDep
+        ////{
+        ////    get { return (List<BO.TaskInList>)GetValue(CurrentDepProperty); }
+        ////    set { SetValue(CurrentDepProperty, value); }
+        ////}
+        /////// <summary>
+        /////// ////////////////
+        /////// </summary>
+        /////// <param name="GetId"></param>
+        
         public TaskView(int GetId = 0)
         {
             try
@@ -39,6 +52,7 @@ namespace PL.Task
                     AddOrUpdate = 1;
                     CurrentTask = s_bl.Task.Read(GetId);
                 }
+                //CurrentDep = CurrentTask.Dependencies;
             }
             catch (Exception ex)
             {
@@ -74,6 +88,11 @@ namespace PL.Task
         {
             // Your event handling code here
             // This method will be called whenever the selection in the ListBox changes
+        }
+
+        private void ListBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

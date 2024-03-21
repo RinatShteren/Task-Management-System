@@ -23,7 +23,7 @@
            FontFamily="Segoe UI Black" HorizontalAlignment="Left" Margin="226,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="32"/>
         <TextBox Grid.Column="5" 
             Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
-           FontFamily="Segoe UI Black" IsEnabled="False" HorizontalAlignment="Left" Margin="226,118,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="36"/>
+           FontFamily="Segoe UI Black" IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToBooleanKey}}" HorizontalAlignment="Left" Margin="226,118,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="36" TextChanged="TextBox_TextChanged"/>
         <TextBox Grid.Column="5" 
             Text="{Binding Email, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
            FontFamily="Segoe UI Black" HorizontalAlignment="Left" Margin="226,169,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="36"/>

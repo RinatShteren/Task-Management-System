@@ -9,6 +9,8 @@
         <local:EngineerLevelCollection x:Key="EngineerLevelCollectionKey" />
         <local:StageCollection x:Key="StageCollectionKey" />
         <local:ConvertDateTimeToInt x:Key="ConvertDateTimeToIntKey"/>
+        <local:ConvertIdToBoolean x:Key="ConvertIdToBooleanKey"/>
        
+
     </Application.Resources>
 </Application>

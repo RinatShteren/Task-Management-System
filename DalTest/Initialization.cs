@@ -5,6 +5,7 @@ using System;
 
 
 
+
 public static class Initialization
 {
 
@@ -28,8 +29,8 @@ public static class Initialization
     {
         const int startDependenceId = 1;
         const int startTaskId = 1;
-
         s_dal = Factory.Get;
+        s_dal.Schedule.ResetDep();
         deleteEngineers();
         deleteTasks();
         deleteDependences();
@@ -108,8 +109,8 @@ public static class Initialization
         {
             int num = s_rand.Next(0, 20);
      
-            string _TaskNickName = TaskNickName[num];//כל פעם תוגרל רנדומלית משימה ותיאור
-            string _Description = TaskDescription[num];
+            string _TaskNickName = TaskNickName[i];//כל פעם תוגרל רנדומלית משימה ותיאור
+            string _Description = TaskDescription[i];
             bool _MileStone = false;
             if (i % 2 == 0) //כדי לגוון שלפעמים יהיה טרו ולפעמים פאלס
                 _MileStone = true;

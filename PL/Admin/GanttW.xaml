@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Admin"
         mc:Ignorable="d"
-        Title="GanttW" Height="600" Width="800"
+        Title="GanttW" Height="650" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Window.Background>
         <ImageBrush x:Name="back" ImageSource="C:\Users\USER\source\repos\dotNet5784_2159_6722\PL\Images/back.jpg"/>
     </Window.Background>
 
     <Grid >
-        <ItemsControl ItemsSource="{Binding ListOfTasks}" Margin="65,10,83,10">
+        <ItemsControl ItemsSource="{Binding ListOfTasks}" Margin="74,51,74,44">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="2" BorderBrush="SaddleBrown">
@@ -22,12 +22,29 @@
                             <!--Width="{Binding DaysFromStart}"
                             Width="{Binding DaysFromStart}"-->
                             <TextBlock HorizontalAlignment="Left" Text="{Binding NickName}" Width="{Binding NumOfDays*5}" FontWeight="Bold" Background="Aquamarine">
+<!--Width="{Binding Duration, Mode=TwoWay, Converter={StaticResource ConvertTimeSpanToIntKey}}" FontWeight="Bold"
+           Background="{Binding Status,Mode=TwoWay,Converter={StaticResource ConvertStatusToColorKey}}">-->
 
-       
                                 <TextBlock.ToolTip>
                                     <ToolTip>
                                         <StackPanel>
-                                            <TextBlock FontWeight="Bold" Text="{Binding Dependencies}"/>
+                                            <TextBlock FontWeight="Bold" Text="Task Details:"/>
+                                            <TextBlock FontWeight="Bold" Text="{Binding NickName}"/>
+                                            <TextBlock FontWeight="Bold" Text="{Binding Description}"/>
+                                            <TextBlock FontWeight="Bold" Text="{Binding StartDate}"/>
+                                            <TextBlock FontWeight="Bold" Text="Dependencies are-"/>
+                                            <ItemsControl ItemsSource="{Binding Dependencies}" Margin="65,10,83,10">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock FontWeight="Bold">
+                                                            <Run Text="{Binding TaskId}"/>  
+                                                            <Run Text=":"/> 
+                                                            <Run Text="{Binding NickName}"/>
+                                                        </TextBlock>
+                                                    </DataTemplate>
+
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
                                         </StackPanel>
                                     </ToolTip>
                                 </TextBlock.ToolTip>
@@ -41,6 +58,8 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+        <Label Content="Gantt" HorizontalAlignment="Left" Height="61" Margin="36,20,0,0" VerticalAlignment="Top" Width="432" FontFamily="Segoe UI Black" FontSize="18
+         " RenderTransformOrigin="0.497,1.129"/>
     </Grid>
     <!--</Grid>-->
 </Window>

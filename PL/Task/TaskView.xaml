@@ -11,102 +11,121 @@
     <Window.Background>
         <ImageBrush ImageSource="C:\Users\אור אסתר כהן\source\repos\dotNet5784_2159_6722\PL\Images/back.jpg"/>
     </Window.Background>
-    <Grid>
-        <Label FontFamily="Segoe UI Black" Content="TaskId" HorizontalAlignment="Left" Margin="122,100,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
-        <Label FontFamily="Segoe UI Black" Content="NickName" HorizontalAlignment="Left" Height="25" Margin="122,130,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-        <Label FontFamily="Segoe UI Black" Content="CreationDate" HorizontalAlignment="Left" Height="25" Margin="122,160,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-        <Label FontFamily="Segoe UI Black" Content="EstimatedDate" HorizontalAlignment="Left" Height="25" Margin="122,190,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-        <Label FontFamily="Segoe UI Black" Content="StartDate" HorizontalAlignment="Left" Height="25" Margin="122,220,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-        <Label FontFamily="Segoe UI Black" Content="NumOfDays" HorizontalAlignment="Left" Margin="122,250,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
-        <Label FontFamily="Segoe UI Black" Content="DeadLine" HorizontalAlignment="Left" Margin="122,280,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
-        <Label FontFamily="Segoe UI Black" Content="FinishtDate" HorizontalAlignment="Left" Margin="122,310,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
-        <Label FontFamily="Segoe UI Black" Content="Product" HorizontalAlignment="Left" Margin="122,340,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
-        <Label FontFamily="Segoe UI Black" Content="Remarks" HorizontalAlignment="Left" Margin="430,100,0,0" VerticalAlignment="Top" Width="145" Height="25" RenderTransformOrigin="0.515,0.371"/>
-        <Label FontFamily="Segoe UI Black" Content="EngineerId" HorizontalAlignment="Left" Margin="430,130,0,0" VerticalAlignment="Top" Width="145" Height="26"/>
-        <Label FontFamily="Segoe UI Black" Content="RequiredLevel" HorizontalAlignment="Left" Margin="430,158,0,0" VerticalAlignment="Top" Width="145" Height="26"/>
+    <ScrollViewer >
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <Label FontFamily="Segoe UI Black" Content="TaskId" Width="145" Grid.ColumnSpan="2" Height="30"/>
+                    <Label FontFamily="Segoe UI Black" Content="NickName" Width="120" Grid.ColumnSpan="2"/>
+                    <Label FontFamily="Segoe UI Black" Content="CreationDate" Width="120" Grid.ColumnSpan="2"/>
+                    <Label FontFamily="Segoe UI Black" Content="EstimatedDate" Width="120" Grid.ColumnSpan="2"/>
+                    <Label FontFamily="Segoe UI Black" Content="StartDate" Width="120" Grid.ColumnSpan="2"/>
+                    <Label FontFamily="Segoe UI Black" Content="NumOfDays" Width="145" Grid.ColumnSpan="2" Height="30"/>
+                    <Label FontFamily="Segoe UI Black" Content="DeadLine" Width="145" Grid.ColumnSpan="2" Height="30"/>
+                    <Label FontFamily="Segoe UI Black" Content="FinishtDate" Width="145" Grid.ColumnSpan="2" Height="30"/>
+                    <Label FontFamily="Segoe UI Black" Content="Product" Width="145" Grid.ColumnSpan="2" Height="30"/>
+                    <Label FontFamily="Segoe UI Black" Content="Remarks" Width="145" Height="30"/>
+                    <Label FontFamily="Segoe UI Black" Content="EngineerId" Width="145" Height="30"/>
+                    <Label FontFamily="Segoe UI Black" Content="RequiredLevel" Width="145" Height="30"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBox Text="{Binding TaskId, Mode=TwoWay, NotifyOnValidationError=true}"
+                       HorizontalAlignment="Left" Margin="10" TextWrapping="Wrap" Width="120" Height="30"/>
+
+                    <TextBox Grid.Column="1" 
+                          Text="{Binding NickName, Mode=TwoWay, NotifyOnValidationError=true}"
+                         IsEnabled="False" HorizontalAlignment="Left" Margin="10"  Width="120" Height="30" />
+
+                    <DatePicker 
+          Text="{Binding CreationDate, Mode=TwoWay, NotifyOnValidationError=true}"
+          HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Height="22"/>
+
+                    <DatePicker 
+         Text="{Binding EstimatedDate, Mode=TwoWay, NotifyOnValidationError=true}"
+         HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="25"/>
+
+                    <DatePicker 
+         Text="{Binding StartDate, Mode=TwoWay, NotifyOnValidationError=true}"
+         HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Height="25"/>
+
+
+                    <TextBox Grid.Column="1"
+          Text="{Binding NumOfDays, Mode=TwoWay,ValidatesOnExceptions=true}"
+          IsEnabled="False" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="18" />
+
+
+                    <DatePicker 
+         Text="{Binding DeadLine, Mode=TwoWay, NotifyOnValidationError=true}"
+          HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="25"/>
+
+                    <DatePicker 
+         Text="{Binding FinishtDate, Mode=TwoWay, NotifyOnValidationError=true}"
+         HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Height="25"/>
+
+
+                    <TextBox 
+          Text="{Binding Product, Mode=TwoWay, NotifyOnValidationError=true}"
+          HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
+
+                    <TextBox 
+          Text="{Binding Remarks, Mode=TwoWay, NotifyOnValidationError=true}"
+          HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" />
+
+
+                    <TextBox 
+          Text="{Binding EngineerId, Mode=TwoWay, NotifyOnValidationError=true}"
+          HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" />
+
+
+                    <ComboBox HorizontalAlignment="Left" Margin="10"  VerticalAlignment="Top" Width="120"
+          ItemsSource="{Binding  Source={StaticResource EngineerLevelCollectionKey}}"
+          SelectedValue="{Binding Level, Mode=TwoWay, NotifyOnValidationError=true}" Grid.ColumnSpan="2" Height="22"/>
+
+
+                </StackPanel>
+            </Grid>
 
 
 
 
-        <TextBox Grid.Column="1" 
-   Text="{Binding TaskId, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
-   HorizontalAlignment="Left" Margin="260,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
-
-        <TextBox Grid.Column="1" 
-   Text="{Binding NickName, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
-  IsEnabled="False" HorizontalAlignment="Left" Margin="260,130,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="18" />
-
-        <DatePicker 
-   Text="{Binding CreationDate, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
-   HorizontalAlignment="Left" Margin="260,160,0,0" VerticalAlignment="Top" Width="120" Height="22"/>
-
-        <DatePicker 
-  Text="{Binding EstimatedDate, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
-  HorizontalAlignment="Left" Margin="260,190,0,0" VerticalAlignment="Top" Width="120" Height="25"/>
-
-        <DatePicker 
-  Text="{Binding StartDate, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
-  HorizontalAlignment="Left" Margin="260,220,0,0" VerticalAlignment="Top" Width="120" Height="25"/>
 
 
-        <TextBox Grid.Column="1"
-   Text="{Binding NumOfDays, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
-   IsEnabled="False" HorizontalAlignment="Left" Margin="260,250,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="18" />
+            <ListBox SelectionChanged="ListBox_SelectionChanged_1"  FontFamily="Comic Sans MS" Grid.Row="1">
 
+                <StackPanel Height="101" Width="274">
+                    <ItemsControl ItemsSource="{Binding Dependencies}" Height="100">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock FontWeight="Bold"><Run Text="{Binding TaskId}"/><Run Text=" "/><Run Text=":"/><Run Text=" "/><Run Text="{Binding NickName}"/></TextBlock>
+                            </DataTemplate>
 
-        <DatePicker 
-  Text="{Binding DeadLine, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
-   HorizontalAlignment="Left" Margin="260,280,0,0" VerticalAlignment="Top" Width="120" Height="25"/>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
 
-        <DatePicker 
-  Text="{Binding FinishtDate, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
-  HorizontalAlignment="Left" Margin="260,310,0,0" VerticalAlignment="Top" Width="120" Height="25"/>
+                </StackPanel>
+            </ListBox>
+            <Button  Grid.Row="2"
+             Content="{Binding TaskId, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" 
+             HorizontalAlignment="Left" Margin="320,370,0,0"  VerticalAlignment="Top" Padding="5" 
+             Click="btnAddUpdate_Click" FontFamily="Segoe UI Black" Width="117" Height="40"/>
 
-
-        <TextBox 
-   Text="{Binding Product, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
-   HorizontalAlignment="Left" Margin="260,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
-
-        <TextBox 
-   Text="{Binding Remarks, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
-   HorizontalAlignment="Left" Margin="550,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" />
-
-
-        <TextBox 
-   Text="{Binding EngineerId, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
-   HorizontalAlignment="Left" Margin="550,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" />
-
-
-        <ComboBox HorizontalAlignment="Left" Margin="550,160,0,0"  VerticalAlignment="Top" Width="120"
-   ItemsSource="{Binding  Source={StaticResource EngineerLevelCollectionKey}}"
-   SelectedValue="{Binding Level, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}" Grid.ColumnSpan="2" Height="22">
-        </ComboBox>
-
-
-        <ListBox Margin="430,213,85,98" SelectionChanged="ListBox_SelectionChanged_1"  FontFamily="Comic Sans MS">
-
-            <StackPanel Height="101" Width="274">
-                <ItemsControl ItemsSource="{Binding Dependencies}" Height="100">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock FontWeight="Bold"><Run Text="{Binding TaskId}"/><Run Text=" "/><Run Text=":"/><Run Text=" "/><Run Text="{Binding NickName}"/></TextBlock>
-                        </DataTemplate>
-
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-
-            </StackPanel>
-
-
-        </ListBox>
-        <Button 
-     Content="{Binding TaskId, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" 
-     HorizontalAlignment="Left" Margin="320,370,0,0"  VerticalAlignment="Top" Padding="5" 
-     Click="btnAddUpdate_Click" FontFamily="Segoe UI Black" Width="117" Height="40"/>
-        <Label FontFamily="Segoe UI Black" Content="Dependencies List:" HorizontalAlignment="Left" Margin="430,182,0,0" VerticalAlignment="Top" Width="145" Height="26"/>
+            <Label FontFamily="Segoe UI Black" Content="Dependencies List:" HorizontalAlignment="Center" Width="145" Height="30"/>
 
 
 
 
-    </Grid>
+        </Grid>
+    </ScrollViewer>
+
 </Window>

@@ -48,9 +48,9 @@ internal class TaskImplementation : BlApi.ITask
         }
 
     }
-    public BO.Status getStatus(BO.Task task)
+
+    private Status getStatus(DO.Task task)
     {
-        TimeSpan t = TimeSpan.FromDays(2);
         if (task.EstimatedDate == null)
             return BO.Status.Unscheduled;
         else
@@ -63,6 +63,7 @@ internal class TaskImplementation : BlApi.ITask
             return BO.Status.Done;
 
     }
+
     public BO.Task? Read(int id)
     {
         DO.Task? doTask = _dal.Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does not exist");
@@ -97,10 +98,9 @@ internal class TaskImplementation : BlApi.ITask
 
         task.DeadLine = GetEndTaskDate_BO(task);
         task.Dependencies = GetLinks(task);
-        task.Status = getStatus(task);
+        task.Status = getStatus(doTask);
         return task;
     }
-
 
     public IEnumerable<BO.TaskInList> ReadAllOptionalTasksForEngineer(BO.Engineer engineer) =>
         from DO.Task task in _dal.Task.ReadAll(task => taskCanBeAssginToEngineer(task, engineer))
@@ -118,8 +118,6 @@ internal class TaskImplementation : BlApi.ITask
 
         return task.TaskId == engineer.Task.Id;
     }
-
-
 
     public void AssginTaskToEngineer(BO.Engineer engineer)
     {
@@ -148,7 +146,8 @@ internal class TaskImplementation : BlApi.ITask
             TaskId = item.TaskId,
             NickName = item.NickName,
             Description = item.Description,
-            StartDate = item.StartDate
+            StartDate = item.StartDate,
+            Status = getStatus(item)
         };
     }
 

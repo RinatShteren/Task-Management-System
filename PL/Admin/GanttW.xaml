@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="GanttW" Height="650" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
-    <Window.Background>
+    <!--<Window.Background>
         <ImageBrush x:Name="back" ImageSource="C:\Users\USER\source\repos\dotNet5784_2159_6722\PL\Images/back.jpg"/>
-    </Window.Background>
+    </Window.Background>-->
 
     <Grid >
         <ItemsControl ItemsSource="{Binding ListOfTasks}" Margin="74,50,170,44">

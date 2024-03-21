@@ -19,7 +19,18 @@ namespace PL.Admin
     /// </summary>
     public partial class DateSelectionForm : Window
     {
-        public DateTime SelectedDate { get; private set; }
+
+
+        public DateTime SelectedDate
+        {
+            get { return (DateTime)GetValue(SelectedDateProperty); }
+            set { SetValue(SelectedDateProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedDate.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedDateProperty =
+            DependencyProperty.Register("SelectedDate", typeof(DateTime), typeof(DateSelectionForm));
+
 
         public DateSelectionForm()
         {
@@ -28,13 +39,11 @@ namespace PL.Admin
 
         private void confirmButton_Click(object sender, EventArgs e)
         {
-            // בדיקה שהמשתמש הכניס תאריך חוקי
-            if (DateTime.TryParse(pic.Text, out DateTime selectedDate))
+            try
             {
-                SelectedDate = selectedDate;
-            
+                //SelectedDate;
             }
-            else
+            catch
             {
                 MessageBox.Show("date is not valid");
             }

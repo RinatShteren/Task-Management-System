@@ -14,4 +14,9 @@ internal class ScheduleImplementation : ISchedule
 		get { return  _startProject; }
 		set {  _startProject = value; }
 	}
+
+    public void ResetDep()
+	{
+
+	}
 }

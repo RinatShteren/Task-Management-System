@@ -5,29 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
-        Title="RegisterTaskWindow" Height="450" Width="800"
+        Title="RegisterTaskWindow" Height="600" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
+
+    <Window.Background>
+        <ImageBrush ImageSource="C:\Users\USER\source\repos\dotNet5784_2159_6722\PL\Images/back.jpg"/>
+    </Window.Background>
     <!--Extrnal Grid-->
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="500*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="66*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
 
         <!--Internal, Upper Grid-->
-        <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+        <Grid Height="auto" Grid.Row="0" Width="auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Label" HorizontalAlignment="Left" Margin="64,22,0,0" VerticalAlignment="Top" Grid.Column="0"/>
+
+            <Label Content="Please select a task" HorizontalAlignment="Left" Height="61" Margin="35,20,0,0" VerticalAlignment="Top" Width="432" FontFamily="Segoe UI Black" FontSize="18
+       " Grid.ColumnSpan="2" RenderTransformOrigin="0.497,1.129"/>
         </Grid>
         <!--List of tasks-->
 
-        <ListView Margin="5,32,0,5" Grid.Row="1" ItemsSource="{Binding TaskList}" MouseDoubleClick="ListViewDoubleClick"
-                    >
+        <ListView Margin="10,32,10,23" Grid.Row="1" ItemsSource="{Binding TaskList}" MouseDoubleClick="ListViewDoubleClick"
+                    FontFamily="Comic Sans MS" >
             <!--List of engineers-->
             <ListView.View>
                 <GridView>

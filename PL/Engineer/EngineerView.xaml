@@ -6,42 +6,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
-        Title="EngineerView" Height="450" Width="800"
+        Title="EngineerView" Height="500" Width="600"
         DataContext="{Binding CurrentEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+    <Window.Background>
+        <ImageBrush ImageSource="C:\Users\USER\source\repos\dotNet5784_2159_6722\PL\Images/back.jpg"/>
+    </Window.Background>
+    <Grid Margin="60,18,175,-16">
 
-    <Grid Margin="135,0,0,0">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Label Content="Name" HorizontalAlignment="Left" Margin="122,105,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>
-        <Label Content="Id" HorizontalAlignment="Left" Height="27" Margin="122,150,0,0" VerticalAlignment="Top" Width="140" Grid.ColumnSpan="2"/>
-        <Label Content="Email&#xD;&#xA;Email" HorizontalAlignment="Left" Height="25" Margin="122,196,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-        <Label Content="Level" HorizontalAlignment="Left" Height="25" Margin="122,248,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-        <Label Content="Cost" HorizontalAlignment="Left" Height="25" Margin="122,293,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.961,0.615" Grid.ColumnSpan="2"/>
-        <TextBox Grid.Column="1" 
+        <Label Content="Name" HorizontalAlignment="Left" Margin="94,67,0,0" VerticalAlignment="Top" Width="140" Height="32" FontSize="20" FontFamily="Segoe UI Black"/>
+        <Label Content="Id" HorizontalAlignment="Left" Height="36" Margin="94,118,0,0" VerticalAlignment="Top" Width="120" FontSize="20" FontFamily="Segoe UI Black"/>
+        <Label Content="Email&#xD;&#xA;Email" HorizontalAlignment="Left" Height="36" Margin="94,169,0,0" VerticalAlignment="Top" Width="120" FontSize="20" FontFamily="Segoe UI Black"/>
+        <Label Content="Level" HorizontalAlignment="Left" Height="34" VerticalAlignment="Center" Width="120" FontSize="20" FontFamily="Segoe UI Black" Margin="94,0,0,0"/>
+        <Label Content="Cost" HorizontalAlignment="Left" Height="41" Margin="94,276,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.961,0.615" FontSize="20" FontFamily="Segoe UI Black"/>
+        <TextBox Grid.Column="5" 
             Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
-            HorizontalAlignment="Left" Margin="267,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26"/>
-        <TextBox Grid.Column="1" 
+           FontFamily="Segoe UI Black" HorizontalAlignment="Left" Margin="226,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="32"/>
+        <TextBox Grid.Column="5" 
             Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
-           IsEnabled="False" HorizontalAlignment="Left" Margin="267,150,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="27"/>
-        <TextBox Grid.Column="1" 
+           FontFamily="Segoe UI Black" IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToBooleanKey}}" HorizontalAlignment="Left" Margin="226,118,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="36" TextChanged="TextBox_TextChanged"/>
+        <TextBox Grid.Column="5" 
             Text="{Binding Email, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
-            HorizontalAlignment="Left" Margin="267,196,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="28"/>
-        <TextBox Grid.Column="1" 
+           FontFamily="Segoe UI Black" HorizontalAlignment="Left" Margin="226,169,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="36"/>
+        <TextBox Grid.Column="5" 
             Text="{Binding Cost, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
-            HorizontalAlignment="Left" Margin="267,293,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="30"/>
+           FontFamily="Segoe UI Black" HorizontalAlignment="Left" Margin="226,276,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="40"/>
 
         <!--hendle engineer level-->
-        <ComboBox HorizontalAlignment="Left" Margin="267,248,0,0"  VerticalAlignment="Top" Width="120"
+        <ComboBox HorizontalAlignment="Left" Margin="226,0,0,0"  VerticalAlignment="Center" Width="120" FontFamily="Segoe UI Black"
             ItemsSource="{Binding  Source={StaticResource EngineerLevelCollectionKey}}"
-            SelectedValue="{Binding Level, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}" Grid.ColumnSpan="2" Height="28">
-        </ComboBox>
+            SelectedValue="{Binding Level, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}" Height="34" Grid.Column="5" RenderTransformOrigin="0.523,-0.425"/>
         <!--hendle botton update/ add-->
         <Button 
             Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" 
-            HorizontalAlignment="Left" Margin="172,341,0,0"  VerticalAlignment="Top" Padding="5" 
-            Click="btnAddUpdate_Click" FontFamily="Comic Sans MS" Width="120" Height="35" Grid.ColumnSpan="2"/>
+            HorizontalAlignment="Left" Margin="141,363,0,0"  VerticalAlignment="Top" Padding="5" 
+            Click="btnAddUpdate_Click"  FontFamily="Segoe UI Black" Width="145" Height="53"/>
 
 
     </Grid>

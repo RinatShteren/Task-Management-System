@@ -1,4 +1,5 @@
-﻿using PL.Engineer;
+﻿using BO;
+using PL.Engineer;
 using PL.Task;
 using System;
 using System.Collections.Generic;
@@ -58,8 +59,23 @@ namespace PL.Admin
 
         private void AutoSchedule_Click(object sender, RoutedEventArgs e)
         {
-            s_bl.Task.CalculateCloserStartDateForAllTasks();
-            s_bl.Task.EnginnerToTask();
+            try
+            {
+                DateSelectionForm dateSelectionForm = new DateSelectionForm();
+                dateSelectionForm.ShowDialog();
+
+                DateTime selectedDate = dateSelectionForm.SelectedDate;
+                               
+                s_bl.Schedule.StartProject = dateSelectionForm.SelectedDate;
+                MessageBox.Show($"The date you choose: {selectedDate.ToShortDateString()}");
+
+                s_bl.Task.CalculateCloserStartDateForAllTasks();
+                s_bl.Task.EnginnerToTask();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void ButtonGuntt_Click(object sender, RoutedEventArgs e)

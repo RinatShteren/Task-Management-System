@@ -12,7 +12,7 @@
     </Window.Background>
 
     <Grid >
-        <ItemsControl ItemsSource="{Binding ListOfTasks}" Margin="74,51,74,44">
+        <ItemsControl ItemsSource="{Binding ListOfTasks}" Margin="74,50,170,44">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="2" BorderBrush="SaddleBrown">
@@ -21,9 +21,8 @@
                             <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding EstimatedDate ,Mode=TwoWay,Converter={StaticResource ConvertDateTimeToIntKey}}"  Fill="{Binding Background, ElementName=back}"/>
                             <!--Width="{Binding DaysFromStart}"
                             Width="{Binding DaysFromStart}"-->
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding NickName}" Width="{Binding NumOfDays*5}" FontWeight="Bold" Background="Aquamarine">
-<!--Width="{Binding Duration, Mode=TwoWay, Converter={StaticResource ConvertTimeSpanToIntKey}}" FontWeight="Bold"
-           Background="{Binding Status,Mode=TwoWay,Converter={StaticResource ConvertStatusToColorKey}}">-->
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding NickName}" Width="{Binding NumOfDays*5}" FontWeight="Bold" 
+                                       Background="{Binding Status,Mode=TwoWay,Converter={StaticResource ConvertStatusToColorKey}}">
 
                                 <TextBlock.ToolTip>
                                     <ToolTip>
@@ -60,6 +59,10 @@
         </ItemsControl>
         <Label Content="Gantt" HorizontalAlignment="Left" Height="61" Margin="36,20,0,0" VerticalAlignment="Top" Width="432" FontFamily="Segoe UI Black" FontSize="18
          " RenderTransformOrigin="0.497,1.129"/>
+        <Label Content=" Scheduled-&#xD;&#xA; Burly Wood " HorizontalAlignment="Left" Height="54" Margin="683,371,0,0" VerticalAlignment="Top" Width="80"/>
+        <Label Content="OnTrack-&#xD;&#xA;Red " HorizontalAlignment="Left" Height="50" Margin="683,430,0,0" VerticalAlignment="Top" Width="80"/>
+        <Label Content=" Done-&#xD;&#xA; Honeydew&#xA; " HorizontalAlignment="Left" Height="45" Margin="683,485,0,0" VerticalAlignment="Top" Width="80"/>
+
     </Grid>
     <!--</Grid>-->
 </Window>

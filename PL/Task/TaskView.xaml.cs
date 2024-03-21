@@ -21,20 +21,7 @@ namespace PL.Task
             get { return (BO.Task)GetValue(CurrentTaskProperty); }
             set { SetValue(CurrentTaskProperty, value); }
         }
-        /////// <summary>
-        /////// /////////////////////////////
-        /////// </summary>
-        ////public static readonly DependencyProperty CurrentDepProperty =
-        //// DependencyProperty.Register("CurrentDep", typeof(List<BO.TaskInList>), typeof(TaskView), new PropertyMetadata(null));
-        ////public List<BO.TaskInList> CurrentDep
-        ////{
-        ////    get { return (List<BO.TaskInList>)GetValue(CurrentDepProperty); }
-        ////    set { SetValue(CurrentDepProperty, value); }
-        ////}
-        /////// <summary>
-        /////// ////////////////
-        /////// </summary>
-        /////// <param name="GetId"></param>
+
         
         public TaskView(int GetId = 0)
         {
@@ -52,7 +39,7 @@ namespace PL.Task
                     AddOrUpdate = 1;
                     CurrentTask = s_bl.Task.Read(GetId);
                 }
-                //CurrentDep = CurrentTask.Dependencies;
+               
             }
             catch (Exception ex)
             {

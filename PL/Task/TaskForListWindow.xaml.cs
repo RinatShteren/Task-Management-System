@@ -22,7 +22,7 @@ namespace PL.Task
     public partial class TaskForListWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        public BO.Stage Stage { get; set; } = BO.Stage.Planning;
+        public BO.Status Status { get; set; } = BO.Status.Scheduled;
 
         public IEnumerable<BO.TaskInList> TaskList
         {
@@ -38,7 +38,7 @@ namespace PL.Task
             try
             {
                 InitializeComponent();
-                TaskList = s_bl.Task.ReadAll().Where(task => task.TaskId > 0);
+                TaskList = s_bl.Task.ReadAll(/*task=>task.taskCanBeAssginToEngineer()*/).Where(task => task.TaskId > 0);
             }
             catch (Exception ex)
             {
@@ -51,9 +51,13 @@ namespace PL.Task
         {
             try
             {
-                TaskList = ((Stage == BO.Stage.Planning) ?   //?? 
-               s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(tsk => Stage == BO.Stage.Planning)!)  //??
-               .OrderBy(t => t.TaskId); // sort by ID  
+                TaskList = ((Status == BO.Status.Scheduled) ?   //?? 
+              s_bl?.Task.ReadAll(null)! : s_bl?.Task.ReadAll(tsk => tsk.Status == BO.Status.Scheduled)!)
+              .OrderBy(t => t.TaskId); 
+                // sort by ID  
+                                       // TaskList = ((Status == BO.Status.Scheduled) ?   //?? 
+                                       //s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(tsk => Status == BO.Status.Scheduled)!)  //??
+                                       //.OrderBy(t => t.TaskId); // sort by ID  
             }
             catch (Exception ex)
             {
@@ -101,8 +105,8 @@ namespace PL.Task
         {
             try
             {
-                TaskList = ((Stage == BO.Stage.Planning) ?   //?? 
-            s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(tsk => Stage == BO.Stage.Planning)!)  //??
+                TaskList = ((Status == BO.Status.Scheduled) ?   //?? 
+            s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(tsk => Status == BO.Status.Scheduled)!)  //??
                .OrderBy(t => t.TaskId);
             } // sort by ID 
 

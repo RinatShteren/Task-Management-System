@@ -18,12 +18,12 @@ internal class EngineerImplementation : BlApi.IEngineer
 
 
     public EngineerImplementation(BlApi.ITask task) => _task = task;
-   
+
     public int AddEngineer(BO.Engineer boEngineer)
     {
         DO.Engineer doEngineer = new DO.Engineer
             (boEngineer.Id, boEngineer.Name, boEngineer.Email, (DO.EngineerLevel)boEngineer.Level, boEngineer.Cost);
-        
+
         try
         {
             if (double.IsNegative(doEngineer.Id)) throw new BO.BlNotVaildException("Id is not vaild");
@@ -74,7 +74,7 @@ internal class EngineerImplementation : BlApi.IEngineer
         return engeneerToRead;
     }
 
-    public IEnumerable<BO.Engineer> ReadAll(Func<BO.Engineer,bool> p = null)
+    public IEnumerable<BO.Engineer> ReadAll(Func<BO.Engineer, bool> p = null)
     {
 
 
@@ -153,11 +153,11 @@ internal class EngineerImplementation : BlApi.IEngineer
             (boEngineer.Id, boEngineer.Name, boEngineer.Email, (DO.EngineerLevel)boEngineer.Level, boEngineer.Cost);
         try
         {
-            if (double.IsNegative(doEngineer.Id )) throw new BO.BlNotVaildException("Id is not vaild");
+            if (double.IsNegative(doEngineer.Id)) throw new BO.BlNotVaildException("Id is not vaild");
 
             if (string.IsNullOrWhiteSpace(doEngineer.Name)) throw new BO.BlNotVaildException("Name is empty");
 
-            if (double.IsNegative( doEngineer.Cost)) throw new BO.BlNotVaildException("Cost under zero");
+            if (double.IsNegative(doEngineer.Cost)) throw new BO.BlNotVaildException("Cost under zero");
 
             if (!new EmailAddressAttribute().IsValid(doEngineer.Email)) throw new BO.BlNotVaildException("Email not vaild");
 
@@ -166,7 +166,7 @@ internal class EngineerImplementation : BlApi.IEngineer
             //UPDATE the engineer if content is vaild
 
             _dal.Engineer.Update(doEngineer);
-          
+
         }
         catch (DO.DalAlreadyExistsException ex)
         {
@@ -174,14 +174,22 @@ internal class EngineerImplementation : BlApi.IEngineer
         }
 
     }
-    public IEnumerable<BO.TaskInList> ReadAllOptionalTasksForEngineer(BO.Engineer engineer) =>
-        _task.ReadAllOptionalTasksForEngineer(engineer);
+    public IEnumerable<BO.TaskInList> ReadAllOptionalTasksForEngineer(BO.Engineer engineer)
+    {
+        return _bl.Task.ReadAllOptionalTasksForEngineer(engineer);
+
+       // return _task.ReadAllOptionalTasksForEngineer(engineer);
+        }
 
     public void AssginTaskToEngineer(BO.Engineer engineer)
     {
         //if he has tasts 
         //if (engineer.Task != null)
-        _task.AssginTaskToEngineer(engineer);
+        //var TempEngineer = _dal.Engineer.Read(eng => (eng == engineer.Task!.Id))//&& task.EngineerId == engineer.Id
+        // ?? throw new BlDoesNotExistException("task dous not fit");
+
+        //_dal.Engineer.Update(TempEngineer with { Task = engineer.Id });
+        _bl.Task.AssginTaskToEngineer(engineer);
     }
 
     public BO.Engineer doToBo(DO.Engineer doEng)

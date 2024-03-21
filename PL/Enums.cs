@@ -18,32 +18,7 @@ internal class EngineerLevelCollection : IEnumerable
 
 internal class StageCollection : IEnumerable
 {
-    static readonly IEnumerable<BO.Stage> s_enums =
-(Enum.GetValues(typeof(BO.Stage)) as IEnumerable<BO.Stage>)!;
+    static readonly IEnumerable<BO.Status> s_enums =
+(Enum.GetValues(typeof(BO.Status)) as IEnumerable<BO.Status>)!;
     public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
 }
-/*
-public enum EngineerLevel
-{
-    Beginner,
-    AdvancedBeginner,
-    Intermediate,
-    Advanced,
-    Expert,
-    All
-
-internal class EngineerLevelCollection : IEnumerable
-{
-    public static readonly Dictionary<string, BO.EngineerLevel?> _engineerLevelsMap =
-       Enum.GetValues(typeof(BO.EngineerLevel))
-           .Cast<BO.EngineerLevel>()
-           .ToDictionary(engineerLevel => engineerLevel.ToString(), engineerLevel => (BO.EngineerLevel?)engineerLevel);
-
-    static EngineerLevelCollection()
-    {
-        _engineerLevelsMap.Add("All", null);
-    }
-
-    public IEnumerator GetEnumerator() =>
-        _engineerLevelsMap.Values.GetEnumerator();
-}}*/

@@ -1,8 +1,11 @@
-﻿using DalApi;
+﻿using BO;
+using DalApi;
+using PL.Admin;
 using PL.Task;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +27,7 @@ namespace PL.Engineer
     {
         List<BO.Task> listPerson;
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-
+        public BO.EngineerLevel EngineerLevel { get; set; } = BO.EngineerLevel.Beginner;
         public IEnumerable<BO.TaskInList> CurrentTaskInList
         {
             get { return (IEnumerable<BO.TaskInList>)GetValue(TaskListProperty); }
@@ -40,7 +43,15 @@ namespace PL.Engineer
     public static readonly DependencyProperty CurrentEngineerProperty =
            DependencyProperty.Register("CurrentEngineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
 
-      
+        public BO.Task CurrentTask
+        {
+            get { return (BO.Task)GetValue(CurrentTaskProperty); }
+            set { SetValue(CurrentTaskProperty, value); }
+        }
+        public static readonly DependencyProperty CurrentTaskProperty =
+               DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(EngineerWindow), new PropertyMetadata(null));
+
+
         public EngineerWindow(int GetId)
         {
             try
@@ -70,7 +81,39 @@ namespace PL.Engineer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
+            UpdateEngineer();
+
+        }
+
+        private void Button_Click_Update(object sender, RoutedEventArgs e)
+        {
+
+            //  BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
+            CurrentTask = s_bl.Task.Read(CurrentEngineer.Task.Id);
+
+            new TaskView(CurrentTask.TaskId).ShowDialog();
+            //UpdateTask();
+        }
+
+        void UpdateEngineer()
+        {
+           CurrentEngineer =
+               s_bl?.Engineer.Read(CurrentEngineer.Id);
+
+        }
+        void UpdateTask()
+        {
+            try
+            {
+                CurrentTask = s_bl?.Task.Read(CurrentEngineer.Task.Id);
+            } // sort by ID 
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
     }
+   
 }

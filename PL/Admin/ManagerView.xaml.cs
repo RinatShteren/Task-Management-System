@@ -1,4 +1,5 @@
-﻿using PL.Engineer;
+﻿using BO;
+using PL.Engineer;
 using PL.Task;
 using System;
 using System.Collections.Generic;
@@ -78,6 +79,14 @@ namespace PL.Admin
         {
             try
             {
+                DateSelectionForm dateSelectionForm = new DateSelectionForm();
+                dateSelectionForm.ShowDialog();
+
+                DateTime selectedDate = dateSelectionForm.SelectedDate;
+                               
+                s_bl.Schedule.StartProject = dateSelectionForm.SelectedDate;
+                MessageBox.Show($"The date you choose: {selectedDate.ToShortDateString()}");
+
                 s_bl.Task.CalculateCloserStartDateForAllTasks();
                 s_bl.Task.EnginnerToTask();
             }

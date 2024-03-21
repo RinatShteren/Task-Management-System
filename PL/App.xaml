@@ -10,6 +10,7 @@
         <local:StageCollection x:Key="StageCollectionKey" />
         <local:ConvertDateTimeToInt x:Key="ConvertDateTimeToIntKey"/>
         <local:ConvertIdToBoolean x:Key="ConvertIdToBooleanKey"/>
+        <local:ConvertStatusToColor x:Key="ConvertStatusToColorKey"/>
        
 
     </Application.Resources>

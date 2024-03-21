@@ -31,6 +31,7 @@ public static class Initialization
         const int startTaskId = 1;
         s_dal = Factory.Get;
         s_dal.Schedule.ResetDep();
+
         deleteEngineers();
         deleteTasks();
         deleteDependences();
@@ -118,12 +119,18 @@ public static class Initialization
             string? _Product = Products[num]; //כל פעם יוגרל רנדומלית תוצר 
             string? _Remarks = Remarks[num % 2]; //כל פעם יוגרל רנדומלית הערה מהרשימה 
             num = s_rand.Next(10, 40);
+            //DateTime? _CreationDate = null; //בכל איטרציה יוגרל תאריך משימה
+            //DateTime? _EstimatedDate = null; //תאריך התחלה
+            //DateTime? _StartDate = null;  //יתחיל יום אחרי המשוער
+            //DateTime? _DeadLine = null; //שיחקתי עם זה קצת שיהיה שונה אבל עקבי
+            //DateTime? _FinishtDate = null; //תמיד לפני הדד ליין
             DateTime? _CreationDate = DateTime.Now.AddDays(num); //בכל איטרציה יוגרל תאריך משימה
             DateTime? _EstimatedDate = DateTime.Now.AddDays(num + 2); //תאריך התחלה
             DateTime? _StartDate = DateTime.Now.AddDays(num + 3);  //יתחיל יום אחרי המשוער
             DateTime? _DeadLine = DateTime.Now.AddDays(num + 3 + i); //שיחקתי עם זה קצת שיהיה שונה אבל עקבי
+
             DateTime? _FinishtDate = DateTime.Now.AddDays(num + 2 + i); //תמיד לפני הדד ליין
- 
+
             var engineesr = s_dal!.Engineer.ReadAll(a => a.Id>0);
 
             //int EnginnerId =

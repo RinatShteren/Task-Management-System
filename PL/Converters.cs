@@ -72,3 +72,20 @@ class ConvertTimeSpanToInt : IValueConverter
         throw new NotImplementedException();
     }
 }
+
+class ConvertStatusToColor : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if ((BO.Status)value == BO.Status.Scheduled) return "BurlyWood";
+        if ((BO.Status)value == BO.Status.OnTrack) return "red";
+        if ((BO.Status)value == BO.Status.Done) return "Honeydew";
+
+        return "true";
+    }
+
+    object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}

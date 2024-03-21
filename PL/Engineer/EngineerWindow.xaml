@@ -16,19 +16,21 @@
             <Label FontFamily="Segoe UI Black" Content="Engineer Name:" HorizontalAlignment="Left" Margin="54,0,0,0" VerticalAlignment="Center"/>
             <Label FontFamily="Segoe UI Black" Content="Engineer Id:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="392,0,0,0"/>
 
-            <TextBox Text="{Binding CurrentEngineer.Name, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}" 
+            <TextBox FontFamily="Segoe UI Black" Text="{Binding CurrentEngineer.Name, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}" 
                    IsEnabled="False" HorizontalAlignment="Left"  Margin="171,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
-            <TextBox Text="{Binding CurrentEngineer.Id, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
+            <TextBox FontFamily="Segoe UI Black" Text="{Binding CurrentEngineer.Id, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
                  IsEnabled="False" HorizontalAlignment="Left" Margin="496,0,0,0" TextWrapping="Wrap"  VerticalAlignment="Center" Width="120"/>
         </Grid>
         <Grid HorizontalAlignment="Center" Height="74" Margin="0,101,0,0" VerticalAlignment="Top" Width="736">
             <Label FontFamily="Segoe UI Black" Content="Engineer current Task:" HorizontalAlignment="Left" Margin="54,0,0,0" VerticalAlignment="Center"/>
 
-            <TextBox Text="{Binding CurrentTaskInList, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                HorizontalAlignment="Center" Margin="204,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="432" Height="54"/>
+            <TextBox FontFamily="Segoe UI Black" Text="{Binding CurrentEngineer.Task.NickName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                IsEnabled="False" HorizontalAlignment="Left" Margin="254,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="432" Height="26" FontSize="20" TextAlignment="Center" />
         </Grid>
-        <Button Content="choose NewTask" HorizontalAlignment="Left" Height="71" Margin="307,256,0,0" VerticalAlignment="Top" Width="200"
+        <Button Content="Choose NewTask" HorizontalAlignment="Left" Height="71" Margin="430,217,0,0" VerticalAlignment="Top" Width="200"
                 Click="Button_Click" FontFamily="Segoe UI Black"/>
+        <Button Content="Update Task" HorizontalAlignment="Left" Height="71" Margin="187,217,0,0" VerticalAlignment="Top" Width="200"
+            Click="Button_Click_Update" FontFamily="Segoe UI Black"/>
 
     </Grid>
 </Window>

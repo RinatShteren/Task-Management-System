@@ -57,10 +57,11 @@ internal class TaskImplementation : BlApi.ITask
             if (task.StartDate == null)
             return BO.Status.Scheduled;
         else
-            if (task.FinishtDate != null)
-            return BO.Status.Done;
-        else
+            if (task.FinishtDate == null)
             return BO.Status.OnTrack;
+        else
+            return BO.Status.Done;
+
     }
     public BO.Task? Read(int id)
     {
@@ -100,20 +101,20 @@ internal class TaskImplementation : BlApi.ITask
         return task;
     }
 
-   
+
     public IEnumerable<BO.TaskInList> ReadAllOptionalTasksForEngineer(BO.Engineer engineer) =>
         from DO.Task task in _dal.Task.ReadAll(task => taskCanBeAssginToEngineer(task, engineer))
         select doToBoTaskInList(task);
 
     private bool taskCanBeAssginToEngineer(DO.Task task, BO.Engineer engineer)//הפונקציה בודקת האם המשימה יכולה להתאים למהנדס ומחזירה T\F בהתאמה
     {
-      
-         //אין משימות קודמות שלא הסתיימו
+
+        //אין משימות קודמות שלא הסתיימו
         if ((int)task.Difficulty > (int)engineer.Level)
             throw new BO.BlNotFitSchedule($"task with ID={task.TaskId} do not fit engineer level");//אותה רמה או רמה נמוכה יותר
         if (task.EngineerId is not 0)
             throw new BO.BlNotFitSchedule($"task with ID={task.TaskId} is alredy bolong to engineer");//לא מבוצעות על ידי מהנדס אחר
-        
+
 
         return task.TaskId == engineer.Task.Id;
     }
@@ -125,7 +126,7 @@ internal class TaskImplementation : BlApi.ITask
         if (BlApi.Factory.Get().Schedule.GetStage() == (BO.Stage.Planning))//are we in the planning stage
             throw new BlNotFitSchedule("you are in the plenning stage- you cant assign a task to engineer ");
 
-        var task = _dal.Task.Read(task => (task.TaskId == engineer.Task!.Id ))//&& task.EngineerId == engineer.Id
+        var task = _dal.Task.Read(task => (task.TaskId == engineer.Task!.Id))//&& task.EngineerId == engineer.Id
            ?? throw new BlDoesNotExistException("task dous not fit");
 
         if (!taskCanBeAssginToEngineer(task, engineer)) throw new taskCannotBeAssginToEngineerException("task Cannot Be Assgin To Engineer Exception");
@@ -194,7 +195,7 @@ internal class TaskImplementation : BlApi.ITask
         }
     }
 
-    public void Update(BO.Task upTask) 
+    public void Update(BO.Task upTask)
     {
 
         if (upTask.TaskId <= 0)
@@ -249,7 +250,7 @@ internal class TaskImplementation : BlApi.ITask
                 tempID = 0;
             else
                 tempID = upTask.EngineerId;
-            
+
             DO.Task doTask = new DO.Task(upTask.TaskId, upTask.Description, upTask.NickName, upTask.CreationDate, upTask.EstimatedDate, upTask.StartDate, 0, upTask.DeadLine, upTask.FinishtDate,
             upTask.Product, upTask.Remarks, tempID, (DO.EngineerLevel)upTask.RequiredLevel);
 

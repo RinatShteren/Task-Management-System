@@ -58,6 +58,7 @@ namespace PL.Engineer
             catch (BO.BlNotVaildException ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             catch (BO.BlDoesNotExistException ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);

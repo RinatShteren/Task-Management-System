@@ -80,7 +80,7 @@
 
         <!-- list of dependent tasks -->
         <ListBox BorderBrush="Black" BorderThickness="1"
-        ItemsSource="{Binding Task.Dependencies }" Height="207" VerticalAlignment="Top" Margin="481,217,21,0" Background="{x:Null}" > <!--SelectionChanged="ListBox_SelectionChanged"--> 
+        ItemsSource="{Binding CurrentTask.Dependencies }" Height="207" VerticalAlignment="Top" Margin="481,217,21,0" Background="{x:Null}" > <!--SelectionChanged="ListBox_SelectionChanged"--> 
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="0,0,0,10">

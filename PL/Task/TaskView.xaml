@@ -9,7 +9,7 @@
         DataContext="{Binding CurrentTask, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
 
     <Window.Background>
-        <ImageBrush ImageSource="C:\Users\USER\source\repos\dotNet5784_2159_6722\PL\Images/back.jpg"/>
+        <ImageBrush ImageSource="C:\Users\אור אסתר כהן\source\repos\dotNet5784_2159_6722\PL\Images/back.jpg"/>
     </Window.Background>
     <Grid>
         <Label FontFamily="Segoe UI Black" Content="TaskId" HorizontalAlignment="Left" Margin="122,100,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2" Height="26"/>

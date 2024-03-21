@@ -24,16 +24,24 @@ namespace PL.Admin
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public ManagerView()
         {
+   
+                InitializeComponent();
 
-            InitializeComponent();
         }
 
         private void btnInit_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Are you shoure you want to initional data?");
-            s_bl.InitalizingBD();
+            try
+            {
+                MessageBox.Show("Are you shoure you want to initional data?");
+                s_bl.InitalizingBD();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
-        
+
         private void btnReset_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -49,23 +57,44 @@ namespace PL.Admin
 
         private void btnEngineerList_Click(object sender, RoutedEventArgs e)
         {
-            new EngineerListWindow().Show();
+            try { new EngineerListWindow().Show(); }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void btnTaskList_Click(object sender, RoutedEventArgs e)
         {
-            new TaskForListWindow().Show();
+            try { new TaskForListWindow().Show(); }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void AutoSchedule_Click(object sender, RoutedEventArgs e)
         {
-            s_bl.Task.CalculateCloserStartDateForAllTasks();
-            s_bl.Task.EnginnerToTask();
+            try
+            {
+                s_bl.Task.CalculateCloserStartDateForAllTasks();
+                s_bl.Task.EnginnerToTask();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void ButtonGuntt_Click(object sender, RoutedEventArgs e)
         {
-            new GanttW().Show();
+            try { new GanttW().Show(); }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
     }
 }

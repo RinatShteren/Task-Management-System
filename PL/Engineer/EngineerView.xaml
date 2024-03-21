@@ -8,9 +8,9 @@
         mc:Ignorable="d"
         Title="EngineerView" Height="500" Width="600"
         DataContext="{Binding CurrentEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
-    <Window.Background>
-        <ImageBrush ImageSource="C:\Users\USER\source\repos\dotNet5784_2159_6722\PL\Images/back.jpg"/>
-    </Window.Background>
+    <!--<Window.Background>
+        <ImageBrush ImageSource="C:\Users\אור אסתר כהן\source\repos\dotNet5784_2159_6722\PL\Images/back.jpg"/>
+    </Window.Background>-->
     <Grid Margin="60,18,175,-16">
 
         <Label Content="Name" HorizontalAlignment="Left" Margin="94,67,0,0" VerticalAlignment="Top" Width="140" Height="32" FontSize="20" FontFamily="Segoe UI Black"/>

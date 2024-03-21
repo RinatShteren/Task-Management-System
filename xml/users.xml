@@ -28,4 +28,12 @@
     <Password>2294</Password>
     <UserId>327376491</UserId>
   </User>
+  <User>
+    <Password>2278</Password>
+    <UserId>0</UserId>
+  </User>
+  <User>
+    <Password>3128</Password>
+    <UserId>123456789</UserId>
+  </User>
 </ArrayOfUser>

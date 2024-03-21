@@ -25,8 +25,15 @@ namespace PL.Engineer
 
         public EngineerListWindow()
         {
-            InitializeComponent();
-            EngineerList = s_bl.Engineer.ReadAll(engineer => engineer.Id > 0);
+            try
+            {
+                InitializeComponent();
+                EngineerList = s_bl.Engineer.ReadAll(engineer => engineer.Id > 0);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public IEnumerable<BO.Engineer> EngineerList
@@ -45,32 +52,59 @@ namespace PL.Engineer
         //option for the user to sort the list of engineers according to their level
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            EngineerList = ((EngineerLevel == BO.EngineerLevel.Beginner) ?   //?? 
-               s_bl?.Engineer.ReadAll(null)! : s_bl?.Engineer.ReadAll(eng => eng.Level == EngineerLevel)!)  //??
-               .OrderBy(e => e.Id); // sort by ID 
+            try
+            {
+                EngineerList = ((EngineerLevel == BO.EngineerLevel.Beginner) ?   //?? 
+                   s_bl?.Engineer.ReadAll(null)! : s_bl?.Engineer.ReadAll(eng => eng.Level == EngineerLevel)!)  //??
+                   .OrderBy(e => e.Id); // sort by ID 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void AddButtonClick(object sender, RoutedEventArgs e)
         {
-            new EngineerView().ShowDialog();
-            UpdateEngineerList();
+            try
+            {
+                new EngineerView().ShowDialog();
+                UpdateEngineerList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void ListViewDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
-            // if (engineer == null)
-            // throw new Excption("engineer is null");
-            new EngineerView(engineer!.Id).ShowDialog();
-            UpdateEngineerList();
+            try
+            {
+                BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
+                // if (engineer == null)
+                // throw new Excption("engineer is null");
+                new EngineerView(engineer!.Id).ShowDialog();
+                UpdateEngineerList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         void UpdateEngineerList()
         {
-
-            EngineerList = ((EngineerLevel == BO.EngineerLevel.Beginner) ? //??
-                s_bl?.Engineer.ReadAll(null)! : s_bl?.Engineer.ReadAll(eng => eng.Level == EngineerLevel)!)
-                .OrderBy(e => e.Id); // sort by ID 
+            try
+            {
+                EngineerList = ((EngineerLevel == BO.EngineerLevel.Beginner) ? //??
+                    s_bl?.Engineer.ReadAll(null)! : s_bl?.Engineer.ReadAll(eng => eng.Level == EngineerLevel)!)
+                    .OrderBy(e => e.Id); // sort by ID 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
     }

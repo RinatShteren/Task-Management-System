@@ -8,7 +8,7 @@
         Title="GanttW" Height="650" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Window.Background>
-        <ImageBrush x:Name="back" ImageSource="C:\Users\USER\source\repos\dotNet5784_2159_6722\PL\Images/back.jpg"/>
+        <ImageBrush ImageSource="/Images/back.jpg"/>
     </Window.Background>
 
     <Grid >

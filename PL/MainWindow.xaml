@@ -23,15 +23,15 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch">
             
             <Label Content="{Binding CurrentTime, Converter={StaticResource ConvertToStringKey}, Mode=OneWay}"
-                       FontSize="12" Margin="10" FontFamily="Segoe UI Black" Width="138" Background="White" VerticalAlignment="Top"/>
+                      FontSize="20" Margin="10" FontFamily="Segoe UI Black"  VerticalAlignment="Center"/>
 
-            <Button Margin="10"  Content="Add Day" Click="AddDay_Click" FontSize="9" FontFamily="Segoe UI Black"/>
+            <Button Margin="10"  Content="Add Day" Click="AddDay_Click" FontSize="12" FontFamily="Segoe UI Black"/>
 
-            <Button Margin="10" Content="Add Month" Click="AddMonth_Click" FontSize="9" FontFamily="Segoe UI Black"/>
+            <Button Margin="10" Content="Add Month" Click="AddMonth_Click" FontSize="12" FontFamily="Segoe UI Black"/>
 
-            <Button Margin="10" Content="Add Year" Click="AddYear_Click" FontSize="9" FontFamily="Segoe UI Black" />
+            <Button Margin="10" Content="Add Year" Click="AddYear_Click" FontSize="12" FontFamily="Segoe UI Black" />
 
-            <Button Margin="10" Content="Initialization Clock" Click="InitializationClock_Click" FontSize="9" Width="140" FontFamily="Segoe UI Black"/>
+            <Button Margin="10" Content="Reset Clock" Click="InitializationClock_Click" FontSize="9"  FontFamily="Segoe UI Black"/>
 
         </StackPanel>
 

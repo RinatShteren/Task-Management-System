@@ -60,7 +60,8 @@ namespace PL
                 {
                     new ManagerView().Show();
                 }
-                else if(s_bl.UserLogin.UserExist(User))
+
+                if(s_bl.UserLogin.UserExist(User))
                 {
                     string? userId = UserIdBox?.Text;
                     new EngineerWindow(int.Parse(userId)).ShowDialog();

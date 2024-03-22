@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlApi;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -85,6 +86,23 @@ class ConvertStatusToColor : IValueConverter
     }
 
     object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class ConvertStartDate : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        IBl bl = Factory.Get();
+        IEnumerable<BO.TaskInList> dependencies = (IEnumerable<BO.TaskInList>)value;
+        return (from dep in dependencies
+                let depTask = bl.Task.Read(dep.TaskId)
+                select depTask.DeadLine).Max()?? DateTime.Now;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }

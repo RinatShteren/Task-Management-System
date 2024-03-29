@@ -10,7 +10,7 @@
         DataContext="{Binding CurrentTask, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
 
     <Window.Background>
-        <ImageBrush ImageSource="C:\Users\אור אסתר כהן\source\repos\dotNet5784_2159_6722\PL\Images/back.jpg"/>
+        <ImageBrush ImageSource="/Engineer/back.jpg"/>
     </Window.Background>
 
 

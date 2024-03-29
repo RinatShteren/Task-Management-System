@@ -16,7 +16,7 @@ public interface ITask
 
     public List<BO.TaskInList> GetLinks(BO.Task task);
    
-    public void CalculateCloserStartDateForAllTasks();
+    public void ScheduleTasks(DateTime startDate);
 
     public DateTime? GetEndTaskDate_DO(DO.Task task);
 

@@ -7,10 +7,9 @@
         mc:Ignorable="d"
         Title="TaskForListWindow" Height="500" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
-    <!--<Window.Background>
-        
-        <ImageBrush ImageSource="C:\Users\אור אסתר כהן\source\repos\dotN2\PL\Images/back.jpt5784_2159_672g"/>
-    </Window.Background>-->
+    <Window.Background>
+        <ImageBrush ImageSource="/Engineer/back.jpg"/>
+    </Window.Background>
 
     <!--Extrnal Grid-->
     <Grid Margin="0,43,0,0">

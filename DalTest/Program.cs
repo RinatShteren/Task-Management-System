@@ -56,7 +56,7 @@ internal class Program
                         break;
                     case 2:
                         // Test Dependence functionality
-                        testDependence(s_dal.Dependence);
+                        testDependence(s_dal.Dependency);
                         break;
                     case 3:
                         // Test Task functionality
@@ -193,7 +193,7 @@ internal class Program
                     int.TryParse(Console.ReadLine(), out PendingTaskId);
                     Console.WriteLine("enter the new Previous Task Id");
                     int.TryParse(Console.ReadLine(), out PreviousTaskId);
-                    Dependence tempDependence = new Dependence(DependenceId, PendingTaskId, PreviousTaskId);
+                    Dependency tempDependence = new Dependency(DependenceId, PendingTaskId, PreviousTaskId);
                     dependence.Create(tempDependence);
                     break;
                 case "b":
@@ -203,7 +203,7 @@ internal class Program
                     Console.WriteLine(dependence.Read(myId));
                     break;
                 case "c":
-                    foreach (Dependence oItem in dependence.ReadAll(dependence => dependence.DependenceId > 0))///print all content
+                    foreach (Dependency oItem in dependence.ReadAll(dependence => dependence.DependenceId > 0))///print all content
                     {
                         Console.WriteLine(oItem);
                     }
@@ -215,7 +215,7 @@ internal class Program
                     int.TryParse(Console.ReadLine(), out PendingTaskId);
                     Console.WriteLine("enter the new Previous Task Id");
                     int.TryParse(Console.ReadLine(), out PreviousTaskId);
-                    Dependence tempDependence2 = new Dependence(DependenceId, PendingTaskId, PreviousTaskId);
+                    Dependency tempDependence2 = new Dependency(DependenceId, PendingTaskId, PreviousTaskId);
 
                     dependence.Update(tempDependence2);
                     break;

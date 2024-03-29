@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,7 @@ namespace PL.Admin
     public partial class DateSelectionForm : Window
     {
 
-
+        private readonly IBl bl = Factory.Get();
         public DateTime SelectedDate
         {
             get { return (DateTime)GetValue(SelectedDateProperty); }
@@ -41,7 +42,7 @@ namespace PL.Admin
         {
             try
             {
-                //SelectedDate;
+                bl.Task.ScheduleTasks(SelectedDate);
             }
             catch
             {

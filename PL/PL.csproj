@@ -16,13 +16,13 @@
 
   <ItemGroup>
     <None Remove="Admin\back.jpg" />
+    <None Remove="Engineer\back.jpg" />
   </ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\BL\BL.csproj" />
 		<ProjectReference Include="..\DalTest\Daltest.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Engineer\" />
 	  <Folder Include="Task\" />
 	</ItemGroup>
 	<ItemGroup>
@@ -30,6 +30,7 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Resource Include="Admin\back.jpg" />
+	  <Resource Include="Engineer\back.jpg" />
 	</ItemGroup>
 
 </Project>

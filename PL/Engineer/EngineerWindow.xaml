@@ -8,9 +8,9 @@
         Title="EngineerWindow" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Window.Background>
-        <ImageBrush ImageSource="C:\Users\אור אסתר כהן\source\repos\dotNet5784_2159_6722\PL\Images/back.jpg"/>
+        <ImageBrush ImageSource="/Engineer/back.jpg"/>
     </Window.Background>
-
+  
     <Grid>
         <Grid HorizontalAlignment="Center" Height="74" Margin="0,22,0,0" VerticalAlignment="Top" Width="736">
             <Label FontFamily="Segoe UI Black" Content="Engineer Name:" HorizontalAlignment="Left" Margin="54,0,0,0" VerticalAlignment="Center"/>
@@ -24,10 +24,10 @@
         <Grid HorizontalAlignment="Center" Height="74" Margin="0,101,0,0" VerticalAlignment="Top" Width="736">
             <Label FontFamily="Segoe UI Black" Content="Engineer current Task:" HorizontalAlignment="Left" Margin="54,0,0,0" VerticalAlignment="Center"/>
 
-            <TextBox FontFamily="Segoe UI Black" Text="{Binding CurrentEngineer.Task.NickName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                IsEnabled="False" HorizontalAlignment="Left" Margin="254,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="432" Height="26" FontSize="20" TextAlignment="Center" />
+            <TextBox FontFamily="Segoe UI Black" Text="{Binding CurrentEngineer.Task.NickName, Mode=TwoWay}" 
+                IsEnabled="False" HorizontalAlignment="Left" Margin="254,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="432" Height="40" FontSize="20" TextAlignment="Center" />
         </Grid>
-        <Button Content="Choose NewTask" HorizontalAlignment="Left" Height="71" Margin="430,217,0,0" VerticalAlignment="Top" Width="200"
+        <Button Content="Choose New Task" HorizontalAlignment="Left" Height="71" Margin="430,217,0,0" VerticalAlignment="Top" Width="200"
                 Click="Button_Click" FontFamily="Segoe UI Black"/>
         <Button Content="Update Task" HorizontalAlignment="Left" Height="71" Margin="187,217,0,0" VerticalAlignment="Top" Width="200"
             Click="Button_Click_Update" FontFamily="Segoe UI Black"/>

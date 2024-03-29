@@ -83,12 +83,12 @@ namespace PL.Admin
                 dateSelectionForm.ShowDialog();
 
                 DateTime selectedDate = dateSelectionForm.SelectedDate;
-                               
+
                 s_bl.Schedule.StartProject = dateSelectionForm.SelectedDate;
                 MessageBox.Show($"The date you choose: {selectedDate.ToShortDateString()}");
 
-                s_bl.Task.CalculateCloserStartDateForAllTasks();
-                s_bl.Task.EnginnerToTask();
+                //s_bl.Task.ScheduleTasks();
+                //s_bl.Task.EnginnerToTask();
             }
             catch (Exception ex)
             {
@@ -98,11 +98,7 @@ namespace PL.Admin
 
         private void ButtonGuntt_Click(object sender, RoutedEventArgs e)
         {
-            try { new GanttW().Show(); }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+             new GanttW().Show(); 
 
         }
     }

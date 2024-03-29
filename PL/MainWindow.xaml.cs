@@ -61,15 +61,18 @@ namespace PL
                     new ManagerView().Show();
                 }
 
-                if(s_bl.UserLogin.UserExist(User))
-                {
-                    string? userId = UserIdBox?.Text;
-                    new EngineerWindow(int.Parse(userId)).ShowDialog();
-
-                }
                 else
                 {
-                    MessageBox.Show("Wrong Name or Password");
+                    if (s_bl.UserLogin.UserExist(User))
+                    {
+                        string? userId = UserIdBox?.Text;
+                        new EngineerWindow(int.Parse(userId)).ShowDialog();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Wrong Name or Password");
+                    }
                 }
             }
             catch (Exception ex)

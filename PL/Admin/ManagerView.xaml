@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="ManagerView" Height="500" Width="600">
 
-    <!--<Window.Background>-->
-        <!--<ImageBrush ImageSource="C:\Users\USER\source\repos\dotNet5784_2159_6722\PL\Images/back.jpg"/>-->
-    <!--</Window.Background>-->
+    <Window.Background>
+        <ImageBrush ImageSource="/Engineer/back.jpg"/>
+    </Window.Background>
 
     <Grid>
 

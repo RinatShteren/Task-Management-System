@@ -120,12 +120,17 @@ public static class Initialization
             string? _Remarks = Remarks[num % 2]; //כל פעם יוגרל רנדומלית הערה מהרשימה 
             num = s_rand.Next(10, 40);
             DateTime? _CreationDate = DateTime.Now.AddDays(num); //בכל איטרציה יוגרל תאריך משימה
-            DateTime? _EstimatedDate = DateTime.Now.AddDays(num + 2); //תאריך התחלה
-            DateTime? _StartDate =  DateTime.Now.AddDays(num + 3);  //יתחיל יום אחרי המשוער
-            DateTime? _DeadLine =  DateTime.Now.AddDays(num + 3 + i); //שיחקתי עם זה קצת שיהיה שונה אבל עקבי
+            //DateTime? _EstimatedDate = DateTime.Now.AddDays(num + 2); //תאריך התחלה
+            //DateTime? _StartDate = DateTime.Now.AddDays(num + 3);  //יתחיל יום אחרי המשוער
+            //DateTime? _DeadLine = DateTime.Now.AddDays(num + 3 + i); //שיחקתי עם זה קצת שיהיה שונה אבל עקבי
 
             DateTime? _FinishtDate = DateTime.Now.AddDays(num + 2 + i); //תמיד לפני הדד ליין
 
+            DateTime? _EstimatedDate = null; //תאריך התחלה
+            DateTime? _StartDate = null;  //יתחיל יום אחרי המשוער
+            DateTime? _DeadLine = null; //שיחקתי עם זה קצת שיהיה שונה אבל עקבי
+
+            //DateTime? _FinishtDate = null; //תמיד לפני הדד ליין
             var engineesr = s_dal!.Engineer.ReadAll(a => a.Id > 0);
 
             //int EnginnerId =
@@ -144,12 +149,12 @@ public static class Initialization
         int depend = 0;
         int dependon = 0;
         List<Task> tasks = s_dal.Task.ReadAll().ToList();
-        for (int i = 0; i < tasks.Count() * 2; i++)
+        HashSet<Dependency> depenendencies = new();
+        for (int i = 5; i < tasks.Count() * 2; i++)
         {
             switch (i)
             {
-                case int x when x < 5:
-                    break;
+
 
                 case int x when x < 10:
                     dependon = s_rand.Next(0, 5);
@@ -176,11 +181,13 @@ public static class Initialization
                     return;
 
             }
-            if(i>4)
-            s_dal.Dependency.Create(new Dependency(
+            Dependency dep = new Dependency(
                 DependenceId: 0,
                 PendingTaskId: depend,
-                PreviousTaskId: dependon));
+                PreviousTaskId: dependon);
+
+            if (!depenendencies.Contains(dep))
+                s_dal.Dependency.Create(dep);
         }
 
     }

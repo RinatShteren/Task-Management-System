@@ -8,9 +8,9 @@
         Title="MainWindow" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
-    <Window.Background>
-        <ImageBrush ImageSource="/Engineer/back.jpg"/>
-    </Window.Background>
+    <!--<Window.Background>
+        <ImageBrush ImageSource="/Engineer/aa.jpg"/>
+    </Window.Background>-->
 
     <Grid>
         <Grid.RowDefinitions>

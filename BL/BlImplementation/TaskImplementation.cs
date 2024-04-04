@@ -301,12 +301,13 @@ internal class TaskImplementation : BlApi.ITask
 
         // Initialize the schedule with tasks that have no dependencies
         Dictionary<int, DO.Task> schedule = tasks.Where(task => !dependencies.Any(dep => dep.PendingTaskId == task.Key)).
-            Select(task => task.Value ).ToList().ToDictionary(task => task.TaskId);
+            Select(task => task.Value).ToList().ToDictionary(task => task.TaskId);
 
         foreach (int key in schedule.Keys)
         {
             DO.Task old = schedule[key];
-            old = old with { EstimatedDate = startDate };
+            int? lenghTask = old.NumOfDays;
+            old = old with { EstimatedDate = startDate, DeadLine = startDate.AddDays( lenghTask.Value) };
             schedule[key] = old;
         }
 
@@ -316,12 +317,13 @@ internal class TaskImplementation : BlApi.ITask
                 tasks.Remove(task);
         }
 
-        bool canSchedule = true;
 
         while (tasks.Count > 0)
         {
             foreach (int newTask in tasks.Keys)
             {
+                bool canSchedule = true;
+
                 foreach (Dependency dep in dependencies.Where(dep => dep.PendingTaskId == newTask))
                 {
                     if (!schedule.ContainsKey(dep.PreviousTaskId))
@@ -333,16 +335,17 @@ internal class TaskImplementation : BlApi.ITask
 
                 if (canSchedule)
                 {
-                    DateTime earlyStart = DateTime.MinValue;
-                    DateTime lastDepDate = DateTime.MinValue;
+                    DateTime? earlyStart = DateTime.MinValue;
+                    DateTime? lastDepDate = DateTime.MinValue;
 
                     foreach (Dependency dep in dependencies.Where(dep => dep.PendingTaskId == newTask))
                     {
-                        lastDepDate = schedule[dep.PreviousTaskId].EstimatedDate.Value.AddDays(schedule[dep.PreviousTaskId].NumOfDays.Value);
+                        lastDepDate = schedule[dep.PreviousTaskId].DeadLine;
                         if (lastDepDate > earlyStart)
                             earlyStart = lastDepDate;
                     }
-                    tasks[newTask] = tasks[newTask] with { EstimatedDate = earlyStart };
+                    tasks[newTask] = tasks[newTask] with { EstimatedDate = earlyStart, DeadLine = earlyStart.Value.AddDays( tasks[newTask].NumOfDays.Value) };
+
                     schedule.Add(newTask, tasks[newTask]);
                     tasks.Remove(newTask);
                 }
@@ -350,6 +353,7 @@ internal class TaskImplementation : BlApi.ITask
         }
 
         schedule.Values.ToList().ForEach(task => { _dal.Task.Update(task); });
+        _dal.Schedule.StartProject = startDate;
     }
     public void EnginnerToTask()
     {
@@ -364,9 +368,9 @@ internal class TaskImplementation : BlApi.ITask
 
     }
 
-    public DateTime? GetEndTaskDate_DO(DO.Task task) => task?.StartDate!.Value.AddDays(task.NumOfDays.Value);
+    public DateTime? GetEndTaskDate_DO(DO.Task task) => task?.EstimatedDate!.Value.AddDays(task.NumOfDays.Value);
 
-    public DateTime? GetEndTaskDate_BO(BO.Task task) => task?.StartDate!.Value.AddDays(task.NumOfDays.Value);
+    public DateTime? GetEndTaskDate_BO(BO.Task task) => task?.EstimatedDate!.Value.AddDays(task.NumOfDays.Value);
 
     public void UpdateDate(int id, DateTime date)//עדכון תאריך של משימה אחת
     {

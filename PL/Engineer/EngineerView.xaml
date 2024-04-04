@@ -9,7 +9,9 @@
         Title="EngineerView" Height="500" Width="600"
         DataContext="{Binding CurrentEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
 
-
+    <Window.Background>
+        <ImageBrush ImageSource="/Engineer/back.jpg"/>
+    </Window.Background>
 
 
     <Grid>

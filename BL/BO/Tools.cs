@@ -31,32 +31,4 @@ namespace BO;
         }
         return result;
     }
-    //public static string ToStringProporty<T>(this T t)
-    //   { 
-    //       string str = "";
-    //       IEnumerable<T> e = t as IEnumerable<T>;
-    //       if (e != null)
-    //       {
-    //           foreach (var item in e)
-    //           {
-    //               str+=item.ToStringProporty();
-    //           }
-    //       }
-
-    //       foreach (PropertyInfo item in t.GetType().GetProperties())
-    //           str += "\n" + item.Name + ": " + item.GetValue(t, null);
-    //       return (str);
-    //       //    IEnumerable<T> e = t as IEnumerable<T>;
-    //       //    if(e != null)
-    //       //    {
-    //       //        foreach(var item in e)
-    //       //        {
-    //       //            item.ToStringProporty();
-    //       //        }
-    //       //    }
-    //       //    string str = "";
-    //       //    foreach (PropertyInfo item in t.GetType().GetProperties())
-    //       //        str += "\n" + item.Name + ": " + item.GetValue(t, null);
-    //       //    return (str);
-    //   }
 }

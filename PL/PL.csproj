@@ -10,25 +10,27 @@
 	  <OutputPath>$(SolutionDir)\bin\</OutputPath>
 	  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 	  <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-	  <UseCommonOutputDirectory>true</UseCommonOutputDirectory>
+	  <UseCommonOutputDirectory>false</UseCommonOutputDirectory>
 
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\aa.jpg" />
-    <None Remove="Images\back.jpg" />
+    <None Remove="Admin\back.jpg" />
+    <None Remove="Engineer\back.jpg" />
   </ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\BL\BL.csproj" />
 		<ProjectReference Include="..\DalTest\Daltest.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Engineer\" />
 	  <Folder Include="Task\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Resource Include="Images\aa.jpg" />
-	  <Resource Include="Images\back.jpg" />
+	  <PackageReference Include="MaterialDesignThemes" Version="4.8.1" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Resource Include="Admin\back.jpg" />
+	  <Resource Include="Engineer\back.jpg" />
 	</ItemGroup>
 
 </Project>

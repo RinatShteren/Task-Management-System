@@ -1,2 +1,31 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfUser />
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <User>
+    <Password>1234</Password>
+    <UserId>11111111</UserId>
+  </User>
+  <User>
+    <Password>1111</Password>
+    <UserId>222222222</UserId>
+  </User>
+  <User>
+    <Password>3342</Password>
+    <UserId>314200465</UserId>
+  </User>
+  <User>
+    <Password>2295</Password>
+    <UserId>331340223</UserId>
+  </User>
+  <User>
+    <Password>2921</Password>
+    <UserId>243550684</UserId>
+  </User>
+  <User>
+    <Password>3531</Password>
+    <UserId>203376987</UserId>
+  </User>
+  <User>
+    <Password>3496</Password>
+    <UserId>300382288</UserId>
+  </User>
+</ArrayOfUser>

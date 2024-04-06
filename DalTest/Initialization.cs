@@ -165,14 +165,14 @@ public static class Initialization
 
                 case int x when x < 20:
                     dependon = s_rand.Next(5, 11);
-                    depend = s_rand.Next(11, 21);
+                    depend = s_rand.Next(11, 20); //depend = s_rand.Next(11, 21);
                     dependon = tasks[dependon].TaskId;
                     depend = tasks[depend].TaskId;
                     break;
 
                 case int x when x < 40:
-                    dependon = s_rand.Next(11, 21);
-                    depend = s_rand.Next(21, 40);
+                    dependon = s_rand.Next(11, 20);//dependon = s_rand.Next(11, 21);
+                    depend = s_rand.Next(0, 20); //depend = s_rand.Next(21, 40);
                     dependon = tasks[dependon].TaskId;
                     depend = tasks[depend].TaskId;
                     break;

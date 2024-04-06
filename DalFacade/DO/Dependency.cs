@@ -6,12 +6,12 @@ namespace DO;
 /// <param name="DependenceId">Unique ID number of the Dependence</param>
 /// <param name="PendingTaskId">ID number of pending task</param>
 /// <param name="PreviousTaskId">Previous assignment ID number</param>
-public record Dependence
+public record Dependency
 (
     int DependenceId,
     int PendingTaskId,
     int PreviousTaskId
 )
 {
-    public Dependence() : this(0,0,0) { }
+    public Dependency() : this(0,0,0) { }
 }

@@ -7,10 +7,10 @@ using System.Collections.Generic;
 
 internal class DependenceImplementation : IDependence
 {
-    public int Create(Dependence item)
+    public int Create(Dependency item)
     {
         int newDependenceId = DataSource.Config.NextDependenceId;//set newDependenceId acording to the run number
-        Dependence newDependence = new Dependence(newDependenceId,0,0);//init a new Dependence
+        Dependency newDependence = new Dependency(newDependenceId,0,0);//init a new Dependence
 
         DataSource.Dependences.Add(newDependence);
         return newDependenceId;
@@ -36,14 +36,14 @@ internal class DependenceImplementation : IDependence
     /// If no dependency with the given identifier is found, the function returns a null value.
     /// <param name="id"></param>
     /// <returns></returns>
-    public Dependence? Read(int id) => Read(x => x.DependenceId == id);
+    public Dependency? Read(int id) => Read(x => x.DependenceId == id);
     /// <summary>
     /// A method that takes a Boolean function delegate of type Func, 
     /// operating on elements of type T in a list. 
     /// It returns the first object in the list for which the function returns True.    /// </summary>
     /// <param name="predicate"></param>
     /// <returns></returns>
-    public Dependence? Read(Func<Dependence, bool>? predicate= null)
+    public Dependency? Read(Func<Dependency, bool>? predicate= null)
     {
         return DataSource.Dependences.Where(predicate).FirstOrDefault();
     }
@@ -54,7 +54,7 @@ internal class DependenceImplementation : IDependence
     /// </summary>
     /// <param name="predicate"></param>
     /// <returns></returns>
-    public IEnumerable<Dependence> ReadAll(Func<Dependence, bool>? predicate = null) =>
+    public IEnumerable<Dependency> ReadAll(Func<Dependency, bool>? predicate = null) =>
         predicate is null ? DataSource.Dependences.Select(a => a) : DataSource.Dependences.Where(predicate);
 
     /// <summary>
@@ -62,7 +62,7 @@ internal class DependenceImplementation : IDependence
     /// </summary>
     /// <param name="item"></param>
     /// <exception cref="DalDoesNotExistException"></exception>
-    public void Update(Dependence item)
+    public void Update(Dependency item)
     {
         if (DataSource.Dependences.Exists(x => x.DependenceId == item.DependenceId))
         {

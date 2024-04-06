@@ -7,12 +7,11 @@
         mc:Ignorable="d"
         Title="EngineerListWindow" Height="500" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
-    <Window.Background>
-        <ImageBrush ImageSource="C:\Users\USER\source\repos\dotNet5784_2159_6722\PL\Images/back.jpg"/>
-    </Window.Background>
 
-    <!--Extrnal Grid-->
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Engineer/back.jpg"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
             <RowDefinition Height="500*"/>
@@ -43,7 +42,7 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
-                    
+
                 </GridView>
             </ListView.View>
         </ListView>

@@ -9,16 +9,16 @@ using System;
 public static class Initialization
 {
 
-    private static IDal? s_dal; //stage 2
+    private static IDal? s_dal = Factory.Get; //stage 2
 
     private static readonly Random s_rand = new();
     private const int MIN_ID = 200000000;
     private const int MAX_ID = 400000000;
 
     public static void Do() //stage 4
-    { 
-    
-    s_dal = Factory.Get; //stage 4
+    {
+
+        s_dal = Factory.Get; //stage 4
         createEngineers();
         createTasks();
         createDependences();
@@ -63,7 +63,7 @@ public static class Initialization
 
     private static void createUsers()
     {
-        s_dal.User.Create(new User(1234,11111111));
+        s_dal.User.Create(new User(1234, 11111111));
         s_dal.User.Create(new User(1111, 222222222));
 
         var engineers = s_dal.Engineer.ReadAll().ToList();
@@ -109,7 +109,7 @@ public static class Initialization
         for (int i = 0; i < 20; i++)
         {
             int num = s_rand.Next(0, 20);
-     
+
             string _TaskNickName = TaskNickName[i];//כל פעם תוגרל רנדומלית משימה ותיאור
             string _Description = TaskDescription[i];
             bool _MileStone = false;
@@ -119,19 +119,19 @@ public static class Initialization
             string? _Product = Products[num]; //כל פעם יוגרל רנדומלית תוצר 
             string? _Remarks = Remarks[num % 2]; //כל פעם יוגרל רנדומלית הערה מהרשימה 
             num = s_rand.Next(10, 40);
-            //DateTime? _CreationDate = null; //בכל איטרציה יוגרל תאריך משימה
-            //DateTime? _EstimatedDate = null; //תאריך התחלה
-            //DateTime? _StartDate = null;  //יתחיל יום אחרי המשוער
-            //DateTime? _DeadLine = null; //שיחקתי עם זה קצת שיהיה שונה אבל עקבי
-            //DateTime? _FinishtDate = null; //תמיד לפני הדד ליין
             DateTime? _CreationDate = DateTime.Now.AddDays(num); //בכל איטרציה יוגרל תאריך משימה
-            DateTime? _EstimatedDate = DateTime.Now.AddDays(num + 2); //תאריך התחלה
-            DateTime? _StartDate = DateTime.Now.AddDays(num + 3);  //יתחיל יום אחרי המשוער
-            DateTime? _DeadLine = DateTime.Now.AddDays(num + 3 + i); //שיחקתי עם זה קצת שיהיה שונה אבל עקבי
+            //DateTime? _EstimatedDate = DateTime.Now.AddDays(num + 2); //תאריך התחלה
+            //DateTime? _StartDate = DateTime.Now.AddDays(num + 3);  //יתחיל יום אחרי המשוער
+            //DateTime? _DeadLine = DateTime.Now.AddDays(num + 3 + i); //שיחקתי עם זה קצת שיהיה שונה אבל עקבי
 
             DateTime? _FinishtDate = DateTime.Now.AddDays(num + 2 + i); //תמיד לפני הדד ליין
 
-            var engineesr = s_dal!.Engineer.ReadAll(a => a.Id>0);
+            DateTime? _EstimatedDate = null; //תאריך התחלה
+            DateTime? _StartDate = null;  //יתחיל יום אחרי המשוער
+            DateTime? _DeadLine = null; //שיחקתי עם זה קצת שיהיה שונה אבל עקבי
+
+            //DateTime? _FinishtDate = null; //תמיד לפני הדד ליין
+            var engineesr = s_dal!.Engineer.ReadAll(a => a.Id > 0);
 
             //int EnginnerId =
             //EngineerLevel EngineerLevel = 
@@ -146,16 +146,48 @@ public static class Initialization
     }
     private static void createDependences()
     {
-        for (int i = 0; i < 20; i++)//היה עד 40 ושיניתי.. מקווה שזה בסדר
+        int depend = 0;
+        int dependon = 0;
+        List<Task> tasks = s_dal.Task.ReadAll().ToList();
+        HashSet<Dependency> depenendencies = new();
+        for (int i = 5; i < tasks.Count() * 2; i++)
         {
-            int _PendingTaskId = s_rand.Next(1, 19); //משימה רנדומלית מ20 המשימות הקיימות
-            int temp = s_rand.Next(1, 19);
-            while (temp < _PendingTaskId) // נרצה שהמשימה הקודמת תיהיה עם דד ליין מוקדם יותר מהמשימה התלויה בה
-                temp = s_rand.Next(1, 19);
-            int _PreviousTaskId = temp;
-            Dependence newDpns = new Dependence(0, _PendingTaskId, _PreviousTaskId); //נגדיר תלות זמנית
-           //נכניס אותה לבסיס נתונים
-            s_dal!.Dependence.Create(newDpns);
+            switch (i)
+            {
+
+
+                case int x when x < 10:
+                    dependon = s_rand.Next(0, 5);
+                    depend = s_rand.Next(5, 11);
+                    dependon = tasks[dependon].TaskId;
+                    depend = tasks[depend].TaskId;
+                    break;
+
+                case int x when x < 20:
+                    dependon = s_rand.Next(5, 11);
+                    depend = s_rand.Next(11, 21);
+                    dependon = tasks[dependon].TaskId;
+                    depend = tasks[depend].TaskId;
+                    break;
+
+                case int x when x < 40:
+                    dependon = s_rand.Next(11, 21);
+                    depend = s_rand.Next(21, 40);
+                    dependon = tasks[dependon].TaskId;
+                    depend = tasks[depend].TaskId;
+                    break;
+
+                default:
+                    return;
+
+            }
+            Dependency dep = new Dependency(
+                DependenceId: 0,
+                PendingTaskId: depend,
+                PreviousTaskId: dependon);
+
+            if (!depenendencies.Contains(dep))
+                s_dal.Dependency.Create(dep);
         }
 
     }
@@ -170,7 +202,7 @@ public static class Initialization
     }
     private static void deleteDependences()
     {
-        s_dal!.Dependence.DeleteAll();
+        s_dal!.Dependency.DeleteAll();
     }
     private static void deleteUsers()
     {

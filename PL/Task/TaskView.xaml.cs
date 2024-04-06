@@ -27,17 +27,21 @@ namespace PL.Task
         {
             try
             {
-                InitializeComponent();
                 if (GetId == 0)
                 {
 
                     AddOrUpdate = 0;
                     CurrentTask = new BO.Task() { TaskId = 0 };
+
+                    if (CurrentTask.Dependencies is null)
+                        CurrentTask.Dependencies = new();
                 }
                 else
                 {
                     AddOrUpdate = 1;
-                    CurrentTask = s_bl.Task.Read(GetId);
+                    CurrentTask = s_bl.Task.Read(GetId)!;
+                    if (CurrentTask.Dependencies is null)
+                        CurrentTask.Dependencies = new();
                 }
                
             }
@@ -45,6 +49,8 @@ namespace PL.Task
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            InitializeComponent();
+
 
         }
 

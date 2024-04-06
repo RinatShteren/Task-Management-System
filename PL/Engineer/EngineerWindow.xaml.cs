@@ -54,17 +54,32 @@ namespace PL.Engineer
 
         public EngineerWindow(int GetId)
         {
-            InitializeComponent();
-            // CurrentEngineer = (BO.Engineer)s_bl.Engineer.ReadAll(Eng => Eng.Id == GetId);
-            CurrentEngineer = s_bl.Engineer.Read(GetId);
-            //CurrentTaskInList = (IEnumerable<BO.TaskInList>)s_bl.Task.Read(CurrentEngineer.Task.Id);
+            try
+            {
+                InitializeComponent();
+                // CurrentEngineer = (BO.Engineer)s_bl.Engineer.ReadAll(Eng => Eng.Id == GetId);
+                CurrentEngineer = s_bl.Engineer.Read(GetId);
+                //CurrentTaskInList = (IEnumerable<BO.TaskInList>)s_bl.Task.Read(CurrentEngineer.Task.Id);
 
-            //  observeListPerson = s_bl.Task.ReadAll(a => a.TaskId > 0);
+                //  observeListPerson = s_bl.Task.ReadAll(a => a.TaskId > 0);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-             new RegisterTaskWindow(CurrentEngineer.Id).ShowDialog();
+            try
+            {
+                new RegisterTaskWindow(CurrentEngineer.Id).ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
             UpdateEngineer();
 

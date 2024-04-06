@@ -273,7 +273,7 @@ namespace BlTest
                
                 s_bl.Schedule.StartProject = startProject;
 
-                s_bl.Task.CalculateCloserStartDateForAllTasks();
+                //s_bl.Task.CalculateCloserStartDateForAllTasks();
                 s_bl.Task.EnginnerToTask();
  
               //  Console.WriteLine(s_bl.Task.Read(item.TaskId));

@@ -8,7 +8,7 @@
         Title="ManagerView" Height="500" Width="600">
 
     <Window.Background>
-        <ImageBrush ImageSource="C:\Users\USER\source\repos\dotNet5784_2159_6722\PL\Images/back.jpg"/>
+        <ImageBrush ImageSource="/Engineer/back.jpg"/>
     </Window.Background>
 
     <Grid>
@@ -17,14 +17,14 @@
 Click="btnInit_Click" Margin="58,184,0,0" FontWeight="Bold" FontSize="20" BorderBrush="{x:Null}"/>
         <Button Content="Reset Data" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="58,319,0,0" VerticalAlignment="Top" Height="82" Width="182"
 Click="btnReset_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}"/>
-        <Button Content="EngineerList" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="58,61,0,0" VerticalAlignment="Top" Height="82" Width="182"
+        <Button Content="Engineer List" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="58,61,0,0" VerticalAlignment="Top" Height="82" Width="182"
 Click="btnEngineerList_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}"/>
-        <Button Content="TaskList" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="352,61,0,0" VerticalAlignment="Top" Height="82" Width="182"
+        <Button Content="Task List" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="352,61,0,0" VerticalAlignment="Top" Height="82" Width="182"
 Click="btnTaskList_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}"/>
         <Button Content="Automatic schedule" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="352,185,0,0" VerticalAlignment="Top" Height="82" Width="182"
 Click="AutoSchedule_Click" FontSize="17" FontWeight="Bold" BorderBrush="{x:Null}"/>
         <Button Content="Gantt" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Height="82" Margin="352,320,0,0" VerticalAlignment="Top"  Width="182"
-Click="ButtonGuntt_Click" FontSize="17" FontWeight="Bold" BorderBrush="{x:Null}"/>
+Click="ButtonGuntt_Click" FontSize="17" FontWeight="Bold" BorderBrush="{x:Null}" />
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="777*"/>

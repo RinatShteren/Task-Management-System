@@ -4,14 +4,24 @@
              xmlns:local="clr-namespace:PL"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
-        <local:ConvertToString x:Key="ConvertToStringKey"/>
-        <local:EngineerLevelCollection x:Key="EngineerLevelCollectionKey" />
-        <local:StageCollection x:Key="StageCollectionKey" />
-        <local:ConvertDateTimeToInt x:Key="ConvertDateTimeToIntKey"/>
-        <local:ConvertIdToBoolean x:Key="ConvertIdToBooleanKey"/>
-        <local:ConvertStatusToColor x:Key="ConvertStatusToColorKey"/>
-       
+
+        <ResourceDictionary>
+           
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Lime.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
+            <local:ConvertToString x:Key="ConvertToStringKey"/>
+            <local:EngineerLevelCollection x:Key="EngineerLevelCollectionKey" />
+            <local:StageCollection x:Key="StageCollectionKey" />
+            <local:ConvertDateTimeToInt x:Key="ConvertDateTimeToIntKey"/>
+            <local:ConvertIdToBoolean x:Key="ConvertIdToBooleanKey"/>
+            <local:ConvertStatusToColor x:Key="ConvertStatusToColorKey"/>
+        </ResourceDictionary>
+
 
     </Application.Resources>
 </Application>

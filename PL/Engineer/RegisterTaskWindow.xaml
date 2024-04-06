@@ -8,11 +8,18 @@
         Title="RegisterTaskWindow" Height="600" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
-    <Window.Background>
-        <ImageBrush ImageSource="C:\Users\USER\source\repos\dotNet5784_2159_6722\PL\Images/back.jpg"/>
-    </Window.Background>
-    <!--Extrnal Grid-->
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Engineer/back.jpg"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="14*"/>
+            <ColumnDefinition Width="14*"/>
+            <ColumnDefinition Width="702*"/>
+            <ColumnDefinition Width="38*"/>
+            <ColumnDefinition Width="27*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="7*"/>
             <RowDefinition Height="66*"/>
@@ -21,10 +28,11 @@
 
 
         <!--Internal, Upper Grid-->
-        <Grid Height="auto" Grid.Row="0" Width="auto">
+        <Grid Height="auto" Grid.Row="0" Width="auto" Grid.ColumnSpan="6">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="400*"/>
+                <ColumnDefinition Width="333*"/>
+                <ColumnDefinition Width="67*"/>
             </Grid.ColumnDefinitions>
 
             <Label Content="Please select a task" HorizontalAlignment="Left" Height="61" Margin="35,20,0,0" VerticalAlignment="Top" Width="432" FontFamily="Segoe UI Black" FontSize="18
@@ -32,8 +40,8 @@
         </Grid>
         <!--List of tasks-->
 
-        <ListView Margin="10,32,10,23" Grid.Row="1" ItemsSource="{Binding TaskList}" MouseDoubleClick="ListViewDoubleClick"
-                    FontFamily="Comic Sans MS" >
+        <ListView Margin="5,32,10,23" Grid.Row="1" ItemsSource="{Binding TaskList}" MouseDoubleClick="ListViewDoubleClick"
+                    FontFamily="Comic Sans MS" Grid.ColumnSpan="5" Grid.Column="1" >
             <!--List of engineers-->
             <ListView.View>
                 <GridView>

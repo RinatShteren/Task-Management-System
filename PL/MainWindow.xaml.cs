@@ -60,11 +60,19 @@ namespace PL
                 {
                     new ManagerView().Show();
                 }
-                else if(s_bl.UserLogin.UserExist(User))
-                {
-                    string? userId = UserIdBox?.Text;
-                    new EngineerWindow(int.Parse(userId)).ShowDialog();
 
+                else
+                {
+                    if (s_bl.UserLogin.UserExist(User))
+                    {
+                        string? userId = UserIdBox?.Text;
+                        new EngineerWindow(int.Parse(userId)).ShowDialog();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Wrong Name or Password");
+                    }
                 }
             }
             catch (Exception ex)
@@ -148,11 +156,6 @@ namespace PL
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
     }
 }

@@ -50,11 +50,12 @@ namespace PL.Engineer
        
         public RegisterTaskWindow(int EngineerId =0)
         {
-            InitializeComponent();
             constEngineerId = EngineerId;
             TaskList = s_bl.Task.ReadAll().Where(task => task.TaskId > 0);
            // TaskList = s_bl.Task.ReadAll(s_bl.TaskCanBeAssginToEngineer).Where(task => task.TaskId > 0);
-            CurrentEngineer = s_bl.Engineer.Read(EngineerId);// שומר את פרטי המהנדס
+            CurrentEngineer = s_bl.Engineer.Read(EngineerId);
+            InitializeComponent();
+
         }
         private void ListViewDoubleClick(object sender, MouseButtonEventArgs e)
         {

@@ -7,7 +7,7 @@ sealed internal class DalXml : IDal
     private DalXml() { }
     public IEngineer Engineer => new EngineerImplementation();
 
-    public IDependence Dependence => new DependenceImplementation();
+    public IDependence Dependency => new DependenceImplementation();
 
     public ITask Task => new TaskImplementation();
 

@@ -51,13 +51,11 @@ namespace PL.Task
         {
             try
             {
-                TaskList = ((Status == BO.Status.Scheduled) ?   //?? 
-              s_bl?.Task.ReadAll(null)! : s_bl?.Task.ReadAll(tsk => tsk.Status == BO.Status.Scheduled)!)
-              .OrderBy(t => t.TaskId); 
-                // sort by ID  
-                                       // TaskList = ((Status == BO.Status.Scheduled) ?   //?? 
-                                       //s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(tsk => Status == BO.Status.Scheduled)!)  //??
-                                       //.OrderBy(t => t.TaskId); // sort by ID  
+                if (sender is ComboBox combo)
+                {
+                    Status selcted = (Status)combo.SelectedItem;
+                    TaskList = s_bl?.Task.ReadAll(tsk => tsk.Status ==selcted)!;
+                }
             }
             catch (Exception ex)
             {

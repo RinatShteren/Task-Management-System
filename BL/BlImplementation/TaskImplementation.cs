@@ -4,6 +4,8 @@ using BO;
 using DalApi;
 using DO;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Threading.Tasks;
 using ISchedule = BlApi.ISchedule;
 
 internal class TaskImplementation : BlApi.ITask
@@ -35,8 +37,8 @@ internal class TaskImplementation : BlApi.ITask
             {
                 foreach (BO.TaskInList item in boTask.Dependencies)
                 {
-                    DO.Dependence dependence = new DO.Dependence(idTsk, boTask.TaskId, item.TaskId);
-                    _dal.Dependence.Create(dependence);
+                    DO.Dependency dependence = new DO.Dependency(idTsk, boTask.TaskId, item.TaskId);
+                    _dal.Dependency.Create(dependence);
                 }
             }
 
@@ -48,20 +50,22 @@ internal class TaskImplementation : BlApi.ITask
         }
 
     }
-    public BO.Status getStatus(BO.Task task)
+
+    private Status getStatus(DO.Task task)
     {
-        TimeSpan t = TimeSpan.FromDays(2);
         if (task.EstimatedDate == null)
             return BO.Status.Unscheduled;
         else
             if (task.StartDate == null)
             return BO.Status.Scheduled;
         else
-            if (task.FinishtDate != null)
-            return BO.Status.Done;
-        else
+            if (task.FinishtDate == null)
             return BO.Status.OnTrack;
+        else
+            return BO.Status.Done;
+
     }
+
     public BO.Task? Read(int id)
     {
         DO.Task? doTask = _dal.Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does not exist");
@@ -96,10 +100,9 @@ internal class TaskImplementation : BlApi.ITask
 
         task.DeadLine = GetEndTaskDate_BO(task);
         task.Dependencies = GetLinks(task);
-        task.Status = getStatus(task);
+        task.Status = getStatus(doTask);
         return task;
     }
-
 
     public IEnumerable<BO.TaskInList> ReadAllOptionalTasksForEngineer(BO.Engineer engineer) =>
         from DO.Task task in _dal.Task.ReadAll(task => taskCanBeAssginToEngineer(task, engineer))
@@ -118,8 +121,6 @@ internal class TaskImplementation : BlApi.ITask
         return task.TaskId == engineer.Task.Id;
     }
 
-
-
     public void AssginTaskToEngineer(BO.Engineer engineer)
     {
         if (BlApi.Factory.Get().Schedule.GetStage() == (BO.Stage.Planning))//are we in the planning stage
@@ -131,7 +132,7 @@ internal class TaskImplementation : BlApi.ITask
         if (!taskCanBeAssginToEngineer(task, engineer)) throw new taskCannotBeAssginToEngineerException("task Cannot Be Assgin To Engineer Exception");
 
         _dal.Task.Update(task with { EngineerId = engineer.Id });
-        
+
     }
 
     public IEnumerable<TaskInList> ReadAll(Func<BO.TaskInList, bool> filter = null!) =>
@@ -147,7 +148,8 @@ internal class TaskImplementation : BlApi.ITask
             TaskId = item.TaskId,
             NickName = item.NickName,
             Description = item.Description,
-            StartDate = item.StartDate
+            StartDate = item.StartDate,
+            Status = getStatus(item)
         };
     }
 
@@ -178,7 +180,7 @@ internal class TaskImplementation : BlApi.ITask
             throw new BO.BlNotFitSchedule("Can not delete tasks after Project Planning phase");
 
 
-        DO.Dependence tempDp = _dal.Dependence?.Read(item => item.PreviousTaskId == id); //checking if there is another task that depended in this task
+        DO.Dependency tempDp = _dal.Dependency?.Read(item => item.PreviousTaskId == id); //checking if there is another task that depended in this task
         if (tempDp != null)
             throw new BO.BlDeletionImpossible("The task cannot be deleted because there is a task that depends on it");
 
@@ -213,10 +215,10 @@ internal class TaskImplementation : BlApi.ITask
         if (_schedule.GetStage() != BO.Stage.Action)
         {
             // list of the tasks that the task we want to update depends on 
-            List<DO.Dependence> dalDependences = _dal.Dependence.ReadAll(Dependence => Dependence.PendingTaskId == upTask.TaskId).ToList();
+            List<DO.Dependency> dalDependences = _dal.Dependency.ReadAll(Dependence => Dependence.PendingTaskId == upTask.TaskId).ToList();
 
             //list of the tasks that the updated task depends on 
-            List<DO.Dependence> upDependences = upTask.Dependencies?.Select(taskIn => new DO.Dependence(0, taskIn.TaskId, upTask.TaskId)).ToList() ?? new List<DO.Dependence>();
+            List<DO.Dependency> upDependences = upTask.Dependencies?.Select(taskIn => new DO.Dependency(0, taskIn.TaskId, upTask.TaskId)).ToList() ?? new List<DO.Dependency>();
             // Check if task links are provided and are different from existing task links
             if (upTask.Dependencies?.Any() == true && !upDependences.SequenceEqual(dalDependences))  //אם הן שונות- חריגה 
             {
@@ -235,15 +237,15 @@ internal class TaskImplementation : BlApi.ITask
         try
         {
             //updete the Dependences
-            foreach (var item in (_dal.Dependence.ReadAll(Dependence => Dependence.PendingTaskId == upTask.TaskId)))
+            foreach (var item in (_dal.Dependency.ReadAll(Dependence => Dependence.PendingTaskId == upTask.TaskId)))
             {
-                _dal.Dependence.Delete(item.DependenceId);
+                _dal.Dependency.Delete(item.DependenceId);
             }
             if (upTask.Dependencies != null)
                 foreach (var item in upTask.Dependencies)
                 {
-                    DO.Dependence temp = new DO.Dependence() { PreviousTaskId = item.TaskId, PendingTaskId = upTask.TaskId };
-                    _dal.Dependence.Create(temp);
+                    DO.Dependency temp = new DO.Dependency() { PreviousTaskId = item.TaskId, PendingTaskId = upTask.TaskId };
+                    _dal.Dependency.Create(temp);
                 }
             int tempID;
             if (upTask.Engineer == null)
@@ -267,13 +269,13 @@ internal class TaskImplementation : BlApi.ITask
     public List<BO.TaskInList> GetLinks(BO.Task task)//return list of all dependence of spesific task
     {
         //כל התלויות שהתלות הבאה שלהם זה המשימה הנוכחית 
-        List<DO.Dependence> dep = new List<DO.Dependence>(_dal.Dependence.ReadAll(link => link.PendingTaskId == task.TaskId));
+        List<DO.Dependency> dep = new List<DO.Dependency>(_dal.Dependency.ReadAll(link => link.PendingTaskId == task.TaskId));
         if (dep.Count == 0)//if the task not have dependence
             return new List<BO.TaskInList>();
         //else
         List<BO.TaskInList> tasks = new List<BO.TaskInList>();
 
-        foreach (DO.Dependence d in dep)//לכל תלות 
+        foreach (DO.Dependency d in dep)//לכל תלות 
         {
 
             DO.Task doTask = _dal.Task.Read(d!.PreviousTaskId) ?? throw new BO.BlDoesNotExistException("");
@@ -291,74 +293,108 @@ internal class TaskImplementation : BlApi.ITask
         return tasks;
     }
 
-    public void CalculateCloserStartDateForAllTasks()
+    public void ScheduleTasks(DateTime startDate)
     {
-        if (_schedule.GetStage() is Stage.Middle)
+        Dictionary<int, DO.Task> tasks = _dal.Task.ReadAll().ToList().ToDictionary(task => task.TaskId);
+        List<Dependency> dependencies = _dal.Dependency.ReadAll().ToList();
+
+
+        // Initialize the schedule with tasks that have no dependencies
+        Dictionary<int, DO.Task> schedule = tasks.Where(task => !dependencies.Any(dep => dep.PendingTaskId == task.Key)).
+            Select(task => task.Value).ToList().ToDictionary(task => task.TaskId);
+
+        foreach (int key in schedule.Keys)
         {
+            DO.Task old = schedule[key];
+            int? lenghTask = old.NumOfDays;
+            old = old with { EstimatedDate = startDate, DeadLine = startDate.AddDays( lenghTask.Value) };
+            schedule[key] = old;
+        }
+
+        foreach (int task in tasks.Keys)
+        {
+            if (schedule.ContainsKey(task))
+                tasks.Remove(task);
+        }
+
+
+        while (tasks.Count > 0)
+        {
+            foreach (int newTask in tasks.Keys)
             {
-                var tasks = _dal.Task.ReadAll(task => task.StartDate is null).ToDictionary(t => t.TaskId, t => t);
+                bool canSchedule = true;
 
-                foreach (var task in tasks.Values)//update the tasks dates
+                foreach (Dependency dep in dependencies.Where(dep => dep.PendingTaskId == newTask))
                 {
-                    var dependenceTasks = _dal.Dependence.ReadAll(dependence => dependence.PendingTaskId == task.TaskId)
-                        .Select(d => tasks[d!.PreviousTaskId]);
-
-
-                    var startDate = dependenceTasks switch
+                    if (!schedule.ContainsKey(dep.PreviousTaskId))
                     {
-                        var l when l.Count() is 0 => _schedule.StartProject,
-
-
-                        var l when l.Any(d => d.StartDate is null) => throw new DependenceTasksStartDateIsStillNull("DependenceTasksStartDateIsStillNull"),
-                        _ => GetEndTaskDate_DO(dependenceTasks.MaxBy(t => GetEndTaskDate_DO(t!))!)
-
-                    } ;
-                    _dal.Task.Update(task with { StartDate = startDate });
+                        canSchedule = false;
+                        break;
+                    }
                 }
-            }
 
-        }
-    }
-        public void EnginnerToTask()
-        {
-            var tasks = _dal.Task.ReadAll(task => task.EngineerId > 0).ToDictionary(t => t.EngineerId, t => t);
-            var engineers = _dal.Engineer.ReadAll(eng => eng.Id > 0).ToList();
-            var CountOfEngineers = _dal.Engineer.ReadAll(eng => eng.Id > 0).Count().ToString();
-            foreach (var task in tasks.Values)
-            {
-                var engineerId = engineers[0];
-                _dal.Task.Update(task with { EngineerId = engineerId.Id });
-            }
-
-        }
-
-        public DateTime? GetEndTaskDate_DO(DO.Task task) => task?.StartDate!.Value.AddDays(task.NumOfDays.Value);
-
-        public DateTime? GetEndTaskDate_BO(BO.Task task) => task?.StartDate!.Value.AddDays(task.NumOfDays.Value);
-
-        public void UpdateDate(int id, DateTime date)//עדכון תאריך של משימה אחת
-        {
-            DO.Task doTask = _dal.Task.Read(id) ??
-                throw new BO.BlDoesNotExistException($"task with ID={id} dous not exist");
-            BO.Task task = Read(id)!;
-            List<BO.TaskInList>? DepTemp = task.Dependencies;//כאן יש את התלויות של המשימה
-
-            if (DepTemp != null)
-            {
-                foreach (BO.TaskInList a in DepTemp)//for each  dependencies of spesific task
+                if (canSchedule)
                 {
-                    DO.Task allTasks = _dal.Task.Read(a.TaskId) ??//מתוך רשימת התלויות תכניס לי משימה
-                        throw new BO.BlDoesNotExistException($"task with ID={id} dous not exist");
-                    if (a.StartDate == null)//if the date is null
-                        throw new BO.BlNotFitSchedule($"The date is null while id is:{a}");
-                    /*  if (date < getPlanToFinish(a))// אם התאריך שקיבלתי קטן מהתאריך של סיום המשימה  אני לא אסיים בזמן
-                          throw new BO.BlNotFitSchedule($"task with ID={a.TaskId} will not finish in time");*/
+                    DateTime? earlyStart = DateTime.MinValue;
+                    DateTime? lastDepDate = DateTime.MinValue;
+
+                    foreach (Dependency dep in dependencies.Where(dep => dep.PendingTaskId == newTask))
+                    {
+                        lastDepDate = schedule[dep.PreviousTaskId].DeadLine;
+                        if (lastDepDate > earlyStart)
+                            earlyStart = lastDepDate;
+                    }
+                    tasks[newTask] = tasks[newTask] with { EstimatedDate = earlyStart, DeadLine = earlyStart.Value.AddDays( tasks[newTask].NumOfDays.Value) };
+
+                    schedule.Add(newTask, tasks[newTask]);
+                    tasks.Remove(newTask);
                 }
             }
-            _dal.Task.Update(doTask with { StartDate = date });//תעדכן את המשימה שקיבלת עם התאריך
+        }
+
+        schedule.Values.ToList().ForEach(task => { _dal.Task.Update(task); });
+        _dal.Schedule.StartProject = startDate;
+    }
+    public void EnginnerToTask()
+    {
+        var tasks = _dal.Task.ReadAll(task => task.EngineerId > 0).ToDictionary(t => t.EngineerId, t => t);
+        var engineers = _dal.Engineer.ReadAll(eng => eng.Id > 0).ToList();
+
+        foreach (var task in tasks.Values)
+        {
+            var engineerId = engineers[0];
+            _dal.Task.Update(task with { EngineerId = engineerId.Id });
         }
 
     }
+
+    public DateTime? GetEndTaskDate_DO(DO.Task task) => task?.EstimatedDate!.Value.AddDays(task.NumOfDays.Value);
+
+    public DateTime? GetEndTaskDate_BO(BO.Task task) => task?.EstimatedDate!.Value.AddDays(task.NumOfDays.Value);
+
+    public void UpdateDate(int id, DateTime date)//עדכון תאריך של משימה אחת
+    {
+        DO.Task doTask = _dal.Task.Read(id) ??
+            throw new BO.BlDoesNotExistException($"task with ID={id} dous not exist");
+        BO.Task task = Read(id)!;
+        List<BO.TaskInList>? DepTemp = task.Dependencies;//כאן יש את התלויות של המשימה
+
+        if (DepTemp != null)
+        {
+            foreach (BO.TaskInList a in DepTemp)//for each  dependencies of spesific task
+            {
+                DO.Task allTasks = _dal.Task.Read(a.TaskId) ??//מתוך רשימת התלויות תכניס לי משימה
+                    throw new BO.BlDoesNotExistException($"task with ID={id} dous not exist");
+                if (a.StartDate == null)//if the date is null
+                    throw new BO.BlNotFitSchedule($"The date is null while id is:{a}");
+                /*  if (date < getPlanToFinish(a))// אם התאריך שקיבלתי קטן מהתאריך של סיום המשימה  אני לא אסיים בזמן
+                      throw new BO.BlNotFitSchedule($"task with ID={a.TaskId} will not finish in time");*/
+            }
+        }
+        _dal.Task.Update(doTask with { StartDate = date });//תעדכן את המשימה שקיבלת עם התאריך
+    }
+
+}
 
 
 

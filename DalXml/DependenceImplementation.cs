@@ -14,11 +14,11 @@ internal class DependenceImplementation:IDependence
 {
     readonly string x_XML_dependences = "dependences";
 
-    public int Create(Dependence item)
+    public int Create(Dependency item)
     {
         int newDependenceId = Config.NextDependenceId; //set newTaskId acording to the run number
-        Dependence newDependence = item with { DependenceId = newDependenceId };
-        var DepList = XMLTools.LoadListFromXMLSerializer<Dependence>(x_XML_dependences);
+        Dependency newDependence = item with { DependenceId = newDependenceId };
+        var DepList = XMLTools.LoadListFromXMLSerializer<Dependency>(x_XML_dependences);
         DepList.Add(newDependence);
         XMLTools.SaveListToXMLSerializer(DepList, x_XML_dependences);
         return newDependenceId;
@@ -26,7 +26,7 @@ internal class DependenceImplementation:IDependence
 
     public void Delete(int id)
     {
-        var DepList = XMLTools.LoadListFromXMLSerializer<Dependence>(x_XML_dependences);
+        var DepList = XMLTools.LoadListFromXMLSerializer<Dependency>(x_XML_dependences);
 
         if (DepList.Exists(x => x.DependenceId == id))
         {
@@ -42,29 +42,29 @@ internal class DependenceImplementation:IDependence
         delItem.RemoveAll();
         XMLTools.SaveListToXMLElement(delItem, x_XML_dependences);
     }
-    public Dependence? Read(int id)
+    public Dependency? Read(int id)
     {
-        var DepList = XMLTools.LoadListFromXMLSerializer<Dependence>(x_XML_dependences);
-        foreach (Dependence dep in DepList)
+        var DepList = XMLTools.LoadListFromXMLSerializer<Dependency>(x_XML_dependences);
+        foreach (Dependency dep in DepList)
         {
             if (dep.DependenceId == id) return dep;
         }
         return null;
     }
 
-    public Dependence? Read(Func<Dependence, bool> filter= null)
+    public Dependency? Read(Func<Dependency, bool> filter= null)
     {
-        var DepList = XMLTools.LoadListFromXMLSerializer<Dependence>(x_XML_dependences);
-        foreach (Dependence dep in DepList)
+        var DepList = XMLTools.LoadListFromXMLSerializer<Dependency>(x_XML_dependences);
+        foreach (Dependency dep in DepList)
         {
             if (filter(dep)) return dep;
         }
         return null;
     }
 
-    public IEnumerable<Dependence> ReadAll(Func<Dependence, bool>? p= null)
+    public IEnumerable<Dependency> ReadAll(Func<Dependency, bool>? p= null)
     {
-        var DepList = XMLTools.LoadListFromXMLSerializer<Dependence>(x_XML_dependences);
+        var DepList = XMLTools.LoadListFromXMLSerializer<Dependency>(x_XML_dependences);
         if (p != null)
         {
             return from item in DepList where p(item) select item;
@@ -74,10 +74,10 @@ internal class DependenceImplementation:IDependence
         //updating item in the orign
     }
 
-    public void Update(Dependence item)
+    public void Update(Dependency item)
     {
-        var DepList = XMLTools.LoadListFromXMLSerializer<Dependence>(x_XML_dependences);
-        Dependence? dependence = Read(item.DependenceId);
+        var DepList = XMLTools.LoadListFromXMLSerializer<Dependency>(x_XML_dependences);
+        Dependency? dependence = Read(item.DependenceId);
         if (dependence != null)
         {
             DepList.Remove(dependence);

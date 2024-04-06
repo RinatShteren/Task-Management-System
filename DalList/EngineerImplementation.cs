@@ -44,7 +44,8 @@ internal class EngineerImplementation : IEngineer
     public Engineer? Read(int id) => Read(x => x.Id == id);
 
     /// <summary>
-    /// A method that takes a Boolean function delegate of type Func, 
+    /// A method that takes a Boolean function 
+    /// of type Func, 
     /// operating on elements of type T in a list. 
     /// It returns the first object in the list for which the function returns True.    /// </summary>
     /// <param name="predicate"></param>
@@ -55,7 +56,8 @@ internal class EngineerImplementation : IEngineer
         return DataSource.Engineers.Where(predicate).FirstOrDefault();
     }
     /// <summary>
-    /// The method will receive a delegate of type Func, representing a Boolean function,
+    /// The method will receive a 
+    /// of type Func, representing a Boolean function,
     /// operating on elements of type T in a list. It will return a list of all objects in the 
     /// list for which the function returns True. If no delegate is provided, the entire list will be returned.
     /// </summary>

@@ -10,6 +10,7 @@ namespace BO;
         if (obj == null)// if the object is null
             return "Not Set";
 
+
         Type type = obj.GetType();
         if (type.IsPrimitive || type.IsValueType || type == typeof(string))// if the object is a primitive type
             return obj.ToString()!;

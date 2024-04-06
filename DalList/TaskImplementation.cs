@@ -36,7 +36,9 @@ internal class TaskImplementation : ITask
      /// <returns></returns>
     public Task? Read(int id) => Read(x => x.TaskId == id);
     /// <summary>
-    /// A method that takes a Boolean function delegate of type Func, 
+    /// A method that takes a Boolean function 
+    /// 
+    /// of type Func, 
     /// operating on elements of type T in a list. 
     /// It returns the first object in the list for which the function returns True.    /// </summary>
     /// <param name="predicate"></param>
@@ -47,7 +49,8 @@ internal class TaskImplementation : ITask
         return DataSource.Tasks.Where(predicate).FirstOrDefault();
     }
     /// <summary>
-    /// A method that takes a Boolean function delegate of type Func, 
+    /// A method that takes a Boolean function 
+    /// of type Func, 
     /// operating on elements of type T in a list. 
     /// It returns the first object in the list for which the function returns True.    /// </summary>
     /// <param name="predicate"></param>

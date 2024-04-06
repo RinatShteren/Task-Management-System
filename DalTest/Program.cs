@@ -23,7 +23,8 @@ internal class Program
             // Stage 2: Perform initialization
             //Initialization.Do(s_dal);
 
-            // Main loop for user interaction
+            // Main loop for user inter
+            // 
             while (num != 0)
             {
                 Console.WriteLine(@"Hello!

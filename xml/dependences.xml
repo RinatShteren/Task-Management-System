@@ -2,47 +2,52 @@
 <ArrayOfDependency xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Dependency>
     <DependenceId>1</DependenceId>
-    <PendingTaskId>11</PendingTaskId>
-    <PreviousTaskId>3</PreviousTaskId>
+    <PendingTaskId>6</PendingTaskId>
+    <PreviousTaskId>5</PreviousTaskId>
   </Dependency>
   <Dependency>
     <DependenceId>2</DependenceId>
-    <PendingTaskId>10</PendingTaskId>
-    <PreviousTaskId>1</PreviousTaskId>
+    <PendingTaskId>6</PendingTaskId>
+    <PreviousTaskId>5</PreviousTaskId>
   </Dependency>
   <Dependency>
     <DependenceId>3</DependenceId>
-    <PendingTaskId>11</PendingTaskId>
-    <PreviousTaskId>3</PreviousTaskId>
+    <PendingTaskId>8</PendingTaskId>
+    <PreviousTaskId>5</PreviousTaskId>
   </Dependency>
   <Dependency>
     <DependenceId>4</DependenceId>
-    <PendingTaskId>10</PendingTaskId>
-    <PreviousTaskId>5</PreviousTaskId>
+    <PendingTaskId>9</PendingTaskId>
+    <PreviousTaskId>4</PreviousTaskId>
   </Dependency>
   <Dependency>
     <DependenceId>5</DependenceId>
     <PendingTaskId>6</PendingTaskId>
-    <PreviousTaskId>4</PreviousTaskId>
+    <PreviousTaskId>1</PreviousTaskId>
   </Dependency>
   <Dependency>
     <DependenceId>6</DependenceId>
-    <PendingTaskId>19</PendingTaskId>
-    <PreviousTaskId>8</PreviousTaskId>
+    <PendingTaskId>17</PendingTaskId>
+    <PreviousTaskId>9</PreviousTaskId>
   </Dependency>
   <Dependency>
     <DependenceId>7</DependenceId>
-    <PendingTaskId>16</PendingTaskId>
+    <PendingTaskId>17</PendingTaskId>
     <PreviousTaskId>7</PreviousTaskId>
   </Dependency>
   <Dependency>
     <DependenceId>8</DependenceId>
-    <PendingTaskId>15</PendingTaskId>
-    <PreviousTaskId>7</PreviousTaskId>
+    <PendingTaskId>18</PendingTaskId>
+    <PreviousTaskId>8</PreviousTaskId>
   </Dependency>
   <Dependency>
     <DependenceId>9</DependenceId>
-    <PendingTaskId>15</PendingTaskId>
-    <PreviousTaskId>7</PreviousTaskId>
+    <PendingTaskId>18</PendingTaskId>
+    <PreviousTaskId>6</PreviousTaskId>
+  </Dependency>
+  <Dependency>
+    <DependenceId>10</DependenceId>
+    <PendingTaskId>16</PendingTaskId>
+    <PreviousTaskId>6</PreviousTaskId>
   </Dependency>
 </ArrayOfDependency>

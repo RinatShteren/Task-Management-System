@@ -8,9 +8,9 @@
         Title="MainWindow" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
-    <!--<Window.Background>
-        <ImageBrush ImageSource="/Engineer/aa.jpg"/>
-    </Window.Background>-->
+    <Window.Background>
+        <ImageBrush ImageSource="/Images/aa.jpg"/>
+    </Window.Background>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -21,7 +21,7 @@
 
         <!-- Clock display -->
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch">
-            
+
             <Label Content="{Binding CurrentTime, Converter={StaticResource ConvertToStringKey}, Mode=OneWay}"
                       FontSize="20" Margin="10" FontFamily="Segoe UI Black"  VerticalAlignment="Center"/>
 
@@ -35,27 +35,28 @@
 
         </StackPanel>
 
-        <Label Grid.Row="1" Content="User login" HorizontalAlignment="Center" VerticalAlignment="Center"
-                 Height="47" Width="200" Grid.ColumnSpan="4" FontSize="25" FontWeight="Bold"/>
+        <Label Grid.Row="1" Content="User login" HorizontalAlignment="Left" VerticalAlignment="Top"
+                Height="47" Width="200" Grid.ColumnSpan="4" FontSize="25" FontWeight="Bold" Margin="387,50,0,0"/>
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="17*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="20*"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0">
+            <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,325,0">
                 <Label Content="ID:" HorizontalAlignment="Right" Height="30" 
                      Width="40" FontFamily="Segoe UI Black" Margin="10"/>
 
 
-                <Label  Content="PASSWORD:" HorizontalAlignment="Right" Height="30"
+                <Label  Content="PASSWORD:" HorizontalAlignment="Right" Height="30" 
                        Width="80" FontFamily="Segoe UI Black" Margin="10"/>
 
 
             </StackPanel>
 
-            <StackPanel Grid.Column="1">
+            <StackPanel Grid.Column="2" Margin="58,0,0,0">
                 <TextBox Name="UserIdBox" Text="{Binding User.UserId, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"
                          Width="120" HorizontalAlignment="Left" Margin="10"/>
 
@@ -64,9 +65,9 @@
 
             </StackPanel>
         </Grid>
-        
-        <Button Content="log in" HorizontalAlignment="Right" Margin="0,12,41,0" VerticalAlignment="Top" Width="120" Height="40"
-                 Click="btnOPEN_Click" FontFamily="Segoe UI Black" Grid.Row="3" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+
+        <Button Content="log in" HorizontalAlignment="Right" Margin="0,41,78,0" VerticalAlignment="Top" Width="120" Height="40"
+                 Click="btnOPEN_Click" FontFamily="Segoe UI Black" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Row="2"/>
 
 
 

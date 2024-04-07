@@ -124,13 +124,13 @@ public static class Initialization
             //DateTime? _StartDate = DateTime.Now.AddDays(num + 3);  //יתחיל יום אחרי המשוער
             //DateTime? _DeadLine = DateTime.Now.AddDays(num + 3 + i); //שיחקתי עם זה קצת שיהיה שונה אבל עקבי
 
-            DateTime? _FinishtDate = DateTime.Now.AddDays(num + 2 + i); //תמיד לפני הדד ליין
+           // DateTime? _FinishtDate = DateTime.Now.AddDays(num + 2 + i); //תמיד לפני הדד ליין
 
             DateTime? _EstimatedDate = null; //תאריך התחלה
             DateTime? _StartDate = null;  //יתחיל יום אחרי המשוער
             DateTime? _DeadLine = null; //שיחקתי עם זה קצת שיהיה שונה אבל עקבי
 
-            //DateTime? _FinishtDate = null; //תמיד לפני הדד ליין
+            DateTime? _FinishtDate = null; //תמיד לפני הדד ליין
             var engineesr = s_dal!.Engineer.ReadAll(a => a.Id > 0);
 
             //int EnginnerId =
@@ -165,17 +165,17 @@ public static class Initialization
 
                 case int x when x < 20:
                     dependon = s_rand.Next(5, 11);
-                    depend = s_rand.Next(11, 21);
+                    depend = s_rand.Next(11, 20);//                    depend = s_rand.Next(11, 21);
                     dependon = tasks[dependon].TaskId;
                     depend = tasks[depend].TaskId;
                     break;
 
-                case int x when x < 40:
-                    dependon = s_rand.Next(11, 21);
-                    depend = s_rand.Next(21, 40);
-                    dependon = tasks[dependon].TaskId;
-                    depend = tasks[depend].TaskId;
-                    break;
+                //case int x when x < 40:
+                //    dependon = s_rand.Next(11, 20);//                    dependon = s_rand.Next(11, 21);
+                //    depend = s_rand.Next(21, 20);//                    depend = s_rand.Next(21, 40);
+                //    dependon = tasks[dependon].TaskId;
+                //    depend = tasks[depend].TaskId;
+                //    break;
 
                 default:
                     return;

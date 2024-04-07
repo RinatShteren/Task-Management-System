@@ -31,14 +31,22 @@ namespace PL.Admin
             DependencyProperty.Register("ListOfTasks", typeof(List<BO.Task>), typeof(GanttW), new PropertyMetadata(null));
 
         public GanttW()
-        {
-            InitializeComponent();
-            ListOfTasks = new List<BO.Task>();
+        {           InitializeComponent();
+            try
+            {
+ ListOfTasks = new List<BO.Task>();
 
             List<BO.TaskInList> listT = s_bl.Task.ReadAll().ToList();
             ListOfTasks = (from item in listT
                            select s_bl.Task.Read(item.TaskId)).ToList();
             int x;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+
         }
     }
 }

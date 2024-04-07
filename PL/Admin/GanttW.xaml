@@ -18,7 +18,7 @@
                     <Border BorderThickness="2" BorderBrush="SaddleBrown">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                             <TextBlock HorizontalAlignment="Left" Text="{Binding TaskId}" FontWeight="Bold" Background="Aquamarine"/>
-                            <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding EstimatedDate ,Mode=TwoWay,Converter={StaticResource ConvertDateTimeToIntKey}}"  Fill="{Binding Background, ElementName=back}"/>
+                            <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding CreationDate ,Mode=TwoWay,Converter={StaticResource ConvertDateTimeToIntKey}}"  Fill="{Binding Background, ElementName=back}"/>
                             <!--Width="{Binding DaysFromStart}"
                             Width="{Binding DaysFromStart}"-->
                             <TextBlock HorizontalAlignment="Left" Text="{Binding NickName}" Width="{Binding NumOfDays*5}" FontWeight="Bold" 

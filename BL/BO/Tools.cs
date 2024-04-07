@@ -26,9 +26,9 @@ namespace BO;
         else// if the object is not a collection
         {
             result += $"{new string(' ', indent)}\n";
-            foreach (PropertyInfo property in obj.GetType().GetProperties())
+            foreach (PropertyInfo property in obj.GetType().GetProperties())//כשיש טיפוס מורכב של רשימה משימות למשל נעבור ערך ערך
                 result += new string(' ', indent + 1) + property.Name + ": " + property.GetValue(obj).ToStringProporty(indent + 1) + '\n';
-            result += new string(' ', indent) + "\n";
+            result += new string(' ', indent) + "\n";//ונדפיס את כל הערכים שלו
         }
         return result;
     }

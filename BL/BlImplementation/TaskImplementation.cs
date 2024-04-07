@@ -18,8 +18,8 @@ internal class TaskImplementation : BlApi.ITask
     public int Create(BO.Task boTask)
     {
 
-        if (_schedule.GetStage() != BO.Stage.Planning)  // Make sure the project is in the planning stage
-            throw new BO.BlNotFitSchedule("Can not add tasks after Project Planning phase");
+        //if (_schedule.GetStage() != BO.Stage.Planning)  // Make sure the project is in the planning stage
+        //    throw new BO.BlNotFitSchedule("Can not add tasks after Project Planning phase");
 
         DO.Task doTask = new DO.Task(boTask.TaskId, boTask.NickName, boTask.Description, _clock) with
         { RequiredLevel = (DO.EngineerLevel)boTask.RequiredLevel!, NumOfDays = boTask.NumOfDays }; //?
@@ -230,7 +230,7 @@ internal class TaskImplementation : BlApi.ITask
                              date != existingTask.StartDate && date != existingTask.DeadLine &&
                              date != existingTask.FinishtDate))
             {
-                throw new BO.BlNotFitSchedule("Unable to initialize dates after creating the project schedule");
+              //  throw new BO.BlNotFitSchedule("Unable to initialize dates after creating the project schedule");
             }
         }
         //עד כאן בדקנו שלא מנסים לעשות משהו שאסור בשלב של הלוז ואם לא קפצנו אז כנראה הכל טוב ואפשר להתחיל
@@ -370,7 +370,7 @@ internal class TaskImplementation : BlApi.ITask
 
     public DateTime? GetEndTaskDate_DO(DO.Task task) => task?.EstimatedDate!.Value.AddDays(task.NumOfDays.Value);
 
-    public DateTime? GetEndTaskDate_BO(BO.Task task) => task?.EstimatedDate!.Value.AddDays(task.NumOfDays.Value);
+    public DateTime? GetEndTaskDate_BO(BO.Task task) => task?.EstimatedDate!.Value.AddDays(task.NumOfDays.Value) ?? throw new ("you need to update all date to continue");
 
     public void UpdateDate(int id, DateTime date)//עדכון תאריך של משימה אחת
     {

@@ -13,7 +13,7 @@
     <Product>SecureGuard Cybersecurity Platform</Product>
     <Remarks>Met project deadlines on time.</Remarks>
     <EngineerId>0</EngineerId>
-    <RequiredLevel>AdvancedBeginner</RequiredLevel>
+    <RequiredLevel>Beginner</RequiredLevel>
     <Difficulty>0</Difficulty>
   </Task>
   <Task>
@@ -125,7 +125,7 @@
     <Product>DataForge Analytics Suite</Product>
     <Remarks>Enhanced UI based on testing.</Remarks>
     <EngineerId>0</EngineerId>
-    <RequiredLevel>Intermediate</RequiredLevel>
+    <RequiredLevel>Advanced</RequiredLevel>
     <Difficulty>0</Difficulty>
   </Task>
   <Task>

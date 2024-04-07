@@ -6,6 +6,7 @@ using DO;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using ISchedule = BlApi.ISchedule;
 
 internal class TaskImplementation : BlApi.ITask
@@ -69,7 +70,7 @@ internal class TaskImplementation : BlApi.ITask
     public BO.Task? Read(int id)
     {
         DO.Task? doTask = _dal.Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does not exist");
-
+        
         BO.Task task = new BO.Task()
         {
             TaskId = id,
@@ -102,6 +103,8 @@ internal class TaskImplementation : BlApi.ITask
         task.Dependencies = GetLinks(task);
         task.Status = getStatus(doTask);
         return task;
+        
+        
     }
 
     public IEnumerable<BO.TaskInList> ReadAllOptionalTasksForEngineer(BO.Engineer engineer) =>

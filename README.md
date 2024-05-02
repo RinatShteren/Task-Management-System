@@ -4,4 +4,3 @@ The system is built in stages according to a hierarchical layered architecture.
 
 It enables storage and access to data of various tasks and allows task allocation to engineers.
 
-Furthermore, the system enables users to view tasks and their status in terms of scheduling on a dedicated Gantt chart.

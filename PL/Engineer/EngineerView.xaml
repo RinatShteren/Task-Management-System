@@ -10,7 +10,7 @@
         DataContext="{Binding CurrentEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
 
     <Window.Background>
-        <ImageBrush ImageSource="/Engineer/back.jpg"/>
+        <ImageBrush ImageSource="/Images/back.jpg"/>
     </Window.Background>
 
 

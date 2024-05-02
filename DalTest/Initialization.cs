@@ -150,7 +150,7 @@ public static class Initialization
         int dependon = 0;
         List<Task> tasks = s_dal.Task.ReadAll().ToList();
         HashSet<Dependency> depenendencies = new();
-        for (int i = 5; i < tasks.Count() * 2; i++)
+        for (int i = 5; i < tasks.Count() * 2; i++)//40 iteretions
         {
             switch (i)
             {

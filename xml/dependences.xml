@@ -26,19 +26,9 @@
     <PreviousTaskId>4</PreviousTaskId>
   </Dependency>
   <Dependency>
-    <DependenceId>6</DependenceId>
-    <PendingTaskId>16</PendingTaskId>
-    <PreviousTaskId>11</PreviousTaskId>
-  </Dependency>
-  <Dependency>
     <DependenceId>7</DependenceId>
     <PendingTaskId>18</PendingTaskId>
     <PreviousTaskId>11</PreviousTaskId>
-  </Dependency>
-  <Dependency>
-    <DependenceId>8</DependenceId>
-    <PendingTaskId>19</PendingTaskId>
-    <PreviousTaskId>9</PreviousTaskId>
   </Dependency>
   <Dependency>
     <DependenceId>32</DependenceId>
@@ -46,19 +36,9 @@
     <PreviousTaskId>9</PreviousTaskId>
   </Dependency>
   <Dependency>
-    <DependenceId>10</DependenceId>
-    <PendingTaskId>19</PendingTaskId>
-    <PreviousTaskId>11</PreviousTaskId>
-  </Dependency>
-  <Dependency>
     <DependenceId>11</DependenceId>
     <PendingTaskId>13</PendingTaskId>
     <PreviousTaskId>6</PreviousTaskId>
-  </Dependency>
-  <Dependency>
-    <DependenceId>12</DependenceId>
-    <PendingTaskId>16</PendingTaskId>
-    <PreviousTaskId>10</PreviousTaskId>
   </Dependency>
   <Dependency>
     <DependenceId>13</DependenceId>
@@ -74,5 +54,25 @@
     <DependenceId>15</DependenceId>
     <PendingTaskId>12</PendingTaskId>
     <PreviousTaskId>9</PreviousTaskId>
+  </Dependency>
+  <Dependency>
+    <DependenceId>16</DependenceId>
+    <PendingTaskId>16</PendingTaskId>
+    <PreviousTaskId>11</PreviousTaskId>
+  </Dependency>
+  <Dependency>
+    <DependenceId>17</DependenceId>
+    <PendingTaskId>16</PendingTaskId>
+    <PreviousTaskId>10</PreviousTaskId>
+  </Dependency>
+  <Dependency>
+    <DependenceId>20</DependenceId>
+    <PendingTaskId>19</PendingTaskId>
+    <PreviousTaskId>9</PreviousTaskId>
+  </Dependency>
+  <Dependency>
+    <DependenceId>21</DependenceId>
+    <PendingTaskId>19</PendingTaskId>
+    <PreviousTaskId>11</PreviousTaskId>
   </Dependency>
 </ArrayOfDependency>

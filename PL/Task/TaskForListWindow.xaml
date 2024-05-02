@@ -8,7 +8,7 @@
         Title="TaskForListWindow" Height="500" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Window.Background>
-        <ImageBrush ImageSource="/Engineer/back.jpg"/>
+        <ImageBrush ImageSource="/Images/back.jpg"/>
     </Window.Background>
 
     <!--Extrnal Grid-->

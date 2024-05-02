@@ -221,7 +221,7 @@ internal class TaskImplementation : BlApi.ITask
             List<DO.Dependency> dalDependences = _dal.Dependency.ReadAll(Dependence => Dependence.PendingTaskId == upTask.TaskId).ToList();
 
             //list of the tasks that the updated task depends on 
-            List<DO.Dependency> upDependences = upTask.Dependencies?.Select(taskIn => new DO.Dependency(0, taskIn.TaskId, upTask.TaskId)).ToList() ?? new List<DO.Dependency>();
+            List<DO.Dependency> upDependences = upTask.Dependencies.Select(taskIn => new DO.Dependency(0, taskIn.TaskId, upTask.TaskId)).ToList() ?? new List<DO.Dependency>();
             // Check if task links are provided and are different from existing task links
             if (upTask.Dependencies?.Any() == true && !upDependences.SequenceEqual(dalDependences))  //אם הן שונות- חריגה 
             {

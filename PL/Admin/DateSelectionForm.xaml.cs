@@ -43,10 +43,11 @@ namespace PL.Admin
             try
             {
                 bl.Task.ScheduleTasks(SelectedDate);
+                
             }
             catch
             {
-                MessageBox.Show("date is not valid");
+                MessageBox.Show("date is not valid,or there is Dependencys and we cant scedule");
             }
             Close();
         }

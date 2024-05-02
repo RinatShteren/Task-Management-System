@@ -30,6 +30,7 @@
                                             <TextBlock FontWeight="Bold" Text="Task Details:"/>
                                             <TextBlock FontWeight="Bold" Text="{Binding NickName}"/>
                                             <TextBlock FontWeight="Bold" Text="{Binding Description}"/>
+                                            <TextBlock FontWeight="Bold" Text="Task Start Date:"/>
                                             <TextBlock FontWeight="Bold" Text="{Binding StartDate}"/>
                                             <TextBlock FontWeight="Bold" Text="Dependencies are-"/>
                                             <ItemsControl ItemsSource="{Binding Dependencies}" Margin="65,10,83,10">

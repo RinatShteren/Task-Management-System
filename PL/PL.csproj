@@ -15,9 +15,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Admin\back.jpg" />
-    <None Remove="Engineer\aa.jpg" />
-    <None Remove="Engineer\back.jpg" />
     <None Remove="Images\aa.jpg" />
     <None Remove="Images\back.jpg" />
   </ItemGroup>
@@ -32,9 +29,6 @@
 	  <PackageReference Include="MaterialDesignThemes" Version="4.8.1" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Resource Include="Admin\back.jpg" />
-	  <Resource Include="Engineer\aa.jpg" />
-	  <Resource Include="Engineer\back.jpg" />
 	  <Resource Include="Images\aa.jpg" />
 	  <Resource Include="Images\back.jpg" />
 	</ItemGroup>

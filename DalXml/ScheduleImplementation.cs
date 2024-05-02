@@ -23,7 +23,7 @@ internal class ScheduleImplementation : ISchedule
         }
     }
 
-    public void ResetDep()
+    public void ResetDep()//reset dependenceys in xml file
     {
 
         XElement root = XMLTools.LoadListFromXMLElement(s_xml);
@@ -33,27 +33,6 @@ internal class ScheduleImplementation : ISchedule
         root.Element("NextTaskId")?.SetValue((1).ToString());
         XMLTools.SaveListToXMLElement(root, s_xml);
         
-        //XElement root = XMLTools.LoadListFromXMLElement(s_xml)!;
-        //root.Element("NextDependenceId")!.Remove();
-        //root.Element("NextTaskId")!.Remove();
-        //XMLTools.SaveListToXMLElement(root, s_xml);
-        //XElement newItem1 = new XElement("NextDependenceId");
-        //newItem1.Add("1");
-        //XElement newItem2 = new XElement("NextDependenceId");
-        //newItem2.Add("1");
-        //XMLTools.SaveListToXMLElement(root, s_xml);
-
-
-        //XElement root = XMLTools.LoadListFromXMLElement(s_xml)!;
-
-        //root.Element("NextDependenceId").SetValue("1");
-        //XMLTools.SaveListToXMLElement(root, s_xml);
-
-
-        //XElement root2 = XMLTools.LoadListFromXMLElement(s_xml).Element("NextTaskId")!;
-
-        //root.SetValue("1");
-        //XMLTools.SaveListToXMLElement(root2, s_xml);
     }
 
 }

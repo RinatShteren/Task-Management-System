@@ -1,38 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Task>
-    <TaskId>1</TaskId>
-    <NickName>Project Alpha</NickName>
-    <Description>Drafting Project Proposal</Description>
-    <CreationDate>2024-04-25T12:59:54.530973+03:00</CreationDate>
-    <EstimatedDate>2025-01-01T00:00:00</EstimatedDate>
-    <StartDate xsi:nil="true" />
-    <NumOfDays>2</NumOfDays>
-    <DeadLine>2025-01-03T00:00:00</DeadLine>
-    <FinishtDate xsi:nil="true" />
-    <Product>SecureGuard Cybersecurity Platform</Product>
-    <Remarks>Met project deadlines on time.</Remarks>
-    <EngineerId>0</EngineerId>
-    <RequiredLevel>Beginner</RequiredLevel>
-    <Difficulty>0</Difficulty>
-  </Task>
-  <Task>
-    <TaskId>2</TaskId>
-    <NickName>Data Analysis</NickName>
-    <Description>Analyzing Sales Data</Description>
-    <CreationDate>2024-04-28T12:59:54.5736478+03:00</CreationDate>
-    <EstimatedDate>2025-01-01T00:00:00</EstimatedDate>
-    <StartDate xsi:nil="true" />
-    <NumOfDays>1</NumOfDays>
-    <DeadLine>2025-01-02T00:00:00</DeadLine>
-    <FinishtDate xsi:nil="true" />
-    <Product>MobileGuard App Security Suite</Product>
-    <Remarks>Met project deadlines on time.</Remarks>
-    <EngineerId>0</EngineerId>
-    <RequiredLevel>Intermediate</RequiredLevel>
-    <Difficulty>0</Difficulty>
-  </Task>
-  <Task>
     <TaskId>3</TaskId>
     <NickName>Budget Planning</NickName>
     <Description>Creating Budget Report</Description>
@@ -257,22 +225,6 @@
     <Difficulty>0</Difficulty>
   </Task>
   <Task>
-    <TaskId>16</TaskId>
-    <NickName>Training Session</NickName>
-    <Description>Conducting Training Session</Description>
-    <CreationDate>2024-05-05T12:59:55.0295293+03:00</CreationDate>
-    <EstimatedDate>2025-01-05T00:00:00</EstimatedDate>
-    <StartDate xsi:nil="true" />
-    <NumOfDays>2</NumOfDays>
-    <DeadLine>2025-01-07T00:00:00</DeadLine>
-    <FinishtDate xsi:nil="true" />
-    <Product>CodeCraft IDE</Product>
-    <Remarks>Met project deadlines on time.</Remarks>
-    <EngineerId>0</EngineerId>
-    <RequiredLevel>Advanced</RequiredLevel>
-    <Difficulty>0</Difficulty>
-  </Task>
-  <Task>
     <TaskId>18</TaskId>
     <NickName>Sales Pitch</NickName>
     <Description>Delivering Sales Pitch</Description>
@@ -289,22 +241,6 @@
     <Difficulty>0</Difficulty>
   </Task>
   <Task>
-    <TaskId>19</TaskId>
-    <NickName>Quality Assurance</NickName>
-    <Description>Ensuring Quality Assurance</Description>
-    <CreationDate>2024-05-10T12:59:55.1299898+03:00</CreationDate>
-    <EstimatedDate>2025-01-03T00:00:00</EstimatedDate>
-    <StartDate xsi:nil="true" />
-    <NumOfDays>2</NumOfDays>
-    <DeadLine>2025-01-05T00:00:00</DeadLine>
-    <FinishtDate xsi:nil="true" />
-    <Product>DataForge Analytics Suite</Product>
-    <Remarks>Enhanced UI based on testing.</Remarks>
-    <EngineerId>0</EngineerId>
-    <RequiredLevel>AdvancedBeginner</RequiredLevel>
-    <Difficulty>0</Difficulty>
-  </Task>
-  <Task>
     <TaskId>7</TaskId>
     <NickName>Preparing Meeting Agenda</NickName>
     <Description>Meeting Prep</Description>
@@ -318,6 +254,70 @@
     <Remarks>Met project deadlines on time.</Remarks>
     <EngineerId>0</EngineerId>
     <RequiredLevel>Expert</RequiredLevel>
+    <Difficulty>0</Difficulty>
+  </Task>
+  <Task>
+    <TaskId>16</TaskId>
+    <NickName>Conducting Training Session</NickName>
+    <Description>Training Session</Description>
+    <CreationDate>2024-05-05T00:00:00</CreationDate>
+    <EstimatedDate>2025-01-05T00:00:00</EstimatedDate>
+    <StartDate>2025-01-16T00:00:00</StartDate>
+    <NumOfDays>0</NumOfDays>
+    <DeadLine>2025-01-07T00:00:00</DeadLine>
+    <FinishtDate xsi:nil="true" />
+    <Product>CodeCraft IDE</Product>
+    <Remarks>Met project deadlines on time.</Remarks>
+    <EngineerId>0</EngineerId>
+    <RequiredLevel>Advanced</RequiredLevel>
+    <Difficulty>0</Difficulty>
+  </Task>
+  <Task>
+    <TaskId>19</TaskId>
+    <NickName>Quality Assurance</NickName>
+    <Description>Ensuring Quality Assurance</Description>
+    <CreationDate>2024-05-10T00:00:00</CreationDate>
+    <EstimatedDate>2025-01-03T00:00:00</EstimatedDate>
+    <StartDate>2025-06-10T00:00:00</StartDate>
+    <NumOfDays>0</NumOfDays>
+    <DeadLine>2025-01-03T00:00:00</DeadLine>
+    <FinishtDate>2025-01-01T00:00:00</FinishtDate>
+    <Product>DataForge Analytics Suite</Product>
+    <Remarks>Enhanced UI based on testing.</Remarks>
+    <EngineerId>0</EngineerId>
+    <RequiredLevel>AdvancedBeginner</RequiredLevel>
+    <Difficulty>0</Difficulty>
+  </Task>
+  <Task>
+    <TaskId>1</TaskId>
+    <NickName>Drafting Project Proposal</NickName>
+    <Description>Project Alpha</Description>
+    <CreationDate>2024-04-25T00:00:00</CreationDate>
+    <EstimatedDate>2025-01-01T00:00:00</EstimatedDate>
+    <StartDate>2025-01-01T00:00:00</StartDate>
+    <NumOfDays>0</NumOfDays>
+    <DeadLine>2025-01-03T00:00:00</DeadLine>
+    <FinishtDate>2025-01-03T00:00:00</FinishtDate>
+    <Product>SecureGuard Cybersecurity Platform</Product>
+    <Remarks>Met project deadlines on time.</Remarks>
+    <EngineerId>0</EngineerId>
+    <RequiredLevel>Beginner</RequiredLevel>
+    <Difficulty>0</Difficulty>
+  </Task>
+  <Task>
+    <TaskId>2</TaskId>
+    <NickName>Analyzing Sales Data</NickName>
+    <Description>Data Analysis</Description>
+    <CreationDate>2024-04-28T00:00:00</CreationDate>
+    <EstimatedDate>2025-01-01T00:00:00</EstimatedDate>
+    <StartDate xsi:nil="true" />
+    <NumOfDays>0</NumOfDays>
+    <DeadLine>2025-01-02T00:00:00</DeadLine>
+    <FinishtDate>2024-04-25T00:00:00</FinishtDate>
+    <Product>MobileGuard App Security Suite</Product>
+    <Remarks>Met project deadlines on time.</Remarks>
+    <EngineerId>0</EngineerId>
+    <RequiredLevel>Intermediate</RequiredLevel>
     <Difficulty>0</Difficulty>
   </Task>
 </ArrayOfTask>

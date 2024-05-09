@@ -39,7 +39,7 @@ namespace PL.Admin
             List<BO.TaskInList> listT = s_bl.Task.ReadAll().ToList();
             ListOfTasks = (from item in listT
                            select s_bl.Task.Read(item.TaskId)).ToList();
-            int x;
+
             }
             catch (Exception ex)
             {

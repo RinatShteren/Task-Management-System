@@ -38,17 +38,24 @@ namespace PL.Admin
             InitializeComponent();
         }
 
-        private void confirmButton_Click(object sender, EventArgs e)
+
+
+        private void DoneButton_Click(object sender, EventArgs e)
         {
             try
             {
                 bl.Task.ScheduleTasks(SelectedDate);
-                
+
             }
             catch
             {
                 MessageBox.Show("date is not valid,or there is Dependencys and we cant scedule");
             }
+            Close();
+        }
+
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
             Close();
         }
     }

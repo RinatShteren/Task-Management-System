@@ -19,8 +19,8 @@ internal class TaskImplementation : BlApi.ITask
     public int Create(BO.Task boTask)
     {
 
-        //if (_schedule.GetStage() != BO.Stage.Planning)  // Make sure the project is in the planning stage
-        //    throw new BO.BlNotFitSchedule("Can not add tasks after Project Planning phase");
+        if (_schedule.GetStage() != BO.Stage.Planning)  // Make sure the project is in the planning stage
+            throw new BO.BlNotFitSchedule("Can not add tasks after Project Planning phase");
 
         DO.Task doTask = new DO.Task(boTask.TaskId, boTask.NickName, boTask.Description, _clock) with
         { RequiredLevel = (DO.EngineerLevel)boTask.RequiredLevel!, NumOfDays = boTask.NumOfDays }; //?

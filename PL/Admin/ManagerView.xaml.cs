@@ -34,8 +34,9 @@ namespace PL.Admin
         {
             try
             {
-                MessageBox.Show("Are you shoure you want to initional data?");
-                s_bl.InitalizingBD();
+                MessageBoxResult result = MessageBox.Show("Are you shoure you want to initional data?");
+                if (result == MessageBoxResult.Yes)
+                    s_bl.InitalizingBD();
             }
             catch (Exception ex)
             {
@@ -47,8 +48,9 @@ namespace PL.Admin
         {
             try
             {
-                MessageBox.Show("Are you shoure you want to reset data?");
-                s_bl.ResetDB();
+                MessageBoxResult result = MessageBox.Show("Are you shoure you want to reset data?");
+                if(result == MessageBoxResult.Yes)
+                    s_bl.ResetDB();
             }
             catch (Exception ex)
             {
@@ -82,13 +84,17 @@ namespace PL.Admin
                 DateSelectionForm dateSelectionForm = new DateSelectionForm();
                 dateSelectionForm.ShowDialog();
 
+                DateTime compareDate = new DateTime(1, 1, 1);
+
                 DateTime selectedDate = dateSelectionForm.SelectedDate;
+                if(selectedDate!= compareDate)
+                    {
+                         s_bl.Schedule.StartProject = dateSelectionForm.SelectedDate;
+                         MessageBox.Show($"The date you choose: {selectedDate.ToShortDateString()}");
+                    }
+               
 
-                s_bl.Schedule.StartProject = dateSelectionForm.SelectedDate;
-                MessageBox.Show($"The date you choose: {selectedDate.ToShortDateString()}");
 
-                //s_bl.Task.ScheduleTasks();
-                //s_bl.Task.EnginnerToTask();
             }
             catch (Exception ex)
             {

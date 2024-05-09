@@ -12,7 +12,9 @@
             <ImageBrush ImageSource="/Images/back.jpg"/>
         </Grid.Background>
         <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}" FontFamily="Segoe UI Black" HorizontalAlignment="Center" Margin="0,32,0,0" VerticalAlignment="Top" Height="36" Width="128"/>
-        <Button Content="Done" HorizontalAlignment="Center" Margin="0,92,0,0" VerticalAlignment="Top" Click="confirmButton_Click" FontFamily="Segoe UI Black" Width="145" Height="53"/>
+        <Button Content="Done" HorizontalAlignment="Left" Margin="100,92,0,0" VerticalAlignment="Top" Click="DoneButton_Click" FontFamily="Segoe UI Black" Width="82" Height="53"/>
+        <Label Content="Choose the project start date:" HorizontalAlignment="Center" Height="30" Margin="0,10,0,0" VerticalAlignment="Top" Width="184" FontFamily="Segoe UI Black"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="8,92,0,0" VerticalAlignment="Top" Click="cancelButton_Click" FontFamily="Segoe UI Black" Width="81" Height="53"/>
 
     </Grid>
 </Window>

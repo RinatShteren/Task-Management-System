@@ -53,7 +53,7 @@ internal class EngineerImplementation : IEngineer
     {
         XElement engineerRoot = XMLTools.LoadListFromXMLElement(_xmlEngineer);
         
-        XElement delItem= engineerRoot.Elements().FirstOrDefault(item => (int?)item.Element("Id") == id);
+        var delItem= engineerRoot.Elements().FirstOrDefault(item => (int?)item.Element("Id") == id);
         if (delItem.IsEmpty)
         {
             throw new DalDoesNotExistException($"Engineer with ID={id} not exist");
@@ -91,7 +91,7 @@ internal class EngineerImplementation : IEngineer
     /// <param name="predicate"></param>
     /// <returns></returns>
     /// 
-    public Engineer? Read(Func<Engineer, bool> filter= null)
+    public Engineer? Read(Func<Engineer, bool> filter = null)
     { 
            
         return XMLTools.LoadListFromXMLElement(_xmlEngineer).Elements().Select(eng=> xlmToEng(eng)).FirstOrDefault(filter);
@@ -129,19 +129,15 @@ internal class EngineerImplementation : IEngineer
         Delete(item.Id);
         Create(item);
     }
-    public Engineer xlmToEng (XElement eng) 
-      {
-        return new Engineer()
-        {
-            Id = eng.ToIntNullable("Id")?? throw new Exception("aaaa"),
-            Name = eng.Element("Name").Value,
-            Email = eng.Element("Email").Value,
-            Level = Enum.Parse<EngineerLevel>(eng.Element("Level").Value),
-            Cost = (double)eng.Element("Cost")
+    public Engineer xlmToEng (XElement eng) => new Engineer()
+    {
+        Id = eng.ToIntNullable("Id") ?? throw new Exception("aaaa"),
+        Name = eng.Element("Name").Value,
+        Email = eng.Element("Email").Value,
+        Level = Enum.Parse<EngineerLevel>(eng.Element("Level").Value),
+        Cost = (double)eng.Element("Cost")
 
-        };
-
-    }
+    };
 
 
 }
